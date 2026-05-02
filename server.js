@@ -13,10 +13,17 @@ const PORT = process.env.PORT || 3000;
 const SITE_URL = process.env.SITE_URL || `http://localhost:${PORT}`;
 const QUOTES_FILE = path.join(__dirname, 'data', 'quotes.json');
 const REQUESTS_FILE = path.join(__dirname, 'data', 'requests.json');
-const serviceAccount = require('./config/firebase.json');
+let serviceAccount;
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+} 
+  else {
+    serviceAccount = require('./config/firebase.json');
+}
+
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
 });
 
 const db = admin.firestore();
