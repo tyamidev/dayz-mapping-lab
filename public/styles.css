@@ -19,6 +19,13 @@
   color: white;
   font-weight: bold;
   transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-btn i {
+  font-size: 18px;
 }
 
 .social-btn:hover {
