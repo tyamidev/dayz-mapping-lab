@@ -1,0 +1,8 @@
+{
+  "name": "dayz-mapping-lab-site-v4",
+  "version": "4.0.0",
+  "description": "Site DayZ Mapping Lab avec Stripe, Discord et panneau admin",
+  "main": "server.js",
+  "scripts": {"start":"node server.js","dev":"node server.js"},
+  "dependencies": {"@stripe/stripe-js":"latest","cookie-parser":"^1.4.6","dotenv":"^16.4.5","express":"^4.18.3","stripe":"^14.25.0"}
+}
