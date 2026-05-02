@@ -13,6 +13,24 @@ const SITE_URL = process.env.SITE_URL || `http://localhost:${PORT}`;
 const QUOTES_FILE = path.join(__dirname, 'data', 'quotes.json');
 const REQUESTS_FILE = path.join(__dirname, 'data', 'requests.json');
 
+const DATA_DIR = path.join(__dirname, 'data');
+
+function ensureDataFiles() {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+
+  if (!fs.existsSync(REQUESTS_FILE)) {
+    fs.writeFileSync(REQUESTS_FILE, '[]', 'utf8');
+  }
+
+  if (!fs.existsSync(QUOTES_FILE)) {
+    fs.writeFileSync(QUOTES_FILE, '[]', 'utf8');
+  }
+}
+
+ensureDataFiles();
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json({ limit: '1mb' }));
