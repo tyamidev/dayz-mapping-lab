@@ -33,6 +33,61 @@ ensureDataFiles();
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.post('/stripe/webhook', express.raw({ type:'application/json' }), async (req,res)=>{
+  if (!stripe) return res.status(500).send('Stripe non configuré.');
+
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (err) {
+    console.error('Erreur webhook Stripe:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+
+    if (session.metadata?.type === 'quote' && session.metadata?.quoteId) {
+      const quoteId = session.metadata.quoteId;
+      const quotes = readQuotes();
+      const index = quotes.findIndex(q => q.id === quoteId);
+
+      if (index !== -1) {
+        quotes[index].status = 'paid';
+        quotes[index].paidAt = new Date().toISOString();
+        quotes[index].stripeSessionId = session.id;
+        writeQuotes(quotes);
+
+        await notifyDiscord({
+          username:'DayZ Mapping Lab',
+          embeds:[{
+            title:`Paiement reçu — ${quoteId}`,
+            color:0x22c55e,
+            fields:[
+              { name:'Client', value:quotes[index].customerName || 'Non renseigné', inline:true },
+              { name:'Email', value:quotes[index].email || 'Non renseigné', inline:true },
+              { name:'Montant', value:`${quotes[index].amount}€`, inline:true },
+              { name:'Service', value:quotes[index].service || 'Non renseigné' }
+            ],
+            timestamp:new Date().toISOString()
+          }]
+        });
+
+        console.log(`Devis ${quoteId} marqué comme payé.`);
+      }
+    }
+  }
+
+  res.json({ received:true });
+});
+
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 
