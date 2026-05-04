@@ -83,38 +83,33 @@
 
 .language-switcher {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .language-switcher button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
   cursor: pointer;
-  background-size: cover;
-  background-position: center;
-  transition: 0.3s;
-}
-
-/* 🇫🇷 */
-.language-switcher button[data-lang="fr"] {
-  background-image: url("https://flagcdn.com/w40/fr.png");
-}
-
-/* 🇬🇧 */
-.language-switcher button[data-lang="en"] {
-  background-image: url("https://flagcdn.com/w40/gb.png");
-}
-
-/* 🇩🇪 */
-.language-switcher button[data-lang="de"] {
-  background-image: url("https://flagcdn.com/w40/de.png");
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
 }
 
 .language-switcher button:hover {
-  transform: scale(1.15);
+  transform: translateY(-2px) scale(1.05);
+  background: rgba(255,255,255,0.15);
+}
+
+.language-switcher button.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(54,211,153,0.6);
 }
 
 
