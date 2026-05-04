@@ -1,4 +1,15 @@
-const burger=document.getElementById('burger');const nav=document.getElementById('nav');if(burger)burger.addEventListener('click',()=>nav.classList.toggle('open'));
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav');
+
+if (burger && nav) {
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+
+  window.addEventListener('scroll', () => {
+    nav.classList.remove('open');
+  });
+}
 document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav?.classList.remove('open')));
 async function postJSON(url,data){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Erreur');return j;}
 document.querySelectorAll('.pay-btn').forEach(btn=>btn.addEventListener('click',async()=>{btn.disabled=true;const old=btn.textContent;btn.textContent='Redirection...';try{const data=await postJSON('/api/checkout/fixed',{offerId:btn.dataset.offer});location.href=data.url;}catch(e){alert(e.message);btn.disabled=false;btn.textContent=old;}}));
