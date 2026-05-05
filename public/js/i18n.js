@@ -195,8 +195,201 @@ const translations = {
     form_submit: "Send"
   },
 
-  de: { hero_title: "Verwandle deine Idee in einen spielbereiten DayZ-Server." },
-  es: { hero_title: "Convierte tu idea en un servidor DayZ listo para jugar." }
+de: {
+  nav_services: "Leistungen",
+  nav_packs: "Pakete",
+  nav_quote: "Angebot",
+  nav_process: "Ablauf",
+  nav_pay_quote: "Angebot bezahlen",
+  nav_contact: "Kontakt",
+
+  hero_title: "Verwandle deine Idee in einen spielbereiten DayZ-Server.",
+  hero_subtitle: "DayZ Mapping Lab unterstützt Server-Ersteller mit individuellen Mappings, sauberer Konfiguration, Discord-Bots und vollständigen Discord-Servern.",
+  cta_packs: "Angebote ansehen",
+  cta_quote: "Angebot anfragen",
+  trust_text: "Sichere Zahlung • Festes Angebot • Lieferung nach Projektbestätigung",
+
+  service_demande: "Meistgefragte Leistungen",
+
+  popular_1: "PvP-Zonen, Händler, Basen, POIs",
+  popular_2: "Schlüsselfertiger DayZ-Server",
+  popular_3: "Discord-Bots (Tickets, Logs, Moderation)",
+  popular_4: "Kompletter Discord-Server mit Rollen und Berechtigungen",
+
+  services_title: "Komplette Unterstützung für dein Projekt",
+
+  mapping_title: "Individuelles DayZ-Mapping",
+  mapping_desc: "Erstellung von Bereichen passend zu deinem Gameplay: RP, PvP, Survival, Händler, Events oder einzigartige Orte.",
+
+  files_key_title: "Schlüsselfertiger DayZ-Server",
+  server_desc: "Serverkonfiguration, Wirtschaft, Loot, Mods, XML-Dateien, Tests und Optimierung für eine stabile Basis.",
+
+  bot_title: "Discord-Bots",
+  bot_desc: "Bots für deine Community: Tickets, Moderation, Ankündigungen, Logs und Automatisierungen.",
+
+  discord_setup_title: "Kompletter Discord-Server",
+  discord_setup_desc: "Fertiger Discord mit Kanälen, Rollen, Berechtigungen, Bots und Sicherheit.",
+
+  paiement_direct: "Feste Angebote",
+  packs_intro: "Diese Angebote können direkt bezahlt werden. Für individuelle Projekte kannst du ein Angebot anfordern.",
+
+  premium_title: "PREMIUM Zugang",
+  premium_desc: "Zugang zu Premium-Vorteilen laut Discord-Bedingungen.",
+  btn_subscribe: "Abonnieren",
+
+  bot_basique_title: "Basic Bot",
+  bot_basic_desc: "Einfacher Bot mit grundlegenden Funktionen.",
+
+  bot_premium_title: "Premium Bot",
+  bot_premium_desc: "Erweiterter Bot mit mehr Funktionen.",
+
+  bot_ultra_title: "Ultra Bot",
+  bot_ultra_desc: "Leistungsstarker Bot für große Communities.",
+
+  mapping_small_title: "Kleines Mapping",
+  mapping_small_desc: "Gezielte kleine Mapping-Verbesserung.",
+
+  mapping_medium_title: "Mittleres Mapping",
+  mapping_medium_desc: "Mittleres Mapping-Projekt.",
+
+  mapping_large_title: "Großes Mapping",
+  mapping_large_desc: "Großes und detailliertes Mapping.",
+
+  discord_pack_desc: "Komplette Discord-Konfiguration mit Rollen und Bots.",
+
+  btn_buy: "Kaufen",
+
+  custom_quote_title: "Individuelles Projekt? Angebot anfragen.",
+  custom_quote_desc: "Für komplexe Projekte erhältst du ein festes Angebot zur Bezahlung.",
+  send_request: "Anfrage senden",
+
+  process_title: "Wie läuft es ab?",
+  demande_title: "Anfrage",
+  validation_title: "Bestätigung",
+  paiement_title: "Zahlung",
+  livraison_title: "Lieferung",
+
+  process_1_desc: "Du erklärst dein Projekt.",
+  process_2_desc: "Preis und Zeit werden festgelegt.",
+  process_3_desc: "Bezahlung über Stripe.",
+  process_4_desc: "Lieferung nach Validierung.",
+
+  contact_title: "Erzähl uns von deinem Projekt",
+  contact_desc: "Beschreibe dein Projekt und deine Bedürfnisse.",
+
+  social_title: "Tritt der Community bei",
+  social_desc: "Folge uns und kontaktiere uns 👇",
+
+  footer_brand: "© 2026 DayZ Mapping Lab™ — Marke von TyamiDev.",
+  footer_legal: "Impressum",
+  footer_terms: "AGB",
+  footer_disclaimer: "Nicht verbunden mit Bohemia Interactive.",
+
+  form_name: "Name",
+  form_email: "E-Mail",
+  form_discord: "Discord",
+  form_budget: "Budget",
+  form_message: "Projektbeschreibung",
+  form_submit: "Senden"
+},
+
+es: {
+  nav_services: "Servicios",
+  nav_packs: "Packs",
+  nav_quote: "Presupuesto",
+  nav_process: "Proceso",
+  nav_pay_quote: "Pagar presupuesto",
+  nav_contact: "Contacto",
+
+  hero_title: "Convierte tu idea en un servidor DayZ listo para jugar.",
+  hero_subtitle: "DayZ Mapping Lab ayuda a creadores de servidores con mappings personalizados, configuraciones limpias, bots de Discord y servidores completos.",
+  cta_packs: "Ver ofertas",
+  cta_quote: "Solicitar presupuesto",
+  trust_text: "Pago seguro • Presupuesto bloqueado • Entrega tras validación",
+
+  service_demande: "Servicios más solicitados",
+
+  popular_1: "Zonas PvP, traders, bases, POIs",
+  popular_2: "Servidor DayZ listo para usar",
+  popular_3: "Bots Discord (tickets, logs, moderación)",
+  popular_4: "Servidor Discord completo con roles",
+
+  services_title: "Soporte completo para tu proyecto",
+
+  mapping_title: "Mapping DayZ personalizado",
+  mapping_desc: "Creación de zonas adaptadas a tu gameplay: RP, PvP, supervivencia, trader o eventos.",
+
+  files_key_title: "Servidor DayZ completo",
+  server_desc: "Configuración de servidor, economía, mods, archivos XML y optimización.",
+
+  bot_title: "Bots Discord",
+  bot_desc: "Bots para tu comunidad: tickets, moderación, anuncios y automatización.",
+
+  discord_setup_title: "Servidor Discord completo",
+  discord_setup_desc: "Servidor listo con canales, roles, bots y seguridad.",
+
+  paiement_direct: "Ofertas fijas",
+  packs_intro: "Puedes pagar directamente. Para proyectos personalizados, solicita un presupuesto.",
+
+  premium_title: "Acceso PREMIUM",
+  premium_desc: "Acceso a ventajas premium según Discord.",
+  btn_subscribe: "Suscribirse",
+
+  bot_basique_title: "Bot Básico",
+  bot_basic_desc: "Bot simple con funciones básicas.",
+
+  bot_premium_title: "Bot Premium",
+  bot_premium_desc: "Bot avanzado con más funciones.",
+
+  bot_ultra_title: "Bot Ultra",
+  bot_ultra_desc: "Bot completo para comunidades grandes.",
+
+  mapping_small_title: "Mapping pequeño",
+  mapping_small_desc: "Pequeña mejora de zona.",
+
+  mapping_medium_title: "Mapping medio",
+  mapping_medium_desc: "Proyecto de tamaño medio.",
+
+  mapping_large_title: "Mapping grande",
+  mapping_large_desc: "Creación grande y detallada.",
+
+  discord_pack_desc: "Configuración completa de Discord con bots.",
+
+  btn_buy: "Comprar",
+
+  custom_quote_title: "¿Proyecto personalizado? Solicita presupuesto.",
+  custom_quote_desc: "Recibirás un presupuesto cerrado listo para pagar.",
+  send_request: "Enviar solicitud",
+
+  process_title: "¿Cómo funciona?",
+  demande_title: "Solicitud",
+  validation_title: "Validación",
+  paiement_title: "Pago",
+  livraison_title: "Entrega",
+
+  process_1_desc: "Explicas tu proyecto.",
+  process_2_desc: "Se define precio y plazo.",
+  process_3_desc: "Pago seguro con Stripe.",
+  process_4_desc: "Entrega final.",
+
+  contact_title: "Cuéntanos tu proyecto",
+  contact_desc: "Describe tu servidor y necesidades.",
+
+  social_title: "Únete a la comunidad",
+  social_desc: "Síguenos y contáctanos 👇",
+
+  footer_brand: "© 2026 DayZ Mapping Lab™ — marca de TyamiDev.",
+  footer_legal: "Aviso legal",
+  footer_terms: "Condiciones",
+  footer_disclaimer: "No afiliado a Bohemia Interactive.",
+
+  form_name: "Nombre",
+  form_email: "Email",
+  form_discord: "Discord",
+  form_budget: "Presupuesto",
+  form_message: "Describe tu proyecto",
+  form_submit: "Enviar"
+}
 };
 
 function setLanguage(lang) {
