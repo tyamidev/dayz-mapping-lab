@@ -2,20 +2,24 @@
 <urlset
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-<loc>https://dayzmappinglab.com/</loc>
-</url>
+  <url>
+    <loc>https://dayzmappinglab.com/</loc>
+  </url>
 
-<url>
-<loc>https://dayzmappinglab.com/payer-devis.html</loc>
-</url>
+  <url>
+    <loc>https://dayzmappinglab.com/admin.html</loc>
+  </url>
 
-<url>
-<loc>https://dayzmappinglab.com/cgv.html</loc>
-</url>
+  <url>
+    <loc>https://dayzmappinglab.com/payer-devis.html</loc>
+  </url>
 
-<url>
-<loc>https://dayzmappinglab.com/mentions-legales.html</loc>
-</url>
+  <url>
+    <loc>https://dayzmappinglab.com/cgv.html</loc>
+  </url>
+
+  <url>
+    <loc>https://dayzmappinglab.com/mentions-legales.html</loc>
+  </url>
 
 </urlset>
