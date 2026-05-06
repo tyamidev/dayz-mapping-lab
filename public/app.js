@@ -15,27 +15,57 @@ async function postJSON(url,data){const r=await fetch(url,{method:'POST',headers
 document.querySelectorAll('.pay-btn').forEach(btn=>btn.addEventListener('click',async()=>{btn.disabled=true;const old=btn.textContent;btn.textContent='Redirection...';try{const data=await postJSON('/api/checkout/fixed',{offerId:btn.dataset.offer});location.href=data.url;}catch(e){alert(e.message);btn.disabled=false;btn.textContent=old;}}));
 const contactForm=document.getElementById('contactForm');if(contactForm)contactForm.addEventListener('submit',async(e)=>{e.preventDefault();const status=document.getElementById('contactStatus');status.textContent='Envoi en cours...';try{await postJSON('/api/contact',Object.fromEntries(new FormData(contactForm)));contactForm.reset();status.textContent='Demande envoyée. Vous recevrez une réponse rapidement.';}catch(err){status.textContent=err.message;}});
 
-const galleryTrack = document.getElementById("galleryTrack");
+const galleryImages = [
+  "/gallery/mapping_1.jpg",
+  "/gallery/mapping_2.jpg",
+  "/gallery/mapping_3.jpg",
+  "/gallery/mapping_4.jpg",
+  "/gallery/mapping_5.jpg",
+  "/gallery/mapping_6.jpg",
+  "/gallery/mapping_7.jpg",
+  "/gallery/mapping_8.jpg",
+  "/gallery/mapping_9.jpg"
+];
+
+const galleryMainImage = document.getElementById("galleryMainImage");
 const galleryPrev = document.getElementById("galleryPrev");
 const galleryNext = document.getElementById("galleryNext");
+const galleryThumbs = document.getElementById("galleryThumbs");
 const galleryLightbox = document.getElementById("galleryLightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const lightboxClose = document.getElementById("lightboxClose");
 
-if (galleryTrack && galleryPrev && galleryNext) {
+let galleryIndex = 0;
+
+function updateGallery(index) {
+  if (!galleryMainImage || !galleryThumbs) return;
+
+  galleryIndex = (index + galleryImages.length) % galleryImages.length;
+  galleryMainImage.src = galleryImages[galleryIndex];
+
+  galleryThumbs.querySelectorAll("img").forEach((thumb, i) => {
+    thumb.classList.toggle("active", i === galleryIndex);
+  });
+}
+
+if (galleryMainImage && galleryPrev && galleryNext && galleryThumbs) {
   galleryPrev.addEventListener("click", () => {
-    galleryTrack.scrollBy({ left: -380, behavior: "smooth" });
+    updateGallery(galleryIndex - 1);
   });
 
   galleryNext.addEventListener("click", () => {
-    galleryTrack.scrollBy({ left: 380, behavior: "smooth" });
+    updateGallery(galleryIndex + 1);
   });
 
-  galleryTrack.querySelectorAll("img").forEach((img) => {
-    img.addEventListener("click", () => {
-      lightboxImage.src = img.src;
-      galleryLightbox.classList.remove("hidden");
+  galleryThumbs.querySelectorAll("img").forEach((thumb, i) => {
+    thumb.addEventListener("click", () => {
+      updateGallery(i);
     });
+  });
+
+  galleryMainImage.addEventListener("click", () => {
+    lightboxImage.src = galleryMainImage.src;
+    galleryLightbox.classList.remove("hidden");
   });
 }
 
