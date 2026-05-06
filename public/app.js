@@ -40,12 +40,21 @@ let galleryIndex = 0;
 function updateGallery(index) {
   if (!galleryMainImage || !galleryThumbs) return;
 
-  galleryIndex = (index + galleryImages.length) % galleryImages.length;
-  galleryMainImage.src = galleryImages[galleryIndex];
+  galleryMainImage.style.opacity = "0.35";
+  galleryMainImage.style.transform = "scale(1.02)";
 
-  galleryThumbs.querySelectorAll("img").forEach((thumb, i) => {
-    thumb.classList.toggle("active", i === galleryIndex);
-  });
+  setTimeout(() => {
+    galleryIndex = (index + galleryImages.length) % galleryImages.length;
+
+    galleryMainImage.src = galleryImages[galleryIndex];
+
+    galleryThumbs.querySelectorAll("img").forEach((thumb, i) => {
+      thumb.classList.toggle("active", i === galleryIndex);
+    });
+
+    galleryMainImage.style.opacity = "1";
+    galleryMainImage.style.transform = "scale(1)";
+  }, 220);
 }
 
 if (galleryMainImage && galleryPrev && galleryNext && galleryThumbs) {
