@@ -8,6 +8,10 @@ const translations = {
     nav_process: "Process",
     nav_pay_quote: "Payer un devis",
     nav_contact: "Contact",
+    nav_gallery: "Galerie",
+    gallery_eyebrow: "Galerie",
+    gallery_title: "Nos réalisations",
+    gallery_desc: "Découvrez quelques exemples de mappings, zones personnalisées et serveurs Discord réalisés.",
 
     hero_title: "Transformez votre idée en serveur DayZ prêt à jouer.",
     hero_subtitle: "DayZ Mapping Lab accompagne les créateurs de serveurs avec des mappings personnalisés, des configurations propres, des bots Discord et des serveurs Discord complets.",
@@ -103,6 +107,10 @@ const translations = {
     nav_process: "Process",
     nav_pay_quote: "Pay a quote",
     nav_contact: "Contact",
+    nav_gallery: "Gallery",
+    gallery_eyebrow: "Gallery",
+    gallery_title: "Our work",
+    gallery_desc: "Discover examples of custom mappings, personalized areas and Discord servers.",
 
     hero_title: "Turn your idea into a ready-to-play DayZ server.",
     hero_subtitle: "DayZ Mapping Lab supports server creators with custom mappings, clean configurations, Discord bots and complete Discord servers.",
@@ -198,6 +206,10 @@ const translations = {
     nav_process: "Ablauf",
     nav_pay_quote: "Angebot bezahlen",
     nav_contact: "Kontakt",
+    nav_gallery: "Galerie",
+    gallery_eyebrow: "Galerie",
+    gallery_title: "Unsere Arbeiten",
+    gallery_desc: "Entdecke Beispiele für individuelle Mappings, personalisierte Bereiche und Discord-Server.",
 
     hero_title: "Verwandle deine Idee in einen spielbereiten DayZ-Server.",
     hero_subtitle: "DayZ Mapping Lab unterstützt Server-Ersteller mit individuellen Mappings, sauberer Konfiguration, Discord-Bots und vollständigen Discord-Servern.",
@@ -293,6 +305,10 @@ const translations = {
     nav_process: "Proceso",
     nav_pay_quote: "Pagar presupuesto",
     nav_contact: "Contacto",
+    nav_gallery: "Galería",
+    gallery_eyebrow: "Galería",
+    gallery_title: "Nuestros trabajos",
+    gallery_desc: "Descubre ejemplos de mappings personalizados, zonas creadas a medida y servidores Discord.",
 
     hero_title: "Convierte tu idea en un servidor DayZ listo para jugar.",
     hero_subtitle: "DayZ Mapping Lab ayuda a creadores de servidores con mappings personalizados, configuraciones limpias, bots de Discord y servidores Discord completos.",
