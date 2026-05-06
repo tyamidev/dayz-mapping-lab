@@ -81,6 +81,13 @@ const translations = {
     social_title: "Rejoins la communauté",
     social_desc: "Suivez-nous et contactez-nous facilement 👇",
 
+    hero_eyebrow: "Mapping • Serveur • Discord • Support",
+    services_eyebrow: "Services",
+    payment_eyebrow: "Paiement direct",
+    custom_eyebrow: "Sur mesure",
+    process_eyebrow: "Process",
+    contact_eyebrow: "Contact",
+
     footer_brand: "© 2026 DayZ Mapping Lab™ — une marque exploitée par TyamiDev (Joanick Dupuy).",
     footer_legal: "Mentions légales",
     footer_terms: "CGV",
@@ -168,6 +175,13 @@ const translations = {
 
     social_title: "Join the community",
     social_desc: "Follow us and contact us easily 👇",
+
+    hero_eyebrow: "Mapping • Server • Discord • Support",
+    services_eyebrow: "Services",
+    payment_eyebrow: "Direct payment",
+    custom_eyebrow: "Custom",
+    process_eyebrow: "Process",
+    contact_eyebrow: "Contact",
 
     footer_brand: "© 2026 DayZ Mapping Lab™ — a brand operated by TyamiDev (Joanick Dupuy).",
     footer_legal: "Legal notice",
@@ -257,6 +271,13 @@ const translations = {
     social_title: "Tritt der Community bei",
     social_desc: "Folge uns und kontaktiere uns einfach 👇",
 
+    hero_eyebrow: "Mapping • Server • Discord • Support",
+    services_eyebrow: "Leistungen",
+    payment_eyebrow: "Direktzahlung",
+    custom_eyebrow: "Individuell",
+    process_eyebrow: "Ablauf",
+    contact_eyebrow: "Kontakt",
+
     footer_brand: "© 2026 DayZ Mapping Lab™ — eine von TyamiDev (Joanick Dupuy) betriebene Marke.",
     footer_legal: "Impressum",
     footer_terms: "AGB",
@@ -344,6 +365,13 @@ const translations = {
 
     social_title: "Únete a la comunidad",
     social_desc: "Síguenos y contáctanos fácilmente 👇",
+
+    hero_eyebrow: "Mapping • Servidor • Discord • Soporte",
+    services_eyebrow: "Servicios",
+    payment_eyebrow: "Pago directo",
+    custom_eyebrow: "Personalizado",
+    process_eyebrow: "Proceso",
+    contact_eyebrow: "Contacto",
 
     footer_brand: "© 2026 DayZ Mapping Lab™ — una marca gestionada por TyamiDev (Joanick Dupuy).",
     footer_legal: "Aviso legal",
