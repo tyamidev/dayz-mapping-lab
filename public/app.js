@@ -81,4 +81,5 @@ if (lightboxClose && galleryLightbox) {
       lightboxImage.src = "";
     }
   });
+        updateGallery(0);
 }
