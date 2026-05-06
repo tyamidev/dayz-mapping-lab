@@ -361,7 +361,7 @@
   content: "";
   position: absolute;
   top: 0;
-  width: 120px;
+  width: 140px;
   height: 100%;
   z-index: 2;
   pointer-events: none;
@@ -371,7 +371,8 @@
   left: 0;
   background: linear-gradient(
     to right,
-    rgba(7,17,13,.85),
+    rgba(5, 10, 8, 0.55),
+    rgba(5, 10, 8, 0.15),
     transparent
   );
 }
@@ -380,7 +381,8 @@
   right: 0;
   background: linear-gradient(
     to left,
-    rgba(7,17,13,.85),
+    rgba(5, 10, 8, 0.55),
+    rgba(5, 10, 8, 0.15),
     transparent
   );
 }
