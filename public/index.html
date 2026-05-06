@@ -185,23 +185,29 @@
     Découvrez quelques exemples de mappings, zones personnalisées et serveurs Discord réalisés.
   </p>
 
-  <div class="gallery-grid">
-    <figure>
-      <img src="/gallery/mapping_1.jpg" alt="Mapping DayZ personnalisé">
-      <figcaption>Mapping DayZ</figcaption>
-    </figure>
+  <div class="gallery-carousel">
+    <button class="gallery-arrow" id="galleryPrev">‹</button>
 
-    <figure>
-      <img src="/gallery/mapping_2.jpg" alt="Zone personnalisée DayZ">
-      <figcaption>Zone personnalisée</figcaption>
-    </figure>
+    <div class="gallery-track" id="galleryTrack">
+      <img src="/gallery/mapping_1.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_2.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_3.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_4.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_5.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_6.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_7.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_8.jpg" alt="Mapping DayZ">
+      <img src="/gallery/mapping_9.jpg" alt="Mapping DayZ">
+    </div>
 
-    <figure>
-      <img src="/gallery/mapping_3.jpg" alt="Mapping premium">
-      <figcaption>Mapping premium</figcaption>
-    </figure>
+    <button class="gallery-arrow" id="galleryNext">›</button>
   </div>
 </section>
+
+<div class="gallery-lightbox hidden" id="galleryLightbox">
+  <button class="lightbox-close" id="lightboxClose">×</button>
+  <img id="lightboxImage" src="" alt="Image galerie">
+</div>
 
 <section id="contact" class="section contact"><div>
   <p class="eyebrow" data-i18n="contact_eyebrow">Contact</p>
