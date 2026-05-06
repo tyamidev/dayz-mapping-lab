@@ -83,3 +83,7 @@ if (lightboxClose && galleryLightbox) {
   });
         updateGallery(0);
 }
+
+setInterval(() => {
+  updateGallery(galleryIndex + 1);
+}, 6000);

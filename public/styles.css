@@ -160,9 +160,39 @@
   margin-top: 34px;
   border-radius: 32px;
   overflow: hidden;
+
   border: 1px solid rgba(54,211,153,.22);
-  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  box-shadow: 0 30px 90px rgba(0,0,0,.45);
+
+  background:
+    radial-gradient(circle at top,
+      rgba(54,211,153,.12),
+      transparent 60%),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.05),
+      rgba(255,255,255,.015)
+    );
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.55),
+    0 0 40px rgba(54,211,153,.08);
+
+  backdrop-filter: blur(6px);
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+.showcase-gallery:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(54,211,153,.45);
+
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.65),
+    0 0 60px rgba(54,211,153,.18);
 }
 
 .showcase-main {
@@ -171,6 +201,26 @@
   object-fit: cover;
   display: block;
   cursor: pointer;
+
+  transition:
+    transform .8s ease,
+    opacity .45s ease;
+
+  animation: galleryBreath 8s ease-in-out infinite;
+}
+
+@keyframes galleryBreath {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .showcase-gallery::after {
