@@ -441,3 +441,16 @@
 .quote-description-list li {
   margin-bottom: 10px;
 }
+
+.quote-toggle-btn {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.client-quote-details {
+  margin-bottom: 24px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.06);
+}

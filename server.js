@@ -234,6 +234,38 @@ app.post('/api/checkout/fixed', async (req,res)=>{
   res.json({ url: session.url });
 });
 
+app.get('/api/quote-search', async (req, res) => {
+  const q = String(req.query.q || '').trim().toLowerCase();
+
+  if (!q) {
+    return res.status(400).json({ error: 'Recherche obligatoire.' });
+  }
+
+  const quotes = readQuotes();
+
+  const results = quotes.filter(quote => {
+    return (
+      String(quote.id || '').toLowerCase().includes(q) ||
+      String(quote.customerName || '').toLowerCase().includes(q) ||
+      String(quote.email || '').toLowerCase().includes(q)
+    );
+  });
+
+  if (!results.length) {
+    return res.status(404).json({ error: 'Aucun devis trouvé.' });
+  }
+
+  res.json(results.map(quote => ({
+    id: quote.id,
+    customerName: quote.customerName,
+    email: quote.email,
+    service: quote.service,
+    amount: quote.amount,
+    description: quote.description,
+    status: quote.status
+  })));
+});
+
 app.get('/api/quote/:id', async (req,res)=>{
   const quotes = await readQuotes();
   const quote = quotes.find(q => q.id.toUpperCase() === req.params.id.toUpperCase());

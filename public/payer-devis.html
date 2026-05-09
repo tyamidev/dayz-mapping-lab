@@ -46,16 +46,16 @@
 
   <section class="hero-card quote-box">
 
-    <label>Numéro de devis</label>
+    <label>Rechercher votre devis</label>
 
     <input
       id="quoteId"
-      placeholder="Ex : DML-0001"
+      placeholder="Nom, email ou numéro de devis"
     >
 
     <div class="actions">
       <button class="btn" id="loadQuote">
-        Afficher le devis
+        Rechercher
       </button>
     </div>
 
@@ -110,55 +110,40 @@ function formatDescription(text = "") {
 }
 
 async function loadQuote() {
+  const query = document.getElementById("quoteId").value.trim();
 
-  const id = document.getElementById("quoteId").value.trim();
-
-  if (!id) {
-    return alert("Indiquez un numéro de devis.");
+  if (!query) {
+    return alert("Indiquez votre nom, email ou numéro de devis.");
   }
 
-  result.innerHTML = `
-    <p class="muted">
-      Recherche du devis...
-    </p>
-  `;
+  result.innerHTML = `<p class="muted">Recherche du devis...</p>`;
 
   try {
-
     const response = await fetch(
-      "/api/quote/" + encodeURIComponent(id)
+      "/api/quote-search?q=" + encodeURIComponent(query)
     );
 
-    const q = await response.json();
+    const quotes = await response.json();
 
     if (!response.ok) {
-      throw new Error(q.error || "Devis introuvable");
+      throw new Error(quotes.error || "Aucun devis trouvé");
     }
 
-    result.innerHTML = `
-
+    result.innerHTML = quotes.map(q => `
       <div class="quote-client-card">
 
         <div class="quote-top">
-
           <div>
-            <p class="quote-ref">
-              Référence ${q.id}
-            </p>
-
-            <h2>
-              Devis de ${q.customerName || "Client"}
-            </h2>
+            <p class="quote-ref">Référence ${q.id}</p>
+            <h2>Devis de ${q.customerName || "Client"}</h2>
           </div>
 
           <span class="badge ${q.status}">
             ${q.status}
           </span>
-
         </div>
 
         <div class="quote-info-grid">
-
           <div class="quote-info">
             <span>Service</span>
             <strong>${q.service || "Projet personnalisé"}</strong>
@@ -166,47 +151,30 @@ async function loadQuote() {
 
           <div class="quote-info">
             <span>Montant</span>
-            <strong class="quote-price">
-              ${q.amount}€
-            </strong>
+            <strong class="quote-price">${q.amount}€</strong>
           </div>
-
         </div>
 
-        <div class="quote-description-block">
+        <button class="btn ghost quote-toggle-btn" onclick="toggleClientQuoteDetails('${q.id}')">
+          Voir la description
+        </button>
 
-          <h3>Description du devis</h3>
-
-          ${formatDescription(q.description)}
-
+        <div id="client-quote-details-${q.id}" class="client-quote-details hidden">
+          <div class="quote-description-block">
+            <h3>Description du devis</h3>
+            ${formatDescription(q.description)}
+          </div>
         </div>
 
-        <button class="btn big-btn" id="payQuote">
+        <button class="btn big-btn" onclick="payQuote('${q.id}')">
           Payer ce devis
         </button>
 
       </div>
-    `;
-
-    document.getElementById("payQuote").onclick = async () => {
-
-      const data = await postJSON(
-        "/api/checkout/quote",
-        {
-          quoteId: q.id
-        }
-      );
-
-      location.href = data.url;
-    };
+    `).join("");
 
   } catch (e) {
-
-    result.innerHTML = `
-      <p class="status">
-        ${e.message}
-      </p>
-    `;
+    result.innerHTML = `<p class="status">${e.message}</p>`;
   }
 }
 
