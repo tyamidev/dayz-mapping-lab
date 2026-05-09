@@ -285,17 +285,39 @@ app.post('/api/checkout/quote', async (req,res)=>{
   const quote = quotes.find(q => q.id.toUpperCase() === String(req.body.quoteId||'').toUpperCase());
   if (!quote) return res.status(404).json({ error:'Devis introuvable.' });
   if (quote.status !== 'pending') return res.status(400).json({ error:'Ce devis n’est pas payable actuellement.' });
-  const session = await stripe.checkout.sessions.create({
-    mode:'payment',
-    customer_email: quote.email,
-    line_items: [{
-      price_data: { currency:'eur', unit_amount: Math.round(Number(quote.amount)*100), product_data:{ name:`Paiement devis ${quote.id}`, description: quote.service } },
-      quantity: 1
-    }],
-    success_url: `${SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${SITE_URL}/cancel.html`,
-    metadata: { type:'quote', quoteId: quote.id }
-  });
+const sessionData = {
+  mode: 'payment',
+
+  line_items: [{
+    price_data: {
+      currency: 'eur',
+
+      unit_amount: Math.round(Number(quote.amount) * 100),
+
+      product_data: {
+        name: `Paiement devis ${quote.id}`,
+        description: quote.service || 'Projet personnalisé'
+      }
+    },
+
+    quantity: 1
+  }],
+
+  success_url: `${SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+
+  cancel_url: `${SITE_URL}/cancel.html`,
+
+  metadata: {
+    type: 'quote',
+    quoteId: quote.id
+  }
+};
+
+if (quote.email && String(quote.email).trim()) {
+  sessionData.customer_email = quote.email;
+}
+
+const session = await stripe.checkout.sessions.create(sessionData);
   res.json({ url: session.url });
 });
 
