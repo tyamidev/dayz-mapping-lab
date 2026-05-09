@@ -179,6 +179,44 @@ async function deleteQuote(id) {
   updateStats();
 }
 
+async function editQuote(id) {
+  const quote = cachedQuotes.find(q => q.id === id);
+
+  if (!quote) {
+    alert("Devis introuvable.");
+    return;
+  }
+
+  const customerName = prompt("Nom / pseudo client :", quote.customerName || "");
+  if (customerName === null) return;
+
+  const email = prompt("Email client :", quote.email || "");
+  if (email === null) return;
+
+  const service = prompt("Service :", quote.service || "");
+  if (service === null) return;
+
+  const amount = prompt("Montant en € :", quote.amount || "");
+  if (amount === null) return;
+
+  const description = prompt("Description du devis :", quote.description || "");
+  if (description === null) return;
+
+  try {
+    await patchQuote(id, {
+      customerName,
+      email,
+      service,
+      amount,
+      description
+    });
+
+    alert("Devis modifié avec succès.");
+  } catch (e) {
+    alert(e.message);
+  }
+}
+
 async function patchRequest(id, data) {
   await req("/api/admin/requests/" + id, {
     method: "PATCH",
@@ -319,6 +357,7 @@ async function loadQuotes() {
         </p>
 
         <div class="toolbar">
+          <button class="btn" onclick="editQuote('${esc(q.id)}')">Modifier</button>
           <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'pending'})">En attente</button>
           <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'paid'})">Payé</button>
           <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'cancelled'})">Annulé</button>
