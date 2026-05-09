@@ -199,5 +199,27 @@
 
 </main>
 
+<div class="admin-modal hidden" id="quoteModal">
+  <div class="admin-modal-card">
+    <button class="modal-close" id="quoteModalClose">×</button>
+
+    <h2 id="quoteModalTitle">Modifier le devis</h2>
+
+    <form id="quoteModalForm" class="form">
+      <input type="hidden" name="quoteId" id="modalQuoteId">
+      <input type="hidden" name="requestId" id="modalRequestId">
+
+      <input name="customerName" id="modalCustomerName" placeholder="Nom / pseudo client">
+      <input name="email" id="modalEmail" type="email" placeholder="Email client optionnel">
+      <input name="service" id="modalService" placeholder="Service optionnel">
+      <input name="amount" id="modalAmount" type="number" min="1" step="0.01" placeholder="Montant en €" required>
+
+      <textarea name="description" id="modalDescription" placeholder="Description du devis"></textarea>
+
+      <button class="btn" type="submit" id="quoteModalSubmit">Enregistrer</button>
+    </form>
+  </div>
+</div>
+
 <script src="admin.js"></script>
 </body></html>

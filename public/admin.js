@@ -179,43 +179,6 @@ async function deleteQuote(id) {
   updateStats();
 }
 
-async function editQuote(id) {
-  const quote = cachedQuotes.find(q => q.id === id);
-
-  if (!quote) {
-    alert("Devis introuvable.");
-    return;
-  }
-
-  const customerName = prompt("Nom / pseudo client :", quote.customerName || "");
-  if (customerName === null) return;
-
-  const email = prompt("Email client :", quote.email || "");
-  if (email === null) return;
-
-  const service = prompt("Service :", quote.service || "");
-  if (service === null) return;
-
-  const amount = prompt("Montant en € :", quote.amount || "");
-  if (amount === null) return;
-
-  const description = prompt("Description du devis :", quote.description || "");
-  if (description === null) return;
-
-  try {
-    await patchQuote(id, {
-      customerName,
-      email,
-      service,
-      amount,
-      description
-    });
-
-    alert("Devis modifié avec succès.");
-  } catch (e) {
-    alert(e.message);
-  }
-}
 
 async function patchRequest(id, data) {
   await req("/api/admin/requests/" + id, {
@@ -238,44 +201,133 @@ async function deleteRequest(id) {
   updateStats();
 }
 
-async function quoteFromRequest(id) {
+const quoteModal = document.getElementById("quoteModal");
+const quoteModalClose = document.getElementById("quoteModalClose");
+const quoteModalForm = document.getElementById("quoteModalForm");
+const quoteModalTitle = document.getElementById("quoteModalTitle");
+
+function openQuoteModal(mode, data = {}) {
+  quoteModal.classList.remove("hidden");
+
+  document.getElementById("modalQuoteId").value = data.quoteId || "";
+  document.getElementById("modalRequestId").value = data.requestId || "";
+
+  document.getElementById("modalCustomerName").value = data.customerName || "";
+  document.getElementById("modalEmail").value = data.email || "";
+  document.getElementById("modalService").value = data.service || "";
+  document.getElementById("modalAmount").value = data.amount || "";
+  document.getElementById("modalDescription").value = data.description || "";
+
+  quoteModal.dataset.mode = mode;
+
+  quoteModalTitle.textContent =
+    mode === "edit" ? "Modifier le devis" : "Créer un devis depuis la demande";
+}
+
+function closeQuoteModal() {
+  quoteModal.classList.add("hidden");
+  quoteModalForm.reset();
+  quoteModal.dataset.mode = "";
+}
+
+quoteModalClose.onclick = closeQuoteModal;
+
+quoteModal.addEventListener("click", (e) => {
+  if (e.target === quoteModal) closeQuoteModal();
+});
+
+function editQuote(id) {
+  const quote = cachedQuotes.find(q => q.id === id);
+
+  if (!quote) {
+    alert("Devis introuvable.");
+    return;
+  }
+
+  openQuoteModal("edit", {
+    quoteId: quote.id,
+    customerName: quote.customerName || "",
+    email: quote.email || "",
+    service: quote.service || "",
+    amount: quote.amount || "",
+    description: quote.description || ""
+  });
+}
+
+function quoteFromRequest(id) {
   const request = cachedRequests.find(r => r.id === id);
 
+  if (!request) {
+    alert("Demande introuvable.");
+    return;
+  }
+
   let suggestedAmount = "";
-  if (request && request.service) {
+
+  if (request.service) {
     const normalized = request.service.toLowerCase();
 
     if (normalized.includes("bot")) suggestedAmount = 35;
     if (normalized.includes("discord")) suggestedAmount = 69;
     if (normalized.includes("mapping")) suggestedAmount = 50;
-    if (normalized.includes("clé") || normalized.includes("server") || normalized.includes("serveur")) suggestedAmount = 100;
+    if (
+      normalized.includes("clé") ||
+      normalized.includes("server") ||
+      normalized.includes("serveur")
+    ) {
+      suggestedAmount = 100;
+    }
   }
 
-  const amount = prompt("Montant du devis en € :", suggestedAmount);
-  if (!amount) return;
+  openQuoteModal("request", {
+    requestId: request.id,
+    customerName: request.name || "",
+    email: request.email || "",
+    service: request.service || "",
+    amount: suggestedAmount,
+    description: request.message || ""
+  });
+}
+quoteModalForm.onsubmit = async (e) => {
+  e.preventDefault();
 
-  const description = prompt("Description du devis :", request?.message || "") || "";
+  const mode = quoteModal.dataset.mode;
+
+  const quoteId = document.getElementById("modalQuoteId").value;
+  const requestId = document.getElementById("modalRequestId").value;
+
+  const data = {
+    customerName: document.getElementById("modalCustomerName").value,
+    email: document.getElementById("modalEmail").value,
+    service: document.getElementById("modalService").value,
+    amount: document.getElementById("modalAmount").value,
+    description: document.getElementById("modalDescription").value
+  };
 
   try {
-    const quote = await req("/api/admin/requests/" + id + "/create-quote", {
-      method: "POST",
-      body: JSON.stringify({ amount, description })
-    });
+    if (mode === "edit") {
+      await patchQuote(quoteId, data);
+      alert("Devis modifié avec succès.");
+    }
 
-    alert(
-      "Devis " +
-      quote.id +
-      " créé.\nLien : " +
-      location.origin +
-      "/payer-devis.html?id=" +
-      quote.id
-    );
+    if (mode === "request") {
+      await req("/api/admin/requests/" + requestId + "/create-quote", {
+        method: "POST",
+        body: JSON.stringify({
+          amount: data.amount,
+          description: data.description
+        })
+      });
 
-    await refreshAll();
-  } catch (e) {
-    alert(e.message);
+      alert("Devis créé avec succès.");
+      await refreshAll();
+    }
+
+    closeQuoteModal();
+  } catch (err) {
+    alert(err.message);
   }
-}
+};
 
 async function loadRequests() {
   const box = document.getElementById("requests");
