@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Quote Payment — DayZ Mapping Lab</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <a class="brand" href="/">
+    <span class="logo">DML</span>
+
+    <span>
+      <strong>DayZ Mapping Lab</strong>
+      <small>Secure quote payment</small>
+    </span>
+  </a>
+
+  <button class="burger" id="burger">☰</button>
+
+  <nav id="nav">
+    <a href="/">Home</a>
+    <a href="/#packs">Offers</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+
+</header>
+
+<main class="page">
+
+  <p class="eyebrow">Custom payment</p>
+
+  <h1>Pay an approved quote</h1>
+
+  <p class="legal">
+    This page is only used for quotes created and approved by DayZ Mapping Lab.
+    The amount is automatically locked.
+  </p>
+
+  <section class="hero-card quote-box">
+
+    <label>Search your quote</label>
+
+    <input
+      id="quoteId"
+      placeholder="Name, email or quote number"
+    >
+
+    <div class="actions">
+      <button class="btn" id="loadQuote">
+        Search
+      </button>
+    </div>
+
+    <div id="quoteResult" class="quote-result"></div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    © 2026 DayZ Mapping Lab™ — a brand operated by TyamiDev.
+  </p>
+</footer>
+
+<script src="app.js"></script>
+
+<script>
+
+const params = new URLSearchParams(location.search);
+
+if (params.get("id")) {
+  document.getElementById("quoteId").value = params.get("id");
+}
+
+const result = document.getElementById("quoteResult");
+
+document.getElementById("loadQuote").onclick = loadQuote;
+
+function formatDescription(text = "") {
+
+  const clean = String(text).trim();
+
+  if (!clean) {
+    return "<p class='muted'>No description.</p>";
+  }
+
+  const parts = clean
+    .split(/\n| - |\+|•|→/)
+    .map(item => item.trim())
+    .filter(Boolean);
+
+  if (parts.length <= 1) {
+    return `<p class="muted">${clean}</p>`;
+  }
+
+  return `
+    <ul class="quote-description-list">
+      ${parts.map(item => `<li>${item}</li>`).join("")}
+    </ul>
+  `;
+}
+
+window.toggleClientQuoteDetails = function(id) {
+
+  const el = document.getElementById(
+    "client-quote-details-" + id
+  );
+
+  if (!el) return;
+
+  el.classList.toggle("hidden");
+};
+
+window.payQuote = async function(id) {
+
+  try {
+
+    const response = await fetch(
+      "/api/checkout/quote",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          quoteId: id
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "Payment error"
+      );
+    }
+
+    window.location.href = data.url;
+
+  } catch (err) {
+
+    alert(
+      err.message ||
+      "Unable to start payment."
+    );
+  }
+};
+
+async function loadQuote() {
+
+  const query =
+    document.getElementById("quoteId")
+    .value
+    .trim();
+
+  if (!query) {
+    return alert(
+      "Enter your name, email or quote number."
+    );
+  }
+
+  result.innerHTML =
+    `<p class="muted">Searching quote...</p>`;
+
+  try {
+
+    const response = await fetch(
+      "/api/quote-search?q=" +
+      encodeURIComponent(query)
+    );
+
+    const quotes = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        quotes.error || "No quote found"
+      );
+    }
+
+    result.innerHTML = quotes.map(q => `
+
+      <div class="quote-client-card">
+
+        <div class="quote-top">
+
+          <div>
+            <p class="quote-ref">
+              Reference ${q.id}
+            </p>
+
+            <h2>
+              Quote for ${q.customerName || "Client"}
+            </h2>
+          </div>
+
+          <span class="badge ${q.status}">
+            ${q.status}
+          </span>
+
+        </div>
+
+        <div class="quote-info-grid">
+
+          <div class="quote-info">
+            <span>Service</span>
+
+            <strong>
+              ${q.service || "Custom project"}
+            </strong>
+          </div>
+
+          <div class="quote-info">
+            <span>Amount</span>
+
+            <strong class="quote-price">
+              ${q.amount}€
+            </strong>
+          </div>
+
+        </div>
+
+        <button
+          class="btn ghost quote-toggle-btn"
+          onclick="toggleClientQuoteDetails('${q.id}')"
+        >
+          View description
+        </button>
+
+        <div
+          id="client-quote-details-${q.id}"
+          class="client-quote-details hidden"
+        >
+
+          <div class="quote-description-block">
+
+            <h3>Quote description</h3>
+
+            ${formatDescription(q.description)}
+
+          </div>
+
+        </div>
+
+        <button
+          class="btn big-btn"
+          onclick="payQuote('${q.id}')"
+        >
+          Pay this quote
+        </button>
+
+      </div>
+
+    `).join("");
+
+  } catch (e) {
+
+    result.innerHTML =
+      `<p class="status">${e.message}</p>`;
+  }
+}
+
+if (params.get("id")) {
+  loadQuote();
+}
+
+</script>
+
+</body>
+</html>
