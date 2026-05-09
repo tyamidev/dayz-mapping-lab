@@ -178,11 +178,12 @@ async function loadQuote() {
   }
 }
 
+window.toggleClientQuoteDetails = toggleClientQuoteDetails;
+window.payQuote = payQuote;
+
 if (params.get("id")) {
   loadQuote();
 }
-
 </script>
-
 </body>
 </html>
