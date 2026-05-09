@@ -18,6 +18,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .sidebar-top {
@@ -365,4 +369,50 @@ body {
 
 #modalDescription {
   min-height: 260px;
+}
+
+.quote-status-group {
+  margin-bottom: 34px;
+}
+
+.quote-status-group h3 {
+  margin: 0 0 16px;
+  color: #74ff9f;
+  font-size: 1.25rem;
+}
+
+.quote-status-group h3 span {
+  color: rgba(255,255,255,.55);
+  font-size: .95rem;
+}
+
+.compact-quote {
+  padding: 18px 22px;
+}
+
+.quote-clickable-header {
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+.quote-clickable-header:hover {
+  color: #74ff9f;
+}
+
+.quote-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.quote-toggle {
+  font-size: .85rem;
+  color: rgba(255,255,255,.55);
+}
+
+.quote-details {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.08);
 }

@@ -47,6 +47,13 @@ function formatDescription(text = "") {
   `;
 }
 
+function toggleQuoteDetails(id) {
+  const details = document.getElementById("quote-details-" + id);
+  if (details) {
+    details.classList.toggle("hidden");
+  }
+}
+
 const fixedPrices = {
   "Bot Basic": 35,
   "Bot Premium": 65,
@@ -390,33 +397,66 @@ async function loadQuotes() {
     const quotes = await req("/api/admin/quotes");
     cachedQuotes = quotes;
 
-    box.innerHTML = quotes.map(q => `
-      <article class="quote-item">
-        <header>
-          <div>
-            <strong>${esc(q.id)}</strong>
-            <p class="muted">${new Date(q.createdAt).toLocaleString("fr-FR")}</p>
-          </div>
-          <span class="badge ${esc(q.status)}">${esc(q.status)}</span>
-        </header>
+    const groups = {
+      pending: quotes.filter(q => q.status === "pending"),
+      paid: quotes.filter(q => q.status === "paid"),
+      cancelled: quotes.filter(q => q.status === "cancelled"),
+      other: quotes.filter(q => !["pending", "paid", "cancelled"].includes(q.status))
+    };
 
-        <p><strong>${esc(q.customerName)}</strong> — ${esc(q.email)}</p>
-        <p>${esc(q.service)} · <strong>${euro(q.amount)}</strong></p>
-        <p class="muted">${formatDescription(q.description)}</p>
+    function renderGroup(title, items) {
+      if (!items.length) return "";
 
-        <p>
-          <a href="/payer-devis.html?id=${esc(q.id)}" target="_blank">Lien de paiement</a>
-        </p>
+      return `
+        <div class="quote-status-group">
+          <h3>${title} <span>${items.length}</span></h3>
 
-        <div class="toolbar">
-          <button class="btn" onclick="editQuote('${esc(q.id)}')">Modifier</button>
-          <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'pending'})">En attente</button>
-          <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'paid'})">Payé</button>
-          <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'cancelled'})">Annulé</button>
-          <button class="btn danger" onclick="deleteQuote('${esc(q.id)}')">Supprimer</button>
+          ${items.map(q => `
+            <article class="quote-item compact-quote">
+              <header onclick="toggleQuoteDetails('${esc(q.id)}')" class="quote-clickable-header">
+                <div>
+                  <strong>${esc(q.id)}</strong>
+                  <p class="muted">${new Date(q.createdAt).toLocaleString("fr-FR")}</p>
+                  <p>
+                    <strong>${esc(q.customerName || "Client")}</strong>
+                    ${q.email ? ` — ${esc(q.email)}` : ""}
+                  </p>
+                  <p>${esc(q.service || "Projet personnalisé")} · <strong>${euro(q.amount)}</strong></p>
+                </div>
+
+                <div class="quote-header-right">
+                  <span class="badge ${esc(q.status)}">${esc(q.status)}</span>
+                  <span class="quote-toggle">Voir détails ▾</span>
+                </div>
+              </header>
+
+              <div id="quote-details-${esc(q.id)}" class="quote-details hidden">
+                ${formatDescription(q.description)}
+
+                <p>
+                  <a href="/payer-devis.html?id=${esc(q.id)}" target="_blank">Lien de paiement</a>
+                </p>
+
+                <div class="toolbar">
+                  <button class="btn" onclick="editQuote('${esc(q.id)}')">Modifier</button>
+                  <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'pending'})">En attente</button>
+                  <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'paid'})">Payé</button>
+                  <button class="btn secondary" onclick="patchQuote('${esc(q.id)}',{status:'cancelled'})">Annulé</button>
+                  <button class="btn danger" onclick="deleteQuote('${esc(q.id)}')">Supprimer</button>
+                </div>
+              </div>
+            </article>
+          `).join("")}
         </div>
-      </article>
-    `).join("") || '<p class="muted">Aucun devis.</p>';
+      `;
+    }
+
+    box.innerHTML =
+      renderGroup("⏳ Devis en attente", groups.pending) +
+      renderGroup("✅ Devis payés", groups.paid) +
+      renderGroup("❌ Devis annulés", groups.cancelled) +
+      renderGroup("📁 Autres devis", groups.other) ||
+      '<p class="muted">Aucun devis.</p>';
 
     updateStats();
   } catch (e) {
