@@ -194,7 +194,8 @@ async function payQuote(id) {
 
     location.href = data.url;
   } catch (e) {
-    alert(e.message);
+        console.error(e);
+        alert("Impossible de lancer le paiement. Vérifie que le devis est bien en statut pending et que Stripe est configuré.");
   }
 }
 
