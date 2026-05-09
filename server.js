@@ -346,8 +346,8 @@ app.get('/api/admin/quotes', requireAdmin, async (req,res)=> {
 app.post('/api/admin/quotes', requireAdmin, async (req,res)=>{
   const { customerName, email, service, amount, description } = req.body;
 
-  if (!customerName || !email || !service || !amount) {
-    return res.status(400).json({ error:'Champs obligatoires manquants.' });
+if (!customerName || !amount) {
+  return res.status(400).json({ error:'Nom client et montant obligatoires.' });
   }
 
   const quote = {

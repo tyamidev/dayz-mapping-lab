@@ -315,3 +315,14 @@ body {
   }
 
 }
+
+.quote-description-list {
+  margin: 16px 0;
+  padding-left: 22px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+}
+
+.quote-description-list li {
+  margin-bottom: 8px;
+}

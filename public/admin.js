@@ -24,6 +24,29 @@ function esc(v = "") {
   }[m]));
 }
 
+function formatDescription(text = "") {
+  const clean = String(text).trim();
+
+  if (!clean) {
+    return '<p class="muted">Aucune description.</p>';
+  }
+
+  const parts = clean
+    .split(/\n| - |\+|•|→/)
+    .map(item => item.trim())
+    .filter(Boolean);
+
+  if (parts.length <= 1) {
+    return `<p class="muted">${esc(clean)}</p>`;
+  }
+
+  return `
+    <ul class="quote-description-list">
+      ${parts.map(item => `<li>${esc(item)}</li>`).join("")}
+    </ul>
+  `;
+}
+
 const fixedPrices = {
   "Bot Basic": 35,
   "Bot Premium": 65,
@@ -289,7 +312,7 @@ async function loadQuotes() {
 
         <p><strong>${esc(q.customerName)}</strong> — ${esc(q.email)}</p>
         <p>${esc(q.service)} · <strong>${euro(q.amount)}</strong></p>
-        <p class="muted">${esc(q.description || "")}</p>
+        <p class="muted">${formatDescription(q.description)}</p>
 
         <p>
           <a href="/payer-devis.html?id=${esc(q.id)}" target="_blank">Lien de paiement</a>
