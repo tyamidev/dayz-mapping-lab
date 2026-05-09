@@ -178,6 +178,26 @@ async function loadQuote() {
   }
 }
 
+function toggleClientQuoteDetails(id) {
+  const details = document.getElementById("client-quote-details-" + id);
+
+  if (details) {
+    details.classList.toggle("hidden");
+  }
+}
+
+async function payQuote(id) {
+  try {
+    const data = await postJSON("/api/checkout/quote", {
+      quoteId: id
+    });
+
+    location.href = data.url;
+  } catch (e) {
+    alert(e.message);
+  }
+}
+
 window.toggleClientQuoteDetails = toggleClientQuoteDetails;
 window.payQuote = payQuote;
 
