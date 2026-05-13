@@ -1,14 +1,6 @@
 let currentJsonFileName = "validated.json";
 let currentXmlFileName = "validated.xml";
 
-if (jsonFile.files[0]) {
-  currentJsonFileName = jsonFile.files[0].name;
-}
-
-if (xmlFile.files[0]) {
-  currentXmlFileName = xmlFile.files[0].name;
-}
-
 function updateFileName(inputId, labelId) {
   const input = document.getElementById(inputId);
   const label = document.getElementById(labelId);
