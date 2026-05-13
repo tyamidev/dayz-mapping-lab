@@ -29,7 +29,22 @@ function selectErrorInTextarea(textarea, position) {
 
   textarea.setSelectionRange(start, end);
 }
+function selectLineInTextarea(textarea, lineNumber) {
+  const lines = textarea.value.split("\n");
 
+  if (!lineNumber || lineNumber < 1 || lineNumber > lines.length) return;
+
+  let start = 0;
+
+  for (let i = 0; i < lineNumber - 1; i++) {
+    start += lines[i].length + 1;
+  }
+
+  const end = start + lines[lineNumber - 1].length;
+
+  textarea.focus();
+  textarea.setSelectionRange(start, end);
+}
 function downloadFile(filename, content, type = "text/plain") {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
@@ -202,13 +217,13 @@ document.getElementById("formatXmlBtn").addEventListener("click", () => {
         position += column - 1;
       }
 
-      selectErrorInTextarea(xmlInput, position);
+      selectLineInTextarea(xmlInput, line);
     }
 
     xmlStatus.innerHTML = `
       ❌ Erreur XML détectée<br><br>
       <strong>Détail :</strong><br>
-      ${e.message}<br><br>
+      <span class="error-detail">${String(e.message).replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span><br><br>
       ${line ? `<strong>Ligne :</strong> ${line}<br>` : ""}
       ${column ? `<strong>Colonne :</strong> ${column}<br>` : ""}
       ${line ? "<br>La zone proche de l’erreur a été sélectionnée dans le fichier." : ""}
