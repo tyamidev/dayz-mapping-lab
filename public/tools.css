@@ -385,7 +385,7 @@
 
 .loot-card-main {
   display: grid;
-  grid-template-columns: 1.8fr 1fr .8fr .75fr .75fr auto;
+  grid-template-columns: 1.7fr 1fr .8fr .7fr .7fr auto;
   gap: 14px;
   align-items: end;
 }
@@ -393,7 +393,6 @@
 .loot-item-info {
   display: flex;
   align-items: center;
-  gap: 14px;
 }
 
 .loot-card h3 {
@@ -427,14 +426,16 @@
   display: none;
 }
 
-@media(max-width: 1100px) {
+@media(max-width: 900px) {
+
   .loot-card-main {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .loot-details-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
+
 }
 
 @media(max-width: 700px) {
