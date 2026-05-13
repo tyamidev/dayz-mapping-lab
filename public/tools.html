@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>DayZ Tools — DayZ Mapping Lab</title>
+  <meta name="description" content="Outils gratuits pour admins DayZ : JSON validator, XML formatter, calculateur jour/nuit et générateurs de fichiers serveur.">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tools.css">
+</head>
+
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/">
+    <span class="logo">DML</span>
+    <span>
+      <strong>DayZ Mapping Lab</strong>
+      <small>Free DayZ server tools</small>
+    </span>
+  </a>
+
+  <button class="burger" id="burger">☰</button>
+
+  <nav id="nav">
+    <a href="/">Accueil</a>
+    <a href="/#services">Services</a>
+    <a href="/#packs">Offres</a>
+    <a href="/payer-devis.html">Payer un devis</a>
+    <a href="/#contact" class="btn small">Contact</a>
+  </nav>
+</header>
+
+<main class="tools-page">
+
+  <section class="tools-hero">
+    <p class="eyebrow">DayZ Tools</p>
+
+    <h1>Outils gratuits pour admins DayZ</h1>
+
+    <p>
+      Importez, vérifiez, formatez et générez vos fichiers serveur DayZ directement depuis votre navigateur.
+      Aucun fichier n’est envoyé sur le serveur.
+    </p>
+  </section>
+
+  <section class="tools-grid">
+
+    <article class="tool-card active" data-tool="jsonTool">
+      <span>🧩</span>
+      <h3>JSON Validator</h3>
+      <p>Vérifier et reformater un fichier JSON DayZ.</p>
+    </article>
+
+    <article class="tool-card" data-tool="xmlTool">
+      <span>🧾</span>
+      <h3>XML Validator</h3>
+      <p>Vérifier et reformater un fichier XML DayZ.</p>
+    </article>
+
+    <article class="tool-card" data-tool="dayNightTool">
+      <span>🌙</span>
+      <h3>Day/Night Calculator</h3>
+      <p>Calculer les valeurs jour/nuit à entrer dans Nitrado.</p>
+    </article>
+
+  </section>
+
+  <section id="jsonTool" class="tool-panel">
+    <h2>JSON Validator / Formatter</h2>
+
+    <p class="muted">
+      Collez votre JSON ou importez un fichier .json.
+    </p>
+
+    <input type="file" id="jsonFile" accept=".json">
+
+    <textarea id="jsonInput" placeholder="Collez votre JSON ici..."></textarea>
+
+    <div class="tool-actions">
+      <button class="btn" id="formatJsonBtn">Vérifier / Formater</button>
+      <button class="btn secondary" id="downloadJsonBtn">Télécharger</button>
+      <button class="btn danger" id="clearJsonBtn">Effacer</button>
+    </div>
+
+    <p id="jsonStatus" class="status"></p>
+  </section>
+
+  <section id="xmlTool" class="tool-panel hidden">
+    <h2>XML Validator / Formatter</h2>
+
+    <p class="muted">
+      Collez votre XML ou importez un fichier .xml.
+    </p>
+
+    <input type="file" id="xmlFile" accept=".xml">
+
+    <textarea id="xmlInput" placeholder="Collez votre XML ici..."></textarea>
+
+    <div class="tool-actions">
+      <button class="btn" id="formatXmlBtn">Vérifier / Formater</button>
+      <button class="btn secondary" id="downloadXmlBtn">Télécharger</button>
+      <button class="btn danger" id="clearXmlBtn">Effacer</button>
+    </div>
+
+    <p id="xmlStatus" class="status"></p>
+  </section>
+
+  <section id="dayNightTool" class="tool-panel hidden">
+    <h2>Day/Night Calculator</h2>
+
+    <p class="muted">
+      Calculez des valeurs simples à tester dans Nitrado.
+    </p>
+
+    <div class="tool-form-grid">
+      <label>
+        Durée réelle souhaitée du jour en minutes
+        <input id="dayMinutes" type="number" min="1" placeholder="Ex : 120">
+      </label>
+
+      <label>
+        Durée réelle souhaitée de la nuit en minutes
+        <input id="nightMinutes" type="number" min="1" placeholder="Ex : 30">
+      </label>
+    </div>
+
+    <div class="tool-actions">
+      <button class="btn" id="calculateDayNightBtn">Calculer</button>
+    </div>
+
+    <div id="dayNightResult" class="tool-result hidden"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 DayZ Mapping Lab™ — Free DayZ tools.</p>
+</footer>
+
+<script src="app.js"></script>
+<script src="tools.js"></script>
+
+</body>
+</html>

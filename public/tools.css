@@ -1,0 +1,119 @@
+.tools-page {
+  padding: 70px 6vw;
+}
+
+.tools-hero {
+  max-width: 980px;
+  margin-bottom: 42px;
+}
+
+.tools-hero h1 {
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: .95;
+  margin: 10px 0 18px;
+}
+
+.tools-hero p {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 760px;
+  line-height: 1.7;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.tool-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  cursor: pointer;
+  transition: .25s ease;
+  box-shadow: var(--shadow);
+}
+
+.tool-card span {
+  font-size: 32px;
+}
+
+.tool-card h3 {
+  margin: 14px 0 8px;
+}
+
+.tool-card p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.tool-card:hover,
+.tool-card.active {
+  transform: translateY(-4px);
+  border-color: rgba(54,211,153,.55);
+  box-shadow: 0 25px 70px rgba(54,211,153,.12);
+}
+
+.tool-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+
+.tool-panel textarea {
+  width: 100%;
+  min-height: 360px;
+  margin-top: 16px;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+}
+
+.tool-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.tool-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.tool-form-grid label {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.tool-form-grid input {
+  margin-top: 10px;
+}
+
+.tool-result {
+  margin-top: 22px;
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(54,211,153,.25);
+  background: rgba(54,211,153,.06);
+}
+
+.tool-result code {
+  display: block;
+  margin-top: 10px;
+  color: var(--accent);
+  font-size: 18px;
+}
+
+@media(max-width: 900px) {
+  .tools-grid,
+  .tool-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
