@@ -709,55 +709,63 @@ function parseLootXml(xml) {
 }
 
 function renderLootItems(items) {
-
   lootTableBody.innerHTML = items.map((item) => `
-    <tr>
+    <article class="loot-card">
 
-      <td>
-        <strong>${item.name}</strong>
-      </td>
+      <div class="loot-card-main">
 
-<td>
-  <span class="loot-category-label">
-    ${item.category || "-"}
-  </span>
-</td>
+        <div class="loot-item-info">
+          <div class="loot-image-placeholder">
+            🎯
+          </div>
 
-      <td>
-        <select
-          class="loot-select"
-          oninput="updateLootValue(${item.id}, 'usage', this.value)"
-        >
-          ${buildSelectOptions(lootUsages, item.usage)}
-        </select>
-      </td>
+          <div>
+            <h3>${item.name}</h3>
 
-      <td>
-        <select
-          class="loot-select small"
-          oninput="updateLootValue(${item.id}, 'tier', this.value)"
-        >
-          ${buildSelectOptions(lootTiers, item.tier)}
-        </select>
-      </td>
+            <span class="loot-category-label">
+              ${item.category || "-"}
+            </span>
+          </div>
+        </div>
 
-      <td>
-        <input
-          type="number"
-          value="${item.nominal}"
-          oninput="updateLootValue(${item.id}, 'nominal', this.value)"
-        >
-      </td>
+        <label>
+          Usage
+          <select
+            class="loot-select"
+            oninput="updateLootValue(${item.id}, 'usage', this.value)"
+          >
+            ${buildSelectOptions(lootUsages, item.usage)}
+          </select>
+        </label>
 
-      <td>
-        <input
-          type="number"
-          value="${item.min}"
-          oninput="updateLootValue(${item.id}, 'min', this.value)"
-        >
-      </td>
+        <label>
+          Tier
+          <select
+            class="loot-select small"
+            oninput="updateLootValue(${item.id}, 'tier', this.value)"
+          >
+            ${buildSelectOptions(lootTiers, item.tier)}
+          </select>
+        </label>
 
-      <td>
+        <label>
+          Nominal
+          <input
+            type="number"
+            value="${item.nominal}"
+            oninput="updateLootValue(${item.id}, 'nominal', this.value)"
+          >
+        </label>
+
+        <label>
+          Min
+          <input
+            type="number"
+            value="${item.min}"
+            oninput="updateLootValue(${item.id}, 'min', this.value)"
+          >
+        </label>
+
         <button
           type="button"
           class="mini-btn"
@@ -765,58 +773,53 @@ function renderLootItems(items) {
         >
           Détails
         </button>
-      </td>
 
-    </tr>
+      </div>
 
-    <tr
-      id="loot-details-${item.id}"
-      class="loot-details-row hidden"
-    >
-      <td colspan="7">
+      <div
+        id="loot-details-${item.id}"
+        class="loot-details-grid hidden"
+      >
 
-        <div class="loot-details-grid">
+        <label>
+          Lifetime
+          <input
+            type="number"
+            value="${item.lifetime}"
+            oninput="updateLootValue(${item.id}, 'lifetime', this.value)"
+          >
+        </label>
 
-          <label>
-            Lifetime
-            <input
-              type="number"
-              value="${item.lifetime}"
-              oninput="updateLootValue(${item.id}, 'lifetime', this.value)"
-            >
-          </label>
+        <label>
+          Restock
+          <input
+            type="number"
+            value="${item.restock}"
+            oninput="updateLootValue(${item.id}, 'restock', this.value)"
+          >
+        </label>
 
-          <label>
-            Restock
-            <input
-              type="number"
-              value="${item.restock}"
-              oninput="updateLootValue(${item.id}, 'restock', this.value)"
-            >
-          </label>
+        <label>
+          Quant Min
+          <input
+            type="number"
+            value="${item.quantmin}"
+            oninput="updateLootValue(${item.id}, 'quantmin', this.value)"
+          >
+        </label>
 
-          <label>
-            Quant Min
-            <input
-              type="number"
-              value="${item.quantmin}"
-              oninput="updateLootValue(${item.id}, 'quantmin', this.value)"
-            >
-          </label>
+        <label>
+          Quant Max
+          <input
+            type="number"
+            value="${item.quantmax}"
+            oninput="updateLootValue(${item.id}, 'quantmax', this.value)"
+          >
+        </label>
 
-          <label>
-            Quant Max
-            <input
-              type="number"
-              value="${item.quantmax}"
-              oninput="updateLootValue(${item.id}, 'quantmax', this.value)"
-            >
-          </label>
+      </div>
 
-        </div>
-
-      </td>
-    </tr>
+    </article>
   `).join("");
 }
 
