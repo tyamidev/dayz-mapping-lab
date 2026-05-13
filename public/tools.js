@@ -1,3 +1,14 @@
+let currentJsonFileName = "validated.json";
+let currentXmlFileName = "validated.xml";
+
+if (jsonFile.files[0]) {
+  currentJsonFileName = jsonFile.files[0].name;
+}
+
+if (xmlFile.files[0]) {
+  currentXmlFileName = xmlFile.files[0].name;
+}
+
 function updateFileName(inputId, labelId) {
   const input = document.getElementById(inputId);
   const label = document.getElementById(labelId);
@@ -89,6 +100,10 @@ const jsonStatus = document.getElementById("jsonStatus");
 jsonFile.addEventListener("change", () => {
   readFileToTextarea(jsonFile, jsonInput);
   updateFileName("jsonFile", "jsonFileName");
+
+  if (jsonFile.files[0]) {
+    currentJsonFileName = jsonFile.files[0].name;
+  }
 });
 
 document.getElementById("formatJsonBtn").addEventListener("click", () => {
@@ -125,7 +140,7 @@ document.getElementById("formatJsonBtn").addEventListener("click", () => {
 });
 
 document.getElementById("downloadJsonBtn").addEventListener("click", () => {
-  downloadFile("formatted.json", jsonInput.value, "application/json");
+  downloadFile(currentJsonFileName, jsonInput.value, "application/json");
 });
 
 document.getElementById("clearJsonBtn").addEventListener("click", () => {
@@ -142,6 +157,10 @@ const xmlStatus = document.getElementById("xmlStatus");
 xmlFile.addEventListener("change", () => {
   readFileToTextarea(xmlFile, xmlInput);
   updateFileName("xmlFile", "xmlFileName");
+
+  if (xmlFile.files[0]) {
+    currentXmlFileName = xmlFile.files[0].name;
+  }
 });
 
 function formatXml(xml) {
@@ -232,7 +251,7 @@ document.getElementById("formatXmlBtn").addEventListener("click", () => {
 });
 
 document.getElementById("downloadXmlBtn").addEventListener("click", () => {
-  downloadFile("formatted.xml", xmlInput.value, "application/xml");
+  downloadFile(currentXmlFileName, xmlInput.value, "application/xml");
 });
 
 document.getElementById("clearXmlBtn").addEventListener("click", () => {
