@@ -267,3 +267,16 @@
   background: rgba(168,85,247,.16);
   color: #d2a7ff;
 }
+
+.loot-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.loot-controls .loot-search {
+  min-width: 240px;
+  flex: 1;
+}

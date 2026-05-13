@@ -142,7 +142,7 @@
         <input type="file" id="xmlFile" accept=".xml">
         <span>Importer un fichier XML</span>
     </label>
-    <p id="xmlFileName" class="file-name">Aucun fichier sélectionné</p>>
+    <p id="xmlFileName" class="file-name">Aucun fichier sélectionné</p>
 
     <textarea id="xmlInput" placeholder="Collez votre XML ici..."></textarea>
 
@@ -339,25 +339,28 @@
     Aucun fichier sélectionné
   </p>
 
-  <div class="tool-actions">
-    <input
-      type="text"
-      id="lootSearch"
-        <select id="lootCategoryFilter" class="loot-search">
-        <option value="all">Toutes catégories</option>
-        </select>
-      placeholder="Rechercher un item..."
-      class="loot-search"
-    >
+<div class="loot-controls">
 
-    <button class="btn secondary" id="downloadLootEditorBtn">
-      Télécharger
-    </button>
+  <input
+    type="text"
+    id="lootSearch"
+    placeholder="Rechercher un item..."
+    class="loot-search"
+  >
 
-    <button class="btn danger" id="clearLootEditorBtn">
-      Effacer
-    </button>
-  </div>
+  <select id="lootCategoryFilter" class="loot-search">
+    <option value="all">Toutes catégories</option>
+  </select>
+
+  <button class="btn secondary" id="downloadLootEditorBtn">
+    Télécharger
+  </button>
+
+  <button class="btn danger" id="clearLootEditorBtn">
+    Effacer
+  </button>
+
+</div>
 
   <p id="lootEditorStatus" class="status"></p>
 
