@@ -717,14 +717,11 @@ function renderLootItems(items) {
         <strong>${item.name}</strong>
       </td>
 
-      <td>
-        <select
-          class="loot-select"
-          oninput="updateLootValue(${item.id}, 'category', this.value)"
-        >
-          ${buildSelectOptions(lootCategories, item.category)}
-        </select>
-      </td>
+<td>
+  <span class="loot-category-label">
+    ${item.category || "-"}
+  </span>
+</td>
 
       <td>
         <select

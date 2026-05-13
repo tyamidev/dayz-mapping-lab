@@ -297,11 +297,11 @@
 }
 
 .loot-table {
-  min-width: 900px;
+  min-width: 760px;
 }
 
 .loot-select {
-  min-width: 130px;
+  min-width: 105px;
 }
 
 .loot-select.small {
@@ -351,4 +351,21 @@
   .loot-details-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.loot-category-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(54,211,153,.14);
+  color: #7dffcb;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.loot-table input {
+  width: 86px;
 }
