@@ -44,12 +44,27 @@ jsonFile.addEventListener("change", () => {
 });
 
 document.getElementById("formatJsonBtn").addEventListener("click", () => {
+
+  jsonStatus.className = "status";
+
   try {
-    const parsed = JSON.parse(jsonInput.value);
-    jsonInput.value = JSON.stringify(parsed, null, 2);
-    jsonStatus.textContent = "JSON valide et formaté.";
+
+    JSON.parse(jsonInput.value);
+
+    jsonStatus.innerHTML = `
+      ✅ JSON valide.
+    `;
+
   } catch (e) {
-    jsonStatus.textContent = "Erreur JSON : " + e.message;
+
+    jsonStatus.classList.add("error");
+
+    jsonStatus.innerHTML = `
+      ❌ Erreur JSON détectée<br><br>
+
+      <strong>Détail :</strong><br>
+      ${e.message}
+    `;
   }
 });
 
@@ -107,11 +122,42 @@ function formatXml(xml) {
 }
 
 document.getElementById("formatXmlBtn").addEventListener("click", () => {
+
+  xmlStatus.className = "status";
+
   try {
-    xmlInput.value = formatXml(xmlInput.value);
-    xmlStatus.textContent = "XML valide et formaté.";
+
+    const parser = new DOMParser();
+
+    const xmlDoc = parser.parseFromString(
+      xmlInput.value,
+      "application/xml"
+    );
+
+    const errorNode =
+      xmlDoc.querySelector("parsererror");
+
+    if (errorNode) {
+
+      throw new Error(
+        errorNode.textContent
+      );
+    }
+
+    xmlStatus.innerHTML = `
+      ✅ XML valide.
+    `;
+
   } catch (e) {
-    xmlStatus.textContent = "Erreur XML : " + e.message;
+
+    xmlStatus.classList.add("error");
+
+    xmlStatus.innerHTML = `
+      ❌ Erreur XML détectée<br><br>
+
+      <strong>Détail :</strong><br>
+      ${e.message}
+    `;
   }
 });
 

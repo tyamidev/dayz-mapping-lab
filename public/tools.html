@@ -31,6 +31,26 @@
     <a href="/#packs">Offres</a>
     <a href="/payer-devis.html">Payer un devis</a>
     <a href="/#contact" class="btn small">Contact</a>
+
+    <div class="language-switcher">
+
+    <button data-lang="fr">
+        <img src="https://flagcdn.com/fr.svg" alt="FR">
+    </button>
+
+    <button data-lang="en">
+        <img src="https://flagcdn.com/gb.svg" alt="EN">
+    </button>
+
+    <button data-lang="de">
+        <img src="https://flagcdn.com/de.svg" alt="DE">
+    </button>
+
+    <button data-lang="es">
+        <img src="https://flagcdn.com/es.svg" alt="ES">
+    </button>
+
+    </div>
   </nav>
 </header>
 
@@ -81,7 +101,7 @@
     <textarea id="jsonInput" placeholder="Collez votre JSON ici..."></textarea>
 
     <div class="tool-actions">
-      <button class="btn" id="formatJsonBtn">Vérifier / Formater</button>
+      <button class="btn" id="formatJsonBtn">Vérifier le JSON</button>
       <button class="btn secondary" id="downloadJsonBtn">Télécharger</button>
       <button class="btn danger" id="clearJsonBtn">Effacer</button>
     </div>
@@ -101,7 +121,7 @@
     <textarea id="xmlInput" placeholder="Collez votre XML ici..."></textarea>
 
     <div class="tool-actions">
-      <button class="btn" id="formatXmlBtn">Vérifier / Formater</button>
+      <button class="btn" id="formatXmlBtn">Vérifier le XML</button>
       <button class="btn secondary" id="downloadXmlBtn">Télécharger</button>
       <button class="btn danger" id="clearXmlBtn">Effacer</button>
     </div>
@@ -142,6 +162,7 @@
 </footer>
 
 <script src="app.js"></script>
+<script src="/js/i18n.js"></script>
 <script src="tools.js"></script>
 
 </body>
