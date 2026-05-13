@@ -396,17 +396,6 @@
   gap: 14px;
 }
 
-.loot-image-placeholder {
-  width: 76px;
-  height: 58px;
-  border-radius: 16px;
-  background: rgba(0,0,0,.22);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-}
-
 .loot-card h3 {
   margin: 0 0 8px;
   font-size: 20px;
