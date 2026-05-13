@@ -596,6 +596,28 @@ function buildSelectOptions(options, selectedValue) {
   `).join("");
 }
 
+function getLootItemImage(category) {
+
+  const icons = {
+    weapons: "🔫",
+    clothes: "🧥",
+    containers: "🎒",
+    food: "🥫",
+    tools: "🛠️",
+    vehiclesparts: "⚙️",
+    explosives: "💣",
+    books: "📘",
+    medical: "💉",
+    ammo: "📦"
+  };
+
+  return `
+    <div class="loot-image-placeholder">
+      ${icons[category] || "🎯"}
+    </div>
+  `;
+}
+
 function populateCategoryFilter() {
   const defaultCategories = [
     "weapons",
@@ -714,10 +736,7 @@ function renderLootItems(items) {
 
       <div class="loot-card-main">
 
-        <div class="loot-item-info">
-          <div class="loot-image-placeholder">
-            🎯
-          </div>
+${getLootItemImage(item.category)}
 
           <div>
             <h3>${item.name}</h3>
