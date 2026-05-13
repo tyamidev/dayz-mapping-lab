@@ -343,6 +343,9 @@
     <input
       type="text"
       id="lootSearch"
+        <select id="lootCategoryFilter" class="loot-search">
+        <option value="all">Toutes catégories</option>
+        </select>
       placeholder="Rechercher un item..."
       class="loot-search"
     >
@@ -364,13 +367,16 @@
 
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Nominal</th>
-          <th>Min</th>
-          <th>Lifetime</th>
-          <th>Restock</th>
-          <th>Quant Min</th>
-          <th>Quant Max</th>
+            <th>Item</th>
+            <th>Catégorie</th>
+            <th>Usage</th>
+            <th>Tier</th>
+            <th>Nominal</th>
+            <th>Min</th>
+            <th>Lifetime</th>
+            <th>Restock</th>
+            <th>Quant Min</th>
+            <th>Quant Max</th>
         </tr>
       </thead>
 

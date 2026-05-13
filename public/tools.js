@@ -506,6 +506,9 @@ const lootEditorStatus = document.getElementById("lootEditorStatus");
 const lootTableBody = document.getElementById("lootTableBody");
 const lootSearch = document.getElementById("lootSearch");
 
+const lootCategoryFilter =
+  document.getElementById("lootCategoryFilter");
+
 lootEditorFile.addEventListener("change", () => {
 
   updateFileName("lootEditorFile", "lootEditorFileName");
@@ -533,6 +536,67 @@ function getTagValue(block, tag) {
   return match ? match[1] : "0";
 }
 
+function getAttributeValue(block, tag, attribute) {
+
+  const regex = new RegExp(
+    `<${tag}[^>]*${attribute}="([^"]+)"`,
+    "i"
+  );
+
+  const match = block.match(regex);
+
+  return match ? match[1] : "";
+}
+
+function populateCategoryFilter() {
+
+  const categories = [
+    ...new Set(
+      lootItems.map(item => item.category)
+    )
+  ].sort();
+
+  lootCategoryFilter.innerHTML = `
+    <option value="all">
+      Toutes catégories
+    </option>
+  `;
+
+  categories.forEach(category => {
+
+    lootCategoryFilter.innerHTML += `
+      <option value="${category}">
+        ${category}
+      </option>
+    `;
+  });
+}
+
+function filterLootItems() {
+
+  const search =
+    lootSearch.value.toLowerCase();
+
+  const category =
+    lootCategoryFilter.value;
+
+  const filtered = lootItems.filter(item => {
+
+    const matchesSearch =
+      item.name.toLowerCase()
+      .includes(search);
+
+    const matchesCategory =
+      category === "all" ||
+      item.category === category;
+
+    return matchesSearch &&
+      matchesCategory;
+  });
+
+  renderLootItems(filtered);
+}
+
 function parseLootXml(xml) {
 
   lootItems = [];
@@ -540,6 +604,7 @@ function parseLootXml(xml) {
   const typeBlocks = xml.match(/<type\b[\s\S]*?<\/type>/gi);
 
   if (!typeBlocks) {
+    populateCategoryFilter();
     lootEditorStatus.textContent = "Aucun item trouvé.";
     return;
   }
@@ -554,6 +619,25 @@ function parseLootXml(xml) {
       id: lootItems.length,
       original: block,
       name: nameMatch[1],
+
+      category: getAttributeValue(
+      block,
+      "category",
+      "name"
+),
+
+      usage: getAttributeValue(
+      block,
+      "usage",
+      "name"
+),
+
+      tier: getAttributeValue(
+      block,
+      "value",
+      "name"
+),
+
       nominal: getTagValue(block, "nominal"),
       min: getTagValue(block, "min"),
       lifetime: getTagValue(block, "lifetime"),
@@ -579,33 +663,69 @@ function renderLootItems(items) {
       </td>
 
       <td>
-        <input type="number" value="${item.nominal}"
+        <span class="loot-tag">
+          ${item.category || "-"}
+        </span>
+      </td>
+
+      <td>
+        <span class="loot-tag blue">
+          ${item.usage || "-"}
+        </span>
+      </td>
+
+      <td>
+        <span class="loot-tag purple">
+          ${item.tier || "-"}
+        </span>
+      </td>
+
+      <td>
+        <input
+          type="number"
+          value="${item.nominal}"
           oninput="updateLootValue(${item.id}, 'nominal', this.value)"
+        >
       </td>
 
       <td>
-        <input type="number" value="${item.min}"
+        <input
+          type="number"
+          value="${item.min}"
           oninput="updateLootValue(${item.id}, 'min', this.value)"
+        >
       </td>
 
       <td>
-        <input type="number" value="${item.lifetime}"
+        <input
+          type="number"
+          value="${item.lifetime}"
           oninput="updateLootValue(${item.id}, 'lifetime', this.value)"
+        >
       </td>
 
       <td>
-        <input type="number" value="${item.restock}"
+        <input
+          type="number"
+          value="${item.restock}"
           oninput="updateLootValue(${item.id}, 'restock', this.value)"
+        >
       </td>
 
       <td>
-        <input type="number" value="${item.quantmin}"
+        <input
+          type="number"
+          value="${item.quantmin}"
           oninput="updateLootValue(${item.id}, 'quantmin', this.value)"
+        >
       </td>
 
       <td>
-        <input type="number" value="${item.quantmax}"
+        <input
+          type="number"
+          value="${item.quantmax}"
           oninput="updateLootValue(${item.id}, 'quantmax', this.value)"
+        >
       </td>
 
     </tr>
@@ -620,16 +740,15 @@ window.updateLootValue = function(id, field, value) {
   item[field] = value;
 };
 
-lootSearch.addEventListener("input", () => {
+lootSearch.addEventListener(
+  "input",
+  filterLootItems
+);
 
-  const search = lootSearch.value.toLowerCase();
-
-  const filtered = lootItems.filter(item =>
-    item.name.toLowerCase().includes(search)
-  );
-
-  renderLootItems(filtered);
-});
+lootCategoryFilter.addEventListener(
+  "change",
+  filterLootItems
+);
 
 function rebuildLootXml() {
 

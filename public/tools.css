@@ -247,3 +247,23 @@
 .loot-search {
   min-width: 280px;
 }
+
+.loot-tag {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(54,211,153,.16);
+  color: #7dffcb;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.loot-tag.blue {
+  background: rgba(59,130,246,.16);
+  color: #8ec5ff;
+}
+
+.loot-tag.purple {
+  background: rgba(168,85,247,.16);
+  color: #d2a7ff;
+}
