@@ -399,71 +399,66 @@ typesOrganizerFile.addEventListener("change", () => {
   }
 });
 
-function getTypeCategory(typeNode) {
-  const category = typeNode.querySelector("category");
-
-  if (!category) {
-    return "sans-categorie";
-  }
-
-  return category.getAttribute("name") || "sans-categorie";
+function extractTypeCategory(typeBlock) {
+  const match = typeBlock.match(/<category\s+name="([^"]+)"/i);
+  return match ? match[1] : "sans-categorie";
 }
 
-function serializeXmlDocument(xmlDoc) {
-  const serializer = new XMLSerializer();
-  let xml = serializer.serializeToString(xmlDoc);
-
-  xml = xml.replace(/></g, ">\n<");
-
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n${xml.replace(/^<\?xml.*?\?>\s*/i, "")}`;
+function extractTypeName(typeBlock) {
+  const match = typeBlock.match(/<type\s+name="([^"]+)"/i);
+  return match ? match[1] : "";
 }
 
 document.getElementById("organizeTypesBtn").addEventListener("click", () => {
   typesOrganizerStatus.className = "status";
 
   try {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(typesOrganizerInput.value, "application/xml");
+    const originalXml = typesOrganizerInput.value.trim();
 
-    const errorNode = xmlDoc.querySelector("parsererror");
-
-    if (errorNode) {
-      throw new Error("Le fichier XML est invalide.");
+    if (!originalXml) {
+      throw new Error("Importez ou collez d’abord un fichier types.xml.");
     }
 
-    const root = xmlDoc.querySelector("types");
+    const typeBlocks = originalXml.match(/<type\b[\s\S]*?<\/type>/gi);
 
-    if (!root) {
-      throw new Error("Impossible de trouver la balise <types>.");
+    if (!typeBlocks || !typeBlocks.length) {
+      throw new Error("Aucun bloc <type> trouvé dans ce fichier.");
     }
 
-    const types = Array.from(root.querySelectorAll(":scope > type"));
+    const headerMatch = originalXml.match(/^[\s\S]*?<types[^>]*>/i);
+    const footerMatch = originalXml.match(/<\/types>[\s\S]*$/i);
 
-    if (!types.length) {
-      throw new Error("Aucun item <type> trouvé dans le fichier.");
-    }
+    const header = headerMatch
+      ? headerMatch[0]
+      : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<types>';
 
-    types.sort((a, b) => {
-      const categoryA = getTypeCategory(a).toLowerCase();
-      const categoryB = getTypeCategory(b).toLowerCase();
+    const footer = footerMatch
+      ? footerMatch[0]
+      : "</types>";
 
-      const nameA = a.getAttribute("name") || "";
-      const nameB = b.getAttribute("name") || "";
+    typeBlocks.sort((a, b) => {
+      const catA = extractTypeCategory(a).toLowerCase();
+      const catB = extractTypeCategory(b).toLowerCase();
 
-      if (categoryA !== categoryB) {
-        return categoryA.localeCompare(categoryB);
+      const nameA = extractTypeName(a).toLowerCase();
+      const nameB = extractTypeName(b).toLowerCase();
+
+      if (catA !== catB) {
+        return catA.localeCompare(catB);
       }
 
       return nameA.localeCompare(nameB);
     });
 
-    types.forEach(type => {
-      root.appendChild(type);
-    });
+    typesOrganizerInput.value =
+      header +
+      "\n\n" +
+      typeBlocks.join("\n\n") +
+      "\n\n" +
+      footer;
 
-    typesOrganizerInput.value = serializeXmlDocument(xmlDoc);
-
-    typesOrganizerStatus.textContent = `types.xml organisé avec succès (${types.length} items).`;
+    typesOrganizerStatus.textContent =
+      `types.xml organisé avec succès (${typeBlocks.length} items).`;
   } catch (e) {
     typesOrganizerStatus.classList.add("error");
     typesOrganizerStatus.textContent = e.message;
@@ -485,6 +480,7 @@ document.getElementById("clearTypesOrganizerBtn").addEventListener("click", () =
   currentTypesOrganizerFileName = "types.xml";
 
   const fileName = document.getElementById("typesOrganizerFileName");
+
   if (fileName) {
     fileName.textContent = "Aucun fichier sélectionné";
   }
