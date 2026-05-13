@@ -1,3 +1,35 @@
+function updateFileName(inputId, labelId) {
+  const input = document.getElementById(inputId);
+  const label = document.getElementById(labelId);
+
+  if (!input || !label) return;
+
+  label.textContent = input.files[0]
+    ? input.files[0].name
+    : "Aucun fichier sélectionné";
+}
+
+function getLineColumnFromPosition(text, position) {
+  const before = text.slice(0, position);
+  const lines = before.split("\n");
+
+  return {
+    line: lines.length,
+    column: lines[lines.length - 1].length + 1
+  };
+}
+
+function selectErrorInTextarea(textarea, position) {
+  if (position < 0) return;
+
+  textarea.focus();
+
+  const start = Math.max(0, position - 20);
+  const end = Math.min(textarea.value.length, position + 20);
+
+  textarea.setSelectionRange(start, end);
+}
+
 function downloadFile(filename, content, type = "text/plain") {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
@@ -41,30 +73,39 @@ const jsonStatus = document.getElementById("jsonStatus");
 
 jsonFile.addEventListener("change", () => {
   readFileToTextarea(jsonFile, jsonInput);
+  updateFileName("jsonFile", "jsonFileName");
 });
 
 document.getElementById("formatJsonBtn").addEventListener("click", () => {
-
   jsonStatus.className = "status";
 
   try {
-
     JSON.parse(jsonInput.value);
 
-    jsonStatus.innerHTML = `
-      ✅ JSON valide.
-    `;
-
+    jsonStatus.innerHTML = "✅ JSON valide.";
   } catch (e) {
-
     jsonStatus.classList.add("error");
 
-    jsonStatus.innerHTML = `
-      ❌ Erreur JSON détectée<br><br>
+    const match = e.message.match(/position (\d+)/);
+    const position = match ? Number(match[1]) : -1;
 
-      <strong>Détail :</strong><br>
-      ${e.message}
-    `;
+    if (position >= 0) {
+      const location = getLineColumnFromPosition(jsonInput.value, position);
+      selectErrorInTextarea(jsonInput, position);
+
+      jsonStatus.innerHTML = `
+        ❌ Erreur JSON détectée<br><br>
+        <strong>Détail :</strong> ${e.message}<br>
+        <strong>Ligne :</strong> ${location.line}<br>
+        <strong>Colonne :</strong> ${location.column}<br><br>
+        La zone proche de l’erreur a été sélectionnée dans le fichier.
+      `;
+    } else {
+      jsonStatus.innerHTML = `
+        ❌ Erreur JSON détectée<br><br>
+        <strong>Détail :</strong> ${e.message}
+      `;
+    }
   }
 });
 
@@ -85,6 +126,7 @@ const xmlStatus = document.getElementById("xmlStatus");
 
 xmlFile.addEventListener("change", () => {
   readFileToTextarea(xmlFile, xmlInput);
+  updateFileName("xmlFile", "xmlFileName");
 });
 
 function formatXml(xml) {
@@ -122,11 +164,9 @@ function formatXml(xml) {
 }
 
 document.getElementById("formatXmlBtn").addEventListener("click", () => {
-
   xmlStatus.className = "status";
 
   try {
-
     const parser = new DOMParser();
 
     const xmlDoc = parser.parseFromString(
@@ -134,29 +174,44 @@ document.getElementById("formatXmlBtn").addEventListener("click", () => {
       "application/xml"
     );
 
-    const errorNode =
-      xmlDoc.querySelector("parsererror");
+    const errorNode = xmlDoc.querySelector("parsererror");
 
     if (errorNode) {
+      throw new Error(errorNode.textContent.trim());
+    }
 
-      throw new Error(
-        errorNode.textContent
-      );
+    xmlStatus.innerHTML = "✅ XML valide.";
+  } catch (e) {
+    xmlStatus.classList.add("error");
+
+    const lineMatch = e.message.match(/line\s+(\d+)/i);
+    const columnMatch = e.message.match(/column\s+(\d+)/i);
+
+    const line = lineMatch ? Number(lineMatch[1]) : null;
+    const column = columnMatch ? Number(columnMatch[1]) : null;
+
+    if (line) {
+      const lines = xmlInput.value.split("\n");
+      let position = 0;
+
+      for (let i = 0; i < line - 1; i++) {
+        position += lines[i].length + 1;
+      }
+
+      if (column) {
+        position += column - 1;
+      }
+
+      selectErrorInTextarea(xmlInput, position);
     }
 
     xmlStatus.innerHTML = `
-      ✅ XML valide.
-    `;
-
-  } catch (e) {
-
-    xmlStatus.classList.add("error");
-
-    xmlStatus.innerHTML = `
       ❌ Erreur XML détectée<br><br>
-
       <strong>Détail :</strong><br>
-      ${e.message}
+      ${e.message}<br><br>
+      ${line ? `<strong>Ligne :</strong> ${line}<br>` : ""}
+      ${column ? `<strong>Colonne :</strong> ${column}<br>` : ""}
+      ${line ? "<br>La zone proche de l’erreur a été sélectionnée dans le fichier." : ""}
     `;
   }
 });

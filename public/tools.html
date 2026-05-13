@@ -102,7 +102,11 @@
       Collez votre JSON ou importez un fichier .json.
     </p>
 
-    <input type="file" id="jsonFile" accept=".json">
+    <label class="file-upload">
+        <input type="file" id="jsonFile" accept=".json">
+        <span>Importer un fichier JSON</span>
+    </label>
+    <p id="jsonFileName" class="file-name">Aucun fichier sélectionné</p>
 
     <textarea id="jsonInput" placeholder="Collez votre JSON ici..."></textarea>
 
@@ -122,7 +126,11 @@
       Collez votre XML ou importez un fichier .xml.
     </p>
 
-    <input type="file" id="xmlFile" accept=".xml">
+    <label class="file-upload">
+        <input type="file" id="xmlFile" accept=".xml">
+        <span>Importer un fichier XML</span>
+    </label>
+    <p id="xmlFileName" class="file-name">Aucun fichier sélectionné</p>>
 
     <textarea id="xmlInput" placeholder="Collez votre XML ici..."></textarea>
 
