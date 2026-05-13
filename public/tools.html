@@ -87,10 +87,16 @@
       <p>Calculer les valeurs jour/nuit à entrer dans Nitrado.</p>
     </article>
 
+    <article class="tool-card" data-tool="weatherTool">
+        <span>🌦️</span>
+        <h3>Weather Manager</h3>
+        <p>Générer un fichier cfgweather.xml.</p>
+    </article>
+
   </section>
 
   <section id="jsonTool" class="tool-panel">
-    <h2>JSON Validator / Formatter</h2>
+    <h2>JSON Validator</h2>
 
     <p class="muted">
       Collez votre JSON ou importez un fichier .json.
@@ -110,7 +116,7 @@
   </section>
 
   <section id="xmlTool" class="tool-panel hidden">
-    <h2>XML Validator / Formatter</h2>
+    <h2>XML Validator</h2>
 
     <p class="muted">
       Collez votre XML ou importez un fichier .xml.
@@ -154,6 +160,57 @@
 
     <div id="dayNightResult" class="tool-result hidden"></div>
   </section>
+
+    <section id="weatherTool" class="tool-panel hidden">
+        <h2>Weather Manager</h2>
+
+        <p class="muted">
+        Renseignez l’ambiance météo souhaitée puis générez un fichier cfgweather.xml.
+        </p>
+
+    <div class="tool-form-grid">
+        <label>Overcast minimum
+            <input id="weatherOvercastMin" type="number" min="0" max="1" step="0.01" value="0.20">
+        </label>
+
+        <label>Overcast maximum
+            <input id="weatherOvercastMax" type="number" min="0" max="1" step="0.01" value="0.70">
+        </label>
+
+        <label>Rain minimum
+            <input id="weatherRainMin" type="number" min="0" max="1" step="0.01" value="0.00">
+        </label>
+
+        <label>Rain maximum
+            <input id="weatherRainMax" type="number" min="0" max="1" step="0.01" value="0.30">
+        </label>
+
+        <label>Fog minimum
+            <input id="weatherFogMin" type="number" min="0" max="1" step="0.01" value="0.00">
+        </label>
+
+        <label>Fog maximum
+            <input id="weatherFogMax" type="number" min="0" max="1" step="0.01" value="0.25">
+        </label>
+
+        <label>Wind minimum
+            <input id="weatherWindMin" type="number" min="0" max="1" step="0.01" value="0.10">
+        </label>
+
+        <label>Wind maximum
+            <input id="weatherWindMax" type="number" min="0" max="1" step="0.01" value="0.60">
+        </label>
+  </div>
+
+  <div class="tool-actions">
+    <button class="btn" id="generateWeatherBtn">Générer cfgweather.xml</button>
+    <button class="btn secondary" id="downloadWeatherBtn">Télécharger</button>
+  </div>
+
+    <p id="weatherStatus" class="status"></p>
+
+    <textarea id="weatherOutput" placeholder="Le fichier généré apparaîtra ici..."></textarea>
+    </section>
 
 </main>
 

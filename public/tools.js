@@ -202,3 +202,83 @@ document.getElementById("calculateDayNightBtn").addEventListener("click", () => 
     </p>
   `;
 });
+
+/* WEATHER MANAGER */
+
+const weatherOutput = document.getElementById("weatherOutput");
+const weatherStatus = document.getElementById("weatherStatus");
+
+function getWeatherValue(id) {
+  return Number(document.getElementById(id).value || 0).toFixed(2);
+}
+
+document.getElementById("generateWeatherBtn").addEventListener("click", () => {
+  const overcastMin = getWeatherValue("weatherOvercastMin");
+  const overcastMax = getWeatherValue("weatherOvercastMax");
+  const rainMin = getWeatherValue("weatherRainMin");
+  const rainMax = getWeatherValue("weatherRainMax");
+  const fogMin = getWeatherValue("weatherFogMin");
+  const fogMax = getWeatherValue("weatherFogMax");
+  const windMin = getWeatherValue("weatherWindMin");
+  const windMax = getWeatherValue("weatherWindMax");
+
+  weatherOutput.value = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<weather reset="0" enable="1">
+    <overcast>
+        <current actual="${overcastMin}" time="120" duration="240" />
+        <limits min="${overcastMin}" max="${overcastMax}" />
+        <timelimits min="600" max="1800" />
+        <changelimits min="0.00" max="1.00" />
+    </overcast>
+
+    <fog>
+        <current actual="${fogMin}" time="120" duration="240" />
+        <limits min="${fogMin}" max="${fogMax}" />
+        <timelimits min="600" max="1800" />
+        <changelimits min="0.00" max="0.30" />
+    </fog>
+
+    <rain>
+        <current actual="${rainMin}" time="120" duration="240" />
+        <limits min="${rainMin}" max="${rainMax}" />
+        <timelimits min="300" max="1200" />
+        <changelimits min="0.00" max="0.60" />
+        <thresholds min="0.60" max="1.00" end="120" />
+    </rain>
+
+    <windMagnitude>
+        <current actual="${windMin}" time="120" duration="240" />
+        <limits min="${windMin}" max="${windMax}" />
+        <timelimits min="300" max="1200" />
+        <changelimits min="0.00" max="0.40" />
+    </windMagnitude>
+
+    <windDirection>
+        <current actual="0.00" time="120" duration="240" />
+        <limits min="-3.14" max="3.14" />
+        <timelimits min="300" max="1200" />
+        <changelimits min="-1.00" max="1.00" />
+    </windDirection>
+
+    <snowfall>
+        <current actual="0.00" time="0" duration="0" />
+        <limits min="0.00" max="0.00" />
+        <timelimits min="0" max="0" />
+        <changelimits min="0.00" max="0.00" />
+        <thresholds min="1.00" max="1.00" end="120" />
+    </snowfall>
+
+    <storm density="0.00" threshold="0.90" timeout="25" />
+</weather>`;
+
+  weatherStatus.textContent = "cfgweather.xml généré.";
+});
+
+document.getElementById("downloadWeatherBtn").addEventListener("click", () => {
+  if (!weatherOutput.value.trim()) {
+    weatherStatus.textContent = "Générez d’abord le fichier météo.";
+    return;
+  }
+
+  downloadFile("cfgweather.xml", weatherOutput.value, "application/xml");
+});
