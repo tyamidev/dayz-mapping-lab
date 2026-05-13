@@ -551,6 +551,7 @@ function parseLootXml(xml) {
     if (!nameMatch) return;
 
     lootItems.push({
+      id: lootItems.length,
       original: block,
       name: nameMatch[1],
       nominal: getTagValue(block, "nominal"),
@@ -570,7 +571,7 @@ function parseLootXml(xml) {
 
 function renderLootItems(items) {
 
-  lootTableBody.innerHTML = items.map((item, index) => `
+  lootTableBody.innerHTML = items.map((item) => `
     <tr>
 
       <td>
@@ -579,40 +580,44 @@ function renderLootItems(items) {
 
       <td>
         <input type="number" value="${item.nominal}"
-          onchange="updateLootValue(${index}, 'nominal', this.value)">
+          oninput="updateLootValue(${item.id}, 'nominal', this.value)"
       </td>
 
       <td>
         <input type="number" value="${item.min}"
-          onchange="updateLootValue(${index}, 'min', this.value)">
+          oninput="updateLootValue(${item.id}, 'min', this.value)"
       </td>
 
       <td>
         <input type="number" value="${item.lifetime}"
-          onchange="updateLootValue(${index}, 'lifetime', this.value)">
+          oninput="updateLootValue(${item.id}, 'lifetime', this.value)"
       </td>
 
       <td>
         <input type="number" value="${item.restock}"
-          onchange="updateLootValue(${index}, 'restock', this.value)">
+          oninput="updateLootValue(${item.id}, 'restock', this.value)"
       </td>
 
       <td>
         <input type="number" value="${item.quantmin}"
-          onchange="updateLootValue(${index}, 'quantmin', this.value)">
+          oninput="updateLootValue(${item.id}, 'quantmin', this.value)"
       </td>
 
       <td>
         <input type="number" value="${item.quantmax}"
-          onchange="updateLootValue(${index}, 'quantmax', this.value)">
+          oninput="updateLootValue(${item.id}, 'quantmax', this.value)"
       </td>
 
     </tr>
   `).join("");
 }
 
-window.updateLootValue = function(index, field, value) {
-  lootItems[index][field] = value;
+window.updateLootValue = function(id, field, value) {
+  const item = lootItems.find(i => i.id === id);
+
+  if (!item) return;
+
+  item[field] = value;
 };
 
 lootSearch.addEventListener("input", () => {
