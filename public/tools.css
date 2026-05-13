@@ -280,3 +280,18 @@
   min-width: 240px;
   flex: 1;
 }
+
+.loot-select {
+  min-width: 130px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: white;
+  font-weight: 800;
+}
+
+.loot-select option {
+  background: #07130d;
+  color: white;
+}

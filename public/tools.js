@@ -501,6 +501,43 @@ let currentLootEditorFileName = "types.xml";
 let currentLootXml = "";
 let lootItems = [];
 
+const lootCategories = [
+  "",
+  "weapons",
+  "clothes",
+  "containers",
+  "food",
+  "tools",
+  "vehiclesparts",
+  "books",
+  "explosives"
+];
+
+const lootUsages = [
+  "",
+  "Military",
+  "Police",
+  "Medic",
+  "Firefighter",
+  "Industrial",
+  "Farm",
+  "Village",
+  "Town",
+  "Coast",
+  "Hunting",
+  "Office",
+  "School",
+  "Prison"
+];
+
+const lootTiers = [
+  "",
+  "Tier1",
+  "Tier2",
+  "Tier3",
+  "Tier4"
+];
+
 const lootEditorFile = document.getElementById("lootEditorFile");
 const lootEditorStatus = document.getElementById("lootEditorStatus");
 const lootTableBody = document.getElementById("lootTableBody");
@@ -546,6 +583,17 @@ function getAttributeValue(block, tag, attribute) {
   const match = block.match(regex);
 
   return match ? match[1] : "";
+}
+
+function buildSelectOptions(options, selectedValue) {
+  return options.map(option => `
+    <option
+      value="${option}"
+      ${option === selectedValue ? "selected" : ""}
+    >
+      ${option || "-"}
+    </option>
+  `).join("");
 }
 
 function populateCategoryFilter() {
@@ -669,23 +717,32 @@ function renderLootItems(items) {
         <strong>${item.name}</strong>
       </td>
 
-      <td>
-        <span class="loot-tag">
-          ${item.category || "-"}
-        </span>
-      </td>
+<td>
+  <select
+    class="loot-select"
+    oninput="updateLootValue(${item.id}, 'category', this.value)"
+  >
+    ${buildSelectOptions(lootCategories, item.category)}
+  </select>
+</td>
 
-      <td>
-        <span class="loot-tag blue">
-          ${item.usage || "-"}
-        </span>
-      </td>
+<td>
+  <select
+    class="loot-select"
+    oninput="updateLootValue(${item.id}, 'usage', this.value)"
+  >
+    ${buildSelectOptions(lootUsages, item.usage)}
+  </select>
+</td>
 
-      <td>
-        <span class="loot-tag purple">
-          ${item.tier || "-"}
-        </span>
-      </td>
+<td>
+  <select
+    class="loot-select"
+    oninput="updateLootValue(${item.id}, 'tier', this.value)"
+  >
+    ${buildSelectOptions(lootTiers, item.tier)}
+  </select>
+</td>
 
       <td>
         <input
@@ -757,12 +814,44 @@ lootCategoryFilter.addEventListener(
   filterLootItems
 );
 
-function rebuildLootXml() {
+function replaceOrInsertAttributeTag(block, tag, value) {
+  const tagRegex = new RegExp(`<${tag}\\s+name="[^"]+"\\s*/>`, "i");
 
+  if (!value) {
+    return block.replace(tagRegex, "");
+  }
+
+  if (tagRegex.test(block)) {
+    return block.replace(tagRegex, `<${tag} name="${value}"/>`);
+  }
+
+  return block.replace(
+    /<\/type>/i,
+    `    <${tag} name="${value}"/>\n</type>`
+  );
+}
+
+function replaceOrInsertValueTag(block, value) {
+  const valueRegex = /<value\s+name="[^"]+"\s*\/>/i;
+
+  if (!value) {
+    return block.replace(valueRegex, "");
+  }
+
+  if (valueRegex.test(block)) {
+    return block.replace(valueRegex, `<value name="${value}"/>`);
+  }
+
+  return block.replace(
+    /<\/type>/i,
+    `    <value name="${value}"/>\n</type>`
+  );
+}
+
+function rebuildLootXml() {
   let xml = currentLootXml;
 
   lootItems.forEach(item => {
-
     let updated = item.original;
 
     updated = updated.replace(
@@ -793,6 +882,23 @@ function rebuildLootXml() {
     updated = updated.replace(
       /<quantmax>.*?<\/quantmax>/i,
       `<quantmax>${item.quantmax}</quantmax>`
+    );
+
+    updated = replaceOrInsertAttributeTag(
+      updated,
+      "category",
+      item.category
+    );
+
+    updated = replaceOrInsertAttributeTag(
+      updated,
+      "usage",
+      item.usage
+    );
+
+    updated = replaceOrInsertValueTag(
+      updated,
+      item.tier
     );
 
     xml = xml.replace(item.original, updated);
