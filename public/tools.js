@@ -549,25 +549,32 @@ function getAttributeValue(block, tag, attribute) {
 }
 
 function populateCategoryFilter() {
+  const defaultCategories = [
+    "weapons",
+    "clothes",
+    "containers",
+    "food",
+    "tools",
+    "vehiclesparts",
+    "books",
+    "explosives"
+  ];
+
+  const fileCategories = lootItems
+    .map(item => item.category)
+    .filter(Boolean);
 
   const categories = [
-    ...new Set(
-      lootItems.map(item => item.category)
-    )
+    ...new Set([...defaultCategories, ...fileCategories])
   ].sort();
 
   lootCategoryFilter.innerHTML = `
-    <option value="all">
-      Toutes catégories
-    </option>
+    <option value="all">Toutes catégories</option>
   `;
 
   categories.forEach(category => {
-
     lootCategoryFilter.innerHTML += `
-      <option value="${category}">
-        ${category}
-      </option>
+      <option value="${category}">${category}</option>
     `;
   });
 }
@@ -646,7 +653,7 @@ function parseLootXml(xml) {
       quantmax: getTagValue(block, "quantmax")
     });
   });
-
+  populateCategoryFilter();
   renderLootItems(lootItems);
 
   lootEditorStatus.textContent =
