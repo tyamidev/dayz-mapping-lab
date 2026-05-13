@@ -64,6 +64,8 @@ function readFileToTextarea(fileInput, textarea) {
   const file = fileInput.files[0];
   if (!file) return;
 
+  textarea.value = "";
+
   const reader = new FileReader();
 
   reader.onload = () => {
@@ -138,6 +140,9 @@ document.getElementById("downloadJsonBtn").addEventListener("click", () => {
 document.getElementById("clearJsonBtn").addEventListener("click", () => {
   jsonInput.value = "";
   jsonStatus.textContent = "";
+  jsonFile.value = "";
+  currentJsonFileName = "validated.json";
+  updateFileName("jsonFile", "jsonFileName");
 });
 
 /* XML TOOL */
@@ -249,6 +254,9 @@ document.getElementById("downloadXmlBtn").addEventListener("click", () => {
 document.getElementById("clearXmlBtn").addEventListener("click", () => {
   xmlInput.value = "";
   xmlStatus.textContent = "";
+  xmlFile.value = "";
+  currentXmlFileName = "validated.xml";
+  updateFileName("xmlFile", "xmlFileName");
 });
 
 /* DAY/NIGHT CALCULATOR */
@@ -477,6 +485,7 @@ document.getElementById("downloadTypesOrganizerBtn").addEventListener("click", (
 document.getElementById("clearTypesOrganizerBtn").addEventListener("click", () => {
   typesOrganizerInput.value = "";
   typesOrganizerStatus.textContent = "";
+  typesOrganizerFile.value = "";
   currentTypesOrganizerFileName = "types.xml";
 
   const fileName = document.getElementById("typesOrganizerFileName");
