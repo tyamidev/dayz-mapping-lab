@@ -717,32 +717,32 @@ function renderLootItems(items) {
         <strong>${item.name}</strong>
       </td>
 
-<td>
-  <select
-    class="loot-select"
-    oninput="updateLootValue(${item.id}, 'category', this.value)"
-  >
-    ${buildSelectOptions(lootCategories, item.category)}
-  </select>
-</td>
+      <td>
+        <select
+          class="loot-select"
+          oninput="updateLootValue(${item.id}, 'category', this.value)"
+        >
+          ${buildSelectOptions(lootCategories, item.category)}
+        </select>
+      </td>
 
-<td>
-  <select
-    class="loot-select"
-    oninput="updateLootValue(${item.id}, 'usage', this.value)"
-  >
-    ${buildSelectOptions(lootUsages, item.usage)}
-  </select>
-</td>
+      <td>
+        <select
+          class="loot-select"
+          oninput="updateLootValue(${item.id}, 'usage', this.value)"
+        >
+          ${buildSelectOptions(lootUsages, item.usage)}
+        </select>
+      </td>
 
-<td>
-  <select
-    class="loot-select"
-    oninput="updateLootValue(${item.id}, 'tier', this.value)"
-  >
-    ${buildSelectOptions(lootTiers, item.tier)}
-  </select>
-</td>
+      <td>
+        <select
+          class="loot-select small"
+          oninput="updateLootValue(${item.id}, 'tier', this.value)"
+        >
+          ${buildSelectOptions(lootTiers, item.tier)}
+        </select>
+      </td>
 
       <td>
         <input
@@ -761,37 +761,64 @@ function renderLootItems(items) {
       </td>
 
       <td>
-        <input
-          type="number"
-          value="${item.lifetime}"
-          oninput="updateLootValue(${item.id}, 'lifetime', this.value)"
+        <button
+          type="button"
+          class="mini-btn"
+          onclick="toggleLootDetails(${item.id})"
         >
+          Détails
+        </button>
       </td>
 
-      <td>
-        <input
-          type="number"
-          value="${item.restock}"
-          oninput="updateLootValue(${item.id}, 'restock', this.value)"
-        >
-      </td>
+    </tr>
 
-      <td>
-        <input
-          type="number"
-          value="${item.quantmin}"
-          oninput="updateLootValue(${item.id}, 'quantmin', this.value)"
-        >
-      </td>
+    <tr
+      id="loot-details-${item.id}"
+      class="loot-details-row hidden"
+    >
+      <td colspan="7">
 
-      <td>
-        <input
-          type="number"
-          value="${item.quantmax}"
-          oninput="updateLootValue(${item.id}, 'quantmax', this.value)"
-        >
-      </td>
+        <div class="loot-details-grid">
 
+          <label>
+            Lifetime
+            <input
+              type="number"
+              value="${item.lifetime}"
+              oninput="updateLootValue(${item.id}, 'lifetime', this.value)"
+            >
+          </label>
+
+          <label>
+            Restock
+            <input
+              type="number"
+              value="${item.restock}"
+              oninput="updateLootValue(${item.id}, 'restock', this.value)"
+            >
+          </label>
+
+          <label>
+            Quant Min
+            <input
+              type="number"
+              value="${item.quantmin}"
+              oninput="updateLootValue(${item.id}, 'quantmin', this.value)"
+            >
+          </label>
+
+          <label>
+            Quant Max
+            <input
+              type="number"
+              value="${item.quantmax}"
+              oninput="updateLootValue(${item.id}, 'quantmax', this.value)"
+            >
+          </label>
+
+        </div>
+
+      </td>
     </tr>
   `).join("");
 }
@@ -802,6 +829,14 @@ window.updateLootValue = function(id, field, value) {
   if (!item) return;
 
   item[field] = value;
+};
+
+window.toggleLootDetails = function(id) {
+  const row = document.getElementById("loot-details-" + id);
+
+  if (!row) return;
+
+  row.classList.toggle("hidden");
 };
 
 lootSearch.addEventListener(

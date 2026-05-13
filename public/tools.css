@@ -295,3 +295,60 @@
   background: #07130d;
   color: white;
 }
+
+.loot-table {
+  min-width: 900px;
+}
+
+.loot-select {
+  min-width: 130px;
+}
+
+.loot-select.small {
+  min-width: 100px;
+}
+
+.mini-btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(54,211,153,.28);
+  background: rgba(54,211,153,.12);
+  color: #7dffcb;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  background: rgba(54,211,153,.22);
+}
+
+.loot-details-row td {
+  background: rgba(0,0,0,.18);
+}
+
+.loot-details-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 18px;
+}
+
+.loot-details-grid label {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.loot-details-grid input {
+  margin-top: 8px;
+  width: 100%;
+}
+
+@media(max-width: 900px) {
+  .loot-table {
+    min-width: 760px;
+  }
+
+  .loot-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
