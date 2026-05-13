@@ -381,3 +381,111 @@ document.getElementById("downloadWeatherBtn").addEventListener("click", () => {
 
   downloadFile("cfgweather.xml", weatherOutput.value, "application/xml");
 });
+
+/* TYPES ORGANIZER */
+
+let currentTypesOrganizerFileName = "types.xml";
+
+const typesOrganizerFile = document.getElementById("typesOrganizerFile");
+const typesOrganizerInput = document.getElementById("typesOrganizerInput");
+const typesOrganizerStatus = document.getElementById("typesOrganizerStatus");
+
+typesOrganizerFile.addEventListener("change", () => {
+  readFileToTextarea(typesOrganizerFile, typesOrganizerInput);
+  updateFileName("typesOrganizerFile", "typesOrganizerFileName");
+
+  if (typesOrganizerFile.files[0]) {
+    currentTypesOrganizerFileName = typesOrganizerFile.files[0].name;
+  }
+});
+
+function getTypeCategory(typeNode) {
+  const category = typeNode.querySelector("category");
+
+  if (!category) {
+    return "sans-categorie";
+  }
+
+  return category.getAttribute("name") || "sans-categorie";
+}
+
+function serializeXmlDocument(xmlDoc) {
+  const serializer = new XMLSerializer();
+  let xml = serializer.serializeToString(xmlDoc);
+
+  xml = xml.replace(/></g, ">\n<");
+
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n${xml.replace(/^<\?xml.*?\?>\s*/i, "")}`;
+}
+
+document.getElementById("organizeTypesBtn").addEventListener("click", () => {
+  typesOrganizerStatus.className = "status";
+
+  try {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(typesOrganizerInput.value, "application/xml");
+
+    const errorNode = xmlDoc.querySelector("parsererror");
+
+    if (errorNode) {
+      throw new Error("Le fichier XML est invalide.");
+    }
+
+    const root = xmlDoc.querySelector("types");
+
+    if (!root) {
+      throw new Error("Impossible de trouver la balise <types>.");
+    }
+
+    const types = Array.from(root.querySelectorAll(":scope > type"));
+
+    if (!types.length) {
+      throw new Error("Aucun item <type> trouvé dans le fichier.");
+    }
+
+    types.sort((a, b) => {
+      const categoryA = getTypeCategory(a).toLowerCase();
+      const categoryB = getTypeCategory(b).toLowerCase();
+
+      const nameA = a.getAttribute("name") || "";
+      const nameB = b.getAttribute("name") || "";
+
+      if (categoryA !== categoryB) {
+        return categoryA.localeCompare(categoryB);
+      }
+
+      return nameA.localeCompare(nameB);
+    });
+
+    types.forEach(type => {
+      root.appendChild(type);
+    });
+
+    typesOrganizerInput.value = serializeXmlDocument(xmlDoc);
+
+    typesOrganizerStatus.textContent = `types.xml organisé avec succès (${types.length} items).`;
+  } catch (e) {
+    typesOrganizerStatus.classList.add("error");
+    typesOrganizerStatus.textContent = e.message;
+  }
+});
+
+document.getElementById("downloadTypesOrganizerBtn").addEventListener("click", () => {
+  if (!typesOrganizerInput.value.trim()) {
+    typesOrganizerStatus.textContent = "Importez ou collez d’abord un fichier types.xml.";
+    return;
+  }
+
+  downloadFile(currentTypesOrganizerFileName, typesOrganizerInput.value, "application/xml");
+});
+
+document.getElementById("clearTypesOrganizerBtn").addEventListener("click", () => {
+  typesOrganizerInput.value = "";
+  typesOrganizerStatus.textContent = "";
+  currentTypesOrganizerFileName = "types.xml";
+
+  const fileName = document.getElementById("typesOrganizerFileName");
+  if (fileName) {
+    fileName.textContent = "Aucun fichier sélectionné";
+  }
+});

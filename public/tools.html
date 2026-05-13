@@ -93,6 +93,12 @@
         <p>Générer un fichier cfgweather.xml.</p>
     </article>
 
+    <article class="tool-card" data-tool="typesOrganizerTool">
+        <span>📦</span>
+        <h3>Types Organizer</h3>
+        <p>Organiser un types.xml par catégorie.</p>
+    </article>
+
   </section>
 
   <section id="jsonTool" class="tool-panel">
@@ -283,6 +289,31 @@
   <p id="weatherStatus" class="status"></p>
 
   <textarea id="weatherOutput" placeholder="Le fichier généré apparaîtra ici..."></textarea>
+</section>
+
+<section id="typesOrganizerTool" class="tool-panel hidden">
+  <h2>Types Organizer</h2>
+
+  <p class="muted">
+    Importez votre fichier types.xml, puis l’outil organise les items par catégorie sans modifier les valeurs existantes.
+  </p>
+
+  <label class="file-upload">
+    <input type="file" id="typesOrganizerFile" accept=".xml">
+    <span>Importer un types.xml</span>
+  </label>
+
+  <p id="typesOrganizerFileName" class="file-name">Aucun fichier sélectionné</p>
+
+  <textarea id="typesOrganizerInput" placeholder="Votre fichier types.xml apparaîtra ici..."></textarea>
+
+  <div class="tool-actions">
+    <button class="btn" id="organizeTypesBtn">Organiser par catégorie</button>
+    <button class="btn secondary" id="downloadTypesOrganizerBtn">Télécharger</button>
+    <button class="btn danger" id="clearTypesOrganizerBtn">Effacer</button>
+  </div>
+
+  <p id="typesOrganizerStatus" class="status"></p>
 </section>
 
 </main>
