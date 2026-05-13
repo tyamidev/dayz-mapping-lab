@@ -494,3 +494,214 @@ document.getElementById("clearTypesOrganizerBtn").addEventListener("click", () =
     fileName.textContent = "Aucun fichier sélectionné";
   }
 });
+
+/* XML LOOT EDITOR */
+
+let currentLootEditorFileName = "types.xml";
+let currentLootXml = "";
+let lootItems = [];
+
+const lootEditorFile = document.getElementById("lootEditorFile");
+const lootEditorStatus = document.getElementById("lootEditorStatus");
+const lootTableBody = document.getElementById("lootTableBody");
+const lootSearch = document.getElementById("lootSearch");
+
+lootEditorFile.addEventListener("change", () => {
+
+  updateFileName("lootEditorFile", "lootEditorFileName");
+
+  if (lootEditorFile.files[0]) {
+    currentLootEditorFileName = lootEditorFile.files[0].name;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+
+    currentLootXml = reader.result;
+
+    parseLootXml(currentLootXml);
+  };
+
+  reader.readAsText(lootEditorFile.files[0]);
+});
+
+function getTagValue(block, tag) {
+  const regex = new RegExp(`<${tag}>(.*?)<\\/${tag}>`, "i");
+  const match = block.match(regex);
+
+  return match ? match[1] : "0";
+}
+
+function parseLootXml(xml) {
+
+  lootItems = [];
+
+  const typeBlocks = xml.match(/<type\b[\s\S]*?<\/type>/gi);
+
+  if (!typeBlocks) {
+    lootEditorStatus.textContent = "Aucun item trouvé.";
+    return;
+  }
+
+  typeBlocks.forEach(block => {
+
+    const nameMatch = block.match(/<type\s+name="([^"]+)"/i);
+
+    if (!nameMatch) return;
+
+    lootItems.push({
+      original: block,
+      name: nameMatch[1],
+      nominal: getTagValue(block, "nominal"),
+      min: getTagValue(block, "min"),
+      lifetime: getTagValue(block, "lifetime"),
+      restock: getTagValue(block, "restock"),
+      quantmin: getTagValue(block, "quantmin"),
+      quantmax: getTagValue(block, "quantmax")
+    });
+  });
+
+  renderLootItems(lootItems);
+
+  lootEditorStatus.textContent =
+    `${lootItems.length} items chargés.`;
+}
+
+function renderLootItems(items) {
+
+  lootTableBody.innerHTML = items.map((item, index) => `
+    <tr>
+
+      <td>
+        <strong>${item.name}</strong>
+      </td>
+
+      <td>
+        <input type="number" value="${item.nominal}"
+          onchange="updateLootValue(${index}, 'nominal', this.value)">
+      </td>
+
+      <td>
+        <input type="number" value="${item.min}"
+          onchange="updateLootValue(${index}, 'min', this.value)">
+      </td>
+
+      <td>
+        <input type="number" value="${item.lifetime}"
+          onchange="updateLootValue(${index}, 'lifetime', this.value)">
+      </td>
+
+      <td>
+        <input type="number" value="${item.restock}"
+          onchange="updateLootValue(${index}, 'restock', this.value)">
+      </td>
+
+      <td>
+        <input type="number" value="${item.quantmin}"
+          onchange="updateLootValue(${index}, 'quantmin', this.value)">
+      </td>
+
+      <td>
+        <input type="number" value="${item.quantmax}"
+          onchange="updateLootValue(${index}, 'quantmax', this.value)">
+      </td>
+
+    </tr>
+  `).join("");
+}
+
+window.updateLootValue = function(index, field, value) {
+  lootItems[index][field] = value;
+};
+
+lootSearch.addEventListener("input", () => {
+
+  const search = lootSearch.value.toLowerCase();
+
+  const filtered = lootItems.filter(item =>
+    item.name.toLowerCase().includes(search)
+  );
+
+  renderLootItems(filtered);
+});
+
+function rebuildLootXml() {
+
+  let xml = currentLootXml;
+
+  lootItems.forEach(item => {
+
+    let updated = item.original;
+
+    updated = updated.replace(
+      /<nominal>.*?<\/nominal>/i,
+      `<nominal>${item.nominal}</nominal>`
+    );
+
+    updated = updated.replace(
+      /<min>.*?<\/min>/i,
+      `<min>${item.min}</min>`
+    );
+
+    updated = updated.replace(
+      /<lifetime>.*?<\/lifetime>/i,
+      `<lifetime>${item.lifetime}</lifetime>`
+    );
+
+    updated = updated.replace(
+      /<restock>.*?<\/restock>/i,
+      `<restock>${item.restock}</restock>`
+    );
+
+    updated = updated.replace(
+      /<quantmin>.*?<\/quantmin>/i,
+      `<quantmin>${item.quantmin}</quantmin>`
+    );
+
+    updated = updated.replace(
+      /<quantmax>.*?<\/quantmax>/i,
+      `<quantmax>${item.quantmax}</quantmax>`
+    );
+
+    xml = xml.replace(item.original, updated);
+  });
+
+  return xml;
+}
+
+document.getElementById("downloadLootEditorBtn")
+.addEventListener("click", () => {
+
+  if (!lootItems.length) {
+    lootEditorStatus.textContent =
+      "Importez un fichier types.xml.";
+    return;
+  }
+
+  const finalXml = rebuildLootXml();
+
+  downloadFile(
+    currentLootEditorFileName,
+    finalXml,
+    "application/xml"
+  );
+});
+
+document.getElementById("clearLootEditorBtn")
+.addEventListener("click", () => {
+
+  lootItems = [];
+  currentLootXml = "";
+
+  lootTableBody.innerHTML = "";
+
+  lootEditorStatus.textContent = "";
+
+  lootEditorFile.value = "";
+
+  updateFileName(
+    "lootEditorFile",
+    "lootEditorFileName"
+  );
+});

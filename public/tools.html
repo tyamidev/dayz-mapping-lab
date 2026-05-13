@@ -99,6 +99,12 @@
         <p>Organiser un types.xml par catégorie.</p>
     </article>
 
+    <article class="tool-card" data-tool="lootEditorTool">
+        <span>🎯</span>
+        <h3>XML Loot Editor</h3>
+        <p>Modifier facilement un fichier types.xml.</p>
+    </article>
+
   </section>
 
   <section id="jsonTool" class="tool-panel">
@@ -314,6 +320,66 @@
   </div>
 
   <p id="typesOrganizerStatus" class="status"></p>
+</section>
+
+<section id="lootEditorTool" class="tool-panel hidden">
+
+  <h2>XML Loot Editor</h2>
+
+  <p class="muted">
+    Importez un fichier types.xml puis modifiez facilement les valeurs loot DayZ.
+  </p>
+
+  <label class="file-upload">
+    <input type="file" id="lootEditorFile" accept=".xml">
+    <span>Importer un types.xml</span>
+  </label>
+
+  <p id="lootEditorFileName" class="file-name">
+    Aucun fichier sélectionné
+  </p>
+
+  <div class="tool-actions">
+    <input
+      type="text"
+      id="lootSearch"
+      placeholder="Rechercher un item..."
+      class="loot-search"
+    >
+
+    <button class="btn secondary" id="downloadLootEditorBtn">
+      Télécharger
+    </button>
+
+    <button class="btn danger" id="clearLootEditorBtn">
+      Effacer
+    </button>
+  </div>
+
+  <p id="lootEditorStatus" class="status"></p>
+
+  <div class="loot-table-wrapper">
+
+    <table class="loot-table">
+
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Nominal</th>
+          <th>Min</th>
+          <th>Lifetime</th>
+          <th>Restock</th>
+          <th>Quant Min</th>
+          <th>Quant Max</th>
+        </tr>
+      </thead>
+
+      <tbody id="lootTableBody"></tbody>
+
+    </table>
+
+  </div>
+
 </section>
 
 </main>
