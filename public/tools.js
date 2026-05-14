@@ -582,6 +582,8 @@ lootEditorFile.addEventListener("change", () => {
 
     parseLootXml(currentLootXml);
 
+    updateLootStats();
+
     filterLootItems();
 
     // Important pour pouvoir réimporter le même fichier
@@ -660,6 +662,9 @@ function populateCategoryFilter() {
   });
 }
 
+lootEditorStatus.textContent =
+  `${count} items modifiés sur ${field}.`;
+
 applyBulkBtn.addEventListener("click", () => {
   if (!lootItems.length) {
     lootEditorStatus.textContent = "Importez d’abord un fichier types.xml.";
@@ -698,6 +703,8 @@ applyBulkBtn.addEventListener("click", () => {
   });
 
   filterLootItems();
+
+  updateLootStats();
 
   lootEditorStatus.textContent =
     `${count} items modifiés sur ${field}.`;
@@ -1055,3 +1062,49 @@ document.getElementById("clearLootEditorBtn")
     "lootEditorFileName"
   );
 });
+
+function updateLootStats() {
+
+  const totalItems = lootItems.length;
+
+  let totalNominal = 0;
+
+  const categories = {};
+
+  lootItems.forEach(item => {
+
+    totalNominal += Number(item.nominal || 0);
+
+    const category = item.category || "unknown";
+
+    categories[category] =
+      (categories[category] || 0) + 1;
+  });
+
+  const averageNominal =
+    totalItems
+      ? Math.round(totalNominal / totalItems)
+      : 0;
+
+  let topCategory = "-";
+  let topCount = 0;
+
+  Object.entries(categories).forEach(([cat, count]) => {
+    if (count > topCount) {
+      topCategory = cat;
+      topCount = count;
+    }
+  });
+
+  document.getElementById("statsTotalItems")
+    .textContent = totalItems;
+
+  document.getElementById("statsTotalNominal")
+    .textContent = totalNominal;
+
+  document.getElementById("statsAverageNominal")
+    .textContent = averageNominal;
+
+  document.getElementById("statsTopCategory")
+    .textContent = topCategory;
+}
