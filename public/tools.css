@@ -444,3 +444,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+.loot-card-main {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 1.6fr) 180px 150px 130px 130px 120px !important;
+  gap: 14px !important;
+  align-items: end !important;
+}
+
+.loot-card-main > * {
+  min-width: 0;
+}
+
+.loot-card-main label {
+  width: auto !important;
+}
+
+.loot-card-main input,
+.loot-card-main select {
+  width: 100% !important;
+}
+
+.loot-item-info {
+  display: block !important;
+}
+
+.loot-card h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
