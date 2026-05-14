@@ -907,6 +907,8 @@ window.updateLootValue = function(id, field, value) {
   if (!item) return;
 
   item[field] = value;
+
+  updateLootStats();
 };
 
 window.toggleLootDetails = function(id) {
@@ -1066,47 +1068,42 @@ document.getElementById("clearLootEditorBtn")
 });
 
 function updateLootStats() {
+  const totalItemsEl = document.getElementById("statsTotalItems");
+  const totalNominalEl = document.getElementById("statsTotalNominal");
+  const averageNominalEl = document.getElementById("statsAverageNominal");
+  const topCategoryEl = document.getElementById("statsTopCategory");
+
+  if (!totalItemsEl || !totalNominalEl || !averageNominalEl || !topCategoryEl) {
+    return;
+  }
 
   const totalItems = lootItems.length;
-
   let totalNominal = 0;
-
   const categories = {};
 
   lootItems.forEach(item => {
-
     totalNominal += Number(item.nominal || 0);
 
     const category = item.category || "unknown";
-
-    categories[category] =
-      (categories[category] || 0) + 1;
+    categories[category] = (categories[category] || 0) + 1;
   });
 
-  const averageNominal =
-    totalItems
-      ? Math.round(totalNominal / totalItems)
-      : 0;
+  const averageNominal = totalItems
+    ? Math.round(totalNominal / totalItems)
+    : 0;
 
   let topCategory = "-";
   let topCount = 0;
 
-  Object.entries(categories).forEach(([cat, count]) => {
+  Object.entries(categories).forEach(([category, count]) => {
     if (count > topCount) {
-      topCategory = cat;
+      topCategory = category;
       topCount = count;
     }
   });
 
-  document.getElementById("statsTotalItems")
-    .textContent = totalItems;
-
-  document.getElementById("statsTotalNominal")
-    .textContent = totalNominal;
-
-  document.getElementById("statsAverageNominal")
-    .textContent = averageNominal;
-
-  document.getElementById("statsTopCategory")
-    .textContent = topCategory;
+  totalItemsEl.textContent = totalItems;
+  totalNominalEl.textContent = totalNominal;
+  averageNominalEl.textContent = averageNominal;
+  topCategoryEl.textContent = topCategory;
 }
