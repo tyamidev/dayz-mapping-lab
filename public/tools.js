@@ -696,14 +696,16 @@ applyBulkBtn.addEventListener("click", () => {
     }
 
     if (mode === "set") {
-      item[field] = Math.max(0, Math.round(value));
+      item[field] = Math.max(
+        0,
+        Math.round(value)
+      );
     }
 
     count++;
   });
 
   filterLootItems();
-
   updateLootStats();
 
   lootEditorStatus.textContent =
