@@ -237,7 +237,7 @@
 
 .loot-card-main {
   display: grid;
-  grid-template-columns: minmax(220px, 1.6fr) 180px 150px 130px 130px 120px;
+  grid-template-columns: minmax(260px, 1.8fr) 180px 150px 130px 130px 120px;
   gap: 14px;
   align-items: end;
 }
@@ -333,11 +333,6 @@
   font-weight: 800;
 }
 
-@media(max-width: 1200px) {
-  .loot-card-main {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
 
 @media(max-width: 800px) {
   .loot-card-main,
