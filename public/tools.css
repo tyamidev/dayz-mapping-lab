@@ -205,67 +205,8 @@
   white-space: pre-wrap;
 }
 
-.loot-table-wrapper {
-  overflow-x: auto;
-  margin-top: 22px;
-  border-radius: 22px;
-  border: 1px solid rgba(255,255,255,.08);
-}
-
-.loot-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 1100px;
-}
-
-.loot-table th {
-  background: rgba(255,255,255,.06);
-  color: white;
-  text-align: left;
-  padding: 16px;
-  font-size: 14px;
-}
-
-.loot-table td {
-  padding: 12px 16px;
-  border-top: 1px solid rgba(255,255,255,.06);
-}
-
-.loot-table tr:hover {
-  background: rgba(255,255,255,.03);
-}
-
-.loot-table input {
-  width: 90px;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.04);
-  color: white;
-}
-
 .loot-search {
   min-width: 280px;
-}
-
-.loot-tag {
-  display: inline-flex;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(54,211,153,.16);
-  color: #7dffcb;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.loot-tag.blue {
-  background: rgba(59,130,246,.16);
-  color: #8ec5ff;
-}
-
-.loot-tag.purple {
-  background: rgba(168,85,247,.16);
-  color: #d2a7ff;
 }
 
 .loot-controls {
@@ -281,76 +222,36 @@
   flex: 1;
 }
 
-.loot-select {
-  min-width: 130px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.04);
-  color: white;
-  font-weight: 800;
-}
-
-.loot-select option {
-  background: #07130d;
-  color: white;
-}
-
-.loot-table {
-  min-width: 760px;
-}
-
-.loot-select {
-  min-width: 105px;
-}
-
-.loot-select.small {
-  min-width: 100px;
-}
-
-.mini-btn {
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(54,211,153,.28);
-  background: rgba(54,211,153,.12);
-  color: #7dffcb;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.mini-btn:hover {
-  background: rgba(54,211,153,.22);
-}
-
-.loot-details-row td {
-  background: rgba(0,0,0,.18);
-}
-
-.loot-details-grid {
+.loot-card-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
+  margin-top: 24px;
+}
+
+.loot-card {
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
   padding: 18px;
 }
 
-.loot-details-grid label {
-  color: var(--muted);
-  font-weight: 800;
+.loot-card-main {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.6fr) 180px 150px 130px 130px 120px;
+  gap: 14px;
+  align-items: end;
 }
 
-.loot-details-grid input {
-  margin-top: 8px;
-  width: 100%;
+.loot-item-info {
+  min-width: 0;
 }
 
-@media(max-width: 900px) {
-  .loot-table {
-    min-width: 760px;
-  }
-
-  .loot-details-grid {
-    grid-template-columns: 1fr;
-  }
+.loot-card h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .loot-category-label {
@@ -366,40 +267,6 @@
   font-weight: 900;
 }
 
-.loot-table input {
-  width: 86px;
-}
-
-.loot-card-list {
-  display: grid;
-  gap: 14px;
-  margin-top: 24px;
-}
-
-.loot-card {
-  border-radius: 22px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
-  padding: 14px;
-}
-
-.loot-card-main {
-  display: grid;
-  grid-template-columns: 1.7fr 1fr .8fr .7fr .7fr auto;
-  gap: 14px;
-  align-items: end;
-}
-
-.loot-item-info {
-  display: flex;
-  align-items: center;
-}
-
-.loot-card h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
-}
-
 .loot-card label {
   color: var(--muted);
   font-weight: 800;
@@ -407,9 +274,36 @@
 }
 
 .loot-card input,
-.loot-card select {
+.loot-card select,
+.loot-select {
   width: 100%;
+  min-width: 0;
   margin-top: 7px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: white;
+  font-weight: 800;
+}
+
+.loot-select option {
+  background: #07130d;
+  color: white;
+}
+
+.mini-btn {
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(54,211,153,.28);
+  background: rgba(54,211,153,.12);
+  color: #7dffcb;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  background: rgba(54,211,153,.22);
 }
 
 .loot-details-grid {
@@ -426,51 +320,20 @@
   display: none;
 }
 
-@media(max-width: 900px) {
-
-  .loot-card-main {
-    grid-template-columns: 1fr;
-  }
-
-  .loot-details-grid {
-    grid-template-columns: 1fr;
-  }
-
+.loot-details-grid label {
+  color: var(--muted);
+  font-weight: 800;
 }
 
-@media(max-width: 700px) {
+@media(max-width: 1200px) {
+  .loot-card-main {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 800px) {
   .loot-card-main,
   .loot-details-grid {
     grid-template-columns: 1fr;
   }
-}
-
-.loot-card-main {
-  display: grid !important;
-  grid-template-columns: minmax(220px, 1.6fr) 180px 150px 130px 130px 120px !important;
-  gap: 14px !important;
-  align-items: end !important;
-}
-
-.loot-card-main > * {
-  min-width: 0;
-}
-
-.loot-card-main label {
-  width: auto !important;
-}
-
-.loot-card-main input,
-.loot-card-main select {
-  width: 100% !important;
-}
-
-.loot-item-info {
-  display: block !important;
-}
-
-.loot-card h3 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
