@@ -553,31 +553,38 @@ const bulkValue = document.getElementById("bulkValue");
 const applyBulkBtn = document.getElementById("applyBulkBtn");
 
 lootEditorFile.addEventListener("change", () => {
-
   const file = lootEditorFile.files[0];
 
   if (!file) return;
 
-  updateFileName("lootEditorFile", "lootEditorFileName");
-
   currentLootEditorFileName = file.name;
 
-  /* reset ancien fichier */
-
+  // Reset complet avant import
   lootItems = [];
   currentLootXml = "";
   lootTableBody.innerHTML = "";
   lootEditorStatus.textContent = "";
 
+  lootSearch.value = "";
+  lootCategoryFilter.value = "all";
+
+  bulkField.value = "nominal";
+  bulkTarget.value = "all";
+  bulkMode.value = "percent";
+  bulkValue.value = "";
+
+  updateFileName("lootEditorFile", "lootEditorFileName");
+
   const reader = new FileReader();
 
   reader.onload = () => {
-
-    currentLootXml = reader.result;
+    currentLootXml = String(reader.result || "");
 
     parseLootXml(currentLootXml);
 
-    /* permet de réimporter immédiatement */
+    filterLootItems();
+
+    // Important pour pouvoir réimporter le même fichier
     lootEditorFile.value = "";
   };
 
@@ -1033,6 +1040,15 @@ document.getElementById("clearLootEditorBtn")
   lootEditorStatus.textContent = "";
 
   lootEditorFile.value = "";
+
+  lootSearch.value = "";
+
+  lootCategoryFilter.value = "all";
+
+  bulkField.value = "nominal";
+  bulkTarget.value = "all";
+  bulkMode.value = "percent";
+  bulkValue.value = "";
 
   updateFileName(
     "lootEditorFile",
