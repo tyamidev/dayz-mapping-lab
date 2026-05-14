@@ -662,9 +662,6 @@ function populateCategoryFilter() {
   });
 }
 
-lootEditorStatus.textContent =
-  `${count} items modifiés sur ${field}.`;
-
 applyBulkBtn.addEventListener("click", () => {
   if (!lootItems.length) {
     lootEditorStatus.textContent = "Importez d’abord un fichier types.xml.";
