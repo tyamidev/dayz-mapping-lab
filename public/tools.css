@@ -244,6 +244,9 @@
 
 .loot-item-info {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
 
 .loot-card h3 {
