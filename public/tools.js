@@ -554,11 +554,20 @@ const applyBulkBtn = document.getElementById("applyBulkBtn");
 
 lootEditorFile.addEventListener("change", () => {
 
+  const file = lootEditorFile.files[0];
+
+  if (!file) return;
+
   updateFileName("lootEditorFile", "lootEditorFileName");
 
-  if (lootEditorFile.files[0]) {
-    currentLootEditorFileName = lootEditorFile.files[0].name;
-  }
+  currentLootEditorFileName = file.name;
+
+  /* reset ancien fichier */
+
+  lootItems = [];
+  currentLootXml = "";
+  lootTableBody.innerHTML = "";
+  lootEditorStatus.textContent = "";
 
   const reader = new FileReader();
 
@@ -567,9 +576,12 @@ lootEditorFile.addEventListener("change", () => {
     currentLootXml = reader.result;
 
     parseLootXml(currentLootXml);
+
+    /* permet de réimporter immédiatement */
+    lootEditorFile.value = "";
   };
 
-  reader.readAsText(lootEditorFile.files[0]);
+  reader.readAsText(file);
 });
 
 function getTagValue(block, tag) {
