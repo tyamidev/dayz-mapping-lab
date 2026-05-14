@@ -719,7 +719,6 @@ function renderLootItems(items) {
             <span class="loot-category-label">
               ${item.category || "-"}
             </span>
-          </div>
         </div>
 
         <label>
