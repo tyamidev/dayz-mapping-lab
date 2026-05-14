@@ -364,6 +364,44 @@
 
   <p id="lootEditorStatus" class="status"></p>
 
+  <div class="loot-bulk-panel">
+
+  <h3>Modification en masse</h3>
+
+  <div class="loot-bulk-grid">
+
+    <select id="bulkField">
+      <option value="nominal">Nominal</option>
+      <option value="min">Min</option>
+      <option value="lifetime">Lifetime</option>
+      <option value="restock">Restock</option>
+      <option value="quantmin">Quant Min</option>
+      <option value="quantmax">Quant Max</option>
+    </select>
+
+    <select id="bulkTarget">
+      <option value="all">Tous les items</option>
+    </select>
+
+    <select id="bulkMode">
+      <option value="percent">Augmenter / réduire en %</option>
+      <option value="set">Définir une valeur fixe</option>
+    </select>
+
+    <input
+      id="bulkValue"
+      type="number"
+      placeholder="Ex : 25 ou -20"
+    >
+
+    <button class="btn" id="applyBulkBtn">
+      Appliquer
+    </button>
+
+  </div>
+
+</div>
+
 <div id="lootTableBody" class="loot-card-list"></div>
 
 </section>

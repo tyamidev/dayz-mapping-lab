@@ -546,6 +546,12 @@ const lootSearch = document.getElementById("lootSearch");
 const lootCategoryFilter =
   document.getElementById("lootCategoryFilter");
 
+const bulkField = document.getElementById("bulkField");
+const bulkTarget = document.getElementById("bulkTarget");
+const bulkMode = document.getElementById("bulkMode");
+const bulkValue = document.getElementById("bulkValue");
+const applyBulkBtn = document.getElementById("applyBulkBtn");
+
 lootEditorFile.addEventListener("change", () => {
 
   updateFileName("lootEditorFile", "lootEditorFileName");
@@ -620,12 +626,63 @@ function populateCategoryFilter() {
     <option value="all">Toutes catégories</option>
   `;
 
+  bulkTarget.innerHTML = `
+    <option value="all">Tous les items</option>
+  `;
+
   categories.forEach(category => {
     lootCategoryFilter.innerHTML += `
       <option value="${category}">${category}</option>
     `;
+
+    bulkTarget.innerHTML += `
+      <option value="${category}">${category}</option>
+    `;
   });
 }
+
+applyBulkBtn.addEventListener("click", () => {
+  if (!lootItems.length) {
+    lootEditorStatus.textContent = "Importez d’abord un fichier types.xml.";
+    return;
+  }
+
+  const field = bulkField.value;
+  const target = bulkTarget.value;
+  const mode = bulkMode.value;
+  const value = Number(bulkValue.value);
+
+  if (Number.isNaN(value)) {
+    lootEditorStatus.textContent = "Indiquez une valeur valide.";
+    return;
+  }
+
+  let count = 0;
+
+  lootItems.forEach(item => {
+    if (target !== "all" && item.category !== target) return;
+
+    const oldValue = Number(item[field] || 0);
+
+    if (mode === "percent") {
+      item[field] = Math.max(
+        0,
+        Math.round(oldValue + oldValue * (value / 100))
+      );
+    }
+
+    if (mode === "set") {
+      item[field] = Math.max(0, Math.round(value));
+    }
+
+    count++;
+  });
+
+  filterLootItems();
+
+  lootEditorStatus.textContent =
+    `${count} items modifiés sur ${field}.`;
+});
 
 function filterLootItems() {
 

@@ -340,3 +340,32 @@
     grid-template-columns: 1fr;
   }
 }
+
+.loot-bulk-panel {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(54,211,153,.06);
+  border: 1px solid rgba(54,211,153,.18);
+}
+
+.loot-bulk-panel h3 {
+  margin-top: 0;
+}
+
+.loot-bulk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr 1fr auto;
+  gap: 12px;
+}
+
+.loot-bulk-grid input,
+.loot-bulk-grid select {
+  width: 100%;
+}
+
+@media(max-width: 900px) {
+  .loot-bulk-grid {
+    grid-template-columns: 1fr;
+  }
+}
