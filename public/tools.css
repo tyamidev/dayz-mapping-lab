@@ -243,10 +243,15 @@
 }
 
 .loot-item-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   min-width: 0;
+}
+
+.loot-item-info > div {
   display: flex;
   flex-direction: column;
-  justify-content: end;
 }
 
 .loot-card h3 {
