@@ -111,6 +111,12 @@
         <p>Modifier facilement un fichier events.xml et cfgeventspawns.xml.</p>
     </article>
 
+    <article class="tool-card" data-tool="mappingCleanerTool">
+      <span>🧹</span>
+      <h3>Mapping Cleaner</h3>
+      <p>Nettoyer, optimiser et compresser un mapping DayZ.</p>
+    </article>
+
   </section>
 
   <section id="jsonTool" class="tool-panel">
@@ -687,6 +693,78 @@
 
   <div id="eventUnifiedList" class="loot-card-list"></div>
 </section>
+
+
+<section id="mappingCleanerTool" class="tool-panel hidden">
+  <h2>🧹 Mapping Cleaner</h2>
+
+  <p class="muted">
+    Nettoyez, optimisez et compressez vos fichiers mapping DayZ.
+  </p>
+
+  <label class="file-upload">
+    <input type="file" id="mappingCleanerFile" accept=".json,.txt,.dze">
+    <span>Importer un fichier</span>
+  </label>
+
+  <p id="mappingCleanerFileName" class="file-name">
+    Aucun fichier sélectionné
+  </p>
+
+  <div class="cleaner-options">
+
+    <label>
+      <input type="checkbox" id="removeEmptyLines" checked>
+      Supprimer les lignes vides
+    </label>
+
+    <label>
+      <input type="checkbox" id="trimLines" checked>
+      Nettoyer les espaces inutiles
+    </label>
+
+    <label>
+      <input type="checkbox" id="removeDuplicateLines" checked>
+      Supprimer les doublons
+    </label>
+
+    <label>
+      <input type="checkbox" id="beautifyJson">
+      Reformater le JSON
+    </label>
+
+    <label>
+      <input type="checkbox" id="minifyJson">
+      Compresser / Minify JSON
+    </label>
+
+  </div>
+
+  <textarea
+    id="mappingCleanerInput"
+    placeholder="Collez ou importez votre mapping ici..."
+  ></textarea>
+
+  <div class="tool-actions">
+
+    <button class="btn" id="cleanMappingBtn">
+      Nettoyer le mapping
+    </button>
+
+    <button class="btn secondary" id="downloadMappingCleanerBtn">
+      Télécharger
+    </button>
+
+    <button class="btn danger" id="clearMappingCleanerBtn">
+      Effacer
+    </button>
+
+  </div>
+
+  <p id="mappingCleanerStatus" class="status"></p>
+
+</section>
+
 
 </main>
 

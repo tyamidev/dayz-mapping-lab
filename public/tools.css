@@ -653,3 +653,40 @@
 .child-row code {
   color: #7dffcb;
 }
+
+.cleaner-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.cleaner-options label {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.cleaner-options label:hover {
+  border-color: rgba(0,255,170,.4);
+  transform: translateY(-2px);
+}
+
+.cleaner-options input {
+  margin-right: 10px;
+}
+
+@media(max-width: 900px) {
+
+  .cleaner-options {
+    grid-template-columns: 1fr;
+  }
+
+}

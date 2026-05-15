@@ -2066,3 +2066,239 @@ if (toggleCreateEvent && createEventContent) {
     createEventContent.classList.toggle("hidden");
   });
 }
+
+/* ======================================================
+   MAPPING CLEANER
+====================================================== */
+
+let currentMappingCleanerFileName = "cleaned-mapping.txt";
+
+const mappingCleanerFile =
+  document.getElementById("mappingCleanerFile");
+
+const mappingCleanerInput =
+  document.getElementById("mappingCleanerInput");
+
+const mappingCleanerStatus =
+  document.getElementById("mappingCleanerStatus");
+
+const removeEmptyLines =
+  document.getElementById("removeEmptyLines");
+
+const trimLines =
+  document.getElementById("trimLines");
+
+const removeDuplicateLines =
+  document.getElementById("removeDuplicateLines");
+
+const beautifyJson =
+  document.getElementById("beautifyJson");
+
+const minifyJson =
+  document.getElementById("minifyJson");
+
+/* IMPORT FICHIER */
+
+if (mappingCleanerFile) {
+
+  mappingCleanerFile.addEventListener("change", () => {
+
+    const file = mappingCleanerFile.files[0];
+
+    if (!file) return;
+
+    currentMappingCleanerFileName = file.name;
+
+    document.getElementById(
+      "mappingCleanerFileName"
+    ).textContent = file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      mappingCleanerInput.value = e.target.result;
+    };
+
+    reader.readAsText(file);
+
+  });
+
+}
+
+/* NETTOYAGE */
+
+function cleanMappingContent(content) {
+
+  if (!content.trim()) {
+    return {
+      success: false,
+      message: "Aucun contenu détecté."
+    };
+  }
+
+  /* JSON */
+
+  if (beautifyJson.checked || minifyJson.checked) {
+
+    try {
+
+      const parsed = JSON.parse(content);
+
+      return {
+        success: true,
+        content: minifyJson.checked
+          ? JSON.stringify(parsed)
+          : JSON.stringify(parsed, null, 2),
+        message: minifyJson.checked
+          ? "✅ JSON compressé avec succès."
+          : "✅ JSON reformaté avec succès."
+      };
+
+    } catch (err) {
+
+      return {
+        success: false,
+        message: "❌ JSON invalide."
+      };
+
+    }
+
+  }
+
+  /* LIGNES */
+
+  let lines = content.split(/\r?\n/);
+
+  if (trimLines.checked) {
+    lines = lines.map(line => line.trim());
+  }
+
+  let removedEmpty = 0;
+
+  if (removeEmptyLines.checked) {
+
+    const before = lines.length;
+
+    lines = lines.filter(
+      line => line.trim() !== ""
+    );
+
+    removedEmpty = before - lines.length;
+
+  }
+
+  let removedDuplicates = 0;
+
+  if (removeDuplicateLines.checked) {
+
+    const seen = new Set();
+
+    lines = lines.filter(line => {
+
+      if (seen.has(line)) {
+        removedDuplicates++;
+        return false;
+      }
+
+      seen.add(line);
+
+      return true;
+
+    });
+
+  }
+
+  return {
+    success: true,
+    content: lines.join("\n"),
+    message:
+      `✅ Nettoyage terminé : `
+      + `${removedEmpty} ligne(s) vide(s) supprimée(s), `
+      + `${removedDuplicates} doublon(s) supprimé(s).`
+  };
+
+}
+
+/* BOUTON CLEAN */
+
+document.getElementById(
+  "cleanMappingBtn"
+)?.addEventListener("click", () => {
+
+  mappingCleanerStatus.className = "status";
+
+  const result = cleanMappingContent(
+    mappingCleanerInput.value
+  );
+
+  if (!result.success) {
+
+    mappingCleanerStatus.classList.add("error");
+
+    mappingCleanerStatus.textContent =
+      result.message;
+
+    return;
+
+  }
+
+  mappingCleanerInput.value = result.content;
+
+  mappingCleanerStatus.textContent =
+    result.message;
+
+});
+
+/* DOWNLOAD */
+
+document.getElementById(
+  "downloadMappingCleanerBtn"
+)?.addEventListener("click", () => {
+
+  if (!mappingCleanerInput.value.trim()) {
+
+    mappingCleanerStatus.className =
+      "status error";
+
+    mappingCleanerStatus.textContent =
+      "Aucun fichier à télécharger.";
+
+    return;
+
+  }
+
+  const blob = new Blob(
+    [mappingCleanerInput.value],
+    { type: "text/plain" }
+  );
+
+  const link = document.createElement("a");
+
+  link.href = URL.createObjectURL(blob);
+
+  link.download =
+    currentMappingCleanerFileName.replace(
+      /(\.[^.]+)?$/,
+      "-cleaned$1"
+    );
+
+  link.click();
+
+});
+
+/* CLEAR */
+
+document.getElementById(
+  "clearMappingCleanerBtn"
+)?.addEventListener("click", () => {
+
+  mappingCleanerInput.value = "";
+
+  mappingCleanerStatus.textContent = "";
+
+  document.getElementById(
+    "mappingCleanerFileName"
+  ).textContent =
+    "Aucun fichier sélectionné";
+
+});
