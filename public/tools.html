@@ -506,6 +506,96 @@
 
   <p id="eventEditorStatus" class="status"></p>
 
+<div class="event-create-panel">
+
+  <h3>Créer un nouvel event</h3>
+
+  <div class="event-create-grid">
+
+    <label>
+      Type d’event
+      <select id="newEventType">
+        <option value="Vehicle">Véhicule</option>
+        <option value="Item">Item / Horde zombie</option>
+        <option value="Animal">Animal</option>
+        <option value="Static">Statique</option>
+        <option value="Dynamic">Dynamique</option>
+        <option value="Custom">Custom</option>
+      </select>
+    </label>
+
+    <label>
+      Nom personnalisé
+      <input id="newEventName" placeholder="Ex : Ada4x4, ZombieVillage, WolfPack">
+    </label>
+
+    <label>
+      Nominal
+      <input id="newEventNominal" type="number" value="1">
+    </label>
+
+    <label>
+      Min
+      <input id="newEventMin" type="number" value="1">
+    </label>
+
+    <label>
+      Max
+      <input id="newEventMax" type="number" value="1">
+    </label>
+
+    <label>
+      Lifetime
+      <input id="newEventLifetime" type="number" value="3600">
+    </label>
+
+    <label>
+      Restock
+      <input id="newEventRestock" type="number" value="0">
+    </label>
+
+    <label>
+      Safe radius
+      <input id="newEventSafeRadius" type="number" value="100">
+    </label>
+
+    <label>
+      Distance radius
+      <input id="newEventDistanceRadius" type="number" value="100">
+    </label>
+
+    <label>
+      Cleanup radius
+      <input id="newEventCleanupRadius" type="number" value="100">
+    </label>
+
+    <label>
+      Position X
+      <input id="newEventX" type="number" step="0.01" placeholder="Ex : 7500">
+    </label>
+
+    <label>
+      Position Z
+      <input id="newEventZ" type="number" step="0.01" placeholder="Ex : 8500">
+    </label>
+
+    <label>
+      Rotation
+      <input id="newEventA" type="number" step="0.01" value="0">
+    </label>
+
+  </div>
+
+  <button class="btn" id="createEventBtn">
+    Créer l’event
+  </button>
+
+  <p class="muted">
+    L’outil ajoute automatiquement l’event dans events.xml et la première position dans cfgeventspawns.xml.
+  </p>
+
+</div>
+
 <hr>
 
 <h3>Positions des events</h3>

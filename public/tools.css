@@ -535,3 +535,38 @@
   }
 
 }
+.event-create-panel {
+  margin-top: 22px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(54,211,153,.06);
+  border: 1px solid rgba(54,211,153,.18);
+}
+
+.event-create-panel h3 {
+  margin-top: 0;
+}
+
+.event-create-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.event-create-grid label {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.event-create-grid input,
+.event-create-grid select {
+  width: 100%;
+  margin-top: 7px;
+}
+
+@media(max-width: 900px) {
+  .event-create-grid {
+    grid-template-columns: 1fr;
+  }
+}

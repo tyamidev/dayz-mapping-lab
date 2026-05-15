@@ -1200,6 +1200,120 @@ const eventSearch =
 const eventUnifiedList =
   document.getElementById("eventUnifiedList");
 
+/* CREATE NEW EVENT */
+
+document.getElementById("createEventBtn")
+.addEventListener("click", () => {
+
+  const type =
+    document.getElementById("newEventType").value;
+
+  const customName =
+    document.getElementById("newEventName").value.trim();
+
+  if (!customName) {
+    eventEditorStatus.textContent =
+      "Indiquez un nom d’event.";
+    return;
+  }
+
+  let prefix = "";
+
+  if (type === "Vehicle") prefix = "Vehicle";
+  if (type === "Item") prefix = "Item";
+  if (type === "Animal") prefix = "Animal";
+  if (type === "Static") prefix = "Static";
+  if (type === "Dynamic") prefix = "Dynamic";
+
+  const finalName =
+    type === "Custom"
+      ? customName
+      : prefix + customName;
+
+  const alreadyExists =
+    eventItems.some(
+      e => e.name.toLowerCase() === finalName.toLowerCase()
+    );
+
+  if (alreadyExists) {
+    eventEditorStatus.textContent =
+      "Cet event existe déjà.";
+    return;
+  }
+
+  /* CREATE EVENT */
+
+  const newEvent = {
+
+    id: Date.now(),
+
+    original: "",
+
+    name: finalName,
+
+    nominal:
+      document.getElementById("newEventNominal").value || "1",
+
+    min:
+      document.getElementById("newEventMin").value || "1",
+
+    max:
+      document.getElementById("newEventMax").value || "1",
+
+    lifetime:
+      document.getElementById("newEventLifetime").value || "3600",
+
+    restock:
+      document.getElementById("newEventRestock").value || "0",
+
+    saferadius:
+      document.getElementById("newEventSafeRadius").value || "100",
+
+    distanceradius:
+      document.getElementById("newEventDistanceRadius").value || "100",
+
+    cleanupradius:
+      document.getElementById("newEventCleanupRadius").value || "100"
+  };
+
+  eventItems.push(newEvent);
+
+  /* CREATE FIRST POSITION */
+
+  const x =
+    document.getElementById("newEventX").value;
+
+  const z =
+    document.getElementById("newEventZ").value;
+
+  if (x && z) {
+
+    eventSpawnItems.push({
+
+      id: Date.now() + Math.random(),
+
+      originalEventBlock: "",
+      originalPosBlock: "",
+
+      eventName: finalName,
+
+      x,
+
+      z,
+
+      a:
+        document.getElementById("newEventA").value || "0",
+
+      group: ""
+    });
+  }
+
+  renderUnifiedEvents();
+
+  eventEditorStatus.textContent =
+    `Event ${finalName} créé avec succès.`;
+});
+
 /* IMPORT EVENTS.XML */
 
 eventEditorFile.addEventListener("change", () => {
