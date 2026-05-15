@@ -1312,7 +1312,17 @@ document.getElementById("createEventBtn")
 
   eventEditorStatus.textContent =
     `Event ${finalName} créé avec succès.`;
-});
+
+document
+  .getElementById("createEventContent")
+  .classList.add("hidden");
+  const arrow = document.querySelector(".event-create-arrow");
+
+  if (arrow) {
+  arrow.style.transform = "rotate(0deg)";
+}
+
+  });
 
 /* IMPORT EVENTS.XML */
 
