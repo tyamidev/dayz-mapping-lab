@@ -1614,3 +1614,101 @@ eventSearch.addEventListener(
   "input",
   renderUnifiedEvents
 );
+
+/* REBUILD EVENTS.XML */
+
+function rebuildEventsXml() {
+  let xml = currentEventsXml;
+
+  eventItems.forEach(event => {
+    let updated = event.original;
+
+    [
+      "nominal",
+      "min",
+      "max",
+      "lifetime",
+      "restock",
+      "saferadius",
+      "distanceradius",
+      "cleanupradius"
+    ].forEach(tag => {
+      updated = updated.replace(
+        new RegExp(`<${tag}>.*?<\\/${tag}>`, "i"),
+        `<${tag}>${event[tag]}</${tag}>`
+      );
+    });
+
+    xml = xml.replace(event.original, updated);
+  });
+
+  return xml;
+}
+
+/* REBUILD CFGEVENTSPAWNS.XML */
+
+function rebuildEventSpawnsXml() {
+  const grouped = {};
+
+  eventSpawnItems.forEach(item => {
+    if (!grouped[item.eventName]) {
+      grouped[item.eventName] = [];
+    }
+
+    grouped[item.eventName].push(item);
+  });
+
+  let xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<eventposdef>\n`;
+
+  Object.entries(grouped).forEach(([eventName, positions]) => {
+    xml += `  <event name="${eventName}">\n`;
+
+    positions.forEach(pos => {
+      xml += `    <pos x="${pos.x}" z="${pos.z}" a="${pos.a}"`;
+
+      if (pos.group) {
+        xml += ` group="${pos.group}"`;
+      }
+
+      xml += ` />\n`;
+    });
+
+    xml += `  </event>\n`;
+  });
+
+  xml += `</eventposdef>\n`;
+
+  return xml;
+}
+
+/* DOWNLOAD EVENTS.XML */
+
+document.getElementById("downloadEventEditorBtn")
+.addEventListener("click", () => {
+  if (!eventItems.length) {
+    eventEditorStatus.textContent = "Importez un fichier events.xml.";
+    return;
+  }
+
+  downloadFile(
+    currentEventEditorFileName,
+    rebuildEventsXml(),
+    "application/xml"
+  );
+});
+
+/* DOWNLOAD CFGEVENTSPAWNS.XML */
+
+document.getElementById("downloadEventSpawnsBtn")
+.addEventListener("click", () => {
+  if (!eventSpawnItems.length) {
+    eventEditorStatus.textContent = "Importez un fichier cfgeventspawns.xml.";
+    return;
+  }
+
+  downloadFile(
+    currentEventSpawnsFileName,
+    rebuildEventSpawnsXml(),
+    "application/xml"
+  );
+});
