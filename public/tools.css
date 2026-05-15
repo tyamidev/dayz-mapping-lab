@@ -450,7 +450,7 @@
 
 .event-position-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 0.7fr auto;
   gap: 14px;
   padding: 14px;
   border-radius: 16px;
@@ -458,10 +458,23 @@
   align-items: end;
 }
 
+.event-position-row {
+  overflow: hidden;
+}
+
+.event-position-row input {
+  width: 100%;
+  min-width: 0;
+}
+
+.event-position-row .mini-btn {
+  white-space: nowrap;
+}
+
 .event-position-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
   margin-top: 14px;
 }
 
