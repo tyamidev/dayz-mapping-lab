@@ -2302,3 +2302,144 @@ document.getElementById(
     "Aucun fichier sélectionné";
 
 });
+
+/* ======================================================
+   TELEPORT GENERATOR
+====================================================== */
+
+let teleportPoints = [];
+
+const teleportName = document.getElementById("teleportName");
+const teleportCategory = document.getElementById("teleportCategory");
+const teleportX = document.getElementById("teleportX");
+const teleportY = document.getElementById("teleportY");
+const teleportZ = document.getElementById("teleportZ");
+const teleportRotation = document.getElementById("teleportRotation");
+
+const teleportList = document.getElementById("teleportList");
+const teleportOutput = document.getElementById("teleportOutput");
+const teleportStatus = document.getElementById("teleportStatus");
+
+function renderTeleportList() {
+  if (!teleportList) return;
+
+  if (!teleportPoints.length) {
+    teleportList.innerHTML = "";
+    return;
+  }
+
+  teleportList.innerHTML = teleportPoints.map((point, index) => `
+    <div class="teleport-card">
+      <div>
+        <strong>${point.name}</strong>
+        <span>${point.category}</span>
+        <code>X: ${point.position.x} | Y: ${point.position.y} | Z: ${point.position.z} | R: ${point.rotation}</code>
+      </div>
+
+      <button class="mini-btn danger" onclick="deleteTeleportPoint(${index})">
+        Supprimer
+      </button>
+    </div>
+  `).join("");
+}
+
+function buildTeleportJson() {
+  return JSON.stringify({
+    tool: "DayZ Mapping Lab - Teleport Generator",
+    version: "1.0",
+    generatedAt: new Date().toISOString(),
+    teleports: teleportPoints
+  }, null, 2);
+}
+
+document.getElementById("addTeleportBtn")?.addEventListener("click", () => {
+  const name = teleportName.value.trim();
+  const category = teleportCategory.value.trim() || "Default";
+
+  const x = parseFloat(teleportX.value);
+  const y = parseFloat(teleportY.value);
+  const z = parseFloat(teleportZ.value);
+  const rotation = parseFloat(teleportRotation.value || "0");
+
+  teleportStatus.className = "status";
+
+  if (!name || Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(z)) {
+    teleportStatus.classList.add("error");
+    teleportStatus.textContent = "Nom, X, Y et Z sont obligatoires.";
+    return;
+  }
+
+  teleportPoints.push({
+    id: `teleport_${Date.now()}`,
+    name,
+    category,
+    position: {
+      x,
+      y,
+      z
+    },
+    rotation: Number.isNaN(rotation) ? 0 : rotation
+  });
+
+  teleportName.value = "";
+  teleportX.value = "";
+  teleportY.value = "";
+  teleportZ.value = "";
+  teleportRotation.value = "0";
+
+  renderTeleportList();
+
+  teleportOutput.value = buildTeleportJson();
+
+  teleportStatus.textContent = "✅ Point de téléportation ajouté.";
+});
+
+function deleteTeleportPoint(index) {
+  teleportPoints.splice(index, 1);
+  renderTeleportList();
+  teleportOutput.value = teleportPoints.length ? buildTeleportJson() : "";
+}
+
+document.getElementById("generateTeleportJsonBtn")?.addEventListener("click", () => {
+  teleportStatus.className = "status";
+
+  if (!teleportPoints.length) {
+    teleportStatus.classList.add("error");
+    teleportStatus.textContent = "Ajoutez au moins un point de téléportation.";
+    return;
+  }
+
+  teleportOutput.value = buildTeleportJson();
+  teleportStatus.textContent = "✅ JSON généré.";
+});
+
+document.getElementById("downloadTeleportJsonBtn")?.addEventListener("click", () => {
+  if (!teleportOutput.value.trim()) {
+    teleportStatus.className = "status error";
+    teleportStatus.textContent = "Aucun fichier à télécharger.";
+    return;
+  }
+
+  downloadFile(
+    "dayz-teleports.json",
+    teleportOutput.value,
+    "application/json"
+  );
+});
+
+document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
+  teleportPoints = [];
+
+  teleportName.value = "";
+  teleportCategory.value = "";
+  teleportX.value = "";
+  teleportY.value = "";
+  teleportZ.value = "";
+  teleportRotation.value = "0";
+
+  teleportOutput.value = "";
+  teleportStatus.className = "status";
+  teleportStatus.textContent = "";
+
+  renderTeleportList();
+});

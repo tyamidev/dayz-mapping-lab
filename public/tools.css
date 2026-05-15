@@ -690,3 +690,46 @@
   }
 
 }
+
+.teleport-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.teleport-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.teleport-card strong {
+  display: block;
+  font-size: 18px;
+}
+
+.teleport-card span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.teleport-card code {
+  display: block;
+  margin-top: 8px;
+  color: #7dffcb;
+  font-size: 13px;
+}
+
+@media(max-width: 700px) {
+  .teleport-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

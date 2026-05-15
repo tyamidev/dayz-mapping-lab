@@ -117,6 +117,12 @@
       <p>Nettoyer, optimiser et compresser un mapping DayZ.</p>
     </article>
 
+    <article class="tool-card" data-tool="teleportGeneratorTool">
+      <span>🌀</span>
+      <h3>Teleport Generator</h3>
+      <p>Créer un fichier de téléportation DayZ prêt à utiliser.</p>
+    </article>
+
   </section>
 
   <section id="jsonTool" class="tool-panel">
@@ -765,6 +771,58 @@
 
 </section>
 
+<section id="teleportGeneratorTool" class="tool-panel hidden">
+  <h2>🌀 Teleport Generator</h2>
+
+  <p class="muted">
+    Créez une liste de points de téléportation avec nom, catégorie, position XYZ et rotation.
+  </p>
+
+  <div class="tool-form-grid">
+    <label>
+      Nom du point
+      <input id="teleportName" placeholder="Ex : Trader Nord">
+    </label>
+
+    <label>
+      Catégorie
+      <input id="teleportCategory" placeholder="Ex : Traders, Safezones, Events">
+    </label>
+
+    <label>
+      Position X
+      <input id="teleportX" type="number" step="0.01" placeholder="Ex : 7500.25">
+    </label>
+
+    <label>
+      Position Y
+      <input id="teleportY" type="number" step="0.01" placeholder="Ex : 0">
+    </label>
+
+    <label>
+      Position Z
+      <input id="teleportZ" type="number" step="0.01" placeholder="Ex : 8500.75">
+    </label>
+
+    <label>
+      Rotation
+      <input id="teleportRotation" type="number" step="0.01" value="0">
+    </label>
+  </div>
+
+  <div class="tool-actions">
+    <button class="btn" id="addTeleportBtn">Ajouter le point</button>
+    <button class="btn secondary" id="generateTeleportJsonBtn">Générer JSON</button>
+    <button class="btn secondary" id="downloadTeleportJsonBtn">Télécharger JSON</button>
+    <button class="btn danger" id="clearTeleportBtn">Effacer</button>
+  </div>
+
+  <p id="teleportStatus" class="status"></p>
+
+  <div id="teleportList" class="teleport-list"></div>
+
+  <textarea id="teleportOutput" placeholder="Le fichier généré apparaîtra ici..."></textarea>
+</section>
 
 </main>
 
