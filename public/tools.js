@@ -1181,326 +1181,187 @@ let currentEventEditorFileName = "events.xml";
 let currentEventsXml = "";
 let eventItems = [];
 
-const eventEditorFile = document.getElementById("eventEditorFile");
-const eventEditorStatus = document.getElementById("eventEditorStatus");
-const eventEditorList = document.getElementById("eventEditorList");
-const eventSearch = document.getElementById("eventSearch");
+let currentEventSpawnsFileName = "cfgeventspawns.xml";
+let currentEventSpawnsXml = "";
+let eventSpawnItems = [];
+
+const eventEditorFile =
+  document.getElementById("eventEditorFile");
+
+const eventSpawnsFile =
+  document.getElementById("eventSpawnsFile");
+
+const eventEditorStatus =
+  document.getElementById("eventEditorStatus");
+
+const eventSearch =
+  document.getElementById("eventSearch");
+
+const eventUnifiedList =
+  document.getElementById("eventUnifiedList");
+
+/* IMPORT EVENTS.XML */
 
 eventEditorFile.addEventListener("change", () => {
+
   const file = eventEditorFile.files[0];
 
   if (!file) return;
 
   currentEventEditorFileName = file.name;
+
   currentEventsXml = "";
   eventItems = [];
-  eventEditorList.innerHTML = "";
+
   eventEditorStatus.textContent = "";
   eventSearch.value = "";
 
-  updateFileName("eventEditorFile", "eventEditorFileName");
+  updateFileName(
+    "eventEditorFile",
+    "eventEditorFileName"
+  );
 
   const reader = new FileReader();
 
   reader.onload = () => {
+
     currentEventsXml = String(reader.result || "");
+
     parseEventsXml(currentEventsXml);
+
+    renderUnifiedEvents();
+
     eventEditorFile.value = "";
   };
 
   reader.readAsText(file);
 });
 
-function getEventTagValue(block, tag) {
-  const regex = new RegExp(`<${tag}>(.*?)<\\/${tag}>`, "i");
-  const match = block.match(regex);
-
-  return match ? match[1] : "0";
-}
-
-function parseEventsXml(xml) {
-  eventItems = [];
-
-  const eventBlocks = xml.match(/<event\b[\s\S]*?<\/event>/gi);
-
-  if (!eventBlocks) {
-    eventEditorStatus.textContent = "Aucun event trouvé.";
-    return;
-  }
-
-  eventBlocks.forEach(block => {
-    const nameMatch = block.match(/<event\s+name="([^"]+)"/i);
-
-    if (!nameMatch) return;
-
-    eventItems.push({
-      id: eventItems.length,
-      original: block,
-      name: nameMatch[1],
-      nominal: getEventTagValue(block, "nominal"),
-      min: getEventTagValue(block, "min"),
-      max: getEventTagValue(block, "max"),
-      lifetime: getEventTagValue(block, "lifetime"),
-      restock: getEventTagValue(block, "restock"),
-      saferadius: getEventTagValue(block, "saferadius"),
-      distanceradius: getEventTagValue(block, "distanceradius"),
-      cleanupradius: getEventTagValue(block, "cleanupradius")
-    });
-  });
-
-  renderEventItems(eventItems);
-
-  eventEditorStatus.textContent =
-    `${eventItems.length} events chargés.`;
-}
-
-function renderEventItems(items) {
-  eventEditorList.innerHTML = items.map(item => `
-    <article class="loot-card">
-
-      <div class="loot-card-main">
-
-        <div class="loot-item-info">
-          <h3>${item.name}</h3>
-          <span class="loot-category-label">event</span>
-        </div>
-
-        <label>
-          Nominal
-          <input
-            type="number"
-            value="${item.nominal}"
-            oninput="updateEventValue(${item.id}, 'nominal', this.value)"
-          >
-        </label>
-
-        <label>
-          Min
-          <input
-            type="number"
-            value="${item.min}"
-            oninput="updateEventValue(${item.id}, 'min', this.value)"
-          >
-        </label>
-
-        <label>
-          Max
-          <input
-            type="number"
-            value="${item.max}"
-            oninput="updateEventValue(${item.id}, 'max', this.value)"
-          >
-        </label>
-
-        <button
-          type="button"
-          class="mini-btn"
-          onclick="toggleEventDetails(${item.id})"
-        >
-          Détails
-        </button>
-
-      </div>
-
-      <div
-        id="event-details-${item.id}"
-        class="loot-details-grid hidden"
-      >
-
-        <label>
-          Lifetime
-          <input
-            type="number"
-            value="${item.lifetime}"
-            oninput="updateEventValue(${item.id}, 'lifetime', this.value)"
-          >
-        </label>
-
-        <label>
-          Restock
-          <input
-            type="number"
-            value="${item.restock}"
-            oninput="updateEventValue(${item.id}, 'restock', this.value)"
-          >
-        </label>
-
-        <label>
-          Safe Radius
-          <input
-            type="number"
-            value="${item.saferadius}"
-            oninput="updateEventValue(${item.id}, 'saferadius', this.value)"
-          >
-        </label>
-
-        <label>
-          Distance Radius
-          <input
-            type="number"
-            value="${item.distanceradius}"
-            oninput="updateEventValue(${item.id}, 'distanceradius', this.value)"
-          >
-        </label>
-
-        <label>
-          Cleanup Radius
-          <input
-            type="number"
-            value="${item.cleanupradius}"
-            oninput="updateEventValue(${item.id}, 'cleanupradius', this.value)"
-          >
-        </label>
-
-      </div>
-
-    </article>
-  `).join("");
-}
-
-window.updateEventValue = function(id, field, value) {
-  const event = eventItems.find(e => e.id === id);
-
-  if (!event) return;
-
-  event[field] = value;
-};
-
-window.toggleEventDetails = function(id) {
-  const details = document.getElementById("event-details-" + id);
-
-  if (!details) return;
-
-  details.classList.toggle("hidden");
-};
-
-eventSearch.addEventListener("input", () => {
-  const search = eventSearch.value.toLowerCase();
-
-  const filtered = eventItems.filter(event =>
-    event.name.toLowerCase().includes(search)
-  );
-
-  renderEventItems(filtered);
-});
-
-function rebuildEventsXml() {
-  let xml = currentEventsXml;
-
-  eventItems.forEach(event => {
-    let updated = event.original;
-
-    [
-      "nominal",
-      "min",
-      "max",
-      "lifetime",
-      "restock",
-      "saferadius",
-      "distanceradius",
-      "cleanupradius"
-    ].forEach(tag => {
-      updated = updated.replace(
-        new RegExp(`<${tag}>.*?<\\/${tag}>`, "i"),
-        `<${tag}>${event[tag]}</${tag}>`
-      );
-    });
-
-    xml = xml.replace(event.original, updated);
-  });
-
-  return xml;
-}
-
-document.getElementById("downloadEventEditorBtn")
-.addEventListener("click", () => {
-  if (!eventItems.length) {
-    eventEditorStatus.textContent = "Importez un fichier events.xml.";
-    return;
-  }
-
-  const finalXml = rebuildEventsXml();
-
-  downloadFile(
-    currentEventEditorFileName,
-    finalXml,
-    "application/xml"
-  );
-});
-
-document.getElementById("clearEventEditorBtn")
-.addEventListener("click", () => {
-  currentEventsXml = "";
-  eventItems = [];
-  eventEditorList.innerHTML = "";
-  eventEditorStatus.textContent = "";
-  eventSearch.value = "";
-  eventEditorFile.value = "";
-
-  updateFileName("eventEditorFile", "eventEditorFileName");
-});
-
-/* CFG EVENT SPAWNS EDITOR */
-
-let currentEventSpawnsFileName = "cfgeventspawns.xml";
-let currentEventSpawnsXml = "";
-let eventSpawnItems = [];
-
-const eventSpawnsFile = document.getElementById("eventSpawnsFile");
-const eventSpawnsStatus = document.getElementById("eventSpawnsStatus");
-const eventSpawnsList = document.getElementById("eventSpawnsList");
-const eventSpawnSearch = document.getElementById("eventSpawnSearch");
+/* IMPORT CFGEVENTSPAWNS.XML */
 
 eventSpawnsFile.addEventListener("change", () => {
+
   const file = eventSpawnsFile.files[0];
 
   if (!file) return;
 
   currentEventSpawnsFileName = file.name;
+
   currentEventSpawnsXml = "";
   eventSpawnItems = [];
-  eventSpawnsList.innerHTML = "";
-  eventSpawnsStatus.textContent = "";
-  eventSpawnSearch.value = "";
 
-  updateFileName("eventSpawnsFile", "eventSpawnsFileName");
+  updateFileName(
+    "eventSpawnsFile",
+    "eventSpawnsFileName"
+  );
 
   const reader = new FileReader();
 
   reader.onload = () => {
+
     currentEventSpawnsXml = String(reader.result || "");
+
     parseEventSpawnsXml(currentEventSpawnsXml);
+
+    renderUnifiedEvents();
+
     eventSpawnsFile.value = "";
   };
 
   reader.readAsText(file);
 });
 
+/* PARSE EVENTS.XML */
+
+function getEventTagValue(block, tag) {
+
+  const regex =
+    new RegExp(`<${tag}>(.*?)<\\/${tag}>`, "i");
+
+  const match = block.match(regex);
+
+  return match ? match[1] : "0";
+}
+
+function parseEventsXml(xml) {
+
+  eventItems = [];
+
+  const eventBlocks =
+    xml.match(/<event\b[\s\S]*?<\/event>/gi);
+
+  if (!eventBlocks) return;
+
+  eventBlocks.forEach(block => {
+
+    const nameMatch =
+      block.match(/<event\s+name="([^"]+)"/i);
+
+    if (!nameMatch) return;
+
+    eventItems.push({
+
+      id: eventItems.length,
+      original: block,
+
+      name: nameMatch[1],
+
+      nominal: getEventTagValue(block, "nominal"),
+      min: getEventTagValue(block, "min"),
+      max: getEventTagValue(block, "max"),
+
+      lifetime: getEventTagValue(block, "lifetime"),
+      restock: getEventTagValue(block, "restock"),
+
+      saferadius: getEventTagValue(block, "saferadius"),
+      distanceradius: getEventTagValue(block, "distanceradius"),
+      cleanupradius: getEventTagValue(block, "cleanupradius")
+    });
+  });
+}
+
+/* PARSE CFGEVENTSPAWNS.XML */
+
+function getXmlAttr(block, attr) {
+
+  const match =
+    block.match(new RegExp(`${attr}="([^"]*)"`, "i"));
+
+  return match ? match[1] : "";
+}
+
 function parseEventSpawnsXml(xml) {
+
   eventSpawnItems = [];
 
-  const eventBlocks = xml.match(/<event\b[\s\S]*?<\/event>/gi);
+  const eventBlocks =
+    xml.match(/<event\b[\s\S]*?<\/event>/gi);
 
-  if (!eventBlocks) {
-    eventSpawnsStatus.textContent = "Aucune position trouvée.";
-    return;
-  }
+  if (!eventBlocks) return;
 
   eventBlocks.forEach(eventBlock => {
-    const eventNameMatch = eventBlock.match(/<event\s+name="([^"]+)"/i);
+
+    const eventNameMatch =
+      eventBlock.match(/<event\s+name="([^"]+)"/i);
 
     if (!eventNameMatch) return;
 
     const eventName = eventNameMatch[1];
 
-    const posBlocks = eventBlock.match(/<pos\b[^>]*\/>/gi) || [];
+    const posBlocks =
+      eventBlock.match(/<pos\b[^>]*\/>/gi) || [];
 
     posBlocks.forEach(posBlock => {
+
       eventSpawnItems.push({
-        id: eventSpawnItems.length,
+
+        id: Date.now() + Math.random(),
+
         originalEventBlock: eventBlock,
         originalPosBlock: posBlock,
+
         eventName,
+
         x: getXmlAttr(posBlock, "x"),
         z: getXmlAttr(posBlock, "z"),
         a: getXmlAttr(posBlock, "a"),
@@ -1508,208 +1369,240 @@ function parseEventSpawnsXml(xml) {
       });
     });
   });
-
-  renderEventSpawns(eventSpawnItems);
-
-  eventSpawnsStatus.textContent =
-    `${eventSpawnItems.length} positions chargées.`;
 }
 
-function getXmlAttr(block, attr) {
-  const match = block.match(new RegExp(`${attr}="([^"]*)"`, "i"));
-  return match ? match[1] : "";
-}
+/* RENDER */
 
-function renderEventSpawns(items) {
+function renderUnifiedEvents() {
 
-  const grouped = {};
+  const search =
+    eventSearch.value.toLowerCase();
 
-  items.forEach(item => {
+  const filteredEvents =
+    eventItems.filter(event =>
+      event.name.toLowerCase().includes(search)
+    );
 
-    if (!grouped[item.eventName]) {
-      grouped[item.eventName] = [];
-    }
+  eventUnifiedList.innerHTML =
+    filteredEvents.map(event => {
 
-    grouped[item.eventName].push(item);
-  });
+      const positions =
+        eventSpawnItems.filter(
+          spawn => spawn.eventName === event.name
+        );
 
-  eventSpawnsList.innerHTML = Object.entries(grouped)
-  .map(([eventName, positions]) => `
+      return `
 
-    <article class="loot-card">
+        <article class="loot-card">
 
-      <div class="event-spawn-header">
+          <div class="event-spawn-header">
 
-        <div>
-          <h3>${eventName}</h3>
+            <div>
 
-          <span class="loot-category-label">
-            ${positions.length} positions
-          </span>
-        </div>
+              <h3>${event.name}</h3>
 
-        <button
-          class="mini-btn"
-          onclick="addEventPosition('${eventName}')"
-        >
-          + Ajouter position
-        </button>
+              <span class="loot-category-label">
+                ${positions.length} positions
+              </span>
 
-      </div>
-
-      <div class="event-position-list">
-
-        ${positions.map(position => `
-
-          <div class="event-position-row">
-
-            <label>
-              X
-              <input
-                type="number"
-                step="0.01"
-                value="${position.x}"
-                oninput="updateEventSpawnValue(${position.id}, 'x', this.value)"
-              >
-            </label>
-
-            <label>
-              Z
-              <input
-                type="number"
-                step="0.01"
-                value="${position.z}"
-                oninput="updateEventSpawnValue(${position.id}, 'z', this.value)"
-              >
-            </label>
-
-            <label>
-              Rotation
-              <input
-                type="number"
-                step="0.01"
-                value="${position.a}"
-                oninput="updateEventSpawnValue(${position.id}, 'a', this.value)"
-              >
-            </label>
-
-            <label>
-              Group
-              <input
-                type="text"
-                value="${position.group}"
-                oninput="updateEventSpawnValue(${position.id}, 'group', this.value)"
-              >
-            </label>
+            </div>
 
             <button
-              class="mini-btn danger"
-              onclick="removeEventPosition(${position.id})"
+              class="mini-btn"
+              onclick="toggleEventPositions('${event.name}')"
             >
-              Supprimer
+              Positions
             </button>
 
           </div>
 
-        `).join("")}
+          <div class="loot-card-main">
 
-      </div>
+            <label>
+              Nominal
+              <input
+                type="number"
+                value="${event.nominal}"
+                oninput="updateEventValue(${event.id}, 'nominal', this.value)"
+              >
+            </label>
 
-    </article>
+            <label>
+              Min
+              <input
+                type="number"
+                value="${event.min}"
+                oninput="updateEventValue(${event.id}, 'min', this.value)"
+              >
+            </label>
 
-  `).join("");
+            <label>
+              Max
+              <input
+                type="number"
+                value="${event.max}"
+                oninput="updateEventValue(${event.id}, 'max', this.value)"
+              >
+            </label>
+
+            <label>
+              Lifetime
+              <input
+                type="number"
+                value="${event.lifetime}"
+                oninput="updateEventValue(${event.id}, 'lifetime', this.value)"
+              >
+            </label>
+
+            <label>
+              Restock
+              <input
+                type="number"
+                value="${event.restock}"
+                oninput="updateEventValue(${event.id}, 'restock', this.value)"
+              >
+            </label>
+
+          </div>
+
+          <div
+            id="event-positions-${event.name}"
+            class="loot-details-grid hidden"
+          >
+
+            ${positions.map(position => `
+
+              <div class="event-position-row">
+
+                <label>
+                  X
+                  <input
+                    type="number"
+                    value="${position.x}"
+                    oninput="updateEventSpawnValue(${position.id}, 'x', this.value)"
+                  >
+                </label>
+
+                <label>
+                  Z
+                  <input
+                    type="number"
+                    value="${position.z}"
+                    oninput="updateEventSpawnValue(${position.id}, 'z', this.value)"
+                  >
+                </label>
+
+                <label>
+                  Rotation
+                  <input
+                    type="number"
+                    value="${position.a}"
+                    oninput="updateEventSpawnValue(${position.id}, 'a', this.value)"
+                  >
+                </label>
+
+                <button
+                  class="mini-btn danger"
+                  onclick="removeEventPosition(${position.id})"
+                >
+                  Supprimer
+                </button>
+
+              </div>
+
+            `).join("")}
+
+            <button
+              class="mini-btn"
+              onclick="addEventPosition('${event.name}')"
+            >
+              + Ajouter position
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
+    }).join("");
+
+  eventEditorStatus.textContent =
+    `${eventItems.length} events chargés.`;
 }
+
+/* UPDATE VALUES */
+
+window.updateEventValue = function(id, field, value) {
+
+  const event =
+    eventItems.find(e => e.id === id);
+
+  if (!event) return;
+
+  event[field] = value;
+};
+
+window.updateEventSpawnValue = function(id, field, value) {
+
+  const spawn =
+    eventSpawnItems.find(s => s.id === id);
+
+  if (!spawn) return;
+
+  spawn[field] = value;
+};
+
+/* TOGGLE POSITIONS */
+
+window.toggleEventPositions = function(eventName) {
+
+  const block =
+    document.getElementById(
+      "event-positions-" + eventName
+    );
+
+  if (!block) return;
+
+  block.classList.toggle("hidden");
+};
+
+/* ADD POSITION */
 
 window.addEventPosition = function(eventName) {
 
   eventSpawnItems.push({
-    id: Date.now(),
+
+    id: Date.now() + Math.random(),
+
     originalEventBlock: "",
     originalPosBlock: "",
+
     eventName,
+
     x: "0",
     z: "0",
     a: "0",
     group: ""
   });
 
-  renderEventSpawns(eventSpawnItems);
-
-  eventSpawnsStatus.textContent =
-    "Nouvelle position ajoutée.";
+  renderUnifiedEvents();
 };
+
+/* REMOVE POSITION */
 
 window.removeEventPosition = function(id) {
 
   eventSpawnItems =
-    eventSpawnItems.filter(item => item.id !== id);
+    eventSpawnItems.filter(
+      item => item.id !== id
+    );
 
-  renderEventSpawns(eventSpawnItems);
-
-  eventSpawnsStatus.textContent =
-    "Position supprimée.";
+  renderUnifiedEvents();
 };
 
-window.updateEventSpawnValue = function(id, field, value) {
-  const item = eventSpawnItems.find(spawn => spawn.id === id);
+/* SEARCH */
 
-  if (!item) return;
-
-  item[field] = value;
-};
-
-eventSpawnSearch.addEventListener("input", () => {
-  const search = eventSpawnSearch.value.toLowerCase();
-
-  const filtered = eventSpawnItems.filter(item =>
-    item.eventName.toLowerCase().includes(search)
-  );
-
-  renderEventSpawns(filtered);
-});
-
-function rebuildEventSpawnsXml() {
-  let xml = currentEventSpawnsXml;
-
-  eventSpawnItems.forEach(item => {
-    let updatedPos = `<pos x="${item.x}" z="${item.z}" a="${item.a}"`;
-
-    if (item.group) {
-      updatedPos += ` group="${item.group}"`;
-    }
-
-    updatedPos += ` />`;
-
-    xml = xml.replace(item.originalPosBlock, updatedPos);
-  });
-
-  return xml;
-}
-
-document.getElementById("downloadEventSpawnsBtn")
-.addEventListener("click", () => {
-  if (!eventSpawnItems.length) {
-    eventSpawnsStatus.textContent = "Importez un fichier cfgeventspawns.xml.";
-    return;
-  }
-
-  const finalXml = rebuildEventSpawnsXml();
-
-  downloadFile(
-    currentEventSpawnsFileName,
-    finalXml,
-    "application/xml"
-  );
-});
-
-document.getElementById("clearEventSpawnsBtn")
-.addEventListener("click", () => {
-  currentEventSpawnsXml = "";
-  eventSpawnItems = [];
-  eventSpawnsList.innerHTML = "";
-  eventSpawnsStatus.textContent = "";
-  eventSpawnSearch.value = "";
-  eventSpawnsFile.value = "";
-
-  updateFileName("eventSpawnsFile", "eventSpawnsFileName");
-});
+eventSearch.addEventListener(
+  "input",
+  renderUnifiedEvents
+);
