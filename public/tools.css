@@ -616,3 +616,8 @@
     grid-template-columns: 1fr;
   }
 }
+.event-header-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

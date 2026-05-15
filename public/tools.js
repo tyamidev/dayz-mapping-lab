@@ -1531,14 +1531,25 @@ function renderUnifiedEvents() {
 
             </div>
 
-            <button
-              class="mini-btn"
-              onclick="toggleEventPositions('${event.name}')"
-            >
-              Positions
-            </button>
+<div class="event-header-actions">
 
-          </div>
+  <button
+    class="mini-btn"
+    onclick="toggleEventPositions('${event.name}')"
+  >
+    Positions
+  </button>
+
+  <button
+    class="mini-btn danger"
+    onclick="removeEvent('${event.name}')"
+  >
+    Supprimer
+  </button>
+
+</div>
+
+</div>
 
           <div class="loot-card-main">
 
@@ -1730,6 +1741,23 @@ window.removeEventPosition = function(id) {
     );
 
   renderUnifiedEvents();
+};
+
+window.removeEvent = function(eventName) {
+  if (!confirm(`Supprimer l'event ${eventName} ?`)) return;
+
+  eventItems = eventItems.filter(
+    event => event.name !== eventName
+  );
+
+  eventSpawnItems = eventSpawnItems.filter(
+    spawn => spawn.eventName !== eventName
+  );
+
+  renderUnifiedEvents();
+
+  eventEditorStatus.textContent =
+    `Event ${eventName} supprimé.`;
 };
 
 /* SEARCH */
