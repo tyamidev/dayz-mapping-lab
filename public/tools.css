@@ -603,3 +603,16 @@
   color: var(--muted);
   font-size: 24px;
 }
+
+.event-file-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 18px;
+}
+
+@media(max-width: 800px) {
+  .event-file-grid {
+    grid-template-columns: 1fr;
+  }
+}
