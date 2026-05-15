@@ -1467,7 +1467,7 @@ function renderUnifiedEvents() {
 
           <div
             id="event-positions-${event.name}"
-            class="loot-details-grid hidden"
+            class="event-position-list hidden"
           >
 
             ${positions.map(position => `
