@@ -105,6 +105,12 @@
         <p>Modifier facilement un fichier types.xml.</p>
     </article>
 
+    <article class="tool-card" data-tool="eventEditorTool">
+        <span>🧟</span>
+        <h3>Event Spawn Editor</h3>
+        <p>Modifier facilement un fichier events.xml.</p>
+    </article>
+
   </section>
 
   <section id="jsonTool" class="tool-panel">
@@ -465,6 +471,42 @@
 
 <div id="lootTableBody" class="loot-card-list"></div>
 
+</section>
+
+<section id="eventEditorTool" class="tool-panel hidden">
+  <h2>Event Spawn Editor</h2>
+
+  <p class="muted">
+    Importez un fichier events.xml puis modifiez les valeurs principales des events.
+  </p>
+
+  <label class="file-upload">
+    <input type="file" id="eventEditorFile" accept=".xml">
+    <span>Importer un events.xml</span>
+  </label>
+
+  <p id="eventEditorFileName" class="file-name">Aucun fichier sélectionné</p>
+
+  <div class="loot-controls">
+    <input
+      type="text"
+      id="eventSearch"
+      placeholder="Rechercher un event..."
+      class="loot-search"
+    >
+
+    <button class="btn secondary" id="downloadEventEditorBtn">
+      Télécharger
+    </button>
+
+    <button class="btn danger" id="clearEventEditorBtn">
+      Effacer
+    </button>
+  </div>
+
+  <p id="eventEditorStatus" class="status"></p>
+
+  <div id="eventEditorList" class="loot-card-list"></div>
 </section>
 
 </main>

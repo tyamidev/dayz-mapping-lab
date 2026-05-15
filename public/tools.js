@@ -1174,3 +1174,268 @@ function updateLootStats() {
   averageNominalEl.textContent = averageNominal;
   topCategoryEl.textContent = topCategory;
 }
+
+/* XML EVENT SPAWN EDITOR */
+
+let currentEventEditorFileName = "events.xml";
+let currentEventsXml = "";
+let eventItems = [];
+
+const eventEditorFile = document.getElementById("eventEditorFile");
+const eventEditorStatus = document.getElementById("eventEditorStatus");
+const eventEditorList = document.getElementById("eventEditorList");
+const eventSearch = document.getElementById("eventSearch");
+
+eventEditorFile.addEventListener("change", () => {
+  const file = eventEditorFile.files[0];
+
+  if (!file) return;
+
+  currentEventEditorFileName = file.name;
+  currentEventsXml = "";
+  eventItems = [];
+  eventEditorList.innerHTML = "";
+  eventEditorStatus.textContent = "";
+  eventSearch.value = "";
+
+  updateFileName("eventEditorFile", "eventEditorFileName");
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    currentEventsXml = String(reader.result || "");
+    parseEventsXml(currentEventsXml);
+    eventEditorFile.value = "";
+  };
+
+  reader.readAsText(file);
+});
+
+function getEventTagValue(block, tag) {
+  const regex = new RegExp(`<${tag}>(.*?)<\\/${tag}>`, "i");
+  const match = block.match(regex);
+
+  return match ? match[1] : "0";
+}
+
+function parseEventsXml(xml) {
+  eventItems = [];
+
+  const eventBlocks = xml.match(/<event\b[\s\S]*?<\/event>/gi);
+
+  if (!eventBlocks) {
+    eventEditorStatus.textContent = "Aucun event trouvé.";
+    return;
+  }
+
+  eventBlocks.forEach(block => {
+    const nameMatch = block.match(/<event\s+name="([^"]+)"/i);
+
+    if (!nameMatch) return;
+
+    eventItems.push({
+      id: eventItems.length,
+      original: block,
+      name: nameMatch[1],
+      nominal: getEventTagValue(block, "nominal"),
+      min: getEventTagValue(block, "min"),
+      max: getEventTagValue(block, "max"),
+      lifetime: getEventTagValue(block, "lifetime"),
+      restock: getEventTagValue(block, "restock"),
+      saferadius: getEventTagValue(block, "saferadius"),
+      distanceradius: getEventTagValue(block, "distanceradius"),
+      cleanupradius: getEventTagValue(block, "cleanupradius")
+    });
+  });
+
+  renderEventItems(eventItems);
+
+  eventEditorStatus.textContent =
+    `${eventItems.length} events chargés.`;
+}
+
+function renderEventItems(items) {
+  eventEditorList.innerHTML = items.map(item => `
+    <article class="loot-card">
+
+      <div class="loot-card-main">
+
+        <div class="loot-item-info">
+          <h3>${item.name}</h3>
+          <span class="loot-category-label">event</span>
+        </div>
+
+        <label>
+          Nominal
+          <input
+            type="number"
+            value="${item.nominal}"
+            oninput="updateEventValue(${item.id}, 'nominal', this.value)"
+          >
+        </label>
+
+        <label>
+          Min
+          <input
+            type="number"
+            value="${item.min}"
+            oninput="updateEventValue(${item.id}, 'min', this.value)"
+          >
+        </label>
+
+        <label>
+          Max
+          <input
+            type="number"
+            value="${item.max}"
+            oninput="updateEventValue(${item.id}, 'max', this.value)"
+          >
+        </label>
+
+        <button
+          type="button"
+          class="mini-btn"
+          onclick="toggleEventDetails(${item.id})"
+        >
+          Détails
+        </button>
+
+      </div>
+
+      <div
+        id="event-details-${item.id}"
+        class="loot-details-grid hidden"
+      >
+
+        <label>
+          Lifetime
+          <input
+            type="number"
+            value="${item.lifetime}"
+            oninput="updateEventValue(${item.id}, 'lifetime', this.value)"
+          >
+        </label>
+
+        <label>
+          Restock
+          <input
+            type="number"
+            value="${item.restock}"
+            oninput="updateEventValue(${item.id}, 'restock', this.value)"
+          >
+        </label>
+
+        <label>
+          Safe Radius
+          <input
+            type="number"
+            value="${item.saferadius}"
+            oninput="updateEventValue(${item.id}, 'saferadius', this.value)"
+          >
+        </label>
+
+        <label>
+          Distance Radius
+          <input
+            type="number"
+            value="${item.distanceradius}"
+            oninput="updateEventValue(${item.id}, 'distanceradius', this.value)"
+          >
+        </label>
+
+        <label>
+          Cleanup Radius
+          <input
+            type="number"
+            value="${item.cleanupradius}"
+            oninput="updateEventValue(${item.id}, 'cleanupradius', this.value)"
+          >
+        </label>
+
+      </div>
+
+    </article>
+  `).join("");
+}
+
+window.updateEventValue = function(id, field, value) {
+  const event = eventItems.find(e => e.id === id);
+
+  if (!event) return;
+
+  event[field] = value;
+};
+
+window.toggleEventDetails = function(id) {
+  const details = document.getElementById("event-details-" + id);
+
+  if (!details) return;
+
+  details.classList.toggle("hidden");
+};
+
+eventSearch.addEventListener("input", () => {
+  const search = eventSearch.value.toLowerCase();
+
+  const filtered = eventItems.filter(event =>
+    event.name.toLowerCase().includes(search)
+  );
+
+  renderEventItems(filtered);
+});
+
+function rebuildEventsXml() {
+  let xml = currentEventsXml;
+
+  eventItems.forEach(event => {
+    let updated = event.original;
+
+    [
+      "nominal",
+      "min",
+      "max",
+      "lifetime",
+      "restock",
+      "saferadius",
+      "distanceradius",
+      "cleanupradius"
+    ].forEach(tag => {
+      updated = updated.replace(
+        new RegExp(`<${tag}>.*?<\\/${tag}>`, "i"),
+        `<${tag}>${event[tag]}</${tag}>`
+      );
+    });
+
+    xml = xml.replace(event.original, updated);
+  });
+
+  return xml;
+}
+
+document.getElementById("downloadEventEditorBtn")
+.addEventListener("click", () => {
+  if (!eventItems.length) {
+    eventEditorStatus.textContent = "Importez un fichier events.xml.";
+    return;
+  }
+
+  const finalXml = rebuildEventsXml();
+
+  downloadFile(
+    currentEventEditorFileName,
+    finalXml,
+    "application/xml"
+  );
+});
+
+document.getElementById("clearEventEditorBtn")
+.addEventListener("click", () => {
+  currentEventsXml = "";
+  eventItems = [];
+  eventEditorList.innerHTML = "";
+  eventEditorStatus.textContent = "";
+  eventSearch.value = "";
+  eventEditorFile.value = "";
+
+  updateFileName("eventEditorFile", "eventEditorFileName");
+});
