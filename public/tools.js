@@ -1586,6 +1586,14 @@ window.addEventPosition = function(eventName) {
   });
 
   renderUnifiedEvents();
+
+  const block = document.getElementById(
+    "event-positions-" + eventName
+  );
+
+  if (block) {
+    block.classList.remove("hidden");
+  }
 };
 
 /* REMOVE POSITION */
