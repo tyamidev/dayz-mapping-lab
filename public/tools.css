@@ -450,17 +450,24 @@
 
 .event-position-row {
   display: grid;
-  grid-template-columns:
-    1fr
-    1fr
-    1fr
-    1fr
-    auto;
-
+  grid-template-columns: 1fr 1fr 1fr auto;
   gap: 14px;
   padding: 14px;
   border-radius: 16px;
   background: rgba(0,0,0,.16);
+  align-items: end;
+}
+
+.event-position-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.event-position-row input {
+  width: 100%;
+  min-width: 120px;
 }
 
 .event-position-row label {
