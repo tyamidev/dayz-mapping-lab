@@ -1200,6 +1200,107 @@ const eventSearch =
 const eventUnifiedList =
   document.getElementById("eventUnifiedList");
 
+let pendingEventChildren = [];
+
+const childPresets = {
+  vehicle: [
+    { label: "Ada 4x4 Bleu", value: "OffroadHatchback_Blue" },
+    { label: "Ada 4x4 Blanc", value: "OffroadHatchback_White" },
+    { label: "Ada 4x4 Noir", value: "OffroadHatchback_Black" },
+    { label: "Olga noire", value: "CivilianSedan_Black" },
+    { label: "Olga wine", value: "CivilianSedan_Wine" },
+    { label: "Gunter rouge", value: "Hatchback_02_Red" },
+    { label: "Sarka bleue", value: "Sedan_02_Blue" },
+    { label: "Bateau noir", value: "Boat_01_Black" }
+  ],
+
+  zombie: [
+    { label: "Jogger femme bleu", value: "ZmbF_JoggerSkinny_Blue" },
+    { label: "Jogger homme gris", value: "ZmbM_JoggerSkinny_Grey" },
+    { label: "Zombie militaire", value: "ZmbM_SoldierNormal" },
+    { label: "Zombie policier", value: "ZmbM_PolicemanFat" },
+    { label: "Zombie pompier", value: "ZmbM_FirefighterNormal" },
+    { label: "Zombie docteur", value: "ZmbM_DoctorFat" }
+  ],
+
+  animal: [
+    { label: "Loup gris", value: "Animal_CanisLupus_Grey" },
+    { label: "Loup blanc", value: "Animal_CanisLupus_White" },
+    { label: "Ours", value: "Animal_UrsusArctos" },
+    { label: "Cerf", value: "Animal_CervusElaphus" },
+    { label: "Sanglier", value: "Animal_SusDomesticus" }
+  ],
+
+  custom: [
+    { label: "Custom", value: "" }
+  ]
+};
+
+function refreshChildPresetSelect() {
+  const category = document.getElementById("newChildCategory").value;
+  const select = document.getElementById("newChildPreset");
+
+  select.innerHTML = childPresets[category].map(child => `
+    <option value="${child.value}">
+      ${child.label}
+    </option>
+  `).join("");
+}
+
+function renderPendingChildren() {
+  const box = document.getElementById("newChildrenList");
+
+  box.innerHTML = pendingEventChildren.map((child, index) => `
+    <div class="child-row">
+      <div>
+        <strong>${child.name}</strong><br>
+        <code>min="${child.min}" max="${child.max}" lootmax="${child.lootmax}"</code>
+      </div>
+
+      <button
+        type="button"
+        class="mini-btn danger"
+        onclick="removePendingChild(${index})"
+      >
+        Supprimer
+      </button>
+    </div>
+  `).join("");
+}
+
+window.removePendingChild = function(index) {
+  pendingEventChildren.splice(index, 1);
+  renderPendingChildren();
+};
+
+document.getElementById("newChildCategory")
+.addEventListener("change", refreshChildPresetSelect);
+
+document.getElementById("addChildBtn")
+.addEventListener("click", () => {
+  const category = document.getElementById("newChildCategory").value;
+  const preset = document.getElementById("newChildPreset").value;
+  const custom = document.getElementById("newChildCustomName").value.trim();
+
+  const name = category === "custom" ? custom : preset;
+
+  if (!name) {
+    eventEditorStatus.textContent = "Choisissez ou indiquez un child.";
+    return;
+  }
+
+  pendingEventChildren.push({
+    name,
+    min: document.getElementById("newChildMin").value || "1",
+    max: document.getElementById("newChildMax").value || "1",
+    lootmax: document.getElementById("newChildLootMax").value || "0"
+  });
+
+  renderPendingChildren();
+});
+
+refreshChildPresetSelect();
+
 /* CREATE NEW EVENT */
 
 document.getElementById("createEventBtn")
@@ -1273,7 +1374,9 @@ document.getElementById("createEventBtn")
       document.getElementById("newEventDistanceRadius").value || "100",
 
     cleanupradius:
-      document.getElementById("newEventCleanupRadius").value || "100"
+      document.getElementById("newEventCleanupRadius").value || "100",
+
+      children: [...pendingEventChildren]
   };
 
   eventItems.push(newEvent);
@@ -1312,6 +1415,9 @@ document.getElementById("createEventBtn")
 
   eventEditorStatus.textContent =
     `Event ${finalName} créé avec succès.`;
+
+pendingEventChildren = [];
+renderPendingChildren();
 
 document
   .getElementById("createEventContent")
@@ -1770,6 +1876,10 @@ eventSearch.addEventListener(
 /* REBUILD EVENTS.XML */
 
 function buildEventXmlBlock(event) {
+  const childrenXml = (event.children || []).map(child => `
+      <child lootmax="${child.lootmax}" lootmin="0" max="${child.max}" min="${child.min}" type="${child.name}" />`
+  ).join("");
+
   return `  <event name="${event.name}">
     <nominal>${event.nominal}</nominal>
     <min>${event.min}</min>
@@ -1783,6 +1893,8 @@ function buildEventXmlBlock(event) {
     <position>fixed</position>
     <limit>mixed</limit>
     <active>1</active>
+    <children>${childrenXml}
+    </children>
   </event>`;
 }
 

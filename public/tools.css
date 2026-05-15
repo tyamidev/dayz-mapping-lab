@@ -621,3 +621,35 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.event-children-panel {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.16);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.event-children-panel h4 {
+  margin-top: 0;
+}
+
+.children-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.child-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+}
+
+.child-row code {
+  color: #7dffcb;
+}

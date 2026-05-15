@@ -628,6 +628,62 @@
       </p>
 
     </div>
+
+<div class="event-children-panel">
+
+  <h4>Children de l’event</h4>
+
+  <p class="muted">
+    Ajoutez les objets ou entités qui doivent apparaître dans cet event.
+  </p>
+
+  <div class="event-create-grid">
+
+    <label>
+      Catégorie child
+      <select id="newChildCategory">
+        <option value="vehicle">Véhicules</option>
+        <option value="zombie">Zombies</option>
+        <option value="animal">Animaux</option>
+        <option value="custom">Custom</option>
+      </select>
+    </label>
+
+    <label>
+      Child
+      <select id="newChildPreset"></select>
+    </label>
+
+    <label>
+      Nom custom
+      <input id="newChildCustomName" placeholder="Ex : ZmbF_JoggerSkinny_Blue">
+    </label>
+
+    <label>
+      Min
+      <input id="newChildMin" type="number" value="1">
+    </label>
+
+    <label>
+      Max
+      <input id="newChildMax" type="number" value="1">
+    </label>
+
+    <label>
+      Loot max
+      <input id="newChildLootMax" type="number" value="0">
+    </label>
+
+  </div>
+
+  <button class="mini-btn" id="addChildBtn" type="button">
+    + Ajouter child
+  </button>
+
+  <div id="newChildrenList" class="children-list"></div>
+
+</div>
+
   </div>
 
   <div id="eventUnifiedList" class="loot-card-list"></div>
