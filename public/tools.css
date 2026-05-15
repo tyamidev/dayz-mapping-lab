@@ -407,3 +407,30 @@
     grid-template-columns: 1fr;
   }
 }
+
+.loot-slider-box {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.16);
+}
+
+.loot-slider-box label {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.loot-slider-box input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.loot-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}

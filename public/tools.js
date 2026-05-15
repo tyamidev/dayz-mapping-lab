@@ -551,6 +551,8 @@ const bulkTarget = document.getElementById("bulkTarget");
 const bulkMode = document.getElementById("bulkMode");
 const bulkValue = document.getElementById("bulkValue");
 const applyBulkBtn = document.getElementById("applyBulkBtn");
+const bulkSlider = document.getElementById("bulkSlider");
+const bulkSliderValue = document.getElementById("bulkSliderValue");
 
 lootEditorFile.addEventListener("change", () => {
   const file = lootEditorFile.files[0];
@@ -707,6 +709,71 @@ applyBulkBtn.addEventListener("click", () => {
 
   lootEditorStatus.textContent =
     `${count} items modifiés sur ${field}.`;
+});
+
+bulkSlider.addEventListener("input", () => {
+  const value = Number(bulkSlider.value);
+
+  bulkSliderValue.textContent =
+    value > 0 ? `+${value}%` : `${value}%`;
+
+  bulkMode.value = "percent";
+  bulkValue.value = value;
+});
+
+document.querySelectorAll("[data-preset]").forEach(button => {
+  button.addEventListener("click", () => {
+    if (!lootItems.length) {
+      lootEditorStatus.textContent = "Importez d’abord un fichier types.xml.";
+      return;
+    }
+
+    const preset = button.dataset.preset;
+
+    if (preset === "hardcore") {
+      bulkField.value = "nominal";
+      bulkTarget.value = "all";
+      bulkMode.value = "percent";
+      bulkValue.value = -40;
+    }
+
+    if (preset === "military") {
+      bulkField.value = "nominal";
+      bulkTarget.value = "weapons";
+      bulkMode.value = "percent";
+      bulkValue.value = 50;
+    }
+
+    if (preset === "food") {
+      bulkField.value = "nominal";
+      bulkTarget.value = "food";
+      bulkMode.value = "percent";
+      bulkValue.value = -60;
+    }
+
+    if (preset === "pvp") {
+      bulkField.value = "nominal";
+      bulkTarget.value = "weapons";
+      bulkMode.value = "percent";
+      bulkValue.value = 75;
+    }
+
+    if (preset === "reset") {
+      parseLootXml(currentLootXml);
+      updateLootStats();
+      filterLootItems();
+      lootEditorStatus.textContent = "Fichier réinitialisé avec les valeurs d’origine.";
+      return;
+    }
+
+    applyBulkBtn.click();
+
+    bulkSlider.value = bulkValue.value;
+    bulkSliderValue.textContent =
+      Number(bulkValue.value) > 0
+        ? `+${bulkValue.value}%`
+        : `${bulkValue.value}%`;
+  });
 });
 
 function filterLootItems() {
@@ -1057,6 +1124,9 @@ document.getElementById("clearLootEditorBtn")
   bulkTarget.value = "all";
   bulkMode.value = "percent";
   bulkValue.value = "";
+
+  bulkSlider.value = 0;
+  bulkSliderValue.textContent = "0%";
 
   updateFileName(
     "lootEditorFile",
