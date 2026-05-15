@@ -2307,110 +2307,121 @@ document.getElementById(
    TELEPORT GENERATOR
 ====================================================== */
 
-let teleportPoints = [];
+let praBoxes = [];
+let safePositions3D = [];
 
-const teleportName = document.getElementById("teleportName");
-const teleportCategory = document.getElementById("teleportCategory");
-const teleportX = document.getElementById("teleportX");
-const teleportY = document.getElementById("teleportY");
-const teleportZ = document.getElementById("teleportZ");
-const teleportRotation = document.getElementById("teleportRotation");
-
+const teleportAreaName = document.getElementById("teleportAreaName");
 const teleportList = document.getElementById("teleportList");
 const teleportOutput = document.getElementById("teleportOutput");
 const teleportStatus = document.getElementById("teleportStatus");
 
+function getNumberValue(id) {
+  const value = parseFloat(document.getElementById(id)?.value);
+  return Number.isNaN(value) ? null : value;
+}
+
 function renderTeleportList() {
   if (!teleportList) return;
 
-  if (!teleportPoints.length) {
-    teleportList.innerHTML = "";
-    return;
-  }
-
-  teleportList.innerHTML = teleportPoints.map((point, index) => `
+  teleportList.innerHTML = `
     <div class="teleport-card">
       <div>
-        <strong>${point.name}</strong>
-        <span>${point.category}</span>
-        <code>X: ${point.position.x} | Y: ${point.position.y} | Z: ${point.position.z} | R: ${point.rotation}</code>
+        <strong>PRABoxes : ${praBoxes.length}</strong>
+        <span>Zones de téléportation créées</span>
       </div>
-
-      <button class="mini-btn danger" onclick="deleteTeleportPoint(${index})">
-        Supprimer
-      </button>
     </div>
-  `).join("");
+
+    <div class="teleport-card">
+      <div>
+        <strong>safePositions3D : ${safePositions3D.length}</strong>
+        <span>Positions de sortie créées</span>
+      </div>
+    </div>
+  `;
 }
 
 function buildTeleportJson() {
   return JSON.stringify({
-    tool: "DayZ Mapping Lab - Teleport Generator",
-    version: "1.0",
-    generatedAt: new Date().toISOString(),
-    teleports: teleportPoints
+    areaName: teleportAreaName.value.trim() || "RestrictedArea",
+    PRABoxes: praBoxes,
+    safePositions3D: safePositions3D
   }, null, 2);
 }
 
-document.getElementById("addTeleportBtn")?.addEventListener("click", () => {
-  const name = teleportName.value.trim();
-  const category = teleportCategory.value.trim() || "Default";
-
-  const x = parseFloat(teleportX.value);
-  const y = parseFloat(teleportY.value);
-  const z = parseFloat(teleportZ.value);
-  const rotation = parseFloat(teleportRotation.value || "0");
-
+document.getElementById("addPRABoxBtn")?.addEventListener("click", () => {
   teleportStatus.className = "status";
 
-  if (!name || Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(z)) {
+  const sizeX = getNumberValue("praSizeX");
+  const sizeY = getNumberValue("praSizeY");
+  const sizeZ = getNumberValue("praSizeZ");
+
+  const rotX = getNumberValue("praRotX") ?? 0;
+  const rotY = getNumberValue("praRotY") ?? 0;
+  const rotZ = getNumberValue("praRotZ") ?? 0;
+
+  const posX = getNumberValue("praPosX");
+  const posY = getNumberValue("praPosY");
+  const posZ = getNumberValue("praPosZ");
+
+  if (
+    sizeX === null || sizeY === null || sizeZ === null ||
+    posX === null || posY === null || posZ === null
+  ) {
     teleportStatus.classList.add("error");
-    teleportStatus.textContent = "Nom, X, Y et Z sont obligatoires.";
+    teleportStatus.textContent = "Remplis au minimum la taille X/Y/Z et la position X/Y/Z de la PRABox.";
     return;
   }
 
-  teleportPoints.push({
-    id: `teleport_${Date.now()}`,
-    name,
-    category,
-    position: {
-      x,
-      y,
-      z
-    },
-    rotation: Number.isNaN(rotation) ? 0 : rotation
-  });
-
-  teleportName.value = "";
-  teleportX.value = "";
-  teleportY.value = "";
-  teleportZ.value = "";
-  teleportRotation.value = "0";
-
-  renderTeleportList();
+  praBoxes.push([
+    [sizeX, sizeY, sizeZ],
+    [rotX, rotY, rotZ],
+    [posX, posY, posZ]
+  ]);
 
   teleportOutput.value = buildTeleportJson();
+  renderTeleportList();
 
-  teleportStatus.textContent = "✅ Point de téléportation ajouté.";
+  teleportStatus.textContent = "✅ PRABox ajoutée.";
 });
 
-function deleteTeleportPoint(index) {
-  teleportPoints.splice(index, 1);
+document.getElementById("addSafePositionBtn")?.addEventListener("click", () => {
+  teleportStatus.className = "status";
+
+  const x = getNumberValue("safePosX");
+  const y = getNumberValue("safePosY");
+  const z = getNumberValue("safePosZ");
+
+  if (x === null || y === null || z === null) {
+    teleportStatus.classList.add("error");
+    teleportStatus.textContent = "Remplis les coordonnées X/Y/Z de la safe position.";
+    return;
+  }
+
+  safePositions3D.push([x, y, z]);
+
+  teleportOutput.value = buildTeleportJson();
   renderTeleportList();
-  teleportOutput.value = teleportPoints.length ? buildTeleportJson() : "";
-}
+
+  teleportStatus.textContent = "✅ Safe position ajoutée.";
+});
 
 document.getElementById("generateTeleportJsonBtn")?.addEventListener("click", () => {
   teleportStatus.className = "status";
 
-  if (!teleportPoints.length) {
+  if (!praBoxes.length) {
     teleportStatus.classList.add("error");
-    teleportStatus.textContent = "Ajoutez au moins un point de téléportation.";
+    teleportStatus.textContent = "Ajoute au moins une PRABox.";
+    return;
+  }
+
+  if (!safePositions3D.length) {
+    teleportStatus.classList.add("error");
+    teleportStatus.textContent = "Ajoute au moins une safe position.";
     return;
   }
 
   teleportOutput.value = buildTeleportJson();
-  teleportStatus.textContent = "✅ JSON généré.";
+  teleportStatus.textContent = "✅ Fichier de téléportation généré.";
 });
 
 document.getElementById("downloadTeleportJsonBtn")?.addEventListener("click", () => {
@@ -2420,26 +2431,37 @@ document.getElementById("downloadTeleportJsonBtn")?.addEventListener("click", ()
     return;
   }
 
+  const areaName = teleportAreaName.value.trim() || "teleport-area";
+
   downloadFile(
-    "dayz-teleports.json",
+    `${areaName}.json`,
     teleportOutput.value,
     "application/json"
   );
 });
 
 document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
-  teleportPoints = [];
+  praBoxes = [];
+  safePositions3D = [];
 
-  teleportName.value = "";
-  teleportCategory.value = "";
-  teleportX.value = "";
-  teleportY.value = "";
-  teleportZ.value = "";
-  teleportRotation.value = "0";
-
+  teleportAreaName.value = "";
   teleportOutput.value = "";
   teleportStatus.className = "status";
   teleportStatus.textContent = "";
+
+  [
+    "praSizeX", "praSizeY", "praSizeZ",
+    "praRotX", "praRotY", "praRotZ",
+    "praPosX", "praPosY", "praPosZ",
+    "safePosX", "safePosY", "safePosZ"
+  ].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) input.value = "";
+  });
+
+  document.getElementById("praRotX").value = "0";
+  document.getElementById("praRotY").value = "0";
+  document.getElementById("praRotZ").value = "0";
 
   renderTeleportList();
 });
