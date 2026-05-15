@@ -1439,3 +1439,203 @@ document.getElementById("clearEventEditorBtn")
 
   updateFileName("eventEditorFile", "eventEditorFileName");
 });
+
+/* CFG EVENT SPAWNS EDITOR */
+
+let currentEventSpawnsFileName = "cfgeventspawns.xml";
+let currentEventSpawnsXml = "";
+let eventSpawnItems = [];
+
+const eventSpawnsFile = document.getElementById("eventSpawnsFile");
+const eventSpawnsStatus = document.getElementById("eventSpawnsStatus");
+const eventSpawnsList = document.getElementById("eventSpawnsList");
+const eventSpawnSearch = document.getElementById("eventSpawnSearch");
+
+eventSpawnsFile.addEventListener("change", () => {
+  const file = eventSpawnsFile.files[0];
+
+  if (!file) return;
+
+  currentEventSpawnsFileName = file.name;
+  currentEventSpawnsXml = "";
+  eventSpawnItems = [];
+  eventSpawnsList.innerHTML = "";
+  eventSpawnsStatus.textContent = "";
+  eventSpawnSearch.value = "";
+
+  updateFileName("eventSpawnsFile", "eventSpawnsFileName");
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    currentEventSpawnsXml = String(reader.result || "");
+    parseEventSpawnsXml(currentEventSpawnsXml);
+    eventSpawnsFile.value = "";
+  };
+
+  reader.readAsText(file);
+});
+
+function parseEventSpawnsXml(xml) {
+  eventSpawnItems = [];
+
+  const eventBlocks = xml.match(/<event\b[\s\S]*?<\/event>/gi);
+
+  if (!eventBlocks) {
+    eventSpawnsStatus.textContent = "Aucune position trouvée.";
+    return;
+  }
+
+  eventBlocks.forEach(eventBlock => {
+    const eventNameMatch = eventBlock.match(/<event\s+name="([^"]+)"/i);
+
+    if (!eventNameMatch) return;
+
+    const eventName = eventNameMatch[1];
+
+    const posBlocks = eventBlock.match(/<pos\b[^>]*\/>/gi) || [];
+
+    posBlocks.forEach(posBlock => {
+      eventSpawnItems.push({
+        id: eventSpawnItems.length,
+        originalEventBlock: eventBlock,
+        originalPosBlock: posBlock,
+        eventName,
+        x: getXmlAttr(posBlock, "x"),
+        z: getXmlAttr(posBlock, "z"),
+        a: getXmlAttr(posBlock, "a"),
+        group: getXmlAttr(posBlock, "group")
+      });
+    });
+  });
+
+  renderEventSpawns(eventSpawnItems);
+
+  eventSpawnsStatus.textContent =
+    `${eventSpawnItems.length} positions chargées.`;
+}
+
+function getXmlAttr(block, attr) {
+  const match = block.match(new RegExp(`${attr}="([^"]*)"`, "i"));
+  return match ? match[1] : "";
+}
+
+function renderEventSpawns(items) {
+  eventSpawnsList.innerHTML = items.map(item => `
+    <article class="loot-card">
+
+      <div class="loot-card-main">
+
+        <div class="loot-item-info">
+          <h3>${item.eventName}</h3>
+          <span class="loot-category-label">position</span>
+        </div>
+
+        <label>
+          X
+          <input
+            type="number"
+            step="0.01"
+            value="${item.x}"
+            oninput="updateEventSpawnValue(${item.id}, 'x', this.value)"
+          >
+        </label>
+
+        <label>
+          Z
+          <input
+            type="number"
+            step="0.01"
+            value="${item.z}"
+            oninput="updateEventSpawnValue(${item.id}, 'z', this.value)"
+          >
+        </label>
+
+        <label>
+          Rotation
+          <input
+            type="number"
+            step="0.01"
+            value="${item.a}"
+            oninput="updateEventSpawnValue(${item.id}, 'a', this.value)"
+          >
+        </label>
+
+        <label>
+          Group
+          <input
+            type="text"
+            value="${item.group}"
+            oninput="updateEventSpawnValue(${item.id}, 'group', this.value)"
+          >
+        </label>
+
+      </div>
+
+    </article>
+  `).join("");
+}
+
+window.updateEventSpawnValue = function(id, field, value) {
+  const item = eventSpawnItems.find(spawn => spawn.id === id);
+
+  if (!item) return;
+
+  item[field] = value;
+};
+
+eventSpawnSearch.addEventListener("input", () => {
+  const search = eventSpawnSearch.value.toLowerCase();
+
+  const filtered = eventSpawnItems.filter(item =>
+    item.eventName.toLowerCase().includes(search)
+  );
+
+  renderEventSpawns(filtered);
+});
+
+function rebuildEventSpawnsXml() {
+  let xml = currentEventSpawnsXml;
+
+  eventSpawnItems.forEach(item => {
+    let updatedPos = `<pos x="${item.x}" z="${item.z}" a="${item.a}"`;
+
+    if (item.group) {
+      updatedPos += ` group="${item.group}"`;
+    }
+
+    updatedPos += ` />`;
+
+    xml = xml.replace(item.originalPosBlock, updatedPos);
+  });
+
+  return xml;
+}
+
+document.getElementById("downloadEventSpawnsBtn")
+.addEventListener("click", () => {
+  if (!eventSpawnItems.length) {
+    eventSpawnsStatus.textContent = "Importez un fichier cfgeventspawns.xml.";
+    return;
+  }
+
+  const finalXml = rebuildEventSpawnsXml();
+
+  downloadFile(
+    currentEventSpawnsFileName,
+    finalXml,
+    "application/xml"
+  );
+});
+
+document.getElementById("clearEventSpawnsBtn")
+.addEventListener("click", () => {
+  currentEventSpawnsXml = "";
+  eventSpawnItems = [];
+  eventSpawnsList.innerHTML = "";
+  eventSpawnsStatus.textContent = "";
+  eventSpawnSearch.value = "";
+  eventSpawnsFile.value = "";
+
+  updateFileName("eventSpawnsFile", "eventSpawnsFileName");
+});

@@ -506,6 +506,42 @@
 
   <p id="eventEditorStatus" class="status"></p>
 
+<hr>
+
+<h3>Positions des events</h3>
+
+<p class="muted">
+  Importez votre fichier cfgeventspawns.xml pour modifier les positions des events.
+</p>
+
+<label class="file-upload">
+  <input type="file" id="eventSpawnsFile" accept=".xml">
+  <span>Importer cfgeventspawns.xml</span>
+</label>
+
+<p id="eventSpawnsFileName" class="file-name">Aucun fichier sélectionné</p>
+
+<div class="loot-controls">
+  <input
+    type="text"
+    id="eventSpawnSearch"
+    placeholder="Rechercher une position..."
+    class="loot-search"
+  >
+
+  <button class="btn secondary" id="downloadEventSpawnsBtn">
+    Télécharger cfgeventspawns.xml
+  </button>
+
+  <button class="btn danger" id="clearEventSpawnsBtn">
+    Effacer positions
+  </button>
+</div>
+
+<p id="eventSpawnsStatus" class="status"></p>
+
+<div id="eventSpawnsList" class="loot-card-list"></div>
+
   <div id="eventEditorList" class="loot-card-list"></div>
 </section>
 
