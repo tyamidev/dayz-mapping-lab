@@ -1521,60 +1521,134 @@ function getXmlAttr(block, attr) {
 }
 
 function renderEventSpawns(items) {
-  eventSpawnsList.innerHTML = items.map(item => `
+
+  const grouped = {};
+
+  items.forEach(item => {
+
+    if (!grouped[item.eventName]) {
+      grouped[item.eventName] = [];
+    }
+
+    grouped[item.eventName].push(item);
+  });
+
+  eventSpawnsList.innerHTML = Object.entries(grouped)
+  .map(([eventName, positions]) => `
+
     <article class="loot-card">
 
-      <div class="loot-card-main">
+      <div class="event-spawn-header">
 
-        <div class="loot-item-info">
-          <h3>${item.eventName}</h3>
-          <span class="loot-category-label">position</span>
+        <div>
+          <h3>${eventName}</h3>
+
+          <span class="loot-category-label">
+            ${positions.length} positions
+          </span>
         </div>
 
-        <label>
-          X
-          <input
-            type="number"
-            step="0.01"
-            value="${item.x}"
-            oninput="updateEventSpawnValue(${item.id}, 'x', this.value)"
-          >
-        </label>
+        <button
+          class="mini-btn"
+          onclick="addEventPosition('${eventName}')"
+        >
+          + Ajouter position
+        </button>
 
-        <label>
-          Z
-          <input
-            type="number"
-            step="0.01"
-            value="${item.z}"
-            oninput="updateEventSpawnValue(${item.id}, 'z', this.value)"
-          >
-        </label>
+      </div>
 
-        <label>
-          Rotation
-          <input
-            type="number"
-            step="0.01"
-            value="${item.a}"
-            oninput="updateEventSpawnValue(${item.id}, 'a', this.value)"
-          >
-        </label>
+      <div class="event-position-list">
 
-        <label>
-          Group
-          <input
-            type="text"
-            value="${item.group}"
-            oninput="updateEventSpawnValue(${item.id}, 'group', this.value)"
-          >
-        </label>
+        ${positions.map(position => `
+
+          <div class="event-position-row">
+
+            <label>
+              X
+              <input
+                type="number"
+                step="0.01"
+                value="${position.x}"
+                oninput="updateEventSpawnValue(${position.id}, 'x', this.value)"
+              >
+            </label>
+
+            <label>
+              Z
+              <input
+                type="number"
+                step="0.01"
+                value="${position.z}"
+                oninput="updateEventSpawnValue(${position.id}, 'z', this.value)"
+              >
+            </label>
+
+            <label>
+              Rotation
+              <input
+                type="number"
+                step="0.01"
+                value="${position.a}"
+                oninput="updateEventSpawnValue(${position.id}, 'a', this.value)"
+              >
+            </label>
+
+            <label>
+              Group
+              <input
+                type="text"
+                value="${position.group}"
+                oninput="updateEventSpawnValue(${position.id}, 'group', this.value)"
+              >
+            </label>
+
+            <button
+              class="mini-btn danger"
+              onclick="removeEventPosition(${position.id})"
+            >
+              Supprimer
+            </button>
+
+          </div>
+
+        `).join("")}
 
       </div>
 
     </article>
+
   `).join("");
 }
+
+window.addEventPosition = function(eventName) {
+
+  eventSpawnItems.push({
+    id: Date.now(),
+    originalEventBlock: "",
+    originalPosBlock: "",
+    eventName,
+    x: "0",
+    z: "0",
+    a: "0",
+    group: ""
+  });
+
+  renderEventSpawns(eventSpawnItems);
+
+  eventSpawnsStatus.textContent =
+    "Nouvelle position ajoutée.";
+};
+
+window.removeEventPosition = function(id) {
+
+  eventSpawnItems =
+    eventSpawnItems.filter(item => item.id !== id);
+
+  renderEventSpawns(eventSpawnItems);
+
+  eventSpawnsStatus.textContent =
+    "Position supprimée.";
+};
 
 window.updateEventSpawnValue = function(id, field, value) {
   const item = eventSpawnItems.find(spawn => spawn.id === id);
