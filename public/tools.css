@@ -570,3 +570,36 @@
     grid-template-columns: 1fr;
   }
 }
+
+.event-create-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.event-create-header > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.event-create-plus {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(54,211,153,.14);
+  border: 1px solid rgba(54,211,153,.35);
+  color: #7dffcb;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.event-create-arrow {
+  color: var(--muted);
+  font-size: 24px;
+}

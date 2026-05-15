@@ -1826,3 +1826,12 @@ document.getElementById("downloadEventSpawnsBtn")
     "application/xml"
   );
 });
+
+const toggleCreateEvent = document.getElementById("toggleCreateEvent");
+const createEventContent = document.getElementById("createEventContent");
+
+if (toggleCreateEvent && createEventContent) {
+  toggleCreateEvent.addEventListener("click", () => {
+    createEventContent.classList.toggle("hidden");
+  });
+}
