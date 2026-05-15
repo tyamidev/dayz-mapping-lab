@@ -1769,29 +1769,59 @@ eventSearch.addEventListener(
 
 /* REBUILD EVENTS.XML */
 
+function buildEventXmlBlock(event) {
+  return `  <event name="${event.name}">
+    <nominal>${event.nominal}</nominal>
+    <min>${event.min}</min>
+    <max>${event.max}</max>
+    <lifetime>${event.lifetime}</lifetime>
+    <restock>${event.restock}</restock>
+    <saferadius>${event.saferadius}</saferadius>
+    <distanceradius>${event.distanceradius}</distanceradius>
+    <cleanupradius>${event.cleanupradius}</cleanupradius>
+    <flags deletable="0" init_random="0" remove_damaged="0" />
+    <position>fixed</position>
+    <limit>mixed</limit>
+    <active>1</active>
+  </event>`;
+}
+
 function rebuildEventsXml() {
   let xml = currentEventsXml;
 
+  if (!xml.trim()) {
+    xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<events>\n</events>`;
+  }
+
   eventItems.forEach(event => {
-    let updated = event.original;
+    if (event.original) {
+      let updated = event.original;
 
-    [
-      "nominal",
-      "min",
-      "max",
-      "lifetime",
-      "restock",
-      "saferadius",
-      "distanceradius",
-      "cleanupradius"
-    ].forEach(tag => {
-      updated = updated.replace(
-        new RegExp(`<${tag}>.*?<\\/${tag}>`, "i"),
-        `<${tag}>${event[tag]}</${tag}>`
+      [
+        "nominal",
+        "min",
+        "max",
+        "lifetime",
+        "restock",
+        "saferadius",
+        "distanceradius",
+        "cleanupradius"
+      ].forEach(tag => {
+        updated = updated.replace(
+          new RegExp(`<${tag}>.*?<\\/${tag}>`, "i"),
+          `<${tag}>${event[tag]}</${tag}>`
+        );
+      });
+
+      xml = xml.replace(event.original, updated);
+    } else {
+      const newBlock = buildEventXmlBlock(event);
+
+      xml = xml.replace(
+        /<\/events>/i,
+        `${newBlock}\n</events>`
       );
-    });
-
-    xml = xml.replace(event.original, updated);
+    }
   });
 
   return xml;
