@@ -1203,33 +1203,63 @@ const eventUnifiedList =
 let pendingEventChildren = [];
 
 const childPresets = {
-  vehicle: [
-    { label: "Ada 4x4 Bleu", value: "OffroadHatchback_Blue" },
-    { label: "Ada 4x4 Blanc", value: "OffroadHatchback_White" },
-    { label: "Ada 4x4 Noir", value: "OffroadHatchback_Black" },
-    { label: "Olga noire", value: "CivilianSedan_Black" },
-    { label: "Olga wine", value: "CivilianSedan_Wine" },
-    { label: "Gunter rouge", value: "Hatchback_02_Red" },
-    { label: "Sarka bleue", value: "Sedan_02_Blue" },
-    { label: "Bateau noir", value: "Boat_01_Black" }
-  ],
+vehicle: [
+  { label: "Ada 4x4 bleu", value: "OffroadHatchback_Blue" },
+  { label: "Ada 4x4 blanc", value: "OffroadHatchback_White" },
+  { label: "Ada 4x4 Vert", value: "OffroadHatchback" },
+  { label: "Olga noire", value: "CivilianSedan_Black" },
+  { label: "Olga blanche", value: "CivilianSedan" },
+  { label: "Olga wine", value: "CivilianSedan_Wine" },
+  { label: "Gunter rouge", value: "Hatchback_02" },
+  { label: "Gunter bleu", value: "Hatchback_02_Blue" },
+  { label: "Gunter noir", value: "Hatchback_02_Black" },
+  { label: "Sarka jaune", value: "Sedan_02" },
+  { label: "Sarka rouge", value: "Sedan_02_Red" },
+  { label: "Sarka grise", value: "Sedan_02_Grey" },
+  { label: "M3S châssis vert", value: "Truck_01_Covered" },
+  { label: "M3S châssis orange", value: "Truck_01_Covered_Orange" },
+  { label: "M3S châssis bleu", value: "Truck_01_Covered_Blue" },
+  { label: "Humvee", value: "Offroad_02" },
+  { label: "Bateau noir", value: "Boat_01_Black" },
+  { label: "Bateau bleu", value: "Boat_01_Blue" },
+  { label: "Bateau orange", value: "Boat_01_Orange" }
+],
 
-  zombie: [
-    { label: "Jogger femme bleu", value: "ZmbF_JoggerSkinny_Blue" },
-    { label: "Jogger homme gris", value: "ZmbM_JoggerSkinny_Grey" },
-    { label: "Zombie militaire", value: "ZmbM_SoldierNormal" },
-    { label: "Zombie policier", value: "ZmbM_PolicemanFat" },
-    { label: "Zombie pompier", value: "ZmbM_FirefighterNormal" },
-    { label: "Zombie docteur", value: "ZmbM_DoctorFat" }
-  ],
+zombie: [
+  { label: "Jogger femme bleu", value: "ZmbF_JoggerSkinny_Blue" },
+  { label: "Jogger femme rouge", value: "ZmbF_JoggerSkinny_Red" },
+  { label: "Jogger homme gris", value: "ZmbM_JoggerSkinny_Grey" },
+  { label: "Jogger homme bleu", value: "ZmbM_JoggerSkinny_Blue" },
+  { label: "Civil femme normal", value: "ZmbF_CitizenANormal_Blue" },
+  { label: "Civil homme normal", value: "ZmbM_CitizenASkinny_Blue" },
+  { label: "Zombie militaire normal", value: "ZmbM_SoldierNormal" },
+  { label: "Zombie militaire lourd", value: "ZmbM_usSoldier_Heavy_Woodland" },
+  { label: "Zombie policier", value: "ZmbM_PolicemanFat" },
+  { label: "Zombie pompier", value: "ZmbM_FirefighterNormal" },
+  { label: "Zombie docteur", value: "ZmbM_DoctorFat" },
+  { label: "Zombie infirmière", value: "ZmbF_NurseFat" },
+  { label: "Zombie prisonnier", value: "ZmbM_PrisonerSkinny" },
+  { label: "Zombie chasseur", value: "ZmbM_HunterOld_Autumn" },
+  { label: "Zombie ouvrier", value: "ZmbM_ConstrWorkerNormal_Beige" },
+  { label: "Zombie mommie", value: "ZmbM_Mummy" },
+  { label: "Zombie santa", value: "ZmbM_Santa" },
+  { label: "Zombie NBC", value: "ZmbM_NBC_Yellow" }
+],
 
-  animal: [
-    { label: "Loup gris", value: "Animal_CanisLupus_Grey" },
-    { label: "Loup blanc", value: "Animal_CanisLupus_White" },
-    { label: "Ours", value: "Animal_UrsusArctos" },
-    { label: "Cerf", value: "Animal_CervusElaphus" },
-    { label: "Sanglier", value: "Animal_SusDomesticus" }
-  ],
+animal: [
+  { label: "Loup gris", value: "Animal_CanisLupus_Grey" },
+  { label: "Loup blanc", value: "Animal_CanisLupus_White" },
+  { label: "Ours", value: "Animal_UrsusArctos" },
+  { label: "Cerf", value: "Animal_CervusElaphus" },
+  { label: "Biche", value: "Animal_CervusElaphusDoe" },
+  { label: "Sanglier", value: "Animal_SusScrofa" },
+  { label: "Vache", value: "Animal_BosTaurus" },
+  { label: "Chèvre", value: "Animal_CapraHircus" },
+  { label: "Mouton", value: "Animal_OvisAries" },
+  { label: "Cochon", value: "Animal_SusDomesticus" },
+  { label: "Poule blanche", value: "Animal_GallusGallusDomesticus" },
+  { label: "Renard", value: "Animal_VulpesVulpes" }
+],
 
   custom: [
     { label: "Custom", value: "" }
@@ -1418,6 +1448,27 @@ document.getElementById("createEventBtn")
 
 pendingEventChildren = [];
 renderPendingChildren();
+
+document.getElementById("newEventName").value = "";
+document.getElementById("newEventNominal").value = "1";
+document.getElementById("newEventMin").value = "1";
+document.getElementById("newEventMax").value = "1";
+document.getElementById("newEventLifetime").value = "3600";
+document.getElementById("newEventRestock").value = "0";
+document.getElementById("newEventSafeRadius").value = "100";
+document.getElementById("newEventDistanceRadius").value = "100";
+document.getElementById("newEventCleanupRadius").value = "100";
+document.getElementById("newEventX").value = "";
+document.getElementById("newEventZ").value = "";
+document.getElementById("newEventA").value = "0";
+
+document.getElementById("newChildCategory").value = "vehicle";
+document.getElementById("newChildCustomName").value = "";
+document.getElementById("newChildMin").value = "1";
+document.getElementById("newChildMax").value = "1";
+document.getElementById("newChildLootMax").value = "0";
+
+refreshChildPresetSelect();
 
 document
   .getElementById("createEventContent")
