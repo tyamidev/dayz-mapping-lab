@@ -2624,6 +2624,7 @@ case "Back":
           classname.includes("izh") ||
           classname.includes("m1") ||
           classname.includes("mp5") ||
+          classname.includes("m79") ||
           classname.includes("mp4") ||
           classname.includes("ump") ||
           classname.includes("sv9") ||
@@ -2631,6 +2632,7 @@ case "Back":
           classname.includes("shov") ||
           classname.includes("crowbar") ||
           classname.includes("hoe") ||
+          classname.includes("pickaxe") ||
           classname.includes("axe")
           ) &&
         !classname.includes("meat") &&
@@ -2640,6 +2642,12 @@ case "Back":
         !classname.includes("bttstck") &&
         !classname.includes("hnd") &&
         !classname.includes("sawed") &&
+        !classname.includes("mask") &&
+        !classname.includes("sawed") &&
+        !classname.includes("smoke") &&
+        !classname.includes("boots") &&
+        !classname.includes("bayon") &&
+        !classname.includes("pumpk") &&
         !classname.includes("rnd")
         );
 
