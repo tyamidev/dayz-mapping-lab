@@ -2310,7 +2310,7 @@ document.getElementById(
 let praBoxes = [];
 let safePositions3D = [];
 
-const teleportAreaName = document.getElementById("teleportAreaName");
+const teleportFileName = document.getElementById("teleportFileName");
 const teleportList = document.getElementById("teleportList");
 const teleportOutput = document.getElementById("teleportOutput");
 const teleportStatus = document.getElementById("teleportStatus");
@@ -2326,15 +2326,15 @@ function renderTeleportList() {
   teleportList.innerHTML = `
     <div class="teleport-card">
       <div>
-        <strong>PRABoxes : ${praBoxes.length}</strong>
-        <span>Zones de téléportation créées</span>
+        <strong>Zones ajoutées : ${praBoxes.length}</strong>
+        <span>Zones où le joueur sera détecté</span>
       </div>
     </div>
 
     <div class="teleport-card">
       <div>
-        <strong>safePositions3D : ${safePositions3D.length}</strong>
-        <span>Positions de sortie créées</span>
+        <strong>Sorties ajoutées : ${safePositions3D.length}</strong>
+        <span>Coordonnées où le joueur sera téléporté</span>
       </div>
     </div>
   `;
@@ -2342,7 +2342,7 @@ function renderTeleportList() {
 
 function buildTeleportJson() {
   return JSON.stringify({
-    areaName: teleportAreaName.value.trim() || "RestrictedArea",
+    areaName: "RestrictedAreaWarheadStorage",
     PRABoxes: praBoxes,
     safePositions3D: safePositions3D
   }, null, 2);
@@ -2381,7 +2381,7 @@ document.getElementById("addPRABoxBtn")?.addEventListener("click", () => {
   teleportOutput.value = buildTeleportJson();
   renderTeleportList();
 
-  teleportStatus.textContent = "✅ PRABox ajoutée.";
+  teleportStatus.textContent = "✅ Zone de téléportation ajoutée.";
 });
 
 document.getElementById("addSafePositionBtn")?.addEventListener("click", () => {
@@ -2410,7 +2410,7 @@ document.getElementById("generateTeleportJsonBtn")?.addEventListener("click", ()
 
   if (!praBoxes.length) {
     teleportStatus.classList.add("error");
-    teleportStatus.textContent = "Ajoute au moins une PRABox.";
+    teleportStatus.textContent = "Ajoute au moins une zone de téléportation.";
     return;
   }
 
@@ -2431,20 +2431,21 @@ document.getElementById("downloadTeleportJsonBtn")?.addEventListener("click", ()
     return;
   }
 
-  const areaName = teleportAreaName.value.trim() || "teleport-area";
+const fileName =
+  teleportFileName.value.trim() || "RestrictedAreaWarheadStorage";
 
-  downloadFile(
-    `${areaName}.json`,
-    teleportOutput.value,
-    "application/json"
-  );
+downloadFile(
+  `${fileName}.json`,
+  teleportOutput.value,
+  "application/json"
+);
 });
 
 document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
   praBoxes = [];
   safePositions3D = [];
 
-  teleportAreaName.value = "";
+  teleportFileName.value = "";
   teleportOutput.value = "";
   teleportStatus.className = "status";
   teleportStatus.textContent = "";
