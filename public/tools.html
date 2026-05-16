@@ -881,7 +881,7 @@
   <h2>🎒 Loadout Generator</h2>
 
   <p class="muted">
-    Créez un fichier loadout DayZ au bon format, avec les items officiels intégrés.
+    Créez un fichier de spawn gear DayZ au vrai format, avec recherche d’items officiels intégrée.
   </p>
 
   <div class="tool-form-grid">
@@ -893,6 +893,16 @@
     <label>
       Nom du loadout
       <input id="loadoutName" value="Player1" placeholder="Ex : Player1">
+    </label>
+
+    <label>
+      Spawn Weight
+      <input id="loadoutSpawnWeight" type="number" value="1" min="0" step="0.1">
+    </label>
+
+    <label>
+      Character Types
+      <input id="loadoutCharacterTypes" placeholder="Ex : SurvivorM_Mirek, SurvivorF_Eva">
     </label>
   </div>
 
@@ -906,56 +916,58 @@
         <option value="Legs">Pantalon</option>
         <option value="Feet">Chaussures</option>
         <option value="Back">Sac à dos</option>
+        <option value="Vest">Gilet</option>
+        <option value="Hips">Ceinture / Hanches</option>
+        <option value="Mask">Masque</option>
         <option value="Headgear">Casque / Chapeau</option>
         <option value="Gloves">Gants</option>
-        <option value="Mask">Masque</option>
-        <option value="Hips">Ceinture / Hanches</option>
-        <option value="Vest">Gilet</option>
+        <option value="Armband">Brassard</option>
       </select>
     </label>
 
     <label>
-      Item principal
-      <input id="loadoutMainItemSearch" list="dayzItemsList" placeholder="Ex : t-shirt blanc, M4A1, sac...">
+      Item porté
+      <input id="loadoutWearItem" list="dayzItemsList" placeholder="Ex : AliceBag_Black">
     </label>
 
     <label>
       Quickbar
-      <input id="loadoutMainQuickbar" type="number" value="-1" min="-1" max="9">
+      <input id="loadoutWearQuickbar" type="number" value="-1" min="-1" max="9">
     </label>
 
     <label>
       Items dans cet équipement
-      <input id="loadoutChildrenItemsSearch" placeholder="Ex : BandageDressing, WaterBottle">
+      <input id="loadoutWearChildren" placeholder="Ex : BandageDressing, WaterBottle">
     </label>
   </div>
 
   <div class="tool-actions">
-    <button class="btn" id="addBodySlotItemBtn">Ajouter au corps</button>
+    <button class="btn" id="addWearItemBtn">Ajouter / remplacer cet équipement</button>
   </div>
 
-  <h3>Items libres / inventaire</h3>
+  <h3>Inventaire libre</h3>
 
   <div class="tool-form-grid">
     <label>
       Item
-      <input id="loadoutLooseItemSearch" list="dayzItemsList" placeholder="Ex : bandage, bacon, chargeur...">
+      <input id="loadoutLooseItem" list="dayzItemsList" placeholder="Ex : BandageDressing">
     </label>
 
     <label>
       Quantité
-      <input id="loadoutLooseQuantity" type="number" min="1" value="1">
+      <input id="loadoutLooseQuantity" type="number" value="1" min="1">
     </label>
 
     <label>
-      Quickbar
+      Quickbar du premier item
       <input id="loadoutLooseQuickbar" type="number" value="-1" min="-1" max="9">
     </label>
   </div>
 
   <div class="tool-actions">
-    <button class="btn" id="addLooseItemBtn">Ajouter item libre</button>
+    <button class="btn" id="addLooseItemBtn">Ajouter à l’inventaire</button>
     <button class="btn secondary" id="generateLoadoutJsonBtn">Générer JSON</button>
+    <button class="btn secondary" id="copyLoadoutJsonBtn">Copier JSON</button>
     <button class="btn secondary" id="downloadLoadoutJsonBtn">Télécharger JSON</button>
     <button class="btn danger" id="clearLoadoutBtn">Effacer</button>
   </div>

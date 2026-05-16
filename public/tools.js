@@ -2468,260 +2468,311 @@ document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
 });
 
 /* ======================================================
-   LOADOUT GENERATOR
+   LOADOUT GENERATOR - DAYZ SPAWN GEAR FORMAT
 ====================================================== */
 
-let loadoutItems = [];
+let loadoutWearSlots = {};
+let loadoutLooseItems = [];
 
-const loadoutPresets = {
-  survivor: [
-    ["clothing", "Hoodie_Black", 1],
-    ["clothing", "Jeans_Blue", 1],
-    ["clothing", "AthleticShoes_Black", 1],
-    ["food", "Apple", 2],
-    ["tools", "StoneKnife", 1],
-    ["medical", "BandageDressing", 1]
-  ],
+const LOADOUT_SLOTS = [
+  "Body",
+  "Legs",
+  "Feet",
+  "Back",
+  "Vest",
+  "Hips",
+  "Mask",
+  "Headgear",
+  "Gloves",
+  "Armband"
+];
 
-  military: [
-    ["clothing", "BDUJacket", 1],
-    ["clothing", "BDUPants", 1],
-    ["clothing", "PlateCarrierVest", 1],
-    ["clothing", "Mich2001Helmet", 1],
-    ["weapons", "M4A1", 1, ["M4_RISHndgrd", "M4_MPBttstck", "ACOGOptic"]],
-    ["ammo", "Mag_STANAG_30Rnd", 3],
-    ["medical", "BandageDressing", 2],
-    ["food", "TacticalBaconCan", 2]
-  ],
-
-  police: [
-    ["clothing", "PoliceJacket", 1],
-    ["clothing", "PolicePants", 1],
-    ["clothing", "PoliceCap", 1],
-    ["weapons", "Glock19", 1],
-    ["ammo", "Mag_Glock_15Rnd", 2],
-    ["medical", "BandageDressing", 1],
-    ["tools", "Handcuffs", 1]
-  ],
-
-  medic: [
-    ["clothing", "ParamedicJacket_Blue", 1],
-    ["clothing", "ParamedicPants_Blue", 1],
-    ["medical", "BandageDressing", 4],
-    ["medical", "Morphine", 2],
-    ["medical", "Epinephrine", 2],
-    ["medical", "SalineBagIV", 1],
-    ["food", "WaterBottle", 1]
-  ],
-
-  builder: [
-    ["clothing", "WorkingGloves_Brown", 1],
-    ["tools", "Hammer", 1],
-    ["tools", "Hatchet", 1],
-    ["tools", "Shovel", 1],
-    ["tools", "Nails", 2],
-    ["tools", "MetalWire", 1],
-    ["food", "PeachesCan", 2]
-  ]
-};
-
-function getLoadoutValue(id) {
+function loadoutGet(id) {
   return document.getElementById(id)?.value?.trim() || "";
 }
 
-function renderLoadoutList() {
+function loadoutSet(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.value = value;
+}
+
+function loadoutStatus(message, isError = false) {
+  const status = document.getElementById("loadoutStatus");
+  if (!status) return;
+
+  status.className = isError ? "status error" : "status";
+  status.textContent = message;
+}
+
+function loadoutAttributes(quantity = 1) {
+  return {
+    healthMin: 1,
+    healthMax: 1,
+    quantityMin: quantity,
+    quantityMax: quantity
+  };
+}
+
+function loadoutCleanName(name) {
+  return String(name || "")
+    .replace(/_/g, " ")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .trim();
+}
+
+function loadoutFindItem(value) {
+  const search = String(value || "").trim().toLowerCase();
+  const items = window.DAYZ_ITEMS || [];
+
+  if (!search) return null;
+
+  return (
+    items.find(i => i.classname.toLowerCase() === search) ||
+    items.find(i => i.label.toLowerCase() === search) ||
+    items.find(i => i.classname.toLowerCase().includes(search)) ||
+    items.find(i => i.label.toLowerCase().includes(search))
+  );
+}
+
+function loadoutClassname(value) {
+  const found = loadoutFindItem(value);
+  return found ? found.classname : String(value || "").trim();
+}
+
+function loadoutRefreshDatalist() {
+  const datalist = document.getElementById("dayzItemsList");
+  const items = window.DAYZ_ITEMS || [];
+
+  if (!datalist) return;
+
+  datalist.innerHTML = items
+    .map(item => `<option value="${item.classname}">${item.label}</option>`)
+    .join("");
+}
+
+function loadoutChildren(value) {
+  return String(value || "")
+    .split(",")
+    .map(v => loadoutClassname(v))
+    .filter(Boolean);
+}
+
+function loadoutCreateWearItem(itemType, quickbar = -1, children = []) {
+  return {
+    itemType,
+    spawnWeight: 1,
+    attributes: loadoutAttributes(1),
+    quickBarSlot: Number(quickbar),
+    complexChildrenTypes: [],
+    simpleChildrenTypes: children,
+    simpleChildrenUseDefaultAttributes: false
+  };
+}
+
+function loadoutCreateLooseItem(itemType, quickbar = -1) {
+  return {
+    itemType,
+    attributes: loadoutAttributes(1),
+    quickBarSlot: Number(quickbar),
+    simpleChildrenTypes: [],
+    simpleChildrenUseDefaultAttributes: true
+  };
+}
+
+function loadoutBuildJson() {
+  const attachmentSlotItemSets = LOADOUT_SLOTS.map(slotName => ({
+    slotName,
+    discreteItemSets: loadoutWearSlots[slotName] ? [loadoutWearSlots[slotName]] : []
+  }));
+
+  const characterTypes = loadoutGet("loadoutCharacterTypes")
+    ? loadoutGet("loadoutCharacterTypes").split(",").map(v => v.trim()).filter(Boolean)
+    : [];
+
+  return JSON.stringify({
+    name: loadoutGet("loadoutName") || "Player1",
+    spawnWeight: Number(loadoutGet("loadoutSpawnWeight") || 1),
+    characterTypes,
+    attachmentSlotItemSets,
+    discreteUnsortedItemSets: [
+      {
+        name: "",
+        spawnWeight: 1,
+        attributes: loadoutAttributes(1),
+        complexChildrenTypes: loadoutLooseItems,
+        simpleChildrenTypes: [],
+        simpleChildrenUseDefaultAttributes: false
+      }
+    ]
+  }, null, 4);
+}
+
+function loadoutRender() {
   const list = document.getElementById("loadoutList");
   if (!list) return;
 
-  if (!loadoutItems.length) {
-    list.innerHTML = "";
-    return;
-  }
+  const wornHtml = LOADOUT_SLOTS
+    .filter(slot => loadoutWearSlots[slot])
+    .map(slot => {
+      const item = loadoutWearSlots[slot];
 
-  list.innerHTML = loadoutItems.map((item, index) => `
-    <div class="loadout-card">
-      <div>
-        <strong>${item.name}</strong>
-        <span>${item.category} — Quantité : ${item.quantity}</span>
-        <code>
-          Health : ${item.health}
-          ${item.attachments.length ? " | Attachments : " + item.attachments.join(", ") : ""}
-        </code>
+      return `
+        <div class="loadout-card">
+          <div>
+            <strong>${slot} : ${loadoutCleanName(item.itemType)}</strong>
+            <span>${item.simpleChildrenTypes.length} item(s) dedans</span>
+            <code>${item.itemType}</code>
+          </div>
+          <button class="mini-btn danger" onclick="loadoutRemoveWear('${slot}')">Supprimer</button>
+        </div>
+      `;
+    })
+    .join("");
+
+  const looseHtml = loadoutLooseItems.length
+    ? `
+      <div class="loadout-card">
+        <div>
+          <strong>Inventaire libre</strong>
+          <span>${loadoutLooseItems.length} item(s)</span>
+          <code>${loadoutLooseItems.map(i => i.itemType).join(", ")}</code>
+        </div>
+        <button class="mini-btn danger" onclick="loadoutClearLoose()">Vider</button>
       </div>
+    `
+    : "";
 
-      <button class="mini-btn danger" onclick="deleteLoadoutItem(${index})">
-        Supprimer
-      </button>
-    </div>
-  `).join("");
+  list.innerHTML = wornHtml + looseHtml;
 }
 
-function buildLoadoutJson() {
-  const name = getLoadoutValue("loadoutName") || "Custom Loadout";
-
-  const grouped = {
-    clothing: [],
-    weapons: [],
-    attachments: [],
-    ammo: [],
-    medical: [],
-    food: [],
-    tools: [],
-    misc: []
-  };
-
-  loadoutItems.forEach(item => {
-    grouped[item.category].push(item);
-  });
-
-  return JSON.stringify({
-    loadoutName: name,
-    generatedBy: "DayZ Mapping Lab",
-    version: "1.0",
-    items: grouped
-  }, null, 2);
+function loadoutUpdateOutput() {
+  const output = document.getElementById("loadoutOutput");
+  if (output) output.value = loadoutBuildJson();
 }
 
-function addLoadoutItem(category, name, quantity = 1, attachments = [], health = 1) {
-  if (!name) return;
-
-  loadoutItems.push({
-    category,
-    name,
-    quantity: Number(quantity) || 1,
-    health: Number(health) || 1,
-    attachments: Array.isArray(attachments)
-      ? attachments
-      : String(attachments)
-          .split(",")
-          .map(a => a.trim())
-          .filter(Boolean)
-  });
+function loadoutRemoveWear(slot) {
+  delete loadoutWearSlots[slot];
+  loadoutRender();
+  loadoutUpdateOutput();
 }
 
-document.getElementById("addLoadoutItemBtn")?.addEventListener("click", () => {
-  const status = document.getElementById("loadoutStatus");
-  status.className = "status";
+function loadoutClearLoose() {
+  loadoutLooseItems = [];
+  loadoutRender();
+  loadoutUpdateOutput();
+}
 
-  const category = getLoadoutValue("loadoutCategory");
-  const name = getLoadoutValue("loadoutItemName");
-  const quantity = getLoadoutValue("loadoutItemQuantity");
-  const health = getLoadoutValue("loadoutItemHealth");
-  const attachments = getLoadoutValue("loadoutItemAttachments");
+document.getElementById("addWearItemBtn")?.addEventListener("click", () => {
+  const slot = loadoutGet("loadoutBodySlot");
+  const itemType = loadoutClassname(loadoutGet("loadoutWearItem"));
+  const quickbar = Number(loadoutGet("loadoutWearQuickbar") || -1);
+  const children = loadoutChildren(loadoutGet("loadoutWearChildren"));
 
-  if (!name) {
-    status.classList.add("error");
-    status.textContent = "Ajoute au moins le nom de l’item.";
+  if (!slot || !itemType) {
+    loadoutStatus("Choisis une partie du corps et un item porté.", true);
     return;
   }
 
-  addLoadoutItem(category, name, quantity, attachments, health);
+  loadoutWearSlots[slot] = loadoutCreateWearItem(itemType, quickbar, children);
 
-  document.getElementById("loadoutItemName").value = "";
-  document.getElementById("loadoutItemQuantity").value = "1";
-  document.getElementById("loadoutItemAttachments").value = "";
+  loadoutSet("loadoutWearItem", "");
+  loadoutSet("loadoutWearChildren", "");
+  loadoutSet("loadoutWearQuickbar", "-1");
 
-  renderLoadoutList();
-  document.getElementById("loadoutOutput").value = buildLoadoutJson();
+  loadoutRender();
+  loadoutUpdateOutput();
 
-  status.textContent = "✅ Item ajouté au loadout.";
+  loadoutStatus(`✅ Équipement ajouté sur ${slot}.`);
 });
 
-document.getElementById("applyLoadoutPresetBtn")?.addEventListener("click", () => {
-  const status = document.getElementById("loadoutStatus");
-  status.className = "status";
+document.getElementById("addLooseItemBtn")?.addEventListener("click", () => {
+  const itemType = loadoutClassname(loadoutGet("loadoutLooseItem"));
+  const quantity = Number(loadoutGet("loadoutLooseQuantity") || 1);
+  const quickbar = Number(loadoutGet("loadoutLooseQuickbar") || -1);
 
-  const preset = getLoadoutValue("loadoutPreset");
-
-  if (!preset || !loadoutPresets[preset]) {
-    status.classList.add("error");
-    status.textContent = "Choisis un preset avant de l’appliquer.";
+  if (!itemType) {
+    loadoutStatus("Ajoute un item à mettre dans l’inventaire.", true);
     return;
   }
 
-  loadoutPresets[preset].forEach(item => {
-    addLoadoutItem(
-      item[0],
-      item[1],
-      item[2],
-      item[3] || [],
-      1
+  for (let i = 0; i < quantity; i++) {
+    loadoutLooseItems.push(
+      loadoutCreateLooseItem(itemType, i === 0 ? quickbar : -1)
     );
-  });
-
-  if (!getLoadoutValue("loadoutName")) {
-    document.getElementById("loadoutName").value =
-      preset.charAt(0).toUpperCase() + preset.slice(1) + " Loadout";
   }
 
-  renderLoadoutList();
-  document.getElementById("loadoutOutput").value = buildLoadoutJson();
+  loadoutSet("loadoutLooseItem", "");
+  loadoutSet("loadoutLooseQuantity", "1");
+  loadoutSet("loadoutLooseQuickbar", "-1");
 
-  status.textContent = "✅ Preset ajouté au loadout.";
+  loadoutRender();
+  loadoutUpdateOutput();
+
+  loadoutStatus(`✅ ${quantity} item(s) ajouté(s) à l’inventaire.`);
 });
-
-function deleteLoadoutItem(index) {
-  loadoutItems.splice(index, 1);
-  renderLoadoutList();
-
-  document.getElementById("loadoutOutput").value =
-    loadoutItems.length ? buildLoadoutJson() : "";
-}
 
 document.getElementById("generateLoadoutJsonBtn")?.addEventListener("click", () => {
-  const status = document.getElementById("loadoutStatus");
-  status.className = "status";
+  const hasWear = Object.keys(loadoutWearSlots).length > 0;
+  const hasLoose = loadoutLooseItems.length > 0;
 
-  if (!loadoutItems.length) {
-    status.classList.add("error");
-    status.textContent = "Ajoute au moins un item ou applique un preset.";
+  if (!hasWear && !hasLoose) {
+    loadoutStatus("Ajoute au moins un équipement ou un item.", true);
     return;
   }
 
-  document.getElementById("loadoutOutput").value = buildLoadoutJson();
-  status.textContent = "✅ Loadout JSON généré.";
+  loadoutUpdateOutput();
+  loadoutStatus("✅ JSON généré au vrai format DayZ.");
+});
+
+document.getElementById("copyLoadoutJsonBtn")?.addEventListener("click", async () => {
+  const output = document.getElementById("loadoutOutput");
+
+  if (!output?.value.trim()) {
+    loadoutStatus("Aucun JSON à copier.", true);
+    return;
+  }
+
+  await navigator.clipboard.writeText(output.value);
+  loadoutStatus("✅ JSON copié.");
 });
 
 document.getElementById("downloadLoadoutJsonBtn")?.addEventListener("click", () => {
-  const status = document.getElementById("loadoutStatus");
   const output = document.getElementById("loadoutOutput");
 
-  if (!output.value.trim()) {
-    status.className = "status error";
-    status.textContent = "Aucun loadout à télécharger.";
+  if (!output?.value.trim()) {
+    loadoutStatus("Aucun fichier à télécharger.", true);
     return;
   }
 
-  const fileName = getLoadoutValue("loadoutFileName") || "dayz-loadout";
+  const fileName =
+    loadoutGet("loadoutFileName") ||
+    loadoutGet("loadoutName") ||
+    "Player1";
 
-  downloadFile(
-    `${fileName}.json`,
-    output.value,
-    "application/json"
-  );
+  downloadFile(`${fileName}.json`, output.value, "application/json");
 });
 
 document.getElementById("clearLoadoutBtn")?.addEventListener("click", () => {
-  loadoutItems = [];
+  loadoutWearSlots = {};
+  loadoutLooseItems = [];
 
-  [
-    "loadoutFileName",
-    "loadoutName",
-    "loadoutItemName",
-    "loadoutItemAttachments"
-  ].forEach(id => {
-    const input = document.getElementById(id);
-    if (input) input.value = "";
-  });
+  loadoutSet("loadoutFileName", "");
+  loadoutSet("loadoutName", "Player1");
+  loadoutSet("loadoutSpawnWeight", "1");
+  loadoutSet("loadoutCharacterTypes", "");
+  loadoutSet("loadoutBodySlot", "Body");
+  loadoutSet("loadoutWearItem", "");
+  loadoutSet("loadoutWearQuickbar", "-1");
+  loadoutSet("loadoutWearChildren", "");
+  loadoutSet("loadoutLooseItem", "");
+  loadoutSet("loadoutLooseQuantity", "1");
+  loadoutSet("loadoutLooseQuickbar", "-1");
 
-  document.getElementById("loadoutItemQuantity").value = "1";
-  document.getElementById("loadoutPreset").value = "";
-  document.getElementById("loadoutCategory").value = "clothing";
-  document.getElementById("loadoutItemHealth").value = "1";
+  const output = document.getElementById("loadoutOutput");
+  if (output) output.value = "";
 
-  document.getElementById("loadoutOutput").value = "";
-  document.getElementById("loadoutStatus").className = "status";
-  document.getElementById("loadoutStatus").textContent = "";
-
-  renderLoadoutList();
+  loadoutRender();
+  loadoutStatus("");
 });
+
+loadoutRefreshDatalist();
