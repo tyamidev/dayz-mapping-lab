@@ -2552,12 +2552,19 @@ function loadoutItemsForSlot(slot) {
 
     switch (slot) {
 
-      case "Back":
-        return (
-          item.slot === "Back" ||
-          classname.includes("bag") ||
-          classname.includes("backpack")
-        );
+case "Back":
+  return (
+    (
+      item.slot === "Back" ||
+      classname.includes("bag") ||
+      classname.includes("backpack")
+    ) &&
+    !classname.includes("bloodbagempty") &&
+    !classname.includes("bloodbagfull") &&
+    !classname.includes("bloodbagiv") &&
+    !classname.includes("salinebagiv") &&
+    !classname.includes("salinebag")
+  );
 
       case "Vest":
         return (
