@@ -3140,5 +3140,22 @@ document.getElementById("loadoutLooseItem")?.addEventListener("input", () => {
   loadoutShowSuggestions("loadoutLooseItem", "loadoutLooseSuggestions");
 });
 
+document.getElementById("toggleCharactersBtn")?.addEventListener("click", () => {
+
+  const container = document.getElementById("loadoutCharacterContainer");
+  const button = document.getElementById("toggleCharactersBtn");
+
+  if (!container || !button) return;
+
+  container.classList.toggle("hidden");
+
+  const opened = !container.classList.contains("hidden");
+
+  button.textContent = opened
+    ? "Character Types ▲"
+    : "Character Types ▼";
+
+});
+
 loadoutInitCharacters();
 loadoutRefreshWearItemsList();

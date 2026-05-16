@@ -831,3 +831,24 @@
   color: #001b12;
   border-color: var(--primary);
 }
+
+.character-collapse-btn {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  text-align: left;
+}
+
+.character-container {
+  margin-top: 16px;
+}
+
+.character-container.hidden {
+  display: none;
+}
