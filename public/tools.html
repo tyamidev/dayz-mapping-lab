@@ -900,11 +900,18 @@
       <input id="loadoutSpawnWeight" type="number" value="1" min="0" step="0.1">
     </label>
 
-    <label>
-      Character Types
-      <input id="loadoutCharacterTypes" placeholder="Ex : SurvivorM_Mirek, SurvivorF_Eva">
-    </label>
+<label>
+  Character Types
+  <select id="loadoutCharacterTypesSelect" multiple size="6"></select>
+</label>
   </div>
+
+<div class="tool-actions">
+  <button class="btn secondary" id="loadoutCharsAllBtn">Tous</button>
+  <button class="btn secondary" id="loadoutCharsMaleBtn">Masculins</button>
+  <button class="btn secondary" id="loadoutCharsFemaleBtn">Féminins</button>
+  <button class="btn secondary" id="loadoutCharsEmptyBtn">Laisser vide</button>
+</div>
 
   <h3>Équipement porté</h3>
 
@@ -927,7 +934,8 @@
 
     <label>
       Item porté
-      <input id="loadoutWearItem" list="dayzItemsList" placeholder="Ex : AliceBag_Black">
+<input id="loadoutWearItem" list="loadoutWearItemsList" placeholder="Ex : AliceBag_Black">
+<datalist id="loadoutWearItemsList"></datalist>
     </label>
 
     <label>
@@ -938,6 +946,7 @@
     <label>
       Items dans cet équipement
       <input id="loadoutWearChildren" placeholder="Ex : BandageDressing, WaterBottle">
+      <div id="loadoutWearChildrenSuggestions" class="item-suggestions"></div>
     </label>
   </div>
 
@@ -951,6 +960,7 @@
     <label>
       Item
       <input id="loadoutLooseItem" list="dayzItemsList" placeholder="Ex : BandageDressing">
+      <div id="loadoutLooseSuggestions" class="item-suggestions"></div>
     </label>
 
     <label>

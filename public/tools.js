@@ -2474,6 +2474,151 @@ document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
 let loadoutWearSlots = {};
 let loadoutLooseItems = [];
 
+const DAYZ_CHARACTER_TYPES = {
+  male: [
+    "SurvivorM_Mirek",
+    "SurvivorM_Denis",
+    "SurvivorM_Boris",
+    "SurvivorM_Cyril",
+    "SurvivorM_Elias",
+    "SurvivorM_Francis",
+    "SurvivorM_Guo",
+    "SurvivorM_Hassan",
+    "SurvivorM_Indar",
+    "SurvivorM_Jose",
+    "SurvivorM_Kaito",
+    "SurvivorM_Lewis",
+    "SurvivorM_Manuel",
+    "SurvivorM_Niki",
+    "SurvivorM_Oliver",
+    "SurvivorM_Peter",
+    "SurvivorM_Quang",
+    "SurvivorM_Rolf",
+    "SurvivorM_Seth",
+    "SurvivorM_Taiki"
+  ],
+  female: [
+    "SurvivorF_Eva",
+    "SurvivorF_Frida",
+    "SurvivorF_Gabi",
+    "SurvivorF_Helga",
+    "SurvivorF_Irena",
+    "SurvivorF_Judy",
+    "SurvivorF_Keiko",
+    "SurvivorF_Linda",
+    "SurvivorF_Maria",
+    "SurvivorF_Naida"
+  ]
+};
+
+function loadoutInitCharacters() {
+  const select = document.getElementById("loadoutCharacterTypesSelect");
+  if (!select) return;
+
+  const all = [
+    ...DAYZ_CHARACTER_TYPES.male,
+    ...DAYZ_CHARACTER_TYPES.female
+  ];
+
+  select.innerHTML = all.map(type => `
+    <option value="${type}">${type}</option>
+  `).join("");
+}
+
+function loadoutSelectCharacters(types) {
+  const select = document.getElementById("loadoutCharacterTypesSelect");
+  if (!select) return;
+
+  [...select.options].forEach(option => {
+    option.selected = types.includes(option.value);
+  });
+
+  loadoutUpdateOutput();
+}
+
+function loadoutGetSelectedCharacters() {
+  const select = document.getElementById("loadoutCharacterTypesSelect");
+  if (!select) return [];
+
+  return [...select.selectedOptions].map(option => option.value);
+}
+
+function loadoutItemsForSlot(slot) {
+  const items = window.DAYZ_ITEMS || [];
+
+  return items.filter(item => {
+    if (slot === "Back") {
+      return item.slot === "Back" || item.classname.toLowerCase().includes("bag") || item.classname.toLowerCase().includes("backpack");
+    }
+
+    if (slot === "Vest") {
+      return item.slot === "Vest" || item.classname.toLowerCase().includes("vest") || item.classname.toLowerCase().includes("platecarrier");
+    }
+
+    return item.slot === slot;
+  });
+}
+
+function loadoutRefreshWearItemsList() {
+  const datalist = document.getElementById("loadoutWearItemsList");
+  const slot = loadoutGet("loadoutBodySlot");
+
+  if (!datalist) return;
+
+  const items = loadoutItemsForSlot(slot);
+
+  datalist.innerHTML = items.map(item => `
+    <option value="${item.classname}">${item.label}</option>
+  `).join("");
+}
+
+function loadoutCurrentToken(value) {
+  const parts = String(value || "").split(",");
+  return parts[parts.length - 1].trim().toLowerCase();
+}
+
+function loadoutReplaceCurrentToken(input, classname) {
+  const parts = input.value.split(",");
+  parts[parts.length - 1] = ` ${classname}`;
+  input.value = parts.map(p => p.trim()).filter(Boolean).join(", ");
+  input.focus();
+}
+
+function loadoutShowSuggestions(inputId, containerId) {
+  const input = document.getElementById(inputId);
+  const container = document.getElementById(containerId);
+  const items = window.DAYZ_ITEMS || [];
+
+  if (!input || !container) return;
+
+  const token = loadoutCurrentToken(input.value);
+
+  if (!token || token.length < 2) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const results = items
+    .filter(item =>
+      item.classname.toLowerCase().includes(token) ||
+      item.label.toLowerCase().includes(token)
+    )
+    .slice(0, 12);
+
+  container.innerHTML = results.map(item => `
+    <button type="button" data-classname="${item.classname}">
+      ${item.classname}
+    </button>
+  `).join("");
+
+  container.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", () => {
+      loadoutReplaceCurrentToken(input, button.dataset.classname);
+      container.innerHTML = "";
+    });
+  });
+}
+
 const LOADOUT_SLOTS = [
   "Body",
   "Legs",
@@ -2585,9 +2730,7 @@ function loadoutBuildJson() {
     discreteItemSets: loadoutWearSlots[slotName] ? [loadoutWearSlots[slotName]] : []
   }));
 
-  const characterTypes = loadoutGet("loadoutCharacterTypes")
-    ? loadoutGet("loadoutCharacterTypes").split(",").map(v => v.trim()).filter(Boolean)
-    : [];
+  const characterTypes = loadoutGetSelectedCharacters();
 
   return JSON.stringify({
     name: loadoutGet("loadoutName") || "Player1",
@@ -2775,4 +2918,41 @@ document.getElementById("clearLoadoutBtn")?.addEventListener("click", () => {
   loadoutStatus("");
 });
 
-loadoutRefreshDatalist();
+document.getElementById("loadoutCharsAllBtn")?.addEventListener("click", () => {
+  loadoutSelectCharacters([
+    ...DAYZ_CHARACTER_TYPES.male,
+    ...DAYZ_CHARACTER_TYPES.female
+  ]);
+});
+
+document.getElementById("loadoutCharsMaleBtn")?.addEventListener("click", () => {
+  loadoutSelectCharacters(DAYZ_CHARACTER_TYPES.male);
+});
+
+document.getElementById("loadoutCharsFemaleBtn")?.addEventListener("click", () => {
+  loadoutSelectCharacters(DAYZ_CHARACTER_TYPES.female);
+});
+
+document.getElementById("loadoutCharsEmptyBtn")?.addEventListener("click", () => {
+  loadoutSelectCharacters([]);
+});
+
+document.getElementById("loadoutCharacterTypesSelect")?.addEventListener("change", () => {
+  loadoutUpdateOutput();
+});
+
+document.getElementById("loadoutBodySlot")?.addEventListener("change", () => {
+  loadoutSet("loadoutWearItem", "");
+  loadoutRefreshWearItemsList();
+});
+
+document.getElementById("loadoutWearChildren")?.addEventListener("input", () => {
+  loadoutShowSuggestions("loadoutWearChildren", "loadoutWearChildrenSuggestions");
+});
+
+document.getElementById("loadoutLooseItem")?.addEventListener("input", () => {
+  loadoutShowSuggestions("loadoutLooseItem", "loadoutLooseSuggestions");
+});
+
+loadoutInitCharacters();
+loadoutRefreshWearItemsList();
