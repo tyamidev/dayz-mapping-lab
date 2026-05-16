@@ -2882,7 +2882,7 @@ function loadoutRefreshDatalist() {
 function loadoutChildren(value) {
   return String(value || "")
     .split(",")
-    .map(v => loadoutClassname(v))
+    .map(v => loadoutClassname(v.trim()))
     .filter(Boolean);
 }
 
