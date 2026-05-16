@@ -2512,25 +2512,31 @@ const DAYZ_CHARACTER_TYPES = {
 };
 
 function loadoutInitCharacters() {
-  const select = document.getElementById("loadoutCharacterTypesSelect");
-  if (!select) return;
+  const box = document.getElementById("loadoutCharacterTypesSelect");
+  if (!box) return;
 
   const all = [
-    ...DAYZ_CHARACTER_TYPES.male,
-    ...DAYZ_CHARACTER_TYPES.female
+    ...DAYZ_CHARACTER_TYPES.male.map(type => ({ type, gender: "male" })),
+    ...DAYZ_CHARACTER_TYPES.female.map(type => ({ type, gender: "female" }))
   ];
 
-  select.innerHTML = all.map(type => `
-    <option value="${type}">${type}</option>
+  box.innerHTML = all.map(char => `
+    <button type="button" class="character-chip" data-type="${char.type}" data-gender="${char.gender}">
+      ${char.type}
+    </button>
   `).join("");
+
+  box.querySelectorAll(".character-chip").forEach(button => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("selected");
+      loadoutUpdateOutput();
+    });
+  });
 }
 
 function loadoutSelectCharacters(types) {
-  const select = document.getElementById("loadoutCharacterTypesSelect");
-  if (!select) return;
-
-  [...select.options].forEach(option => {
-    option.selected = types.includes(option.value);
+  document.querySelectorAll(".character-chip").forEach(button => {
+    button.classList.toggle("selected", types.includes(button.dataset.type));
   });
 
   loadoutUpdateOutput();
@@ -3119,10 +3125,6 @@ document.getElementById("loadoutCharsFemaleBtn")?.addEventListener("click", () =
 
 document.getElementById("loadoutCharsEmptyBtn")?.addEventListener("click", () => {
   loadoutSelectCharacters([]);
-});
-
-document.getElementById("loadoutCharacterTypesSelect")?.addEventListener("change", () => {
-  loadoutUpdateOutput();
 });
 
 document.getElementById("loadoutBodySlot")?.addEventListener("change", () => {
