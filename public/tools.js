@@ -2648,6 +2648,7 @@ case "Back":
         !classname.includes("boots") &&
         !classname.includes("bayon") &&
         !classname.includes("pumpk") &&
+        !classname.includes("compensator") &&
         !classname.includes("rnd")
         );
 
