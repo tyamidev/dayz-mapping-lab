@@ -2547,15 +2547,61 @@ function loadoutItemsForSlot(slot) {
   const items = window.DAYZ_ITEMS || [];
 
   return items.filter(item => {
-    if (slot === "Back") {
-      return item.slot === "Back" || item.classname.toLowerCase().includes("bag") || item.classname.toLowerCase().includes("backpack");
+
+    const classname = item.classname.toLowerCase();
+
+    switch (slot) {
+
+      case "Back":
+        return (
+          item.slot === "Back" ||
+          classname.includes("bag") ||
+          classname.includes("backpack")
+        );
+
+      case "Vest":
+        return (
+          item.slot === "Vest" ||
+          classname.includes("vest") ||
+          classname.includes("platecarrier")
+        );
+
+      case "Eyewear":
+        return (
+          classname.includes("glasses") ||
+          classname.includes("eyewear") ||
+          classname.includes("goggles")
+        );
+
+      case "Hands":
+        return (
+          classname.includes("flashlight") ||
+          classname.includes("rifle") ||
+          classname.includes("pistol") ||
+          classname.includes("knife") ||
+          classname.includes("bat") ||
+          classname.includes("axe")
+        );
+
+      case "LeftShoulder":
+      case "RightShoulder":
+        return (
+          classname.includes("rifle") ||
+          classname.includes("shotgun") ||
+          classname.includes("mosin") ||
+          classname.includes("m4") ||
+          classname.includes("ak") ||
+          classname.includes("sks") ||
+          classname.includes("smg")
+        );
+
+      case "Armband":
+        return classname.includes("armband");
+
+      default:
+        return item.slot === slot;
     }
 
-    if (slot === "Vest") {
-      return item.slot === "Vest" || item.classname.toLowerCase().includes("vest") || item.classname.toLowerCase().includes("platecarrier");
-    }
-
-    return item.slot === slot;
   });
 }
 
