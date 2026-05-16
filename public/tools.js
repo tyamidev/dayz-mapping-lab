@@ -2634,6 +2634,12 @@ case "Back":
           classname.includes("axe")
           ) &&
         !classname.includes("meat") &&
+        !classname.includes("shoes") &&
+        !classname.includes("jacket") &&
+        !classname.includes("pants") &&
+        !classname.includes("bttstck") &&
+        !classname.includes("hnd") &&
+        !classname.includes("sawed") &&
         !classname.includes("rnd")
         );
 
