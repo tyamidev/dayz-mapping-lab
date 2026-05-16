@@ -881,75 +881,80 @@
   <h2>🎒 Loadout Generator</h2>
 
   <p class="muted">
-    Créez un loadout complet DayZ avec presets, catégories, quantités et export JSON.
+    Créez un fichier loadout DayZ au bon format, avec les items officiels intégrés.
   </p>
 
   <div class="tool-form-grid">
     <label>
       Nom du fichier
-      <input id="loadoutFileName" placeholder="Ex : military-loadout">
+      <input id="loadoutFileName" placeholder="Ex : Player1">
     </label>
 
     <label>
       Nom du loadout
-      <input id="loadoutName" placeholder="Ex : Kit militaire">
+      <input id="loadoutName" value="Player1" placeholder="Ex : Player1">
     </label>
+  </div>
 
+  <h3>Équipement porté</h3>
+
+  <div class="tool-form-grid">
     <label>
-      Preset rapide
-      <select id="loadoutPreset">
-        <option value="">Choisir un preset</option>
-        <option value="survivor">Survivant</option>
-        <option value="military">Militaire</option>
-        <option value="police">Police</option>
-        <option value="medic">Médecin</option>
-        <option value="builder">Builder</option>
+      Partie du corps
+      <select id="loadoutBodySlot">
+        <option value="Body">Haut / Veste</option>
+        <option value="Legs">Pantalon</option>
+        <option value="Feet">Chaussures</option>
+        <option value="Back">Sac à dos</option>
+        <option value="Headgear">Casque / Chapeau</option>
+        <option value="Gloves">Gants</option>
+        <option value="Mask">Masque</option>
+        <option value="Hips">Ceinture / Hanches</option>
+        <option value="Vest">Gilet</option>
       </select>
     </label>
 
     <label>
-      Catégorie
-      <select id="loadoutCategory">
-        <option value="clothing">Vêtements</option>
-        <option value="weapons">Armes</option>
-        <option value="attachments">Accessoires armes</option>
-        <option value="ammo">Munitions</option>
-        <option value="medical">Médical</option>
-        <option value="food">Nourriture</option>
-        <option value="tools">Outils</option>
-        <option value="misc">Divers</option>
-      </select>
+      Item principal
+      <input id="loadoutMainItemSearch" list="dayzItemsList" placeholder="Ex : t-shirt blanc, M4A1, sac...">
     </label>
 
     <label>
-      Nom de l’item DayZ
-      <input id="loadoutItemName" placeholder="Ex : M4A1">
+      Quickbar
+      <input id="loadoutMainQuickbar" type="number" value="-1" min="-1" max="9">
     </label>
 
     <label>
-      Quantité
-      <input id="loadoutItemQuantity" type="number" min="1" value="1">
-    </label>
-
-    <label>
-      Santé / Health
-      <select id="loadoutItemHealth">
-        <option value="1">Pristine</option>
-        <option value="0.75">Worn</option>
-        <option value="0.5">Damaged</option>
-        <option value="0.25">Badly Damaged</option>
-      </select>
-    </label>
-
-    <label>
-      Attachments
-      <input id="loadoutItemAttachments" placeholder="Ex : M4_RISHndgrd,ACOGOptic">
+      Items dans cet équipement
+      <input id="loadoutChildrenItemsSearch" placeholder="Ex : BandageDressing, WaterBottle">
     </label>
   </div>
 
   <div class="tool-actions">
-    <button class="btn" id="addLoadoutItemBtn">Ajouter l’item</button>
-    <button class="btn secondary" id="applyLoadoutPresetBtn">Appliquer le preset</button>
+    <button class="btn" id="addBodySlotItemBtn">Ajouter au corps</button>
+  </div>
+
+  <h3>Items libres / inventaire</h3>
+
+  <div class="tool-form-grid">
+    <label>
+      Item
+      <input id="loadoutLooseItemSearch" list="dayzItemsList" placeholder="Ex : bandage, bacon, chargeur...">
+    </label>
+
+    <label>
+      Quantité
+      <input id="loadoutLooseQuantity" type="number" min="1" value="1">
+    </label>
+
+    <label>
+      Quickbar
+      <input id="loadoutLooseQuickbar" type="number" value="-1" min="-1" max="9">
+    </label>
+  </div>
+
+  <div class="tool-actions">
+    <button class="btn" id="addLooseItemBtn">Ajouter item libre</button>
     <button class="btn secondary" id="generateLoadoutJsonBtn">Générer JSON</button>
     <button class="btn secondary" id="downloadLoadoutJsonBtn">Télécharger JSON</button>
     <button class="btn danger" id="clearLoadoutBtn">Effacer</button>
@@ -959,7 +964,9 @@
 
   <div id="loadoutList" class="loadout-list"></div>
 
-  <textarea id="loadoutOutput" placeholder="Le loadout généré apparaîtra ici..."></textarea>
+  <textarea id="loadoutOutput" placeholder="Le fichier loadout apparaîtra ici..."></textarea>
+
+  <datalist id="dayzItemsList"></datalist>
 </section>
 
 </main>
@@ -970,6 +977,7 @@
 
 <script src="app.js"></script>
 <script src="/js/i18n.js"></script>
+<script src="data/dayz-items.js"></script>
 <script src="tools.js"></script>
 
 </body>
