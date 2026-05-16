@@ -2641,7 +2641,6 @@ case "Back":
         !classname.includes("pants") &&
         !classname.includes("bttstck") &&
         !classname.includes("hnd") &&
-        !classname.includes("sawed") &&
         !classname.includes("mask") &&
         !classname.includes("sawed") &&
         !classname.includes("smoke") &&
@@ -2655,8 +2654,67 @@ case "Back":
       case "Armband":
         return classname.includes("armband");
 
-      default:
-        return item.slot === slot;
+      case "Body":
+        return (
+        item.slot === "Body" ||
+        classname.includes("shirt") ||
+        classname.includes("jacket") ||
+        classname.includes("hoodie") ||
+        classname.includes("coat") ||
+        classname.includes("sweater") ||
+        classname.includes("tshirt")
+        );
+
+      case "Legs":
+        return (
+        item.slot === "Legs" ||
+        classname.includes("pants") ||
+        classname.includes("jeans") ||
+        classname.includes("shorts") ||
+        classname.includes("skirt")
+        );
+
+      case "Feet":
+        return (
+        item.slot === "Feet" ||
+        classname.includes("shoes") ||
+        classname.includes("boots") ||
+        classname.includes("sneakers")
+        );
+
+      case "Headgear":
+        return (
+        item.slot === "Headgear" ||
+        classname.includes("helmet") ||
+        classname.includes("cap") ||
+        classname.includes("hat") ||
+        classname.includes("beanie") ||
+        classname.includes("ushanka")
+        );
+
+      case "Gloves":
+        return (
+        item.slot === "Gloves" ||
+        classname.includes("gloves")
+        );
+
+      case "Mask":
+        return (
+        item.slot === "Mask" ||
+        classname.includes("mask") ||
+        classname.includes("balaclava") ||
+        classname.includes("respirator")
+        );
+
+      case "Hips":
+        return (
+        item.slot === "Hips" ||
+        classname.includes("belt") ||
+        classname.includes("hippack")
+        );
+
+  default:
+  return item.slot === slot;
     }
 
   });
