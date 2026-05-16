@@ -2656,6 +2656,7 @@ case "Back":
 
       case "Body":
         return (
+          (
         item.slot === "Body" ||
         classname.includes("shirt") ||
         classname.includes("jacket") ||
@@ -2663,15 +2664,20 @@ case "Back":
         classname.includes("coat") ||
         classname.includes("sweater") ||
         classname.includes("tshirt")
+      ) &&
+        !classname.includes("zmbm")
         );
 
       case "Legs":
         return (
+          (
         item.slot === "Legs" ||
         classname.includes("pants") ||
         classname.includes("jeans") ||
         classname.includes("shorts") ||
         classname.includes("skirt")
+      ) &&
+        !classname.includes("zmbf")
         );
 
       case "Feet":
@@ -2684,12 +2690,18 @@ case "Back":
 
       case "Headgear":
         return (
+          (
         item.slot === "Headgear" ||
         classname.includes("helmet") ||
         classname.includes("cap") ||
         classname.includes("hat") ||
         classname.includes("beanie") ||
         classname.includes("ushanka")
+      ) &&
+        !classname.includes("animal") &&
+        !classname.includes("door") &&
+        !classname.includes("hatch") &&
+        !classname.includes("vest")
         );
 
       case "Gloves":
@@ -2703,7 +2715,7 @@ case "Back":
         item.slot === "Mask" ||
         classname.includes("mask") ||
         classname.includes("balaclava") ||
-        classname.includes("respirator")
+        classname.includes("headstrap")
         );
 
       case "Hips":
