@@ -2597,14 +2597,7 @@ case "Back":
         );
 
       case "Hands":
-        return (
-          classname.includes("flashlight") ||
-          classname.includes("rifle") ||
-          classname.includes("knife") ||
-          classname.includes("baseballbat") ||
-          classname.includes("map") ||
-          classname.includes("axe")
-        );
+        return true;
 
       case "LeftShoulder":
       case "RightShoulder":
