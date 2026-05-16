@@ -2572,6 +2572,7 @@ case "Back":
       (
         item.slot === "Vest" ||
         classname.includes("vest") ||
+        classname.includes("chestholster") ||
         classname.includes("platecarrier")
       ) &&
         !classname.includes("platecarrierholster") &&
@@ -2712,17 +2713,23 @@ case "Back":
 
       case "Mask":
         return (
+          (
         item.slot === "Mask" ||
         classname.includes("mask") ||
         classname.includes("balaclava") ||
         classname.includes("headstrap")
+      ) &&
+        !classname.includes("filter")
         );
 
       case "Hips":
         return (
+          (
         item.slot === "Hips" ||
         classname.includes("belt") ||
         classname.includes("hippack")
+      ) &&
+        !classname.includes("holster")
         );
 
   default:
