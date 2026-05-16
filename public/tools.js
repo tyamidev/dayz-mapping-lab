@@ -2602,6 +2602,7 @@ case "Back":
       case "LeftShoulder":
       case "RightShoulder":
         return (
+          (
           classname.includes("rifle") ||
           classname.includes("shotgun") ||
           classname.includes("mosin") ||
@@ -2612,7 +2613,28 @@ case "Back":
           classname.includes("sks") ||
           classname.includes("smg") ||
           classname.includes("cz") ||
+          classname.includes("winchester") ||
+          classname.includes("svd") ||
+          classname.includes("aug") ||
+          classname.includes("b95") ||
+          classname.includes("fal") ||
+          classname.includes("fama") ||
+          classname.includes("vss") ||
+          classname.includes("val") ||
+          classname.includes("izh") ||
+          classname.includes("m1") ||
+          classname.includes("mp5") ||
+          classname.includes("mp4") ||
+          classname.includes("ump") ||
+          classname.includes("sv9") ||
+          classname.includes("vikh") ||
+          classname.includes("shov") ||
+          classname.includes("crowbar") ||
+          classname.includes("hoe") ||
           classname.includes("axe")
+          ) &&
+        !classname.includes("meat") &&
+        !classname.includes("rnd")
         );
 
       case "Armband":
