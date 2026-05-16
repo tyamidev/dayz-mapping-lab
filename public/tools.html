@@ -119,8 +119,14 @@
 
     <article class="tool-card" data-tool="teleportGeneratorTool">
       <span>🌀</span>
-      <h3>Teleport Generator (beta)</h3>
+      <h3>Teleport Generator</h3>
       <p>Créer un fichier de téléportation DayZ prêt à utiliser.</p>
+    </article>
+
+    <article class="tool-card" data-tool="loadoutGeneratorTool">
+      <span>🎒</span>
+      <h3>Loadout Generator</h3>
+      <p>Créer des kits/loadouts DayZ avec armes, vêtements, nourriture et items.</p>
     </article>
 
   </section>
@@ -869,6 +875,91 @@
   <div id="teleportList" class="teleport-list"></div>
 
   <textarea id="teleportOutput" placeholder="Le fichier généré apparaîtra ici..."></textarea>
+</section>
+
+<section id="loadoutGeneratorTool" class="tool-panel hidden">
+  <h2>🎒 Loadout Generator</h2>
+
+  <p class="muted">
+    Créez un loadout complet DayZ avec presets, catégories, quantités et export JSON.
+  </p>
+
+  <div class="tool-form-grid">
+    <label>
+      Nom du fichier
+      <input id="loadoutFileName" placeholder="Ex : military-loadout">
+    </label>
+
+    <label>
+      Nom du loadout
+      <input id="loadoutName" placeholder="Ex : Kit militaire">
+    </label>
+
+    <label>
+      Preset rapide
+      <select id="loadoutPreset">
+        <option value="">Choisir un preset</option>
+        <option value="survivor">Survivant</option>
+        <option value="military">Militaire</option>
+        <option value="police">Police</option>
+        <option value="medic">Médecin</option>
+        <option value="builder">Builder</option>
+      </select>
+    </label>
+
+    <label>
+      Catégorie
+      <select id="loadoutCategory">
+        <option value="clothing">Vêtements</option>
+        <option value="weapons">Armes</option>
+        <option value="attachments">Accessoires armes</option>
+        <option value="ammo">Munitions</option>
+        <option value="medical">Médical</option>
+        <option value="food">Nourriture</option>
+        <option value="tools">Outils</option>
+        <option value="misc">Divers</option>
+      </select>
+    </label>
+
+    <label>
+      Nom de l’item DayZ
+      <input id="loadoutItemName" placeholder="Ex : M4A1">
+    </label>
+
+    <label>
+      Quantité
+      <input id="loadoutItemQuantity" type="number" min="1" value="1">
+    </label>
+
+    <label>
+      Santé / Health
+      <select id="loadoutItemHealth">
+        <option value="1">Pristine</option>
+        <option value="0.75">Worn</option>
+        <option value="0.5">Damaged</option>
+        <option value="0.25">Badly Damaged</option>
+      </select>
+    </label>
+
+    <label>
+      Attachments
+      <input id="loadoutItemAttachments" placeholder="Ex : M4_RISHndgrd,ACOGOptic">
+    </label>
+  </div>
+
+  <div class="tool-actions">
+    <button class="btn" id="addLoadoutItemBtn">Ajouter l’item</button>
+    <button class="btn secondary" id="applyLoadoutPresetBtn">Appliquer le preset</button>
+    <button class="btn secondary" id="generateLoadoutJsonBtn">Générer JSON</button>
+    <button class="btn secondary" id="downloadLoadoutJsonBtn">Télécharger JSON</button>
+    <button class="btn danger" id="clearLoadoutBtn">Effacer</button>
+  </div>
+
+  <p id="loadoutStatus" class="status"></p>
+
+  <div id="loadoutList" class="loadout-list"></div>
+
+  <textarea id="loadoutOutput" placeholder="Le loadout généré apparaîtra ici..."></textarea>
 </section>
 
 </main>

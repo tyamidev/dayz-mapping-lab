@@ -2466,3 +2466,262 @@ document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
 
   renderTeleportList();
 });
+
+/* ======================================================
+   LOADOUT GENERATOR
+====================================================== */
+
+let loadoutItems = [];
+
+const loadoutPresets = {
+  survivor: [
+    ["clothing", "Hoodie_Black", 1],
+    ["clothing", "Jeans_Blue", 1],
+    ["clothing", "AthleticShoes_Black", 1],
+    ["food", "Apple", 2],
+    ["tools", "StoneKnife", 1],
+    ["medical", "BandageDressing", 1]
+  ],
+
+  military: [
+    ["clothing", "BDUJacket", 1],
+    ["clothing", "BDUPants", 1],
+    ["clothing", "PlateCarrierVest", 1],
+    ["clothing", "Mich2001Helmet", 1],
+    ["weapons", "M4A1", 1, ["M4_RISHndgrd", "M4_MPBttstck", "ACOGOptic"]],
+    ["ammo", "Mag_STANAG_30Rnd", 3],
+    ["medical", "BandageDressing", 2],
+    ["food", "TacticalBaconCan", 2]
+  ],
+
+  police: [
+    ["clothing", "PoliceJacket", 1],
+    ["clothing", "PolicePants", 1],
+    ["clothing", "PoliceCap", 1],
+    ["weapons", "Glock19", 1],
+    ["ammo", "Mag_Glock_15Rnd", 2],
+    ["medical", "BandageDressing", 1],
+    ["tools", "Handcuffs", 1]
+  ],
+
+  medic: [
+    ["clothing", "ParamedicJacket_Blue", 1],
+    ["clothing", "ParamedicPants_Blue", 1],
+    ["medical", "BandageDressing", 4],
+    ["medical", "Morphine", 2],
+    ["medical", "Epinephrine", 2],
+    ["medical", "SalineBagIV", 1],
+    ["food", "WaterBottle", 1]
+  ],
+
+  builder: [
+    ["clothing", "WorkingGloves_Brown", 1],
+    ["tools", "Hammer", 1],
+    ["tools", "Hatchet", 1],
+    ["tools", "Shovel", 1],
+    ["tools", "Nails", 2],
+    ["tools", "MetalWire", 1],
+    ["food", "PeachesCan", 2]
+  ]
+};
+
+function getLoadoutValue(id) {
+  return document.getElementById(id)?.value?.trim() || "";
+}
+
+function renderLoadoutList() {
+  const list = document.getElementById("loadoutList");
+  if (!list) return;
+
+  if (!loadoutItems.length) {
+    list.innerHTML = "";
+    return;
+  }
+
+  list.innerHTML = loadoutItems.map((item, index) => `
+    <div class="loadout-card">
+      <div>
+        <strong>${item.name}</strong>
+        <span>${item.category} — Quantité : ${item.quantity}</span>
+        <code>
+          Health : ${item.health}
+          ${item.attachments.length ? " | Attachments : " + item.attachments.join(", ") : ""}
+        </code>
+      </div>
+
+      <button class="mini-btn danger" onclick="deleteLoadoutItem(${index})">
+        Supprimer
+      </button>
+    </div>
+  `).join("");
+}
+
+function buildLoadoutJson() {
+  const name = getLoadoutValue("loadoutName") || "Custom Loadout";
+
+  const grouped = {
+    clothing: [],
+    weapons: [],
+    attachments: [],
+    ammo: [],
+    medical: [],
+    food: [],
+    tools: [],
+    misc: []
+  };
+
+  loadoutItems.forEach(item => {
+    grouped[item.category].push(item);
+  });
+
+  return JSON.stringify({
+    loadoutName: name,
+    generatedBy: "DayZ Mapping Lab",
+    version: "1.0",
+    items: grouped
+  }, null, 2);
+}
+
+function addLoadoutItem(category, name, quantity = 1, attachments = [], health = 1) {
+  if (!name) return;
+
+  loadoutItems.push({
+    category,
+    name,
+    quantity: Number(quantity) || 1,
+    health: Number(health) || 1,
+    attachments: Array.isArray(attachments)
+      ? attachments
+      : String(attachments)
+          .split(",")
+          .map(a => a.trim())
+          .filter(Boolean)
+  });
+}
+
+document.getElementById("addLoadoutItemBtn")?.addEventListener("click", () => {
+  const status = document.getElementById("loadoutStatus");
+  status.className = "status";
+
+  const category = getLoadoutValue("loadoutCategory");
+  const name = getLoadoutValue("loadoutItemName");
+  const quantity = getLoadoutValue("loadoutItemQuantity");
+  const health = getLoadoutValue("loadoutItemHealth");
+  const attachments = getLoadoutValue("loadoutItemAttachments");
+
+  if (!name) {
+    status.classList.add("error");
+    status.textContent = "Ajoute au moins le nom de l’item.";
+    return;
+  }
+
+  addLoadoutItem(category, name, quantity, attachments, health);
+
+  document.getElementById("loadoutItemName").value = "";
+  document.getElementById("loadoutItemQuantity").value = "1";
+  document.getElementById("loadoutItemAttachments").value = "";
+
+  renderLoadoutList();
+  document.getElementById("loadoutOutput").value = buildLoadoutJson();
+
+  status.textContent = "✅ Item ajouté au loadout.";
+});
+
+document.getElementById("applyLoadoutPresetBtn")?.addEventListener("click", () => {
+  const status = document.getElementById("loadoutStatus");
+  status.className = "status";
+
+  const preset = getLoadoutValue("loadoutPreset");
+
+  if (!preset || !loadoutPresets[preset]) {
+    status.classList.add("error");
+    status.textContent = "Choisis un preset avant de l’appliquer.";
+    return;
+  }
+
+  loadoutPresets[preset].forEach(item => {
+    addLoadoutItem(
+      item[0],
+      item[1],
+      item[2],
+      item[3] || [],
+      1
+    );
+  });
+
+  if (!getLoadoutValue("loadoutName")) {
+    document.getElementById("loadoutName").value =
+      preset.charAt(0).toUpperCase() + preset.slice(1) + " Loadout";
+  }
+
+  renderLoadoutList();
+  document.getElementById("loadoutOutput").value = buildLoadoutJson();
+
+  status.textContent = "✅ Preset ajouté au loadout.";
+});
+
+function deleteLoadoutItem(index) {
+  loadoutItems.splice(index, 1);
+  renderLoadoutList();
+
+  document.getElementById("loadoutOutput").value =
+    loadoutItems.length ? buildLoadoutJson() : "";
+}
+
+document.getElementById("generateLoadoutJsonBtn")?.addEventListener("click", () => {
+  const status = document.getElementById("loadoutStatus");
+  status.className = "status";
+
+  if (!loadoutItems.length) {
+    status.classList.add("error");
+    status.textContent = "Ajoute au moins un item ou applique un preset.";
+    return;
+  }
+
+  document.getElementById("loadoutOutput").value = buildLoadoutJson();
+  status.textContent = "✅ Loadout JSON généré.";
+});
+
+document.getElementById("downloadLoadoutJsonBtn")?.addEventListener("click", () => {
+  const status = document.getElementById("loadoutStatus");
+  const output = document.getElementById("loadoutOutput");
+
+  if (!output.value.trim()) {
+    status.className = "status error";
+    status.textContent = "Aucun loadout à télécharger.";
+    return;
+  }
+
+  const fileName = getLoadoutValue("loadoutFileName") || "dayz-loadout";
+
+  downloadFile(
+    `${fileName}.json`,
+    output.value,
+    "application/json"
+  );
+});
+
+document.getElementById("clearLoadoutBtn")?.addEventListener("click", () => {
+  loadoutItems = [];
+
+  [
+    "loadoutFileName",
+    "loadoutName",
+    "loadoutItemName",
+    "loadoutItemAttachments"
+  ].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) input.value = "";
+  });
+
+  document.getElementById("loadoutItemQuantity").value = "1";
+  document.getElementById("loadoutPreset").value = "";
+  document.getElementById("loadoutCategory").value = "clothing";
+  document.getElementById("loadoutItemHealth").value = "1";
+
+  document.getElementById("loadoutOutput").value = "";
+  document.getElementById("loadoutStatus").className = "status";
+  document.getElementById("loadoutStatus").textContent = "";
+
+  renderLoadoutList();
+});
