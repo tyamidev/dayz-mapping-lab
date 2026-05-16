@@ -2629,7 +2629,11 @@ const LOADOUT_SLOTS = [
   "Mask",
   "Headgear",
   "Gloves",
-  "Armband"
+  "Armband",
+  "Eyewear",
+  "Hands",
+  "LeftShoulder",
+  "RightShoulder"
 ];
 
 function loadoutGet(id) {
