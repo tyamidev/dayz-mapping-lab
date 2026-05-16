@@ -2566,27 +2566,43 @@ case "Back":
     !classname.includes("salinebag")
   );
 
-      case "Vest":
-        return (
-          item.slot === "Vest" ||
-          classname.includes("vest") ||
-          classname.includes("platecarrier")
-        );
+
+  case "Vest":
+    return (
+      (
+        item.slot === "Vest" ||
+        classname.includes("vest") ||
+        classname.includes("platecarrier")
+      ) &&
+        !classname.includes("platecarrierholster") &&
+        !classname.includes("platecarrierholster_black") &&
+        !classname.includes("platecarrierholster_camo") &&
+        !classname.includes("platecarrierholster_green") &&
+        !classname.includes("platecarrierholster_winter") &&
+        !classname.includes("platecarrierpouches") &&
+        !classname.includes("platecarrierpouches_black") &&
+        !classname.includes("platecarrierpouches_camo") &&
+        !classname.includes("platecarrierpouches_green") &&
+        !classname.includes("platecarrierpouches_winter")
+    );
 
       case "Eyewear":
         return (
+          (
           classname.includes("glasses") ||
           classname.includes("eyewear") ||
           classname.includes("goggles")
+        ) &&
+        !classname.includes("nvgoggles")
         );
 
       case "Hands":
         return (
           classname.includes("flashlight") ||
           classname.includes("rifle") ||
-          classname.includes("pistol") ||
           classname.includes("knife") ||
-          classname.includes("bat") ||
+          classname.includes("baseballbat") ||
+          classname.includes("map") ||
           classname.includes("axe")
         );
 
@@ -2596,10 +2612,14 @@ case "Back":
           classname.includes("rifle") ||
           classname.includes("shotgun") ||
           classname.includes("mosin") ||
-          classname.includes("m4") ||
-          classname.includes("ak") ||
+          classname.includes("m4a") ||
+          classname.includes("ak7") ||
+          classname.includes("akm") ||
+          classname.includes("ak1") ||
           classname.includes("sks") ||
-          classname.includes("smg")
+          classname.includes("smg") ||
+          classname.includes("cz") ||
+          classname.includes("axe")
         );
 
       case "Armband":
