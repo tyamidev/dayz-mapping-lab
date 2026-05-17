@@ -416,3 +416,9 @@ body {
   padding-top: 18px;
   border-top: 1px solid rgba(255,255,255,.08);
 }
+.site-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  object-fit: cover;
+}

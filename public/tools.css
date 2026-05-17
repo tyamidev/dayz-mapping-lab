@@ -852,3 +852,9 @@
   color: #001b12;
   border-color: var(--primary);
 }
+.site-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  object-fit: cover;
+}

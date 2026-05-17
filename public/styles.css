@@ -571,3 +571,9 @@
 .review-card {
   min-height: 230px;
 }
+.site-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  object-fit: cover;
+}
