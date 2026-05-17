@@ -64,7 +64,7 @@
   </p>
 
 <div class="actions">
-  <a class="btn tools-main-cta" href="/tools.html">🛠️ Accéder aux outils gratuits</a>
+  <a class="btn tools-main-cta" href="/tools.html" data-i18n="cta_tools">🛠️ Accéder aux outils gratuits</a>
   <a class="btn" href="#packs" data-i18n="cta_packs">Voir les offres</a>
   <a class="btn ghost" href="#contact" data-i18n="cta_quote">Demander un devis</a>
 </div>
@@ -83,9 +83,9 @@
 </section>
 
 <section id="free-tools" class="section tools-highlight">
-  <p class="eyebrow">Free Tools</p>
-  <h2>Des outils gratuits pour gérer vos fichiers DayZ</h2>
-  <p class="section-intro">
+  <p class="eyebrow" data-i18n="tools_eyebrow">Free Tools</p>
+  <h2 data-i18n="tools_title">Des outils gratuits pour gérer vos fichiers DayZ</h2>
+  <p class="section-intro" data-i18n="tools_intro">
     Accédez à nos outils DayZ : XML Validator, Types Organizer, Mapping Cleaner, Teleport Generator, Loadout Generator et plus encore.
   </p>
 
@@ -232,21 +232,23 @@
 </div>
 
 <section id="avis" class="section reviews-section">
-  <p class="eyebrow">Avis clients</p>
-  <h2>Ils ont travaillé avec DayZ Mapping Lab</h2>
+  <p class="eyebrow" data-i18n="reviews_eyebrow">Avis clients</p>
+  <h2 data-i18n="reviews_title">Ils ont travaillé avec DayZ Mapping Lab</h2>
 
   <div id="reviewsGrid" class="reviews-grid"></div>
 
   <form id="reviewForm" class="form review-form">
-    <input name="name" placeholder="Votre pseudo" required>
-    <input name="service" placeholder="Service utilisé ex : Mapping, Bot Discord...">
+    <input name="name" data-i18n-placeholder="reviews_name" placeholder="Votre pseudo" required>
+    <input name="service" data-i18n-placeholder="reviews_service" placeholder="Service utilisé ex : Mapping, Bot Discord...">
     <select name="rating" required>
       <option value="5">★★★★★ - Excellent</option>
       <option value="4">★★★★☆ - Très bien</option>
       <option value="3">★★★☆☆ - Bien</option>
+      <option value="2">★★☆☆☆ - Moyen</option>
+      <option value="1">★☆☆☆☆ - Mauvais</option>
     </select>
-    <textarea name="message" placeholder="Votre avis" required></textarea>
-    <button class="btn" type="submit">Laisser un avis</button>
+    <textarea name="message" data-i18n-placeholder="reviews_message" placeholder="Votre avis" required></textarea>
+    <button class="btn" type="submit" data-i18n="reviews_submit">Laisser un avis</button>
     <p id="reviewStatus" class="status"></p>
   </form>
 </section>
