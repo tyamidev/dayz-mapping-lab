@@ -70,6 +70,7 @@ const logoutBtn = document.getElementById("logout");
 
 let cachedRequests = [];
 let cachedQuotes = [];
+let cachedReviews = [];
 
 async function check() {
   const me = await req("/api/admin/me");
@@ -86,6 +87,7 @@ async function check() {
 async function refreshAll() {
   await loadRequests();
   await loadQuotes();
+  await loadReviewsAdmin();
   updateStats();
 }
 
@@ -127,6 +129,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
 
 document.getElementById("refreshRequests").onclick = loadRequests;
 document.getElementById("refreshQuotes").onclick = loadQuotes;
+document.getElementById("refreshReviews").onclick = loadReviewsAdmin;
 
 const serviceSelect = document.getElementById("serviceSelect");
 const amountInput = document.getElementById("amountInput");
@@ -462,6 +465,95 @@ async function loadQuotes() {
   } catch (e) {
     box.innerHTML = `<p class="status">${e.message}</p>`;
   }
+}
+
+async function loadReviewsAdmin() {
+  const box = document.getElementById("reviewsAdmin");
+  if (!box) return;
+
+  box.innerHTML = '<p class="muted">Chargement...</p>';
+
+  try {
+    const reviews = await req("/api/admin/reviews");
+    cachedReviews = reviews;
+
+    box.innerHTML = reviews.map(r => `
+      <article class="quote-item">
+        <header>
+          <div>
+            <strong>${esc(r.name)}</strong>
+            <p class="muted">${r.createdAt ? new Date(r.createdAt).toLocaleString("fr-FR") : ""}</p>
+          </div>
+          <span class="badge ${esc(r.status || "pending")}">${esc(r.status || "pending")}</span>
+        </header>
+
+        <p>Service : <strong>${esc(r.service || "Service DayZ Mapping Lab")}</strong></p>
+        <p>Note : <strong>${"★".repeat(Number(r.rating || 5))}${"☆".repeat(5 - Number(r.rating || 5))}</strong></p>
+        <p class="muted">${esc(r.message)}</p>
+
+        <div class="toolbar">
+          <button class="btn" onclick="publishReview('${esc(r.id)}')">Publier</button>
+          <button class="btn secondary" onclick="pendingReview('${esc(r.id)}')">Mettre en attente</button>
+          <button class="btn secondary" onclick="editReview('${esc(r.id)}')">Modifier</button>
+          <button class="btn danger" onclick="deleteReview('${esc(r.id)}')">Supprimer</button>
+        </div>
+      </article>
+    `).join("") || '<p class="muted">Aucun avis.</p>';
+
+  } catch (e) {
+    box.innerHTML = `<p class="status">${e.message}</p>`;
+  }
+}
+
+async function patchReview(id, data) {
+  await req("/api/admin/reviews/" + id, {
+    method: "PATCH",
+    body: JSON.stringify(data)
+  });
+
+  await loadReviewsAdmin();
+}
+
+async function publishReview(id) {
+  await patchReview(id, { status: "published" });
+}
+
+async function pendingReview(id) {
+  await patchReview(id, { status: "pending" });
+}
+
+async function deleteReview(id) {
+  if (!confirm("Supprimer cet avis ?")) return;
+
+  await req("/api/admin/reviews/" + id, {
+    method: "DELETE"
+  });
+
+  await loadReviewsAdmin();
+}
+
+async function editReview(id) {
+  const review = cachedReviews.find(r => r.id === id);
+  if (!review) return alert("Avis introuvable.");
+
+  const name = prompt("Nom / pseudo :", review.name || "");
+  if (name === null) return;
+
+  const service = prompt("Service :", review.service || "");
+  if (service === null) return;
+
+  const rating = prompt("Note de 1 à 5 :", review.rating || 5);
+  if (rating === null) return;
+
+  const message = prompt("Avis :", review.message || "");
+  if (message === null) return;
+
+  await patchReview(id, {
+    name,
+    service,
+    rating: Math.min(5, Math.max(1, Number(rating || 5))),
+    message
+  });
 }
 
 function updateStats() {

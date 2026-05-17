@@ -135,7 +135,7 @@ if (reviewForm) {
     try {
       await postJSON("/api/reviews", Object.fromEntries(new FormData(reviewForm)));
       reviewForm.reset();
-      status.textContent = "Merci ! Votre avis est publié.";
+      status.textContent = "Merci ! Votre avis a été envoyé et sera publié après validation.";
       loadReviews();
     } catch (err) {
       status.textContent = err.message;

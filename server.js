@@ -230,7 +230,7 @@ app.post('/api/reviews', async (req, res) => {
     service: service ? String(service).trim().slice(0, 80) : '',
     rating: Math.min(5, Math.max(1, Number(rating || 5))),
     message: String(message).trim().slice(0, 600),
-    status: 'published',
+    status: 'pending',
     createdAt: new Date().toISOString()
   };
 
@@ -514,6 +514,42 @@ app.delete('/api/admin/quotes/:id', requireAdmin, async (req,res)=>{
 
 app.post('/stripe/webhook', express.raw({ type:'application/json' }), async (req,res)=>{
   res.json({ received:true });
+});
+
+app.get('/api/admin/reviews', requireAdmin, async (req, res) => {
+  const reviews = await readReviews();
+
+  res.json(
+    reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  );
+});
+
+app.patch('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+  const reviews = await readReviews();
+  const review = reviews.find(r => r.id === req.params.id);
+
+  if (!review) {
+    return res.status(404).json({ error: 'Avis introuvable.' });
+  }
+
+  const allowed = ['name', 'service', 'rating', 'message', 'status'];
+
+  for (const key of allowed) {
+    if (key in req.body) {
+      review[key] = key === 'rating' ? Number(req.body[key]) : req.body[key];
+    }
+  }
+
+  review.updatedAt = new Date().toISOString();
+
+  await writeReview(review);
+
+  res.json(review);
+});
+
+app.delete('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
+  await deleteDoc('reviews', req.params.id);
+  res.json({ ok: true });
 });
 
 app.listen(PORT, ()=> console.log(`DayZ Mapping Lab lancé sur ${SITE_URL}`));
