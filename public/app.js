@@ -96,3 +96,51 @@ if (lightboxClose && galleryLightbox) {
 setInterval(() => {
   updateGallery(galleryIndex + 1);
 }, 6000);
+
+async function loadReviews() {
+  const grid = document.getElementById("reviewsGrid");
+  if (!grid) return;
+
+  try {
+    const res = await fetch("/api/reviews");
+    const reviews = await res.json();
+
+    if (!reviews.length) {
+      grid.innerHTML = `<p class="muted">Aucun avis pour le moment.</p>`;
+      return;
+    }
+
+    grid.innerHTML = reviews.map(review => `
+      <article class="review-card">
+        <div class="review-stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
+        <h3>${review.name}</h3>
+        <small>${review.service || "Service DayZ Mapping Lab"}</small>
+        <p>${review.message}</p>
+      </article>
+    `).join("");
+  } catch {
+    grid.innerHTML = `<p class="muted">Impossible de charger les avis.</p>`;
+  }
+}
+
+const reviewForm = document.getElementById("reviewForm");
+
+if (reviewForm) {
+  reviewForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const status = document.getElementById("reviewStatus");
+    status.textContent = "Envoi en cours...";
+
+    try {
+      await postJSON("/api/reviews", Object.fromEntries(new FormData(reviewForm)));
+      reviewForm.reset();
+      status.textContent = "Merci ! Votre avis est publié.";
+      loadReviews();
+    } catch (err) {
+      status.textContent = err.message;
+    }
+  });
+}
+
+loadReviews();

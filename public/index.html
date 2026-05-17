@@ -63,10 +63,11 @@
     DayZ Mapping Lab accompagne les créateurs de serveurs avec des mappings personnalisés, des configurations propres, des bots Discord et des serveurs Discord complets.
   </p>
 
-  <div class="actions">
-    <a class="btn" href="#packs" data-i18n="cta_packs">Voir les offres</a>
-    <a class="btn ghost" href="#contact" data-i18n="cta_quote">Demander un devis</a>
-  </div>
+<div class="actions">
+  <a class="btn tools-main-cta" href="/tools.html">🛠️ Accéder aux outils gratuits</a>
+  <a class="btn" href="#packs" data-i18n="cta_packs">Voir les offres</a>
+  <a class="btn ghost" href="#contact" data-i18n="cta_quote">Demander un devis</a>
+</div>
 
   <p class="trust" data-i18n="trust_text">Paiement sécurisé • Devis verrouillé • Livraison selon validation du projet</p>
 </div>
@@ -80,6 +81,19 @@
     </ul>
   </div>
 </section>
+
+<section id="free-tools" class="section tools-highlight">
+  <p class="eyebrow">Free Tools</p>
+  <h2>Des outils gratuits pour gérer vos fichiers DayZ</h2>
+  <p class="section-intro">
+    Accédez à nos outils DayZ : XML Validator, Types Organizer, Mapping Cleaner, Teleport Generator, Loadout Generator et plus encore.
+  </p>
+
+  <a class="btn tools-big-btn" href="/tools.html">
+    🛠️ Ouvrir les outils gratuits
+  </a>
+</section>
+
 <section id="services" class="section">
   <p class="eyebrow" data-i18n="services_eyebrow">Services</p>
   <h2 data-i18n="services_title">Un accompagnement complet pour lancer votre projet</h2>
@@ -216,6 +230,26 @@
   <button class="lightbox-close" id="lightboxClose">×</button>
   <img id="lightboxImage" src="" alt="Image galerie">
 </div>
+
+<section id="avis" class="section reviews-section">
+  <p class="eyebrow">Avis clients</p>
+  <h2>Ils ont travaillé avec DayZ Mapping Lab</h2>
+
+  <div id="reviewsGrid" class="reviews-grid"></div>
+
+  <form id="reviewForm" class="form review-form">
+    <input name="name" placeholder="Votre pseudo" required>
+    <input name="service" placeholder="Service utilisé ex : Mapping, Bot Discord...">
+    <select name="rating" required>
+      <option value="5">★★★★★ - Excellent</option>
+      <option value="4">★★★★☆ - Très bien</option>
+      <option value="3">★★★☆☆ - Bien</option>
+    </select>
+    <textarea name="message" placeholder="Votre avis" required></textarea>
+    <button class="btn" type="submit">Laisser un avis</button>
+    <p id="reviewStatus" class="status"></p>
+  </form>
+</section>
 
 <section id="contact" class="section contact"><div>
   <p class="eyebrow" data-i18n="contact_eyebrow">Contact</p>

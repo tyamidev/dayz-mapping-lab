@@ -188,6 +188,57 @@ async function notifyDiscord(payload){
   await fetch(url, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(()=>{});
 }
 
+async function readReviews() {
+  return await getCollection('reviews');
+}
+
+async function writeReview(review) {
+  await saveDoc('reviews', review.id, review);
+}
+
+async function nextReviewId() {
+  const reviews = await readReviews();
+  const nums = reviews
+    .map(r => Number(String(r.id || '').replace('REV-', '')))
+    .filter(Boolean);
+
+  const next = (nums.length ? Math.max(...nums) : 0) + 1;
+  return `REV-${String(next).padStart(4, '0')}`;
+}
+
+app.get('/api/reviews', async (req, res) => {
+  const reviews = await readReviews();
+
+  res.json(
+    reviews
+      .filter(r => r.status === 'published')
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 12)
+  );
+});
+
+app.post('/api/reviews', async (req, res) => {
+  const { name, service, rating, message } = req.body;
+
+  if (!name || !message) {
+    return res.status(400).json({ error: 'Pseudo et avis obligatoires.' });
+  }
+
+  const review = {
+    id: await nextReviewId(),
+    name: String(name).trim().slice(0, 40),
+    service: service ? String(service).trim().slice(0, 80) : '',
+    rating: Math.min(5, Math.max(1, Number(rating || 5))),
+    message: String(message).trim().slice(0, 600),
+    status: 'published',
+    createdAt: new Date().toISOString()
+  };
+
+  await writeReview(review);
+
+  res.json({ ok: true });
+});
+
 app.post('/api/contact', async (req,res)=>{
   const { name, email, discord, service, budget, message } = req.body;
   if (!name || !email || !message) return res.status(400).json({ error:'Nom, email et message obligatoires.' });
