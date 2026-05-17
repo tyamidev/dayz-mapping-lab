@@ -572,3 +572,7 @@ function updateStats() {
 }
 
 check();
+
+document.querySelector('[data-tab="reviewsTab"]')?.addEventListener("click", () => {
+  loadReviewsAdmin();
+});
