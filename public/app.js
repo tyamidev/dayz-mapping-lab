@@ -97,31 +97,79 @@ setInterval(() => {
   updateGallery(galleryIndex + 1);
 }, 6000);
 
+let allReviews = [];
+let visibleReviewsCount = 3;
+
 async function loadReviews() {
   const grid = document.getElementById("reviewsGrid");
+  const summary = document.getElementById("reviewsSummary");
+  const moreBtn = document.getElementById("showMoreReviewsBtn");
+
   if (!grid) return;
 
   try {
     const res = await fetch("/api/reviews");
-    const reviews = await res.json();
+    allReviews = await res.json();
 
-    if (!reviews.length) {
-      grid.innerHTML = `<p class="muted">Aucun avis pour le moment.</p>`;
-      return;
+    renderReviews();
+
+    if (summary && allReviews.length) {
+      const avg =
+        allReviews.reduce((sum, r) => sum + Number(r.rating || 0), 0) /
+        allReviews.length;
+
+      summary.innerHTML = `
+        <span class="avg">${avg.toFixed(1)} ★</span>
+        <span class="count">${allReviews.length} avis client${allReviews.length > 1 ? "s" : ""}</span>
+      `;
     }
 
-    grid.innerHTML = reviews.map(review => `
-      <article class="review-card">
-        <div class="review-stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
-        <h3>${review.name}</h3>
-        <small>${review.service || "Service DayZ Mapping Lab"}</small>
-        <p>${review.message}</p>
-      </article>
-    `).join("");
+    if (summary && !allReviews.length) {
+      summary.innerHTML = "";
+    }
+
+    if (moreBtn) {
+      moreBtn.style.display = allReviews.length > visibleReviewsCount ? "inline-flex" : "none";
+    }
+
   } catch {
     grid.innerHTML = `<p class="muted">Impossible de charger les avis.</p>`;
   }
 }
+
+function renderReviews() {
+  const grid = document.getElementById("reviewsGrid");
+  const moreBtn = document.getElementById("showMoreReviewsBtn");
+
+  if (!grid) return;
+
+  const reviews = allReviews.slice(0, visibleReviewsCount);
+
+  if (!reviews.length) {
+    grid.innerHTML = `<p class="muted">Aucun avis pour le moment.</p>`;
+    if (moreBtn) moreBtn.style.display = "none";
+    return;
+  }
+
+  grid.innerHTML = reviews.map(review => `
+    <article class="review-card">
+      <div class="review-stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
+      <h3>${review.name}</h3>
+      <small>${review.service || "Service DayZ Mapping Lab"}</small>
+      <p>${review.message}</p>
+    </article>
+  `).join("");
+
+  if (moreBtn) {
+    moreBtn.style.display =
+      visibleReviewsCount < allReviews.length ? "inline-flex" : "none";
+  }
+}
+
+document.getElementById("showMoreReviewsBtn")?.addEventListener("click", () => {
+  visibleReviewsCount += 3;
+  renderReviews();
+});
 
 const reviewForm = document.getElementById("reviewForm");
 

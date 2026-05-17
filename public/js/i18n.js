@@ -30,6 +30,7 @@ const translations = {
     reviews_service: "Service utilisé ex : Mapping, Bot Discord...",
     reviews_message: "Votre avis",
     reviews_submit: "Laisser un avis",
+    reviews_more: "Voir plus d’avis",
     trust_text: "Paiement sécurisé • Devis verrouillé • Livraison selon validation du projet",
     
 
@@ -143,6 +144,7 @@ const translations = {
     reviews_service: "Service used e.g. Mapping, Discord Bot...",
     reviews_message: "Your review",
     reviews_submit: "Leave a review",
+    reviews_more: "See more reviews",
     trust_text: "Secure payment • Locked quote • Delivery after project validation",
 
     service_demande: "Most requested services",
@@ -255,6 +257,7 @@ const translations = {
     reviews_service: "Genutzter Service z. B. Mapping, Discord-Bot...",
     reviews_message: "Deine Bewertung",
     reviews_submit: "Bewertung abgeben",
+    reviews_more: "Mehr Bewertungen anzeigen",
     trust_text: "Sichere Zahlung • Festes Angebot • Lieferung nach Projektbestätigung",
 
     service_demande: "Meistgefragte Leistungen",
@@ -367,6 +370,7 @@ const translations = {
     reviews_service: "Servicio utilizado ej.: Mapping, Bot de Discord...",
     reviews_message: "Tu reseña",
     reviews_submit: "Dejar una reseña",
+    reviews_more: "Ver más reseñas",
     trust_text: "Pago seguro • Presupuesto bloqueado • Entrega tras validación del proyecto",
 
     service_demande: "Servicios más solicitados",

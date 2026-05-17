@@ -541,3 +541,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+.reviews-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 8px;
+  padding: 16px 22px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  font-weight: 900;
+}
+
+.reviews-summary .avg {
+  color: var(--accent2);
+  font-size: 24px;
+}
+
+.reviews-summary .count {
+  color: var(--muted);
+}
+
+.reviews-actions {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.review-card {
+  min-height: 230px;
+}
