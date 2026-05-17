@@ -30,7 +30,7 @@
       <button class="sidebar-btn active tab-btn" data-tab="dashboardTab">
         📊 Dashboard
       </button>
-      
+
       <button class="sidebar-btn tab-btn" data-tab="reviewsTab">
         ⭐ Avis
       </button>
@@ -108,6 +108,21 @@
 
         </div>
       </section>
+
+      <section id="reviewsTab" class="admin-panel tab-panel hidden">
+  <div class="toolbar">
+    <div>
+      <h2>Avis clients</h2>
+      <p class="muted">Valider, modifier ou supprimer les avis avant publication.</p>
+    </div>
+
+    <button class="btn secondary" id="refreshReviews">
+      Actualiser
+    </button>
+  </div>
+
+  <div id="reviewsAdmin" class="quote-list"></div>
+</section>
 
       <section id="requestsTab" class="admin-panel tab-panel hidden">
         <div class="toolbar">
