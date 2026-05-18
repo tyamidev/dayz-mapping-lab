@@ -3163,6 +3163,9 @@ document.getElementById("toggleCharactersBtn")?.addEventListener("click", () => 
 
 });
 
+loadoutInitCharacters();
+loadoutRefreshWearItemsList();
+
 let territoryZones = [];
 
 function renderTerritoryZones() {
@@ -3281,8 +3284,6 @@ document.getElementById("clearTerritoryXmlBtn")
   document.getElementById("territoryXmlOutput").value = "";
 });
 
-loadoutInitCharacters();
-loadoutRefreshWearItemsList();
 
 document.getElementById("territoryXmlImport")
 ?.addEventListener("change", async (event) => {
