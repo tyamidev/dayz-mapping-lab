@@ -3163,5 +3163,123 @@ document.getElementById("toggleCharactersBtn")?.addEventListener("click", () => 
 
 });
 
+let territoryZones = [];
+
+function renderTerritoryZones() {
+  const container = document.getElementById("territoryZoneList");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  territoryZones.forEach((zone, index) => {
+    container.innerHTML += `
+      <div class="loadout-item-card">
+        <div>
+          <strong>${zone.name}</strong><br>
+          x="${zone.x}" z="${zone.z}" r="${zone.r}"
+        </div>
+
+        <button
+          class="btn danger-btn"
+          onclick="removeTerritoryZone(${index})"
+        >
+          Supprimer
+        </button>
+      </div>
+    `;
+  });
+}
+
+function removeTerritoryZone(index) {
+  territoryZones.splice(index, 1);
+  renderTerritoryZones();
+}
+
+document.getElementById("addTerritoryZoneBtn")?.addEventListener("click", () => {
+
+  territoryZones.push({
+    name: document.getElementById("territoryZoneName").value,
+    smin: document.getElementById("territorySmin").value,
+    smax: document.getElementById("territorySmax").value,
+    dmin: document.getElementById("territoryDmin").value,
+    dmax: document.getElementById("territoryDmax").value,
+    x: document.getElementById("territoryX").value,
+    z: document.getElementById("territoryZ").value,
+    r: document.getElementById("territoryRadius").value
+  });
+
+  renderTerritoryZones();
+});
+
+function generateTerritoryXML() {
+
+  const color = document.getElementById("territoryColor").value;
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<territory-type>\n`;
+  xml += `    <territory color="${color}">\n`;
+
+  territoryZones.forEach(zone => {
+
+    xml += `        <zone `;
+    xml += `name="${zone.name}" `;
+    xml += `smin="${zone.smin}" `;
+    xml += `smax="${zone.smax}" `;
+    xml += `dmin="${zone.dmin}" `;
+    xml += `dmax="${zone.dmax}" `;
+    xml += `x="${zone.x}" `;
+    xml += `z="${zone.z}" `;
+    xml += `r="${zone.r}"/>\n`;
+
+  });
+
+  xml += `    </territory>\n`;
+  xml += `</territory-type>`;
+
+  document.getElementById("territoryXmlOutput").value = xml;
+}
+
+document.getElementById("generateTerritoryXmlBtn")
+?.addEventListener("click", generateTerritoryXML);
+
+document.getElementById("downloadTerritoryXmlBtn")
+?.addEventListener("click", () => {
+
+  generateTerritoryXML();
+
+  const content =
+    document.getElementById("territoryXmlOutput").value;
+
+  const blob = new Blob([content], {
+    type: "application/xml"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "territories.xml";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById("clearTerritoryXmlBtn")
+?.addEventListener("click", () => {
+
+  territoryZones = [];
+
+  renderTerritoryZones();
+
+  document.getElementById("territoryXmlOutput").value = "";
+});
+
 loadoutInitCharacters();
 loadoutRefreshWearItemsList();

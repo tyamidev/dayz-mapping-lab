@@ -142,7 +142,11 @@
       <p>Créer des kits/loadouts DayZ avec armes, vêtements, nourriture et items.</p>
     </article>
 
-
+    <article class="tool-card" data-tool="territoryGeneratorTool">
+      <span>🗺️</span>
+      <h3>Territory XML Generator</h3>
+      <p>Créer des zones de spawn XML DayZ pour zombies et animaux.</p>
+    </article>
     
   </section>
 
@@ -1017,6 +1021,90 @@
 
   <datalist id="dayzItemsList"></datalist>
 </section>
+
+<section id="territoryGeneratorTool" class="tool-panel hidden">
+  <h2>🗺️ Territory XML Generator</h2>
+
+  <p class="muted">
+    Créez des zones de spawn XML DayZ pour zombies et animaux au vrai format territories.
+  </p>
+
+  <div class="tool-grid">
+    <div class="tool-input">
+      <label>Territory Color</label>
+      <input type="number" id="territoryColor" value="1291845632">
+    </div>
+
+    <div class="tool-input">
+      <label>Zone Type</label>
+      <select id="territoryZoneName">
+        <option value="InfectedVillage">InfectedVillage</option>
+        <option value="InfectedArmy">InfectedArmy</option>
+        <option value="InfectedArmyHard">InfectedArmyHard</option>
+        <option value="InfectedIndustrial">InfectedIndustrial</option>
+        <option value="InfectedMedic">InfectedMedic</option>
+        <option value="InfectedReligious">InfectedReligious</option>
+        <option value="InfectedNBC">InfectedNBC</option>
+        <option value="InfectedSolitude">InfectedSolitude</option>
+        <option value="HuntingGround">HuntingGround</option>
+        <option value="Rest">Rest</option>
+        <option value="Water">Water</option>
+      </select>
+    </div>
+
+    <div class="tool-input">
+      <label>smin</label>
+      <input type="number" id="territorySmin" value="0">
+    </div>
+
+    <div class="tool-input">
+      <label>smax</label>
+      <input type="number" id="territorySmax" value="0">
+    </div>
+
+    <div class="tool-input">
+      <label>dmin</label>
+      <input type="number" id="territoryDmin" value="1">
+    </div>
+
+    <div class="tool-input">
+      <label>dmax</label>
+      <input type="number" id="territoryDmax" value="3">
+    </div>
+
+    <div class="tool-input">
+      <label>X</label>
+      <input type="number" id="territoryX" step="0.01" value="7500">
+    </div>
+
+    <div class="tool-input">
+      <label>Z</label>
+      <input type="number" id="territoryZ" step="0.01" value="7500">
+    </div>
+
+    <div class="tool-input">
+      <label>Radius</label>
+      <input type="number" id="territoryRadius" value="80">
+    </div>
+  </div>
+
+  <div class="tool-actions">
+    <button class="btn" id="addTerritoryZoneBtn">➕ Ajouter une zone</button>
+    <button class="btn secondary" id="generateTerritoryXmlBtn">Générer XML</button>
+    <button class="btn secondary" id="downloadTerritoryXmlBtn">Télécharger XML</button>
+    <button class="btn danger" id="clearTerritoryXmlBtn">Effacer</button>
+  </div>
+
+  <div id="territoryZoneList"></div>
+
+  <textarea
+    id="territoryXmlOutput"
+    class="tool-output"
+    placeholder="Le fichier territories XML apparaîtra ici..."
+    spellcheck="false"
+  ></textarea>
+</section>
+
 
 </main>
 
