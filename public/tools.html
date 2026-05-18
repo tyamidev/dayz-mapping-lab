@@ -1037,19 +1037,43 @@
 
     <div class="tool-input">
       <label>Zone Type</label>
-      <select id="territoryZoneName">
-        <option value="InfectedVillage">InfectedVillage</option>
-        <option value="InfectedArmy">InfectedArmy</option>
-        <option value="InfectedArmyHard">InfectedArmyHard</option>
-        <option value="InfectedIndustrial">InfectedIndustrial</option>
-        <option value="InfectedMedic">InfectedMedic</option>
-        <option value="InfectedReligious">InfectedReligious</option>
-        <option value="InfectedNBC">InfectedNBC</option>
-        <option value="InfectedSolitude">InfectedSolitude</option>
-        <option value="HuntingGround">HuntingGround</option>
-        <option value="Rest">Rest</option>
-        <option value="Water">Water</option>
-      </select>
+
+<input
+  id="territoryZoneName"
+  list="territoryZonePresets"
+  placeholder="Ex : InfectedVillage"
+/>
+
+<datalist id="territoryZonePresets">
+
+  <!-- ZOMBIES -->
+  <option value="InfectedVillage">
+  <option value="InfectedArmy">
+  <option value="InfectedArmyHard">
+  <option value="InfectedIndustrial">
+  <option value="InfectedMedic">
+  <option value="InfectedPolice">
+  <option value="InfectedFirefighter">
+  <option value="InfectedReligious">
+  <option value="InfectedPrison">
+  <option value="InfectedNBC">
+  <option value="InfectedFarm">
+  <option value="InfectedOffice">
+  <option value="InfectedSpooky">
+  <option value="InfectedSolitude">
+
+  <!-- ANIMAUX -->
+  <option value="Graze">
+  <option value="Rest">
+  <option value="Water">
+  <option value="HuntingGround">
+
+  <!-- PETITS ANIMAUX -->
+  <option value="Zone_hen">
+  <option value="Zone_Hare">
+
+</datalist>
+
     </div>
 
     <div class="tool-input">
