@@ -3283,3 +3283,47 @@ document.getElementById("clearTerritoryXmlBtn")
 
 loadoutInitCharacters();
 loadoutRefreshWearItemsList();
+
+document.getElementById("territoryXmlImport")
+?.addEventListener("change", async (event) => {
+
+  const file = event.target.files?.[0];
+
+  if (!file) return;
+
+  const text = await file.text();
+
+  const parser = new DOMParser();
+
+  const xml = parser.parseFromString(text, "application/xml");
+
+  const territory =
+    xml.querySelector("territory");
+
+  if (territory) {
+    document.getElementById("territoryColor").value =
+      territory.getAttribute("color") || "1291845632";
+  }
+
+  territoryZones = [];
+
+  xml.querySelectorAll("zone").forEach(zone => {
+
+    territoryZones.push({
+      name: zone.getAttribute("name") || "",
+      smin: zone.getAttribute("smin") || "0",
+      smax: zone.getAttribute("smax") || "0",
+      dmin: zone.getAttribute("dmin") || "0",
+      dmax: zone.getAttribute("dmax") || "0",
+      x: zone.getAttribute("x") || "0",
+      z: zone.getAttribute("z") || "0",
+      r: zone.getAttribute("r") || "50"
+    });
+
+  });
+
+  renderTerritoryZones();
+
+  generateTerritoryXML();
+
+});
