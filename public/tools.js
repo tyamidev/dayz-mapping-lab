@@ -2543,10 +2543,9 @@ function loadoutSelectCharacters(types) {
 }
 
 function loadoutGetSelectedCharacters() {
-  const select = document.getElementById("loadoutCharacterTypesSelect");
-  if (!select) return [];
-
-  return [...select.selectedOptions].map(option => option.value);
+  return [...document.querySelectorAll(".character-chip.selected")]
+    .map(button => button.dataset.type)
+    .filter(Boolean);
 }
 
 function loadoutItemsForSlot(slot) {
@@ -2980,7 +2979,14 @@ function loadoutRender() {
 
 function loadoutUpdateOutput() {
   const output = document.getElementById("loadoutOutput");
-  if (output) output.value = loadoutBuildJson();
+  if (!output) return;
+
+  try {
+    output.value = loadoutBuildJson();
+  } catch (error) {
+    console.error("Erreur génération loadout :", error);
+    loadoutStatus("Erreur pendant la génération du JSON.", true);
+  }
 }
 
 function loadoutRemoveWear(slot) {
