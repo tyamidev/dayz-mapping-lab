@@ -1026,96 +1026,92 @@
   <h2>🗺️ Territory XML Generator</h2>
 
   <p class="muted">
-    Créez des zones de spawn XML DayZ pour zombies et animaux au vrai format territories.
+    Importez ou créez des zones de spawn XML DayZ pour zombies et animaux au vrai format territories.
   </p>
 
-  <div class="tool-grid">
-    <div class="tool-input">
-      <label>Territory Color</label>
-      <input type="number" id="territoryColor" value="1291845632">
-    </div>
+  <div class="tool-import-grid">
+    <label class="file-upload">
+      Importer un fichier XML
+      <input type="file" id="territoryXmlImport" accept=".xml">
+    </label>
 
-    <div class="tool-input">
-      <label>Zone Type</label>
-
-<input
-  id="territoryZoneName"
-  list="territoryZonePresets"
-  placeholder="Ex : InfectedVillage"
-/>
-
-<datalist id="territoryZonePresets">
-
-  <!-- ZOMBIES -->
-  <option value="InfectedVillage">
-  <option value="InfectedArmy">
-  <option value="InfectedArmyHard">
-  <option value="InfectedIndustrial">
-  <option value="InfectedMedic">
-  <option value="InfectedPolice">
-  <option value="InfectedFirefighter">
-  <option value="InfectedReligious">
-  <option value="InfectedPrison">
-  <option value="InfectedNBC">
-  <option value="InfectedFarm">
-  <option value="InfectedOffice">
-  <option value="InfectedSpooky">
-  <option value="InfectedSolitude">
-
-  <!-- ANIMAUX -->
-  <option value="Graze">
-  <option value="Rest">
-  <option value="Water">
-  <option value="HuntingGround">
-
-  <!-- PETITS ANIMAUX -->
-  <option value="Zone_hen">
-  <option value="Zone_Hare">
-
-</datalist>
-
-    </div>
-
-    <div class="tool-input">
-      <label>smin</label>
-      <input type="number" id="territorySmin" value="0">
-    </div>
-
-    <div class="tool-input">
-      <label>smax</label>
-      <input type="number" id="territorySmax" value="0">
-    </div>
-
-    <div class="tool-input">
-      <label>dmin</label>
-      <input type="number" id="territoryDmin" value="1">
-    </div>
-
-    <div class="tool-input">
-      <label>dmax</label>
-      <input type="number" id="territoryDmax" value="3">
-    </div>
-
-    <div class="tool-input">
-      <label>X</label>
-      <input type="number" id="territoryX" step="0.01" value="7500">
-    </div>
-
-    <div class="tool-input">
-      <label>Z</label>
-      <input type="number" id="territoryZ" step="0.01" value="7500">
-    </div>
-
-    <div class="tool-input">
-      <label>Radius</label>
-      <input type="number" id="territoryRadius" value="80">
-    </div>
+    <p id="territoryXmlImportName" class="muted">Aucun fichier sélectionné</p>
   </div>
 
-<label class="upload-box">
-  Importer un fichier XML
-  <input type="file" id="territoryXmlImport" accept=".xml">
-</label>
+  <div class="tool-form-grid">
+    <label>
+      Territory Color
+      <input type="number" id="territoryColor" value="1291845632">
+    </label>
+
+    <label>
+      Zone Type
+      <input
+        id="territoryZoneName"
+        list="territoryZonePresets"
+        placeholder="Ex : InfectedVillage"
+        value="InfectedVillage"
+      >
+
+      <datalist id="territoryZonePresets">
+        <option value="InfectedVillage">
+        <option value="InfectedArmy">
+        <option value="InfectedArmyHard">
+        <option value="InfectedIndustrial">
+        <option value="InfectedMedic">
+        <option value="InfectedPolice">
+        <option value="InfectedFirefighter">
+        <option value="InfectedReligious">
+        <option value="InfectedPrison">
+        <option value="InfectedNBC">
+        <option value="InfectedFarm">
+        <option value="InfectedOffice">
+        <option value="InfectedSpooky">
+        <option value="InfectedSolitude">
+        <option value="Graze">
+        <option value="Rest">
+        <option value="Water">
+        <option value="HuntingGround">
+        <option value="Zone_hen">
+        <option value="Zone_Hare">
+      </datalist>
+    </label>
+
+    <label>
+      smin
+      <input type="number" id="territorySmin" value="0">
+    </label>
+
+    <label>
+      smax
+      <input type="number" id="territorySmax" value="0">
+    </label>
+
+    <label>
+      dmin
+      <input type="number" id="territoryDmin" value="1">
+    </label>
+
+    <label>
+      dmax
+      <input type="number" id="territoryDmax" value="3">
+    </label>
+
+    <label>
+      X
+      <input type="number" id="territoryX" step="0.01" value="7500">
+    </label>
+
+    <label>
+      Z
+      <input type="number" id="territoryZ" step="0.01" value="7500">
+    </label>
+
+    <label>
+      Radius
+      <input type="number" id="territoryRadius" value="80">
+    </label>
+  </div>
 
   <div class="tool-actions">
     <button class="btn" id="addTerritoryZoneBtn">➕ Ajouter une zone</button>
@@ -1124,11 +1120,10 @@
     <button class="btn danger" id="clearTerritoryXmlBtn">Effacer</button>
   </div>
 
-  <div id="territoryZoneList"></div>
+  <div id="territoryZoneList" class="loadout-list"></div>
 
   <textarea
     id="territoryXmlOutput"
-    class="tool-output"
     placeholder="Le fichier territories XML apparaîtra ici..."
     spellcheck="false"
   ></textarea>
