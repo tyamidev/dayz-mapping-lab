@@ -552,4 +552,8 @@ app.delete('/api/admin/reviews/:id', requireAdmin, async (req, res) => {
   res.json({ ok: true });
 });
 
+app.get('/dml-admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+});
+
 app.listen(PORT, ()=> console.log(`DayZ Mapping Lab lancé sur ${SITE_URL}`));

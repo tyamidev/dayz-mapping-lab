@@ -347,46 +347,99 @@ async function loadRequests() {
     const requests = await req("/api/admin/requests");
     cachedRequests = requests;
 
-    box.innerHTML = requests.map(r => `
-      <article class="quote-item">
-        <header>
-          <div>
-            <strong>${esc(r.id)}</strong>
-            <p class="muted">${new Date(r.createdAt).toLocaleString("fr-FR")}</p>
-          </div>
-          <span class="badge ${esc(r.status)}">${esc(r.status)}</span>
-        </header>
+    const groups = {
+      new: requests.filter(r => r.status === "new"),
+      contacted: requests.filter(r => r.status === "contacted"),
+      archived: requests.filter(r =>
+        r.status === "closed" ||
+        r.status === "quoted"
+      )
+    };
 
-        <p>
-          <strong>${esc(r.name)}</strong> — ${esc(r.email)}
-          ${r.discord ? `— Discord : ${esc(r.discord)}` : ""}
-        </p>
+    function renderGroup(title, items) {
+      if (!items.length) return "";
 
-        <p>
-          Service : <strong>${esc(r.service)}</strong>
-          ${r.budget ? ` · Budget : <strong>${esc(r.budget)}</strong>` : ""}
-        </p>
+      return `
+        <div class="quote-status-group">
+          <h3>${title} <span>${items.length}</span></h3>
 
-        <p class="muted">${esc(r.message)}</p>
+          ${items.map(r => `
+            <article class="quote-item">
+              <header>
+                <div>
+                  <strong>${esc(r.id)}</strong>
+                  <p class="muted">
+                    ${new Date(r.createdAt).toLocaleString("fr-FR")}
+                  </p>
+                </div>
 
-        ${r.quoteId ? `
-          <p>
-            Devis lié :
-            <a href="/payer-devis.html?id=${esc(r.quoteId)}" target="_blank">${esc(r.quoteId)}</a>
-          </p>
-        ` : ""}
+                <span class="badge ${esc(r.status)}">
+                  ${esc(r.status)}
+                </span>
+              </header>
 
-        <div class="toolbar">
-          <button class="btn" onclick="quoteFromRequest('${esc(r.id)}')">Créer devis</button>
-          <button class="btn secondary" onclick="patchRequest('${esc(r.id)}',{status:'new'})">Nouveau</button>
-          <button class="btn secondary" onclick="patchRequest('${esc(r.id)}',{status:'contacted'})">Contacté</button>
-          <button class="btn secondary" onclick="patchRequest('${esc(r.id)}',{status:'closed'})">Classer</button>
-          <button class="btn danger" onclick="deleteRequest('${esc(r.id)}')">Supprimer</button>
+              <p>
+                <strong>${esc(r.name)}</strong>
+                — ${esc(r.email)}
+                ${r.discord ? `— Discord : ${esc(r.discord)}` : ""}
+              </p>
+
+              <p>
+                Service : <strong>${esc(r.service)}</strong>
+                ${r.budget ? ` · Budget : <strong>${esc(r.budget)}</strong>` : ""}
+              </p>
+
+              <p class="muted">${esc(r.message)}</p>
+
+              ${r.quoteId ? `
+                <p>
+                  Devis lié :
+                  <a href="/payer-devis.html?id=${esc(r.quoteId)}" target="_blank">
+                    ${esc(r.quoteId)}
+                  </a>
+                </p>
+              ` : ""}
+
+              <div class="toolbar">
+                <button class="btn"
+                  onclick="quoteFromRequest('${esc(r.id)}')">
+                  Créer devis
+                </button>
+
+                <button class="btn secondary"
+                  onclick="patchRequest('${esc(r.id)}',{status:'new'})">
+                  Nouveau
+                </button>
+
+                <button class="btn secondary"
+                  onclick="patchRequest('${esc(r.id)}',{status:'contacted'})">
+                  Contacté
+                </button>
+
+                <button class="btn secondary"
+                  onclick="patchRequest('${esc(r.id)}',{status:'closed'})">
+                  Archiver
+                </button>
+
+                <button class="btn danger"
+                  onclick="deleteRequest('${esc(r.id)}')">
+                  Supprimer
+                </button>
+              </div>
+            </article>
+          `).join("")}
         </div>
-      </article>
-    `).join("") || '<p class="muted">Aucune demande.</p>';
+      `;
+    }
+
+    box.innerHTML =
+      renderGroup("🔥 Nouvelles demandes", groups.new) +
+      renderGroup("📩 Demandes contactées", groups.contacted) +
+      renderGroup("📁 Demandes archivées", groups.archived) ||
+      '<p class="muted">Aucune demande.</p>';
 
     updateStats();
+
   } catch (e) {
     box.innerHTML = `<p class="status">${e.message}</p>`;
   }
