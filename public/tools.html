@@ -177,22 +177,22 @@
   <section id="xmlTool" class="tool-panel hidden">
     <h2>XML Validator</h2>
 
-    <p class="muted">
+    <p class="muted" data-i18n="tool_xml_panel_desc">
       Collez votre XML ou importez un fichier .xml.
     </p>
 
     <label class="file-upload">
         <input type="file" id="xmlFile" accept=".xml">
-        <span>Importer un fichier XML</span>
+        <span data-i18n="tools_import_xml">Importer un fichier XML</span>
     </label>
-    <p id="xmlFileName" class="file-name">Aucun fichier sélectionné</p>
+    <p id="xmlFileName" class="file-name" data-i18n="tools_no_file">Aucun fichier sélectionné</p>
 
-    <textarea id="xmlInput" placeholder="Collez votre XML ici..."></textarea>
+    <textarea id="xmlInput" data-i18n-placeholder="tools_placeholder_xml" placeholder="Collez votre XML ici..."></textarea>
 
     <div class="tool-actions">
-      <button class="btn" id="formatXmlBtn">Vérifier le XML</button>
-      <button class="btn secondary" id="downloadXmlBtn">Télécharger</button>
-      <button class="btn danger" id="clearXmlBtn">Effacer</button>
+      <button class="btn" id="formatXmlBtn" data-i18n="tools_check_xml">Vérifier le XML</button>
+      <button class="btn secondary" id="downloadXmlBtn" data-i18n="tools_download">Télécharger</button>
+      <button class="btn danger" id="clearXmlBtn" data-i18n="tools_clear">Effacer</button>
     </div>
 
     <p id="xmlStatus" class="status"></p>
