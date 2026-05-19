@@ -153,22 +153,22 @@
   <section id="jsonTool" class="tool-panel">
     <h2>JSON Validator</h2>
 
-    <p class="muted">
+    <p class="muted" data-i18n="tool_json_panel_desc">
       Collez votre JSON ou importez un fichier .json.
     </p>
 
-    <label class="file-upload">
+    <label class="file-upload" data-i18n="tools_import_json">
         <input type="file" id="jsonFile" accept=".json">
         <span>Importer un fichier JSON</span>
     </label>
-    <p id="jsonFileName" class="file-name">Aucun fichier sélectionné</p>
+    <p id="jsonFileName" class="file-name" data-i18n="tools_no_file">Aucun fichier sélectionné</p>
 
-    <textarea id="jsonInput" placeholder="Collez votre JSON ici..."></textarea>
+    <textarea id="jsonInput" data-i18n-placeholder="tools_placeholder_json" placeholder="Collez votre JSON ici..."></textarea>
 
     <div class="tool-actions">
-      <button class="btn" id="formatJsonBtn">Vérifier le JSON</button>
-      <button class="btn secondary" id="downloadJsonBtn">Télécharger</button>
-      <button class="btn danger" id="clearJsonBtn">Effacer</button>
+      <button class="btn" id="formatJsonBtn" data-i18n="tools_check_json">Vérifier le JSON</button>
+      <button class="btn secondary" id="downloadJsonBtn" data-i18n="tools_download">Télécharger</button>
+      <button class="btn danger" id="clearJsonBtn" data-i18n="tools_clear">Effacer</button>
     </div>
 
     <p id="jsonStatus" class="status"></p>
