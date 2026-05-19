@@ -3187,14 +3187,18 @@ const territoryPresets = {
     { label: "Spooky / event", value: "InfectedSpooky", color: "1879004416" }
   ],
 
-  animal: [
-    { label: "Pâturage / nourriture", value: "Graze", color: "855695852" },
-    { label: "Repos", value: "Rest", color: "855695852" },
-    { label: "Point d’eau", value: "Water", color: "855695852" },
-    { label: "Zone de chasse", value: "HuntingGround", color: "869059788" },
-    { label: "Poules", value: "Zone_hen", color: "855638016" },
-    { label: "Lièvres", value: "Zone_Hare", color: "4289352960" }
-  ]
+animal: [
+  { label: "Loup", value: "HuntingGround", color: "869059788" },
+  { label: "Ours", value: "HuntingGround", color: "869059788" },
+  { label: "Sanglier", value: "Graze", color: "2841534046" },
+  { label: "Cerf rouge", value: "Graze", color: "855695852" },
+  { label: "Chevreuil", value: "Graze", color: "856817408" },
+  { label: "Vache", value: "Graze", color: "864420070" },
+  { label: "Cochon", value: "Graze", color: "1409252796" },
+  { label: "Mouton / Chèvre", value: "Graze", color: "872412928" },
+  { label: "Poule", value: "Zone_hen", color: "855638016" },
+  { label: "Lièvre", value: "Zone_Hare", color: "4289352960" }
+]
 };
 
 function territoryGet(id) {
