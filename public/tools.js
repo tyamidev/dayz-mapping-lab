@@ -3171,6 +3171,7 @@ loadoutRefreshWearItemsList();
 ====================================================== */
 
 let territoryZones = [];
+let editingTerritoryIndex = -1;
 
 const territoryPresets = {
   zombie: [
@@ -3250,7 +3251,10 @@ function updateTerritoryAdvancedValues() {
 }
 
 function renderTerritoryZones() {
-  const container = document.getElementById("territoryZoneList");
+
+  const container =
+    document.getElementById("territoryZoneList");
+
   if (!container) return;
 
   if (!territoryZones.length) {
@@ -3258,25 +3262,76 @@ function renderTerritoryZones() {
     return;
   }
 
-  container.innerHTML = territoryZones.map((zone, index) => `
-    <div class="loadout-card">
-      <div>
-        <strong>${zone.label || zone.name}</strong>
-        <span>${zone.name} — X:${zone.x} Z:${zone.z} Rayon:${zone.r}</span>
-        <code>Min:${zone.dmin} Max:${zone.dmax}</code>
+  container.innerHTML =
+    territoryZones.map((zone, index) => `
+
+      <div class="loadout-card">
+
+        <div
+          class="territory-zone-info"
+          onclick="editTerritoryZone(${index})"
+        >
+          <strong>${zone.label || zone.name}</strong>
+
+          <span>
+            ${zone.name}
+            • X:${zone.x}
+            • Z:${zone.z}
+            • R:${zone.r}
+          </span>
+
+          <code>
+            Min:${zone.dmin}
+            Max:${zone.dmax}
+          </code>
+        </div>
+
+        <button
+          class="mini-btn danger"
+          onclick="removeTerritoryZone(${index})"
+        >
+          Supprimer
+        </button>
+
       </div>
 
-      <button class="mini-btn danger" onclick="removeTerritoryZone(${index})">
-        Supprimer
-      </button>
-    </div>
-  `).join("");
+    `).join("");
 }
 
 window.removeTerritoryZone = function(index) {
   territoryZones.splice(index, 1);
   renderTerritoryZones();
   generateTerritoryXML();
+};
+
+window.editTerritoryZone = function(index) {
+
+  const zone = territoryZones[index];
+
+  if (!zone) return;
+
+  editingTerritoryIndex = index;
+
+  document.getElementById("territoryX").value = zone.x;
+  document.getElementById("territoryZ").value = zone.z;
+  document.getElementById("territoryRadius").value = zone.r;
+
+  document.getElementById("territoryMin").value = zone.dmin;
+  document.getElementById("territoryMax").value = zone.dmax;
+
+  document.getElementById("territoryZoneName").value = zone.name;
+
+  const button =
+    document.getElementById("addTerritoryZoneBtn");
+
+  if (button) {
+    button.textContent = "💾 Sauvegarder la zone";
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 };
 
 function generateTerritoryXML() {
@@ -3340,7 +3395,24 @@ document.getElementById("addTerritoryZoneBtn")?.addEventListener("click", () => 
     return;
   }
 
+if (editingTerritoryIndex >= 0) {
+
+  territoryZones[editingTerritoryIndex] = zone;
+
+  editingTerritoryIndex = -1;
+
+  const button =
+    document.getElementById("addTerritoryZoneBtn");
+
+  if (button) {
+    button.textContent = "➕ Ajouter la zone";
+  }
+
+} else {
+
   territoryZones.push(zone);
+
+}
 
   renderTerritoryZones();
   generateTerritoryXML();
