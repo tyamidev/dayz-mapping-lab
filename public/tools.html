@@ -157,10 +157,18 @@
       Collez votre JSON ou importez un fichier .json.
     </p>
 
-    <label class="file-upload" data-i18n="tools_import_json">
-        <input type="file" id="jsonFile" accept=".json">
-        <span>Importer un fichier JSON</span>
-    </label>
+<label class="file-upload" for="jsonFile">
+  <span data-i18n="tools_import_json">
+    Importer un fichier JSON
+  </span>
+</label>
+
+<input
+  type="file"
+  id="jsonFile"
+  accept=".json"
+  hidden
+>
     <p id="jsonFileName" class="file-name" data-i18n="tools_no_file">Aucun fichier sélectionné</p>
 
     <textarea id="jsonInput" data-i18n-placeholder="tools_placeholder_json" placeholder="Collez votre JSON ici..."></textarea>
