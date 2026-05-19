@@ -429,7 +429,7 @@ document.getElementById("organizeTypesBtn").addEventListener("click", () => {
     const originalXml = typesOrganizerInput.value.trim();
 
     if (!originalXml) {
-      throw new Error("Importez ou collez d’abord un fichier types.xml.");
+      throw new Error(tr("types_import_first"));
     }
 
     const typeBlocks = originalXml.match(/<type\b[\s\S]*?<\/type>/gi);
@@ -471,7 +471,7 @@ document.getElementById("organizeTypesBtn").addEventListener("click", () => {
       footer;
 
     typesOrganizerStatus.textContent =
-      `types.xml organisé avec succès (${typeBlocks.length} items).`;
+      `${tr("types_success")} (${typeBlocks.length} ${tr("types_items")}).`;
   } catch (e) {
     typesOrganizerStatus.classList.add("error");
     typesOrganizerStatus.textContent = e.message;
@@ -480,7 +480,7 @@ document.getElementById("organizeTypesBtn").addEventListener("click", () => {
 
 document.getElementById("downloadTypesOrganizerBtn").addEventListener("click", () => {
   if (!typesOrganizerInput.value.trim()) {
-    typesOrganizerStatus.textContent = "Importez ou collez d’abord un fichier types.xml.";
+    typesOrganizerStatus.textContent = tr("types_import_first");
     return;
   }
 
@@ -496,7 +496,7 @@ document.getElementById("clearTypesOrganizerBtn").addEventListener("click", () =
   const fileName = document.getElementById("typesOrganizerFileName");
 
   if (fileName) {
-    fileName.textContent = "Aucun fichier sélectionné";
+    fileName.textContent = tr("tools_no_file");
   }
 });
 

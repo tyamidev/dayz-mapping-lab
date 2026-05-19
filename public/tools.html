@@ -380,23 +380,61 @@
 <section id="typesOrganizerTool" class="tool-panel hidden">
   <h2>Types Organizer</h2>
 
-  <p class="muted">
+  <p class="muted" data-i18n="tool_types_panel_desc">
     Importez votre fichier types.xml, puis l’outil organise les items par catégorie sans modifier les valeurs existantes.
   </p>
 
-  <label class="file-upload">
-    <input type="file" id="typesOrganizerFile" accept=".xml">
-    <span>Importer un types.xml</span>
+  <label class="file-upload" for="typesOrganizerFile">
+    <span data-i18n="types_import">
+      Importer un types.xml
+    </span>
   </label>
 
-  <p id="typesOrganizerFileName" class="file-name">Aucun fichier sélectionné</p>
+  <input
+    type="file"
+    id="typesOrganizerFile"
+    accept=".xml"
+    hidden
+  >
 
-  <textarea id="typesOrganizerInput" placeholder="Votre fichier types.xml apparaîtra ici..."></textarea>
+  <p
+    id="typesOrganizerFileName"
+    class="file-name"
+    data-i18n="tools_no_file"
+  >
+    Aucun fichier sélectionné
+  </p>
+
+  <textarea
+    id="typesOrganizerInput"
+    data-i18n-placeholder="types_placeholder"
+    placeholder="Votre fichier types.xml apparaîtra ici..."
+  ></textarea>
 
   <div class="tool-actions">
-    <button class="btn" id="organizeTypesBtn">Organiser par catégorie</button>
-    <button class="btn secondary" id="downloadTypesOrganizerBtn">Télécharger</button>
-    <button class="btn danger" id="clearTypesOrganizerBtn">Effacer</button>
+    <button
+      class="btn"
+      id="organizeTypesBtn"
+      data-i18n="types_organize"
+    >
+      Organiser par catégorie
+    </button>
+
+    <button
+      class="btn secondary"
+      id="downloadTypesOrganizerBtn"
+      data-i18n="tools_download"
+    >
+      Télécharger
+    </button>
+
+    <button
+      class="btn danger"
+      id="clearTypesOrganizerBtn"
+      data-i18n="tools_clear"
+    >
+      Effacer
+    </button>
   </div>
 
   <p id="typesOrganizerStatus" class="status"></p>
