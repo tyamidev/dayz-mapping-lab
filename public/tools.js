@@ -3184,15 +3184,15 @@ const territoryPresets = {
     { label: "Médecin", value: "InfectedMedic", color: "2387830984" },
     { label: "NBC / toxique", value: "InfectedNBC", color: "2260328206" },
     { label: "Religieux", value: "InfectedReligious", color: "1291845632" },
-    { label: "Zone isolée", value: "InfectedSolitude", color: "1910952871" },
-    { label: "Spooky / event", value: "InfectedSpooky", color: "1879004416" }
+    { label: "Pecheur / chasseur", value: "InfectedSolitude", color: "1910952871" },
+    { label: "Spooky", value: "InfectedSpooky", color: "1879004416" }
   ],
 
 animal: [
   { label: "Loup", value: "HuntingGround", color: "869059788" },
   { label: "Ours", value: "HuntingGround", color: "869059788" },
   { label: "Sanglier", value: "Graze", color: "2841534046" },
-  { label: "Cerf rouge", value: "Graze", color: "855695852" },
+  { label: "Cerf", value: "Graze", color: "855695852" },
   { label: "Chevreuil", value: "Graze", color: "856817408" },
   { label: "Vache", value: "Graze", color: "864420070" },
   { label: "Cochon", value: "Graze", color: "1409252796" },
