@@ -209,24 +209,28 @@
   <section id="dayNightTool" class="tool-panel hidden">
     <h2>Day/Night Calculator</h2>
 
-    <p class="muted">
+    <p class="muted" data-i18n="tool_daynight_panel_desc">
       Calculez des valeurs simples à tester dans Nitrado.
     </p>
 
     <div class="tool-form-grid">
       <label>
+      <span data-i18n="tool_day_duration">
         Durée réelle souhaitée du jour en minutes
-        <input id="dayMinutes" type="number" min="1" placeholder="Ex : 120">
+      </span>
+        <input id="dayMinutes" type="number" min="1" data-i18n-placeholder="tool_day_placeholder" placeholder="Ex : 120">
       </label>
 
       <label>
+      <span data-i18n="tool_night_duration">
         Durée réelle souhaitée de la nuit en minutes
-        <input id="nightMinutes" type="number" min="1" placeholder="Ex : 30">
+      </span>
+        <input id="nightMinutes" type="number" min="1" data-i18n-placeholder="tool_night_placeholder" placeholder="Ex : 30">
       </label>
     </div>
 
     <div class="tool-actions">
-      <button class="btn" id="calculateDayNightBtn">Calculer</button>
+      <button class="btn" id="calculateDayNightBtn" data-i18n="tools_calculate">Calculer</button>
     </div>
 
     <div id="dayNightResult" class="tool-result hidden"></div>
