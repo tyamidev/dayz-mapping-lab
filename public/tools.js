@@ -3327,11 +3327,6 @@ window.editTerritoryZone = function(index) {
   if (button) {
     button.textContent = "💾 Sauvegarder la zone";
   }
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 };
 
 function generateTerritoryXML() {
