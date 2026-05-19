@@ -268,7 +268,7 @@ document.getElementById("calculateDayNightBtn").addEventListener("click", () => 
 
   if (!day || !night) {
     result.classList.remove("hidden");
-    result.innerHTML = "<p class='status'>Indiquez une durée de jour et de nuit.</p>";
+    result.innerHTML = `<p class="status">${t("tool_daynight_missing_values")}</p>`;
     return;
   }
 
@@ -279,15 +279,15 @@ document.getElementById("calculateDayNightBtn").addEventListener("click", () => 
 
   result.classList.remove("hidden");
   result.innerHTML = `
-    <h3>Valeurs conseillées</h3>
+    <h3>${t("tool_daynight_result_title")}</h3>
 
-    <p>Durée totale souhaitée : <strong>${fullCycle} minutes</strong></p>
+    <p>${t("tool_daynight_total_duration")} <strong>${fullCycle} ${t("tool_minutes")}</strong></p>
 
     <code>serverTimeAcceleration=${serverTimeAcceleration}</code>
     <code>serverNightTimeAcceleration=${serverNightTimeAcceleration}</code>
 
     <p class="muted">
-      Ces valeurs sont une base de test. Ajustez selon le ressenti en jeu.
+      ${t("tool_daynight_result_desc")}
     </p>
   `;
 });
