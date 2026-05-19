@@ -261,6 +261,11 @@ document.getElementById("clearXmlBtn").addEventListener("click", () => {
 
 /* DAY/NIGHT CALCULATOR */
 
+function tr(key) {
+  const lang = localStorage.getItem("lang") || "fr";
+  return translations?.[lang]?.[key] || translations?.fr?.[key] || key;
+}
+
 document.getElementById("calculateDayNightBtn").addEventListener("click", () => {
   const day = Number(document.getElementById("dayMinutes").value);
   const night = Number(document.getElementById("nightMinutes").value);
@@ -268,7 +273,7 @@ document.getElementById("calculateDayNightBtn").addEventListener("click", () => 
 
   if (!day || !night) {
     result.classList.remove("hidden");
-    result.innerHTML = `<p class="status">${t("tool_daynight_missing_values")}</p>`;
+    result.innerHTML = `<p class="status">${tr("tool_daynight_missing_values")}</p>`;
     return;
   }
 
@@ -279,15 +284,15 @@ document.getElementById("calculateDayNightBtn").addEventListener("click", () => 
 
   result.classList.remove("hidden");
   result.innerHTML = `
-    <h3>${t("tool_daynight_result_title")}</h3>
+    <h3>${tr("tool_daynight_result_title")}</h3>
 
-    <p>${t("tool_daynight_total_duration")} <strong>${fullCycle} ${t("tool_minutes")}</strong></p>
+    <p>${tr("tool_daynight_total_duration")} <strong>${fullCycle} ${tr("tool_minutes")}</strong></p>
 
     <code>serverTimeAcceleration=${serverTimeAcceleration}</code>
     <code>serverNightTimeAcceleration=${serverNightTimeAcceleration}</code>
 
     <p class="muted">
-      ${t("tool_daynight_result_desc")}
+      ${tr("tool_daynight_result_desc")}
     </p>
   `;
 });
