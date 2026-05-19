@@ -1026,12 +1026,12 @@
   <h2>🗺️ Territory XML Generator</h2>
 
   <p class="muted">
-    Importez ou créez des zones de spawn XML DayZ pour zombies et animaux au vrai format territories.
+    Créez ou modifiez facilement des zones de spawn pour zombies et animaux, sans toucher aux réglages techniques.
   </p>
 
   <div class="tool-import-grid">
     <label class="file-upload">
-      Importer un fichier XML
+      Importer un fichier XML existant
       <input type="file" id="territoryXmlImport" accept=".xml">
     </label>
 
@@ -1040,81 +1040,82 @@
 
   <div class="tool-form-grid">
     <label>
-      Territory Color
-      <input type="number" id="territoryColor" value="1291845632">
+      Type de spawn
+      <select id="territorySpawnType">
+        <option value="zombie">Zombies</option>
+        <option value="animal">Animaux</option>
+      </select>
     </label>
 
     <label>
-      Zone Type
-      <input
-        id="territoryZoneName"
-        list="territoryZonePresets"
-        placeholder="Ex : InfectedVillage"
-        value="InfectedVillage"
-      >
-
-      <datalist id="territoryZonePresets">
-        <option value="InfectedVillage">
-        <option value="InfectedArmy">
-        <option value="InfectedArmyHard">
-        <option value="InfectedIndustrial">
-        <option value="InfectedMedic">
-        <option value="InfectedPolice">
-        <option value="InfectedFirefighter">
-        <option value="InfectedReligious">
-        <option value="InfectedPrison">
-        <option value="InfectedNBC">
-        <option value="InfectedFarm">
-        <option value="InfectedOffice">
-        <option value="InfectedSpooky">
-        <option value="InfectedSolitude">
-        <option value="Graze">
-        <option value="Rest">
-        <option value="Water">
-        <option value="HuntingGround">
-        <option value="Zone_hen">
-        <option value="Zone_Hare">
-      </datalist>
+      Catégorie
+      <select id="territoryCategory"></select>
     </label>
 
     <label>
-      smin
-      <input type="number" id="territorySmin" value="0">
+      Position X
+      <input type="number" id="territoryX" step="0.01" placeholder="Ex : 7500">
     </label>
 
     <label>
-      smax
-      <input type="number" id="territorySmax" value="0">
+      Position Z
+      <input type="number" id="territoryZ" step="0.01" placeholder="Ex : 7500">
     </label>
 
     <label>
-      dmin
-      <input type="number" id="territoryDmin" value="1">
-    </label>
-
-    <label>
-      dmax
-      <input type="number" id="territoryDmax" value="3">
-    </label>
-
-    <label>
-      X
-      <input type="number" id="territoryX" step="0.01" value="7500">
-    </label>
-
-    <label>
-      Z
-      <input type="number" id="territoryZ" step="0.01" value="7500">
-    </label>
-
-    <label>
-      Radius
+      Rayon de la zone
       <input type="number" id="territoryRadius" value="80">
+    </label>
+
+    <label>
+      Nombre minimum
+      <input type="number" id="territoryMin" value="1">
+    </label>
+
+    <label>
+      Nombre maximum
+      <input type="number" id="territoryMax" value="3">
     </label>
   </div>
 
+  <details class="advanced-box">
+    <summary>Réglages avancés</summary>
+
+    <div class="tool-form-grid">
+      <label>
+        Territory Color
+        <input type="number" id="territoryColor" value="1291845632">
+      </label>
+
+      <label>
+        Zone name généré
+        <input id="territoryZoneName" value="InfectedVillage">
+      </label>
+
+      <label>
+        smin
+        <input type="number" id="territorySmin" value="0">
+      </label>
+
+      <label>
+        smax
+        <input type="number" id="territorySmax" value="0">
+      </label>
+
+      <label>
+        dmin
+        <input type="number" id="territoryDmin" value="1">
+      </label>
+
+      <label>
+        dmax
+        <input type="number" id="territoryDmax" value="3">
+      </label>
+    </div>
+  </details>
+
   <div class="tool-actions">
-    <button class="btn" id="addTerritoryZoneBtn">➕ Ajouter une zone</button>
+    <button class="btn" id="addTerritoryZoneBtn">➕ Ajouter la zone</button>
     <button class="btn secondary" id="generateTerritoryXmlBtn">Générer XML</button>
     <button class="btn secondary" id="downloadTerritoryXmlBtn">Télécharger XML</button>
     <button class="btn danger" id="clearTerritoryXmlBtn">Effacer</button>
@@ -1128,7 +1129,6 @@
     spellcheck="false"
   ></textarea>
 </section>
-
 
 </main>
 

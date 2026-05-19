@@ -3166,165 +3166,248 @@ document.getElementById("toggleCharactersBtn")?.addEventListener("click", () => 
 loadoutInitCharacters();
 loadoutRefreshWearItemsList();
 
+/* ======================================================
+   TERRITORY XML GENERATOR
+====================================================== */
+
 let territoryZones = [];
+
+const territoryPresets = {
+  zombie: [
+    { label: "Village / ville", value: "InfectedVillage", color: "4289374847" },
+    { label: "Militaire", value: "InfectedArmy", color: "1124502272" },
+    { label: "Militaire difficile", value: "InfectedArmyHard", color: "1124502272" },
+    { label: "Industriel", value: "InfectedIndustrial", color: "1102461653" },
+    { label: "Police", value: "InfectedPolice", color: "1291845632" },
+    { label: "Pompier", value: "InfectedFirefighter", color: "3014746644" },
+    { label: "Médecin", value: "InfectedMedic", color: "2387830984" },
+    { label: "NBC / toxique", value: "InfectedNBC", color: "2260328206" },
+    { label: "Religieux", value: "InfectedReligious", color: "1291845632" },
+    { label: "Zone isolée", value: "InfectedSolitude", color: "1910952871" },
+    { label: "Spooky / event", value: "InfectedSpooky", color: "1879004416" }
+  ],
+
+  animal: [
+    { label: "Pâturage / nourriture", value: "Graze", color: "855695852" },
+    { label: "Repos", value: "Rest", color: "855695852" },
+    { label: "Point d’eau", value: "Water", color: "855695852" },
+    { label: "Zone de chasse", value: "HuntingGround", color: "869059788" },
+    { label: "Poules", value: "Zone_hen", color: "855638016" },
+    { label: "Lièvres", value: "Zone_Hare", color: "4289352960" }
+  ]
+};
+
+function territoryGet(id) {
+  return document.getElementById(id)?.value?.trim() || "";
+}
+
+function refreshTerritoryCategories() {
+  const type = territoryGet("territorySpawnType") || "zombie";
+  const select = document.getElementById("territoryCategory");
+
+  if (!select) return;
+
+  select.innerHTML = territoryPresets[type].map(item => `
+    <option value="${item.value}" data-color="${item.color}">
+      ${item.label}
+    </option>
+  `).join("");
+
+  updateTerritoryAdvancedValues();
+}
+
+function updateTerritoryAdvancedValues() {
+  const type = territoryGet("territorySpawnType") || "zombie";
+  const categorySelect = document.getElementById("territoryCategory");
+  const selectedOption = categorySelect?.selectedOptions?.[0];
+
+  const zoneName = categorySelect?.value || "InfectedVillage";
+  const color = selectedOption?.dataset?.color || "1291845632";
+
+  document.getElementById("territoryZoneName").value = zoneName;
+  document.getElementById("territoryColor").value = color;
+
+  const min = territoryGet("territoryMin") || "1";
+  const max = territoryGet("territoryMax") || "3";
+
+  if (type === "zombie") {
+    document.getElementById("territorySmin").value = "0";
+    document.getElementById("territorySmax").value = "0";
+    document.getElementById("territoryDmin").value = min;
+    document.getElementById("territoryDmax").value = max;
+  }
+
+  if (type === "animal") {
+    document.getElementById("territorySmin").value = "0";
+    document.getElementById("territorySmax").value = "0";
+    document.getElementById("territoryDmin").value = min;
+    document.getElementById("territoryDmax").value = max;
+  }
+}
 
 function renderTerritoryZones() {
   const container = document.getElementById("territoryZoneList");
-
   if (!container) return;
 
-  container.innerHTML = "";
+  if (!territoryZones.length) {
+    container.innerHTML = "";
+    return;
+  }
 
-  territoryZones.forEach((zone, index) => {
-    container.innerHTML += `
-      <div class="loadout-item-card">
-        <div>
-          <strong>${zone.name}</strong><br>
-          x="${zone.x}" z="${zone.z}" r="${zone.r}"
-        </div>
-
-        <button
-          class="btn danger-btn"
-          onclick="removeTerritoryZone(${index})"
-        >
-          Supprimer
-        </button>
+  container.innerHTML = territoryZones.map((zone, index) => `
+    <div class="loadout-card">
+      <div>
+        <strong>${zone.label || zone.name}</strong>
+        <span>${zone.name} — X:${zone.x} Z:${zone.z} Rayon:${zone.r}</span>
+        <code>Min:${zone.dmin} Max:${zone.dmax}</code>
       </div>
-    `;
-  });
+
+      <button class="mini-btn danger" onclick="removeTerritoryZone(${index})">
+        Supprimer
+      </button>
+    </div>
+  `).join("");
 }
 
-function removeTerritoryZone(index) {
+window.removeTerritoryZone = function(index) {
   territoryZones.splice(index, 1);
   renderTerritoryZones();
-}
-
-document.getElementById("addTerritoryZoneBtn")?.addEventListener("click", () => {
-
-  territoryZones.push({
-    name: document.getElementById("territoryZoneName").value,
-    smin: document.getElementById("territorySmin").value,
-    smax: document.getElementById("territorySmax").value,
-    dmin: document.getElementById("territoryDmin").value,
-    dmax: document.getElementById("territoryDmax").value,
-    x: document.getElementById("territoryX").value,
-    z: document.getElementById("territoryZ").value,
-    r: document.getElementById("territoryRadius").value
-  });
-
-  renderTerritoryZones();
-});
+  generateTerritoryXML();
+};
 
 function generateTerritoryXML() {
+  const grouped = {};
 
-  const color = document.getElementById("territoryColor").value;
+  territoryZones.forEach(zone => {
+    const key = zone.color || "1291845632";
+
+    if (!grouped[key]) {
+      grouped[key] = [];
+    }
+
+    grouped[key].push(zone);
+  });
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<territory-type>\n`;
-  xml += `    <territory color="${color}">\n`;
 
-  territoryZones.forEach(zone => {
+  Object.entries(grouped).forEach(([color, zones]) => {
+    xml += `    <territory color="${color}">\n`;
 
-    xml += `        <zone `;
-    xml += `name="${zone.name}" `;
-    xml += `smin="${zone.smin}" `;
-    xml += `smax="${zone.smax}" `;
-    xml += `dmin="${zone.dmin}" `;
-    xml += `dmax="${zone.dmax}" `;
-    xml += `x="${zone.x}" `;
-    xml += `z="${zone.z}" `;
-    xml += `r="${zone.r}"/>\n`;
+    zones.forEach(zone => {
+      xml += `        <zone name="${zone.name}" smin="${zone.smin}" smax="${zone.smax}" dmin="${zone.dmin}" dmax="${zone.dmax}" x="${zone.x}" z="${zone.z}" r="${zone.r}"/>\n`;
+    });
 
+    xml += `    </territory>\n`;
   });
 
-  xml += `    </territory>\n`;
   xml += `</territory-type>`;
 
-  document.getElementById("territoryXmlOutput").value = xml;
+  const output = document.getElementById("territoryXmlOutput");
+  if (output) output.value = xml;
 }
 
-document.getElementById("generateTerritoryXmlBtn")
-?.addEventListener("click", generateTerritoryXML);
+document.getElementById("territorySpawnType")?.addEventListener("change", refreshTerritoryCategories);
+document.getElementById("territoryCategory")?.addEventListener("change", updateTerritoryAdvancedValues);
+document.getElementById("territoryMin")?.addEventListener("input", updateTerritoryAdvancedValues);
+document.getElementById("territoryMax")?.addEventListener("input", updateTerritoryAdvancedValues);
 
-document.getElementById("downloadTerritoryXmlBtn")
-?.addEventListener("click", () => {
+document.getElementById("addTerritoryZoneBtn")?.addEventListener("click", () => {
+  updateTerritoryAdvancedValues();
 
+  const categorySelect = document.getElementById("territoryCategory");
+  const selectedLabel = categorySelect?.selectedOptions?.[0]?.textContent?.trim();
+
+  const zone = {
+    label: selectedLabel,
+    color: territoryGet("territoryColor"),
+    name: territoryGet("territoryZoneName"),
+    smin: territoryGet("territorySmin"),
+    smax: territoryGet("territorySmax"),
+    dmin: territoryGet("territoryDmin"),
+    dmax: territoryGet("territoryDmax"),
+    x: territoryGet("territoryX"),
+    z: territoryGet("territoryZ"),
+    r: territoryGet("territoryRadius")
+  };
+
+  if (!zone.x || !zone.z || !zone.r) {
+    alert("Indique au minimum X, Z et le rayon.");
+    return;
+  }
+
+  territoryZones.push(zone);
+
+  renderTerritoryZones();
   generateTerritoryXML();
 
-  const content =
-    document.getElementById("territoryXmlOutput").value;
-
-  const blob = new Blob([content], {
-    type: "application/xml"
-  });
-
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = "territories.xml";
-
-  document.body.appendChild(a);
-
-  a.click();
-
-  document.body.removeChild(a);
-
-  URL.revokeObjectURL(url);
+  document.getElementById("territoryX").value = "";
+  document.getElementById("territoryZ").value = "";
 });
 
-document.getElementById("clearTerritoryXmlBtn")
-?.addEventListener("click", () => {
+document.getElementById("generateTerritoryXmlBtn")?.addEventListener("click", () => {
+  generateTerritoryXML();
+});
 
+document.getElementById("downloadTerritoryXmlBtn")?.addEventListener("click", () => {
+  generateTerritoryXML();
+
+  const output = document.getElementById("territoryXmlOutput");
+
+  if (!output?.value.trim()) {
+    alert("Aucun XML à télécharger.");
+    return;
+  }
+
+  downloadFile("territories.xml", output.value, "application/xml");
+});
+
+document.getElementById("clearTerritoryXmlBtn")?.addEventListener("click", () => {
   territoryZones = [];
-
   renderTerritoryZones();
 
   document.getElementById("territoryXmlOutput").value = "";
+  document.getElementById("territoryX").value = "";
+  document.getElementById("territoryZ").value = "";
+  document.getElementById("territoryRadius").value = "80";
+  document.getElementById("territoryMin").value = "1";
+  document.getElementById("territoryMax").value = "3";
+
+  refreshTerritoryCategories();
 });
 
-
-document.getElementById("territoryXmlImport")
-?.addEventListener("change", async (event) => {
-
+document.getElementById("territoryXmlImport")?.addEventListener("change", async (event) => {
   const file = event.target.files?.[0];
-
   if (!file) return;
 
+  document.getElementById("territoryXmlImportName").textContent = file.name;
+
   const text = await file.text();
-
-  const parser = new DOMParser();
-
-  const xml = parser.parseFromString(text, "application/xml");
-
-  const territory =
-    xml.querySelector("territory");
-
-  if (territory) {
-    document.getElementById("territoryColor").value =
-      territory.getAttribute("color") || "1291845632";
-  }
+  const xml = new DOMParser().parseFromString(text, "application/xml");
 
   territoryZones = [];
 
-  xml.querySelectorAll("zone").forEach(zone => {
+  xml.querySelectorAll("territory").forEach(territory => {
+    const color = territory.getAttribute("color") || "1291845632";
 
-    territoryZones.push({
-      name: zone.getAttribute("name") || "",
-      smin: zone.getAttribute("smin") || "0",
-      smax: zone.getAttribute("smax") || "0",
-      dmin: zone.getAttribute("dmin") || "0",
-      dmax: zone.getAttribute("dmax") || "0",
-      x: zone.getAttribute("x") || "0",
-      z: zone.getAttribute("z") || "0",
-      r: zone.getAttribute("r") || "50"
+    territory.querySelectorAll("zone").forEach(zone => {
+      territoryZones.push({
+        label: zone.getAttribute("name") || "Zone",
+        color,
+        name: zone.getAttribute("name") || "",
+        smin: zone.getAttribute("smin") || "0",
+        smax: zone.getAttribute("smax") || "0",
+        dmin: zone.getAttribute("dmin") || "0",
+        dmax: zone.getAttribute("dmax") || "0",
+        x: zone.getAttribute("x") || "0",
+        z: zone.getAttribute("z") || "0",
+        r: zone.getAttribute("r") || "80"
+      });
     });
-
   });
 
   renderTerritoryZones();
-
   generateTerritoryXML();
-
 });
+
+refreshTerritoryCategories();
