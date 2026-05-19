@@ -262,8 +262,8 @@ document.getElementById("clearXmlBtn").addEventListener("click", () => {
 /* DAY/NIGHT CALCULATOR */
 
 function tr(key) {
-  const lang = localStorage.getItem("lang") || "fr";
-  return translations?.[lang]?.[key] || translations?.fr?.[key] || key;
+  const lang = localStorage.getItem("dml_lang") || "fr";
+  return window.translations?.[lang]?.[key] || window.translations?.fr?.[key] || key;
 }
 
 document.getElementById("calculateDayNightBtn").addEventListener("click", () => {

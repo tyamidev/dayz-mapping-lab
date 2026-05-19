@@ -1,4 +1,4 @@
-const translations = {
+window.translations = {
   fr: {
     brand_subtitle: "Serveurs DayZ & Discord sur mesure",
 
