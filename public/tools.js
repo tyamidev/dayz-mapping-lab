@@ -383,12 +383,12 @@ document.getElementById("generateWeatherBtn").addEventListener("click", () => {
     <storm density="${stormDensity}" threshold="${stormThreshold}" timeout="${stormTimeout}" />
 </weather>`;
 
-  weatherStatus.textContent = "cfgweather.xml généré.";
+  weatherStatus.textContent = tr("weather_generated_status");
 });
 
 document.getElementById("downloadWeatherBtn").addEventListener("click", () => {
   if (!weatherOutput.value.trim()) {
-    weatherStatus.textContent = "Générez d’abord le fichier météo.";
+    weatherStatus.textContent = tr("weather_generate_first");
     return;
   }
 
