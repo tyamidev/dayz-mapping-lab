@@ -2483,6 +2483,30 @@ function getLoadoutItems() {
   return window.DAYZ_CORE_ITEMS || [];
 }
 
+function getDayZRelations() {
+  return window.DAYZ_CORE_RELATIONS || {};
+}
+
+function getLoadoutRelation(classname) {
+  const relations = getDayZRelations();
+
+  if (!classname) return null;
+
+  return relations[classname] || null;
+}
+
+function getCompatibleWeaponChildren(classname) {
+  const relation = getLoadoutRelation(classname);
+
+  if (!relation) return [];
+
+  return [
+    ...(relation.compatibleAttachments || []),
+    ...(relation.compatibleMagazines || []),
+    ...(relation.compatibleAmmo || [])
+  ];
+}
+
 const DAYZ_CHARACTER_TYPES = {
   male: [
     "SurvivorM_Mirek",
@@ -2778,10 +2802,9 @@ function loadoutReplaceCurrentToken(input, classname) {
   input.focus();
 }
 
-function loadoutShowSuggestions(inputId, containerId) {
+function loadoutShowSuggestions(inputId, containerId, parentItemId = null) {
   const input = document.getElementById(inputId);
   const container = document.getElementById(containerId);
-  const items = getLoadoutItems();
 
   if (!input || !container) return;
 
@@ -2792,25 +2815,67 @@ function loadoutShowSuggestions(inputId, containerId) {
     return;
   }
 
+  let items = getLoadoutItems();
+
+  if (parentItemId) {
+    const parentClassname =
+      loadoutClassname(
+        loadoutGet(parentItemId)
+      );
+
+    const compatible =
+      getCompatibleWeaponChildren(parentClassname);
+
+    if (compatible.length) {
+      const compatibleSet =
+        new Set(
+          compatible.map(name =>
+            name.toLowerCase()
+          )
+        );
+
+      items = items.filter(item =>
+        compatibleSet.has(
+          item.classname.toLowerCase()
+        )
+      );
+    }
+  }
+
   const results = items
     .filter(item =>
-      item.classname.toLowerCase().includes(token) ||
-      item.label.toLowerCase().includes(token)
+      item.classname
+        .toLowerCase()
+        .includes(token) ||
+      item.label
+        .toLowerCase()
+        .includes(token)
     )
     .slice(0, 12);
 
   container.innerHTML = results.map(item => `
-    <button type="button" data-classname="${item.classname}">
+    <button
+      type="button"
+      data-classname="${item.classname}"
+    >
       ${item.classname}
     </button>
   `).join("");
 
-  container.querySelectorAll("button").forEach(button => {
-    button.addEventListener("click", () => {
-      loadoutReplaceCurrentToken(input, button.dataset.classname);
-      container.innerHTML = "";
+  container
+    .querySelectorAll("button")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+        loadoutReplaceCurrentToken(
+          input,
+          button.dataset.classname
+        );
+
+        container.innerHTML = "";
+      });
+
     });
-  });
 }
 
 const LOADOUT_SLOTS = [
@@ -3148,7 +3213,11 @@ document.getElementById("loadoutBodySlot")?.addEventListener("change", () => {
 });
 
 document.getElementById("loadoutWearChildren")?.addEventListener("input", () => {
-  loadoutShowSuggestions("loadoutWearChildren", "loadoutWearChildrenSuggestions");
+  loadoutShowSuggestions(
+    "loadoutWearChildren",
+    "loadoutWearChildrenSuggestions",
+    "loadoutWearItem"
+  );
 });
 
 document.getElementById("loadoutLooseItem")?.addEventListener("input", () => {
