@@ -147,6 +147,12 @@
       <h3>Territory XML Generator</h3>
       <p data-i18n="tool_territory_desc">Créer des zones de spawn XML DayZ pour zombies et animaux.</p>
     </article>
+
+    <article class="tool-card" data-tool="spawnableTypesTool">
+      <span>🧬</span>
+      <h3>Spawnable Types Editor</h3>
+      <p>Modifier facilement un fichier cfgspawnabletypes.xml.</p>
+    </article>
     
   </section>
 
@@ -1203,6 +1209,68 @@
     placeholder="Le fichier territories XML apparaîtra ici..."
     spellcheck="false"
   ></textarea>
+</section>
+
+<section id="spawnableTypesTool" class="tool-panel hidden">
+
+  <h2>🧬 CFG Spawnable Types Editor</h2>
+
+  <p class="muted">
+    Importez un fichier cfgspawnabletypes.xml puis modifiez les dégâts,
+    attachments, cargo et presets des objets DayZ.
+  </p>
+
+  <label class="file-upload">
+    <input
+      type="file"
+      id="spawnableTypesFile"
+      accept=".xml"
+    >
+    <span>Importer cfgspawnabletypes.xml</span>
+  </label>
+
+  <p
+    id="spawnableTypesFileName"
+    class="file-name"
+  >
+    Aucun fichier sélectionné
+  </p>
+
+  <div class="loot-controls">
+
+    <input
+      type="text"
+      id="spawnableTypesSearch"
+      placeholder="Rechercher un classname..."
+      class="loot-search"
+    >
+
+    <button
+      class="btn secondary"
+      id="downloadSpawnableTypesBtn"
+    >
+      Télécharger
+    </button>
+
+    <button
+      class="btn danger"
+      id="clearSpawnableTypesBtn"
+    >
+      Effacer
+    </button>
+
+  </div>
+
+  <p
+    id="spawnableTypesStatus"
+    class="status"
+  ></p>
+
+  <div
+    id="spawnableTypesList"
+    class="loot-card-list"
+  ></div>
+
 </section>
 
 </main>

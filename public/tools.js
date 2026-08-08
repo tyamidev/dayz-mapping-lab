@@ -3622,3 +3622,445 @@ document.getElementById("territoryXmlImport")?.addEventListener("change", async 
 refreshTerritoryCategories();
 
 console.log("DayZ Core :", DayZCore.getMaps());
+
+/* ======================================================
+   CFG SPAWNABLE TYPES EDITOR
+====================================================== */
+
+let currentSpawnableTypesFileName = "cfgspawnabletypes.xml";
+let currentSpawnableTypesXml = "";
+let spawnableTypesItems = [];
+
+const spawnableTypesFile =
+  document.getElementById("spawnableTypesFile");
+
+const spawnableTypesSearch =
+  document.getElementById("spawnableTypesSearch");
+
+const spawnableTypesStatus =
+  document.getElementById("spawnableTypesStatus");
+
+const spawnableTypesList =
+  document.getElementById("spawnableTypesList");
+
+
+/* ======================================================
+   PARSE
+====================================================== */
+
+function parseSpawnableTypesEditorXml(xml) {
+
+  spawnableTypesItems = [];
+
+  const parser = new DOMParser();
+
+  const xmlDoc = parser.parseFromString(
+    xml,
+    "application/xml"
+  );
+
+  const parserError =
+    xmlDoc.querySelector("parsererror");
+
+  if (parserError) {
+    throw new Error(
+      "Le fichier cfgspawnabletypes.xml est invalide."
+    );
+  }
+
+  const typeElements =
+    [...xmlDoc.querySelectorAll("type")];
+
+  typeElements.forEach((typeElement, index) => {
+
+    const name =
+      typeElement.getAttribute("name") || "";
+
+    if (!name) return;
+
+
+    /* -------------------------
+       DAMAGE
+    ------------------------- */
+
+    const damageElement =
+      [...typeElement.children]
+        .find(child =>
+          child.tagName.toLowerCase() === "damage"
+        );
+
+    const damage = damageElement
+      ? {
+          min:
+            damageElement.getAttribute("min") || "",
+          max:
+            damageElement.getAttribute("max") || ""
+        }
+      : null;
+
+
+    /* -------------------------
+       ATTACHMENTS
+    ------------------------- */
+
+    const attachmentGroups =
+      [...typeElement.children]
+        .filter(child =>
+          child.tagName.toLowerCase() === "attachments"
+        );
+
+
+    /* -------------------------
+       CARGO
+    ------------------------- */
+
+    const cargoGroups =
+      [...typeElement.children]
+        .filter(child =>
+          child.tagName.toLowerCase() === "cargo"
+        );
+
+
+    /* -------------------------
+       HOARDER
+    ------------------------- */
+
+    const hoarder =
+      typeElement.getAttribute("hoarder");
+
+
+    spawnableTypesItems.push({
+      id: index,
+
+      name,
+
+      hoarder:
+        hoarder !== null
+          ? hoarder
+          : "",
+
+      damage,
+
+      attachmentGroups:
+        attachmentGroups.length,
+
+      cargoGroups:
+        cargoGroups.length,
+
+      originalElement:
+        typeElement.cloneNode(true)
+    });
+  });
+}
+
+
+/* ======================================================
+   RENDER
+====================================================== */
+
+function renderSpawnableTypesEditor() {
+
+  if (!spawnableTypesList) return;
+
+  const search =
+    String(
+      spawnableTypesSearch?.value || ""
+    )
+      .trim()
+      .toLowerCase();
+
+  const filtered =
+    spawnableTypesItems.filter(item =>
+      item.name
+        .toLowerCase()
+        .includes(search)
+    );
+
+  spawnableTypesList.innerHTML =
+    filtered.map(item => {
+
+      const damageText =
+        item.damage
+          ? `${item.damage.min || "-"} → ${item.damage.max || "-"}`
+          : "Aucun";
+
+      return `
+        <article class="loot-card">
+
+          <div class="event-spawn-header">
+
+            <div>
+              <h3>${item.name}</h3>
+
+              <span class="loot-category-label">
+                ${item.attachmentGroups} groupe(s) attachment
+              </span>
+            </div>
+
+          </div>
+
+          <div class="loot-card-main">
+
+            <label>
+              Damage
+              <input
+                type="text"
+                value="${damageText}"
+                disabled
+              >
+            </label>
+
+            <label>
+              Attachments
+              <input
+                type="text"
+                value="${item.attachmentGroups}"
+                disabled
+              >
+            </label>
+
+            <label>
+              Cargo
+              <input
+                type="text"
+                value="${item.cargoGroups}"
+                disabled
+              >
+            </label>
+
+            <label>
+              Hoarder
+              <input
+                type="text"
+                value="${item.hoarder || "-"}"
+                disabled
+              >
+            </label>
+
+            <button
+              type="button"
+              class="mini-btn"
+              onclick="toggleSpawnableTypeDetails(${item.id})"
+            >
+              Détails
+            </button>
+
+          </div>
+
+          <div
+            id="spawnable-type-details-${item.id}"
+            class="loot-details-grid hidden"
+          >
+
+            <div>
+              <strong>Classname</strong>
+              <code>${item.name}</code>
+            </div>
+
+            <div>
+              <strong>Damage min</strong>
+              <code>${item.damage?.min || "-"}</code>
+            </div>
+
+            <div>
+              <strong>Damage max</strong>
+              <code>${item.damage?.max || "-"}</code>
+            </div>
+
+            <div>
+              <strong>Groupes attachments</strong>
+              <code>${item.attachmentGroups}</code>
+            </div>
+
+            <div>
+              <strong>Groupes cargo</strong>
+              <code>${item.cargoGroups}</code>
+            </div>
+
+          </div>
+
+        </article>
+      `;
+    }).join("");
+
+  if (spawnableTypesStatus) {
+    spawnableTypesStatus.textContent =
+      `${spawnableTypesItems.length} types chargés — ${filtered.length} affichés.`;
+  }
+}
+
+
+/* ======================================================
+   DETAILS
+====================================================== */
+
+window.toggleSpawnableTypeDetails = function(id) {
+
+  const block =
+    document.getElementById(
+      `spawnable-type-details-${id}`
+    );
+
+  if (!block) return;
+
+  block.classList.toggle("hidden");
+};
+
+
+/* ======================================================
+   IMPORT
+====================================================== */
+
+spawnableTypesFile?.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      spawnableTypesFile.files[0];
+
+    if (!file) return;
+
+    currentSpawnableTypesFileName =
+      file.name;
+
+    if (spawnableTypesStatus) {
+      spawnableTypesStatus.className =
+        "status";
+    }
+
+    const fileName =
+      document.getElementById(
+        "spawnableTypesFileName"
+      );
+
+    if (fileName) {
+      fileName.textContent =
+        file.name;
+    }
+
+    const reader =
+      new FileReader();
+
+    reader.onload = () => {
+
+      try {
+
+        currentSpawnableTypesXml =
+          String(reader.result || "");
+
+        parseSpawnableTypesEditorXml(
+          currentSpawnableTypesXml
+        );
+
+        renderSpawnableTypesEditor();
+
+      } catch (error) {
+
+        console.error(
+          "Spawnable Types Editor :",
+          error
+        );
+
+        spawnableTypesItems = [];
+
+        if (spawnableTypesList) {
+          spawnableTypesList.innerHTML = "";
+        }
+
+        if (spawnableTypesStatus) {
+          spawnableTypesStatus.className =
+            "status error";
+
+          spawnableTypesStatus.textContent =
+            error.message;
+        }
+      }
+
+      /*
+        Permet de réimporter
+        le même fichier ensuite.
+      */
+      spawnableTypesFile.value = "";
+    };
+
+    reader.readAsText(file);
+  }
+);
+
+
+/* ======================================================
+   SEARCH
+====================================================== */
+
+spawnableTypesSearch?.addEventListener(
+  "input",
+  renderSpawnableTypesEditor
+);
+
+
+/* ======================================================
+   DOWNLOAD
+====================================================== */
+
+document
+  .getElementById("downloadSpawnableTypesBtn")
+  ?.addEventListener("click", () => {
+
+    if (!currentSpawnableTypesXml.trim()) {
+
+      if (spawnableTypesStatus) {
+        spawnableTypesStatus.textContent =
+          "Importez d’abord un fichier cfgspawnabletypes.xml.";
+      }
+
+      return;
+    }
+
+    downloadFile(
+      currentSpawnableTypesFileName,
+      currentSpawnableTypesXml,
+      "application/xml"
+    );
+  });
+
+
+/* ======================================================
+   CLEAR
+====================================================== */
+
+document
+  .getElementById("clearSpawnableTypesBtn")
+  ?.addEventListener("click", () => {
+
+    currentSpawnableTypesFileName =
+      "cfgspawnabletypes.xml";
+
+    currentSpawnableTypesXml = "";
+    spawnableTypesItems = [];
+
+    if (spawnableTypesFile) {
+      spawnableTypesFile.value = "";
+    }
+
+    if (spawnableTypesSearch) {
+      spawnableTypesSearch.value = "";
+    }
+
+    if (spawnableTypesList) {
+      spawnableTypesList.innerHTML = "";
+    }
+
+    if (spawnableTypesStatus) {
+      spawnableTypesStatus.textContent = "";
+    }
+
+    const fileName =
+      document.getElementById(
+        "spawnableTypesFileName"
+      );
+
+    if (fileName) {
+      fileName.textContent =
+        "Aucun fichier sélectionné";
+    }
+  });
