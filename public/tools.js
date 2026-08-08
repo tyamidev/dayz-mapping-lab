@@ -2492,7 +2492,7 @@ function getLoadoutRelation(classname) {
 
   if (!classname) return null;
 
-  return relations[classname] || null;
+  return relations.weapons?.[classname] || null;
 }
 
 function getCompatibleWeaponChildren(classname) {
@@ -2810,12 +2810,8 @@ function loadoutShowSuggestions(inputId, containerId, parentItemId = null) {
 
   const token = loadoutCurrentToken(input.value);
 
-  if (!token || token.length < 2) {
-    container.innerHTML = "";
-    return;
-  }
-
   let items = getLoadoutItems();
+  let compatible = [];
 
   if (parentItemId) {
     const parentClassname =
@@ -2823,7 +2819,7 @@ function loadoutShowSuggestions(inputId, containerId, parentItemId = null) {
         loadoutGet(parentItemId)
       );
 
-    const compatible =
+    compatible =
       getCompatibleWeaponChildren(parentClassname);
 
     if (compatible.length) {
@@ -2842,16 +2838,38 @@ function loadoutShowSuggestions(inputId, containerId, parentItemId = null) {
     }
   }
 
-  const results = items
-    .filter(item =>
+  /*
+    Si aucun parent compatible n'est trouvé,
+    on garde l'ancien comportement :
+    minimum 2 caractères pour rechercher.
+  */
+  if (
+    !compatible.length &&
+    (!token || token.length < 2)
+  ) {
+    container.innerHTML = "";
+    return;
+  }
+
+  /*
+    Si on a une arme compatible :
+    - champ vide = affiche les propositions compatibles
+    - texte saisi = filtre les propositions
+  */
+  let results = items;
+
+  if (token) {
+    results = results.filter(item =>
       item.classname
         .toLowerCase()
         .includes(token) ||
       item.label
         .toLowerCase()
         .includes(token)
-    )
-    .slice(0, 12);
+    );
+  }
+
+  results = results.slice(0, 30);
 
   container.innerHTML = results.map(item => `
     <button
@@ -3213,6 +3231,14 @@ document.getElementById("loadoutBodySlot")?.addEventListener("change", () => {
 });
 
 document.getElementById("loadoutWearChildren")?.addEventListener("input", () => {
+  loadoutShowSuggestions(
+    "loadoutWearChildren",
+    "loadoutWearChildrenSuggestions",
+    "loadoutWearItem"
+  );
+});
+
+document.getElementById("loadoutWearChildren")?.addEventListener("focus", () => {
   loadoutShowSuggestions(
     "loadoutWearChildren",
     "loadoutWearChildrenSuggestions",
