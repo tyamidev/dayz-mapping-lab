@@ -54,61 +54,65 @@ getPresetVariant(name, mapId = "chernarusplus") {
 },
 
 getResolvedSpawnData(classname, mapId = "chernarusplus") {
-  const spawnable = this.getSpawnableVariant(classname, mapId);
+  const spawnable =
+    this.getSpawnableVariant(classname, mapId);
 
   if (!spawnable) {
     return {
       classname,
+      damage: null,
       attachments: [],
       cargo: []
     };
   }
 
-  const resolveSection = (section) => {
-    if (!section) return [];
+  const resolveGroup = (group) => {
+    const entries = [];
 
-    const result = [];
-
-    (section.items || []).forEach(item => {
-      result.push({
+    (group.items || []).forEach(item => {
+      entries.push({
         type: "item",
         name: item.name,
         chance: item.chance
       });
     });
 
-    (section.presets || []).forEach(presetRef => {
-      const preset = this.getPresetVariant(presetRef.name, mapId);
+    (group.presets || []).forEach(presetRef => {
+      const preset =
+        this.getPresetVariant(
+          presetRef.name,
+          mapId
+        );
 
-      if (!preset) {
-        result.push({
-          type: "preset",
-          name: presetRef.name,
-          chance: presetRef.chance,
-          items: []
-        });
-
-        return;
-      }
-
-      result.push({
+      entries.push({
         type: "preset",
         name: presetRef.name,
         chance: presetRef.chance,
-        items: preset.items || []
+        items: preset?.items || []
       });
     });
 
-    return result;
+    return {
+      chance: group.chance,
+      entries
+    };
   };
 
   return {
     classname,
-    damage: spawnable.damage || null,
-    attachmentsChance: spawnable.attachments?.chance ?? null,
-    attachments: resolveSection(spawnable.attachments),
-    cargoChance: spawnable.cargo?.chance ?? null,
-    cargo: resolveSection(spawnable.cargo)
+
+    damage:
+      spawnable.damage || null,
+
+    attachments:
+      Array.isArray(spawnable.attachments)
+        ? spawnable.attachments.map(resolveGroup)
+        : [],
+
+    cargo:
+      Array.isArray(spawnable.cargo)
+        ? spawnable.cargo.map(resolveGroup)
+        : []
   };
 }
 };
