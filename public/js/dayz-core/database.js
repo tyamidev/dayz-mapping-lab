@@ -57,14 +57,8 @@ getResolvedSpawnData(classname, mapId = "chernarusplus") {
   const spawnable =
     this.getSpawnableVariant(classname, mapId);
 
-  if (!spawnable) {
-    return {
-      classname,
-      damage: null,
-      attachments: [],
-      cargo: []
-    };
-  }
+  const customAttachments =
+    this.getCustomAttachments(classname);
 
   const resolveGroup = (group) => {
     const entries = [];
@@ -73,7 +67,8 @@ getResolvedSpawnData(classname, mapId = "chernarusplus") {
       entries.push({
         type: "item",
         name: item.name,
-        chance: item.chance
+        chance: item.chance,
+        source: "vanilla"
       });
     });
 
@@ -88,7 +83,8 @@ getResolvedSpawnData(classname, mapId = "chernarusplus") {
         type: "preset",
         name: presetRef.name,
         chance: presetRef.chance,
-        items: preset?.items || []
+        items: preset?.items || [],
+        source: "vanilla"
       });
     });
 
@@ -98,22 +94,48 @@ getResolvedSpawnData(classname, mapId = "chernarusplus") {
     };
   };
 
+  const vanillaGroups =
+    spawnable && Array.isArray(spawnable.attachments)
+      ? spawnable.attachments.map(resolveGroup)
+      : [];
+
+  const customGroup = {
+    chance: 1,
+    entries: customAttachments.map(name => ({
+      type: "item",
+      name,
+      chance: 1,
+      source: "custom"
+    }))
+  };
+
+  const attachments = [...vanillaGroups];
+
+  if (customGroup.entries.length) {
+    attachments.push(customGroup);
+  }
+
   return {
     classname,
 
     damage:
-      spawnable.damage || null,
+      spawnable?.damage || null,
 
-    attachments:
-      Array.isArray(spawnable.attachments)
-        ? spawnable.attachments.map(resolveGroup)
-        : [],
+    attachments,
 
     cargo:
-      Array.isArray(spawnable.cargo)
+      spawnable && Array.isArray(spawnable.cargo)
         ? spawnable.cargo.map(resolveGroup)
         : []
   };
+},
+
+getCustomAttachments(classname) {
+  return (
+    window.DAYZ_CUSTOM_RELATIONS?.attachments?.[classname] ||
+    []
+  );
 }
+
 };
 
