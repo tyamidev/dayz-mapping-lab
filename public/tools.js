@@ -3493,3 +3493,5 @@ document.getElementById("territoryXmlImport")?.addEventListener("change", async 
 });
 
 refreshTerritoryCategories();
+
+console.log("DayZ Core :", DayZCore.getMaps());
