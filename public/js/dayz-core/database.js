@@ -35,5 +35,81 @@ window.DayZDatabase = {
         item.vanillaMaps &&
         item.vanillaMaps[mapId]
       );
+  },
+
+getSpawnableVariant(classname, mapId = "chernarusplus") {
+  const entry = this.getSpawnableType(classname);
+
+  if (!entry) return null;
+
+  return entry.variants?.[mapId] || null;
+},
+
+getPresetVariant(name, mapId = "chernarusplus") {
+  const preset = this.getPreset(name);
+
+  if (!preset) return null;
+
+  return preset.variants?.[mapId] || null;
+},
+
+getResolvedSpawnData(classname, mapId = "chernarusplus") {
+  const spawnable = this.getSpawnableVariant(classname, mapId);
+
+  if (!spawnable) {
+    return {
+      classname,
+      attachments: [],
+      cargo: []
+    };
   }
+
+  const resolveSection = (section) => {
+    if (!section) return [];
+
+    const result = [];
+
+    (section.items || []).forEach(item => {
+      result.push({
+        type: "item",
+        name: item.name,
+        chance: item.chance
+      });
+    });
+
+    (section.presets || []).forEach(presetRef => {
+      const preset = this.getPresetVariant(presetRef.name, mapId);
+
+      if (!preset) {
+        result.push({
+          type: "preset",
+          name: presetRef.name,
+          chance: presetRef.chance,
+          items: []
+        });
+
+        return;
+      }
+
+      result.push({
+        type: "preset",
+        name: presetRef.name,
+        chance: presetRef.chance,
+        items: preset.items || []
+      });
+    });
+
+    return result;
+  };
+
+  return {
+    classname,
+    damage: spawnable.damage || null,
+    attachmentsChance: spawnable.attachments?.chance ?? null,
+    attachments: resolveSection(spawnable.attachments),
+    cargoChance: spawnable.cargo?.chance ?? null,
+    cargo: resolveSection(spawnable.cargo)
+  };
+}
 };
+
