@@ -108,63 +108,49 @@ function parseSpawnableTypes(xml) {
       };
     }
 
-    const attachmentsMatch =
-      block.match(
-        /<attachments\b[^>]*>[\s\S]*?<\/attachments>/i
-      );
+const attachmentBlocks =
+  block.match(
+    /<attachments\b[^>]*>[\s\S]*?<\/attachments>/gi
+  ) || [];
 
-    const cargoMatch =
-      block.match(
-        /<cargo\b[^>]*>[\s\S]*?<\/cargo>/i
-      );
+const attachments = attachmentBlocks.map(
+  attachmentBlock => ({
+    chance: getNumberAttr(
+      attachmentBlock,
+      "chance"
+    ),
 
-    const attachments = {
-      chance: null,
-      items: [],
-      presets: []
-    };
+    items: extractItemsFromSection(
+      attachmentBlock
+    ),
 
-    if (attachmentsMatch) {
-      attachments.chance =
-        getNumberAttr(
-          attachmentsMatch[0],
-          "chance"
-        );
+    presets: extractPresetsFromSection(
+      attachmentBlock
+    )
+  })
+);
 
-      attachments.items =
-        extractItemsFromSection(
-          attachmentsMatch[0]
-        );
+const cargoBlocks =
+  block.match(
+    /<cargo\b[^>]*>[\s\S]*?<\/cargo>/gi
+  ) || [];
 
-      attachments.presets =
-        extractPresetsFromSection(
-          attachmentsMatch[0]
-        );
-    }
+const cargo = cargoBlocks.map(
+  cargoBlock => ({
+    chance: getNumberAttr(
+      cargoBlock,
+      "chance"
+    ),
 
-    const cargo = {
-      chance: null,
-      items: [],
-      presets: []
-    };
+    items: extractItemsFromSection(
+      cargoBlock
+    ),
 
-    if (cargoMatch) {
-      cargo.chance =
-        getNumberAttr(
-          cargoMatch[0],
-          "chance"
-        );
-
-      cargo.items =
-        extractItemsFromSection(
-          cargoMatch[0]
-        );
-
-      cargo.presets =
-        extractPresetsFromSection(
-          cargoMatch[0]
-        );
-    }
+    presets: extractPresetsFromSection(
+      cargoBlock
+    )
+  })
+);
 
     return {
       classname,
