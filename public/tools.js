@@ -2796,9 +2796,33 @@ function loadoutCurrentToken(value) {
 }
 
 function loadoutReplaceCurrentToken(input, classname) {
-  const parts = input.value.split(",");
-  parts[parts.length - 1] = ` ${classname}`;
-  input.value = parts.map(p => p.trim()).filter(Boolean).join(", ");
+  const parts = String(input.value || "")
+    .split(",")
+    .map(p => p.trim())
+    .filter(Boolean);
+
+  // Retire le texte en cours de frappe
+  if (parts.length) {
+    const last = parts[parts.length - 1];
+
+    if (
+      !last.includes("_") &&
+      last.toLowerCase() !== classname.toLowerCase()
+    ) {
+      parts.pop();
+    }
+  }
+
+  // Évite les doublons
+  const alreadyAdded = parts.some(
+    item => item.toLowerCase() === classname.toLowerCase()
+  );
+
+  if (!alreadyAdded) {
+    parts.push(classname);
+  }
+
+  input.value = parts.join(", ") + ", ";
   input.focus();
 }
 
@@ -2884,14 +2908,18 @@ function loadoutShowSuggestions(inputId, containerId, parentItemId = null) {
     .querySelectorAll("button")
     .forEach(button => {
 
-      button.addEventListener("click", () => {
-        loadoutReplaceCurrentToken(
-          input,
-          button.dataset.classname
-        );
+button.addEventListener("click", () => {
+  loadoutReplaceCurrentToken(
+    input,
+    button.dataset.classname
+  );
 
-        container.innerHTML = "";
-      });
+  loadoutShowSuggestions(
+    inputId,
+    containerId,
+    parentItemId
+  );
+});
 
     });
 }
