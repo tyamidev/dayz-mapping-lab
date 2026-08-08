@@ -2479,6 +2479,10 @@ document.getElementById("clearTeleportBtn")?.addEventListener("click", () => {
 let loadoutWearSlots = {};
 let loadoutLooseItems = [];
 
+function getLoadoutItems() {
+  return window.DAYZ_CORE_ITEMS || [];
+}
+
 const DAYZ_CHARACTER_TYPES = {
   male: [
     "SurvivorM_Mirek",
@@ -2554,7 +2558,7 @@ function loadoutGetSelectedCharacters() {
 }
 
 function loadoutItemsForSlot(slot) {
-  const items = window.DAYZ_ITEMS || [];
+  const items = getLoadoutItems();
 
   return items.filter(item => {
 
@@ -2777,7 +2781,7 @@ function loadoutReplaceCurrentToken(input, classname) {
 function loadoutShowSuggestions(inputId, containerId) {
   const input = document.getElementById(inputId);
   const container = document.getElementById(containerId);
-  const items = window.DAYZ_ITEMS || [];
+  const items = getLoadoutItems();
 
   if (!input || !container) return;
 
@@ -2861,7 +2865,7 @@ function loadoutCleanName(name) {
 
 function loadoutFindItem(value) {
   const search = String(value || "").trim().toLowerCase();
-  const items = window.DAYZ_ITEMS || [];
+  const items = getLoadoutItems();
 
   if (!search) return null;
 
@@ -2880,7 +2884,7 @@ function loadoutClassname(value) {
 
 function loadoutRefreshDatalist() {
   const datalist = document.getElementById("dayzItemsList");
-  const items = window.DAYZ_ITEMS || [];
+  const items = getLoadoutItems();
 
   if (!datalist) return;
 
