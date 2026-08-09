@@ -1230,3 +1230,131 @@
     flex-direction: column;
   }
 }
+
+/* ======================================================
+   CFG SPAWNABLE TYPES - AUTOCOMPLETE
+====================================================== */
+
+.spawnable-autocomplete {
+    position: relative;
+    width: 100%;
+}
+
+.spawnable-autocomplete > input {
+    width: 100%;
+}
+
+
+/* Liste déroulante */
+
+.spawnable-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+
+    z-index: 10000;
+
+    max-height: 290px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: #07130f;
+
+    border: 1px solid rgba(57, 211, 159, 0.45);
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.55);
+
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+/* Important */
+
+.spawnable-suggestions.hidden {
+    display: none;
+}
+
+
+/* Une proposition */
+
+.spawnable-suggestion {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #f4f7f5;
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+/* Hover */
+
+.spawnable-suggestion:hover {
+    background: rgba(57, 211, 159, 0.18);
+    color: #55e6b5;
+}
+
+
+/* Clic */
+
+.spawnable-suggestion:active {
+    transform: scale(0.995);
+}
+
+
+/* Aucun résultat */
+
+.spawnable-suggestion-empty {
+    padding: 14px;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* Scrollbar */
+
+.spawnable-suggestions::-webkit-scrollbar {
+    width: 8px;
+}
+
+.spawnable-suggestions::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.spawnable-suggestions::-webkit-scrollbar-thumb {
+    background: rgba(57, 211, 159, 0.30);
+    border-radius: 10px;
+}
+
+.spawnable-suggestions::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 211, 159, 0.55);
+}
