@@ -3703,22 +3703,43 @@ function parseSpawnableTypesEditorXml(xml) {
        ATTACHMENTS
     ------------------------- */
 
-    const attachmentGroups =
-      [...typeElement.children]
-        .filter(child =>
-          child.tagName.toLowerCase() === "attachments"
-        );
+function parseSpawnGroup(groupElement) {
+  return {
+    chance: groupElement.getAttribute("chance") || "",
 
+    items: [...groupElement.children]
+      .filter(child =>
+        child.tagName.toLowerCase() === "item"
+      )
+      .map(child => ({
+        name: child.getAttribute("name") || "",
+        chance: child.getAttribute("chance") || ""
+      })),
 
-    /* -------------------------
-       CARGO
-    ------------------------- */
+    presets: [...groupElement.children]
+      .filter(child =>
+        child.tagName.toLowerCase() === "preset"
+      )
+      .map(child => ({
+        name: child.getAttribute("name") || "",
+        chance: child.getAttribute("chance") || ""
+      }))
+  };
+}
 
-    const cargoGroups =
-      [...typeElement.children]
-        .filter(child =>
-          child.tagName.toLowerCase() === "cargo"
-        );
+const attachmentGroups =
+  [...typeElement.children]
+    .filter(child =>
+      child.tagName.toLowerCase() === "attachments"
+    )
+    .map(parseSpawnGroup);
+
+const cargoGroups =
+  [...typeElement.children]
+    .filter(child =>
+      child.tagName.toLowerCase() === "cargo"
+    )
+    .map(parseSpawnGroup);
 
 
     /* -------------------------
@@ -3740,12 +3761,8 @@ function parseSpawnableTypesEditorXml(xml) {
           : "",
 
       damage,
-
-      attachmentGroups:
-        attachmentGroups.length,
-
-      cargoGroups:
-        cargoGroups.length,
+      attachmentGroups,
+      cargoGroups,
 
       originalElement:
         typeElement.cloneNode(true)
@@ -3793,7 +3810,7 @@ function renderSpawnableTypesEditor() {
               <h3>${item.name}</h3>
 
               <span class="loot-category-label">
-                ${item.attachmentGroups} groupe(s) attachment
+                ${item.attachmentGroups.length} groupe(s) attachment
               </span>
             </div>
 
@@ -3814,7 +3831,7 @@ function renderSpawnableTypesEditor() {
               Attachments
               <input
                 type="text"
-                value="${item.attachmentGroups}"
+                value="${item.attachmentGroups.length}"
                 disabled
               >
             </label>
@@ -3823,7 +3840,7 @@ function renderSpawnableTypesEditor() {
               Cargo
               <input
                 type="text"
-                value="${item.cargoGroups}"
+                value="${item.cargoGroups.length}"
                 disabled
               >
             </label>
@@ -3847,37 +3864,125 @@ function renderSpawnableTypesEditor() {
 
           </div>
 
-          <div
-            id="spawnable-type-details-${item.id}"
-            class="loot-details-grid hidden"
-          >
+<div
+  id="spawnable-type-details-${item.id}"
+  class="hidden"
+>
 
-            <div>
-              <strong>Classname</strong>
-              <code>${item.name}</code>
-            </div>
+  <div class="loot-details-grid">
 
-            <div>
-              <strong>Damage min</strong>
-              <code>${item.damage?.min || "-"}</code>
-            </div>
+    <div>
+      <strong>Classname</strong>
+      <code>${item.name}</code>
+    </div>
 
-            <div>
-              <strong>Damage max</strong>
-              <code>${item.damage?.max || "-"}</code>
-            </div>
+    <div>
+      <strong>Damage min</strong>
+      <code>${item.damage?.min || "-"}</code>
+    </div>
 
-            <div>
-              <strong>Groupes attachments</strong>
-              <code>${item.attachmentGroups}</code>
-            </div>
+    <div>
+      <strong>Damage max</strong>
+      <code>${item.damage?.max || "-"}</code>
+    </div>
 
-            <div>
-              <strong>Groupes cargo</strong>
-              <code>${item.cargoGroups}</code>
-            </div>
+  </div>
+
+  <h4>Attachments</h4>
+
+  ${
+    item.attachmentGroups.length
+      ? item.attachmentGroups.map((group, groupIndex) => `
+          <div class="loot-card">
+
+            <strong>
+              Groupe ${groupIndex + 1}
+              — chance ${group.chance || "-"}
+            </strong>
+
+            ${
+              group.items.length
+                ? `
+                  <p>Items :</p>
+                  <code>
+                    ${group.items
+                      .map(entry =>
+                        `${entry.name} (${entry.chance || "-"})`
+                      )
+                      .join(", ")}
+                  </code>
+                `
+                : ""
+            }
+
+            ${
+              group.presets.length
+                ? `
+                  <p>Presets :</p>
+                  <code>
+                    ${group.presets
+                      .map(entry =>
+                        `${entry.name} (${entry.chance || "-"})`
+                      )
+                      .join(", ")}
+                  </code>
+                `
+                : ""
+            }
 
           </div>
+        `).join("")
+      : `<p class="muted">Aucun attachment.</p>`
+  }
+
+  <h4>Cargo</h4>
+
+  ${
+    item.cargoGroups.length
+      ? item.cargoGroups.map((group, groupIndex) => `
+          <div class="loot-card">
+
+            <strong>
+              Groupe ${groupIndex + 1}
+              — chance ${group.chance || "-"}
+            </strong>
+
+            ${
+              group.items.length
+                ? `
+                  <p>Items :</p>
+                  <code>
+                    ${group.items
+                      .map(entry =>
+                        `${entry.name} (${entry.chance || "-"})`
+                      )
+                      .join(", ")}
+                  </code>
+                `
+                : ""
+            }
+
+            ${
+              group.presets.length
+                ? `
+                  <p>Presets :</p>
+                  <code>
+                    ${group.presets
+                      .map(entry =>
+                        `${entry.name} (${entry.chance || "-"})`
+                      )
+                      .join(", ")}
+                  </code>
+                `
+                : ""
+            }
+
+          </div>
+        `).join("")
+      : `<p class="muted">Aucun cargo.</p>`
+  }
+
+</div>
 
         </article>
       `;
