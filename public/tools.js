@@ -4706,6 +4706,9 @@ function(
 
   if (!suggestionsBox) return;
 
+closeSpawnableSuggestions(
+  suggestionsBox
+);
 
   const allItems =
     getSpawnableCompatibleItems();
@@ -4809,6 +4812,51 @@ function(
 };
 
 /* ======================================================
+SPAWNABLE AUTOCOMPLETE - CLOSE
+====================================================== */
+
+function closeSpawnableSuggestions(except = null) {
+
+  document
+    .querySelectorAll(".spawnable-suggestions")
+    .forEach(box => {
+
+      if (box === except) {
+        return;
+      }
+
+      box.classList.add("hidden");
+    });
+}
+
+
+/* Clic en dehors du champ */
+
+document.addEventListener("click", event => {
+
+  const autocomplete =
+    event.target.closest(".spawnable-autocomplete");
+
+  if (autocomplete) {
+    return;
+  }
+
+  closeSpawnableSuggestions();
+});
+
+
+/* Touche Echap */
+
+document.addEventListener("keydown", event => {
+
+  if (event.key !== "Escape") {
+    return;
+  }
+
+  closeSpawnableSuggestions();
+});
+
+/* ======================================================
    RENDER MODAL GROUP
 ====================================================== */
 
@@ -4842,7 +4890,7 @@ function renderSpawnableModalGroup(
             .map(entry => spawnableEscapeHtml(entry.name))
             .filter(Boolean)
             .join(" / ")
-        : `Groupe ${groupIndex + 1}`
+        : `Groupe ${index + 1}`
   }
 </strong>
 
