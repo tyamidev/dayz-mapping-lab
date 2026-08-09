@@ -23,6 +23,14 @@ const DAYZ_VEHICLES_ROOT = path.join(
   "vehicles"
 );
 
+const DAYZ_CHARACTERS_ROOT = path.join(
+  process.env.USERPROFILE || "",
+  "Documents",
+  "DayZ Projects",
+  "DZ",
+  "characters"
+);
+
 const CORE_ITEMS_FILE = path.join(
   ROOT,
   "public",
@@ -452,16 +460,20 @@ const weaponConfigFiles =
     DAYZ_WEAPONS_ROOT
   );
 
-
 const vehicleConfigFiles =
   findConfigFiles(
     DAYZ_VEHICLES_ROOT
   );
 
+const characterConfigFiles =
+  findConfigFiles(
+    DAYZ_CHARACTERS_ROOT
+  );
 
 const configFiles = [
   ...weaponConfigFiles,
-  ...vehicleConfigFiles
+  ...vehicleConfigFiles,
+  ...characterConfigFiles
 ];
 
 
@@ -471,6 +483,10 @@ console.log(
 
 console.log(
   `config.cpp véhicules : ${vehicleConfigFiles.length}`
+);
+
+console.log(
+  `config.cpp characters : ${characterConfigFiles.length}`
 );
 
 console.log(
@@ -488,6 +504,12 @@ if (!weaponConfigFiles.length) {
 if (!vehicleConfigFiles.length) {
   throw new Error(
     "Aucun config.cpp trouvé dans DZ/vehicles."
+  );
+}
+
+if (!characterConfigFiles.length) {
+  throw new Error(
+    "Aucun config.cpp trouvé dans DZ/characters."
   );
 }
 
@@ -838,6 +860,89 @@ function isVehicleRootClass(classname) {
 }
 
 /* =========================================================
+EQUIPMENT HELPERS
+========================================================= */
+
+function isEquipmentClass(classname) {
+
+  const data =
+    classMap.get(classname);
+
+  if (!data) {
+    return false;
+  }
+
+  const source =
+    String(data.source || "")
+      .replace(/\\/g, "/")
+      .toLowerCase();
+
+  return source.startsWith(
+    "characters/"
+  );
+}
+
+
+function isEquipmentRootClass(classname) {
+
+  if (!isEquipmentClass(classname)) {
+    return false;
+  }
+
+  /*
+    Exclure les personnages jouables.
+    Ils possèdent énormément de slots d'équipement,
+    mais ne sont pas des objets utilisables dans
+    cfgspawnabletypes.xml comme équipement.
+  */
+
+  if (
+    classname === "SurvivorBase" ||
+    classname === "SurvivorMale_Base" ||
+    classname === "SurvivorFemale_Base" ||
+    classname.startsWith("SurvivorM_") ||
+    classname.startsWith("SurvivorF_")
+  ) {
+    return false;
+  }
+
+    /*
+    Exclure les zombies / infectés.
+    Ils possèdent des slots de vêtements,
+    mais ne sont pas des équipements.
+  */
+
+  if (
+    classname === "CfgVehicles" ||
+    classname === "ZombieBase" ||
+    classname === "ZombieMaleBase" ||
+    classname === "ZombieFemaleBase" ||
+
+    classname === "LowTierZombieMaleBase" ||
+    classname === "LowTierZombieFemaleBase" ||
+    classname === "LowTierMaleZombieBase" ||
+    classname === "LowTierFemaleZombieBase" ||
+
+    classname.startsWith("ZmbM_") ||
+    classname.startsWith("ZmbF_")
+  ) {
+    return false;
+  }
+
+  const resolved =
+    resolveClass(classname);
+
+  if (!resolved) {
+    return false;
+  }
+
+  return (
+    Array.isArray(resolved.attachments) &&
+    resolved.attachments.length > 0
+  );
+}
+
+/* =========================================================
    BUILD WEAPON RELATIONS
 ========================================================= */
 
@@ -1087,6 +1192,140 @@ classMap.forEach(
 );
 
 /* =========================================================
+BUILD EQUIPMENT RELATIONS
+========================================================= */
+
+const equipmentRelations = {};
+
+let equipmentRelationCount = 0;
+
+
+classMap.forEach(
+  (_, classname) => {
+
+    if (!isEquipmentRootClass(classname)) {
+      return;
+    }
+
+
+    const resolved =
+      resolveClass(classname);
+
+    if (!resolved) {
+      return;
+    }
+
+
+    const compatibleAttachments =
+      new Set();
+
+    const attachmentsBySlot = {};
+
+
+    resolved.attachments.forEach(
+      slot => {
+
+        const normalizedSlot =
+          normalizeSlot(slot);
+
+        if (!normalizedSlot) {
+          return;
+        }
+
+
+        const compatible =
+          slotIndex.get(
+            normalizedSlot
+          ) || [];
+
+
+        /*
+          On ne veut pas proposer
+          l'équipement parent lui-même.
+        */
+
+        const filtered =
+          compatible.filter(
+            candidate =>
+              candidate !== classname
+          );
+
+
+        const unique =
+          [...new Set(filtered)]
+            .sort();
+
+
+        attachmentsBySlot[slot] =
+          unique;
+
+
+        unique.forEach(
+          attachmentName => {
+
+            compatibleAttachments.add(
+              attachmentName
+            );
+
+            equipmentRelationCount++;
+          }
+        );
+      }
+    );
+
+
+    equipmentRelations[classname] = {
+
+      parent:
+        resolved.parent,
+
+      attachmentSlots:
+        resolved.attachments,
+
+      attachmentsBySlot,
+
+      compatibleAttachments:
+        [...compatibleAttachments]
+          .sort()
+    };
+  }
+);
+
+/* =========================================================
+EQUIPMENT AUDIT
+========================================================= */
+
+const equipmentAudit =
+  Object.entries(equipmentRelations)
+    .map(([name, data]) => ({
+      name,
+      slots:
+        data.attachmentSlots.length,
+
+      relations:
+        data.compatibleAttachments.length
+    }))
+    .sort(
+      (a, b) =>
+        b.relations - a.relations
+    );
+
+console.log("");
+console.log("===============================");
+console.log(" EQUIPMENT AUDIT");
+console.log("===============================");
+console.log("");
+
+equipmentAudit
+  .slice(0, 30)
+  .forEach(item => {
+
+    console.log(
+      `${item.name} : ${item.slots} slot(s) / ${item.relations} relation(s)`
+    );
+  });
+
+/* =========================================================
    STATS
 ========================================================= */
 
@@ -1209,7 +1448,10 @@ const output = {
     weaponRelations,
 
   vehicles:
-    vehicleRelations
+    vehicleRelations,
+
+  equipment:
+    equipmentRelations
 };
 
 const fileContent = `
@@ -1320,6 +1562,16 @@ console.log(
 
 console.log(
   `Relations pièces véhicule : ${vehicleRelationCount}`
+);
+
+console.log("");
+
+console.log(
+  `Équipements trouvés : ${Object.keys(equipmentRelations).length}`
+);
+
+console.log(
+  `Relations équipements : ${equipmentRelationCount}`
 );
 
 console.log(

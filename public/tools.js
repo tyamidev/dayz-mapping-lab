@@ -4535,6 +4535,32 @@ function getSpawnableCompatibleItems() {
       .sort();
   }
 
+  /* -------------------------
+   EQUIPMENT
+------------------------- */
+
+const equipment =
+  relations.equipment?.[classname];
+
+if (equipment) {
+
+  return [
+    ...(equipment.compatibleAttachments || [])
+  ]
+    .filter(Boolean)
+
+    .filter(name =>
+      !name.startsWith("Proxy")
+    )
+
+    .filter(
+      (value, index, array) =>
+        array.indexOf(value) === index
+    )
+
+    .sort();
+}
+
 
   return [];
 }

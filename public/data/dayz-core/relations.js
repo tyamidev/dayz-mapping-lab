@@ -15,7 +15,7 @@
 // =========================================================
 
 window.DAYZ_CORE_RELATIONS = {
-  "generatedAt": "2026-08-09T09:58:18.105Z",
+  "generatedAt": "2026-08-09T11:23:38.947Z",
   "source": "Official DayZ extracted config.cpp",
   "weapons": {
     "ACOGOptic": {
@@ -3050,8 +3050,7 @@ window.DAYZ_CORE_RELATIONS = {
       ],
       "attachmentsBySlot": {
         "RevolverCylinder": [
-          "Magnum_Cylinder",
-          "cfgVehicles"
+          "Magnum_Cylinder"
         ],
         "RevolverEjector": [
           "Magnum_Ejector"
@@ -3059,8 +3058,7 @@ window.DAYZ_CORE_RELATIONS = {
       },
       "compatibleAttachments": [
         "Magnum_Cylinder",
-        "Magnum_Ejector",
-        "cfgVehicles"
+        "Magnum_Ejector"
       ],
       "compatibleMagazines": [],
       "compatibleAmmo": [
@@ -3464,6 +3462,18 @@ window.DAYZ_CORE_RELATIONS = {
       "parent": "Inventory_Base",
       "attachmentSlots": [],
       "attachmentsBySlot": {},
+      "compatibleAttachments": [],
+      "compatibleMagazines": [],
+      "compatibleAmmo": []
+    },
+    "NVGoggles": {
+      "parent": "ItemOptics",
+      "attachmentSlots": [
+        "BatteryD"
+      ],
+      "attachmentsBySlot": {
+        "BatteryD": []
+      },
       "compatibleAttachments": [],
       "compatibleMagazines": [],
       "compatibleAmmo": []
@@ -3925,8 +3935,7 @@ window.DAYZ_CORE_RELATIONS = {
       ],
       "attachmentsBySlot": {
         "RevolverCylinder": [
-          "Magnum_Cylinder",
-          "cfgVehicles"
+          "Magnum_Cylinder"
         ],
         "RevolverEjector": [
           "Magnum_Ejector"
@@ -3934,8 +3943,7 @@ window.DAYZ_CORE_RELATIONS = {
       },
       "compatibleAttachments": [
         "Magnum_Cylinder",
-        "Magnum_Ejector",
-        "cfgVehicles"
+        "Magnum_Ejector"
       ],
       "compatibleMagazines": [],
       "compatibleAmmo": [
@@ -4705,6 +4713,34 @@ window.DAYZ_CORE_RELATIONS = {
       "compatibleMagazines": [],
       "compatibleAmmo": []
     },
+    "TortillaBag_Desert": {
+      "parent": "TortillaBag",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ],
+      "compatibleMagazines": [],
+      "compatibleAmmo": []
+    },
     "UMP45": {
       "parent": "UMP45_Base",
       "attachmentSlots": [
@@ -4918,29 +4954,6 @@ window.DAYZ_CORE_RELATIONS = {
     }
   },
   "vehicles": {
-    "CfgVehicles": {
-      "parent": null,
-      "attachmentSlots": [
-        "CarBattery",
-        "Reflector_1_1",
-        "Reflector_2_1"
-      ],
-      "attachmentsBySlot": {
-        "CarBattery": [
-          "ProxyBattery_Car"
-        ],
-        "Reflector_1_1": [
-          "ProxyReplacement_Headlight"
-        ],
-        "Reflector_2_1": [
-          "ProxyReplacement_Headlight"
-        ]
-      },
-      "compatibleAttachments": [
-        "ProxyBattery_Car",
-        "ProxyReplacement_Headlight"
-      ]
-    },
     "TruckBattery": {
       "parent": "Inventory_Base",
       "attachmentSlots": [
@@ -8363,6 +8376,4575 @@ window.DAYZ_CORE_RELATIONS = {
         "ProxyBattery_Car",
         "ProxyReplacement_Headlight"
       ]
+    }
+  },
+  "equipment": {
+    "TaloonBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TaloonBag_Blue": {
+      "parent": "TaloonBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TaloonBag_Green": {
+      "parent": "TaloonBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TaloonBag_Orange": {
+      "parent": "TaloonBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TaloonBag_Violet": {
+      "parent": "TaloonBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TortillaBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TortillaBag_Winter": {
+      "parent": "TortillaBag",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "TortillaBag_Desert": {
+      "parent": "TortillaBag",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CourierBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "FurCourierBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ImprovisedBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "FurImprovisedBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_Orange": {
+      "parent": "DryBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_Yellow": {
+      "parent": "DryBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_Blue": {
+      "parent": "DryBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_Green": {
+      "parent": "DryBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_Black": {
+      "parent": "DryBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DryBag_Red": {
+      "parent": "DryBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "HuntingBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "HuntingBag_Hannah": {
+      "parent": "HuntingBag",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "MountainBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "MountainBag_Red": {
+      "parent": "MountainBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "MountainBag_Blue": {
+      "parent": "MountainBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "MountainBag_Orange": {
+      "parent": "MountainBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "MountainBag_Green": {
+      "parent": "MountainBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "SmershBag": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": []
+      },
+      "compatibleAttachments": []
+    },
+    "ChildBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ChildBag_Green": {
+      "parent": "ChildBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ChildBag_Red": {
+      "parent": "ChildBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ChildBag_Blue": {
+      "parent": "ChildBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "LeatherSack_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "LeatherSack_Natural": {
+      "parent": "LeatherSack_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "LeatherSack_Black": {
+      "parent": "LeatherSack_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "LeatherSack_Beige": {
+      "parent": "LeatherSack_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "LeatherSack_Brown": {
+      "parent": "LeatherSack_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AssaultBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AssaultBag_Ttsko": {
+      "parent": "AssaultBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AssaultBag_Black": {
+      "parent": "AssaultBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AssaultBag_Green": {
+      "parent": "AssaultBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AssaultBag_Winter": {
+      "parent": "AssaultBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "Attack2Bag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "Attack2Bag_Ttsko": {
+      "parent": "Attack2Bag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "Attack2Bag_Black": {
+      "parent": "Attack2Bag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "Attack2Bag_Green": {
+      "parent": "Attack2Bag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "Attack2Bag_Yeger": {
+      "parent": "Attack2Bag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CoyoteBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CoyoteBag_Brown": {
+      "parent": "CoyoteBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CoyoteBag_Green": {
+      "parent": "CoyoteBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CoyoteBag_Winter": {
+      "parent": "CoyoteBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AliceBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AliceBag_Green": {
+      "parent": "AliceBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AliceBag_Black": {
+      "parent": "AliceBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AliceBag_Camo": {
+      "parent": "AliceBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AliceBag_NearBubble": {
+      "parent": "AliceBag_Green",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "AliceBag_FarBubble": {
+      "parent": "AliceBag_Camo",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "SlingBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "SlingBag_Brown": {
+      "parent": "SlingBag_ColorBase",
+      "attachmentSlots": [
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "SlingBag_Gray": {
+      "parent": "SlingBag_ColorBase",
+      "attachmentSlots": [
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "SlingBag_Black": {
+      "parent": "SlingBag_ColorBase",
+      "attachmentSlots": [
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ArmyPouch_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ArmyPouch_Beige": {
+      "parent": "ArmyPouch_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ArmyPouch_Black": {
+      "parent": "ArmyPouch_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ArmyPouch_Camo": {
+      "parent": "ArmyPouch_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "ArmyPouch_Green": {
+      "parent": "ArmyPouch_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DuffelBagSmall_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DuffelBagSmall_Green": {
+      "parent": "DuffelBagSmall_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DuffelBagSmall_Camo": {
+      "parent": "DuffelBagSmall_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DuffelBagSmall_Medical": {
+      "parent": "DuffelBagSmall_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CanvasBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CanvasBag_Olive": {
+      "parent": "CanvasBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "CanvasBag_Medical": {
+      "parent": "CanvasBag_ColorBase",
+      "attachmentSlots": [
+        "Chemlight",
+        "WalkieTalkie",
+        "Backpack_1"
+      ],
+      "attachmentsBySlot": {
+        "Chemlight": [],
+        "WalkieTalkie": [],
+        "Backpack_1": [
+          "CrudeMachete",
+          "Hatchet",
+          "Machete",
+          "OrientalMachete",
+          "PipeWrench"
+        ]
+      },
+      "compatibleAttachments": [
+        "CrudeMachete",
+        "Hatchet",
+        "Machete",
+        "OrientalMachete",
+        "PipeWrench"
+      ]
+    },
+    "DrysackBag_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "WalkieTalkie"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": []
+      },
+      "compatibleAttachments": []
+    },
+    "DrysackBag_Green": {
+      "parent": "DrysackBag_ColorBase",
+      "attachmentSlots": [
+        "WalkieTalkie"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": []
+      },
+      "compatibleAttachments": []
+    },
+    "DrysackBag_Orange": {
+      "parent": "DrysackBag_ColorBase",
+      "attachmentSlots": [
+        "WalkieTalkie"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": []
+      },
+      "compatibleAttachments": []
+    },
+    "DrysackBag_Yellow": {
+      "parent": "DrysackBag_ColorBase",
+      "attachmentSlots": [
+        "WalkieTalkie"
+      ],
+      "attachmentsBySlot": {
+        "WalkieTalkie": []
+      },
+      "compatibleAttachments": []
+    },
+    "CivilianBelt": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "MilitaryBelt": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "RopeBelt": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "LeatherKnifeSheath": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "NylonKnifeSheath": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "LeatherBelt_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "LeatherBelt_Natural": {
+      "parent": "LeatherBelt_ColorBase",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "LeatherBelt_Beige": {
+      "parent": "LeatherBelt_ColorBase",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "LeatherBelt_Brown": {
+      "parent": "LeatherBelt_ColorBase",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "LeatherBelt_Black": {
+      "parent": "LeatherBelt_ColorBase",
+      "attachmentSlots": [
+        "Belt_Back",
+        "Belt_Right",
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Back": [
+          "LeatherKnifeSheath",
+          "NylonKnifeSheath",
+          "Proxybelt_back_proxy"
+        ],
+        "Belt_Right": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxybelt_right_proxy"
+        ],
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "LeatherKnifeSheath",
+        "NylonKnifeSheath",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxybelt_back_proxy",
+        "Proxybelt_left_proxy",
+        "Proxybelt_right_proxy"
+      ]
+    },
+    "HipPack_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "Proxybelt_left_proxy"
+      ]
+    },
+    "HipPack_Black": {
+      "parent": "HipPack_ColorBase",
+      "attachmentSlots": [
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "Proxybelt_left_proxy"
+      ]
+    },
+    "HipPack_Green": {
+      "parent": "HipPack_ColorBase",
+      "attachmentSlots": [
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "Proxybelt_left_proxy"
+      ]
+    },
+    "HipPack_Medical": {
+      "parent": "HipPack_ColorBase",
+      "attachmentSlots": [
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "Proxybelt_left_proxy"
+      ]
+    },
+    "HipPack_Party": {
+      "parent": "HipPack_ColorBase",
+      "attachmentSlots": [
+        "Belt_Left"
+      ],
+      "attachmentsBySlot": {
+        "Belt_Left": [
+          "Proxybelt_left_proxy"
+        ]
+      },
+      "compatibleAttachments": [
+        "Proxybelt_left_proxy"
+      ]
+    },
+    "NVGHeadstrap": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "NVG"
+      ],
+      "attachmentsBySlot": {
+        "NVG": [
+          "NVGoggles",
+          "ProxyNVG"
+        ]
+      },
+      "compatibleAttachments": [
+        "NVGoggles",
+        "ProxyNVG"
+      ]
+    },
+    "NVGoggles": {
+      "parent": "ItemOptics",
+      "attachmentSlots": [
+        "BatteryD"
+      ],
+      "attachmentsBySlot": {
+        "BatteryD": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Black": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Blue": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_DPM": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Dubok": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Flecktran": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_NavyBlue": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Olive": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Orange": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Red": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Tan": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "BoonieHat_Winter": {
+      "parent": "BoonieHat_ColorBase",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "GorkaHelmet": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Glass"
+      ],
+      "attachmentsBySlot": {
+        "Glass": []
+      },
+      "compatibleAttachments": []
+    },
+    "GorkaHelmet_Green": {
+      "parent": "GorkaHelmet",
+      "attachmentSlots": [
+        "Glass"
+      ],
+      "attachmentsBySlot": {
+        "Glass": []
+      },
+      "compatibleAttachments": []
+    },
+    "GorkaHelmet_Black": {
+      "parent": "GorkaHelmet",
+      "attachmentSlots": [
+        "Glass"
+      ],
+      "attachmentsBySlot": {
+        "Glass": []
+      },
+      "compatibleAttachments": []
+    },
+    "DirtBikeHelmet_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Green": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Chernarus": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Khaki": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Police": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Red": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Black": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "DirtBikeHelmet_Blue": {
+      "parent": "DirtBikeHelmet_ColorBase",
+      "attachmentSlots": [
+        "DBHelmetVisor",
+        "DBHelmetMouth"
+      ],
+      "attachmentsBySlot": {
+        "DBHelmetVisor": [
+          "DirtBikeHelmet_Visor",
+          "ProxyMxHelmet_visor"
+        ],
+        "DBHelmetMouth": [
+          "DirtBikeHelmet_Mouthguard",
+          "ProxyMxHelmet_mouthguard"
+        ]
+      },
+      "compatibleAttachments": [
+        "DirtBikeHelmet_Mouthguard",
+        "DirtBikeHelmet_Visor",
+        "ProxyMxHelmet_mouthguard",
+        "ProxyMxHelmet_visor"
+      ]
+    },
+    "Mich2001Helmet": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "NVG",
+        "helmetFlashlight"
+      ],
+      "attachmentsBySlot": {
+        "NVG": [
+          "NVGoggles",
+          "ProxyNVG"
+        ],
+        "helmetFlashlight": [
+          "Proxyhelmet_flashlight",
+          "UniversalLight"
+        ]
+      },
+      "compatibleAttachments": [
+        "NVGoggles",
+        "ProxyNVG",
+        "Proxyhelmet_flashlight",
+        "UniversalLight"
+      ]
+    },
+    "GP5GasMask": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "GasMaskFilter"
+      ],
+      "attachmentsBySlot": {
+        "GasMaskFilter": []
+      },
+      "compatibleAttachments": []
+    },
+    "AirborneMask": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "GasMaskFilter"
+      ],
+      "attachmentsBySlot": {
+        "GasMaskFilter": []
+      },
+      "compatibleAttachments": []
+    },
+    "MilitaryBoots_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "MilitaryBoots_Beige": {
+      "parent": "MilitaryBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "MilitaryBoots_Black": {
+      "parent": "MilitaryBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "MilitaryBoots_Bluerock": {
+      "parent": "MilitaryBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "MilitaryBoots_Brown": {
+      "parent": "MilitaryBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "MilitaryBoots_Redpunk": {
+      "parent": "MilitaryBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "TraditionalBoots_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "TraditionalBoots_Beige": {
+      "parent": "TraditionalBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "TraditionalBoots_DarkBrown": {
+      "parent": "TraditionalBoots_ColorBase",
+      "attachmentSlots": [
+        "Knife"
+      ],
+      "attachmentsBySlot": {
+        "Knife": [
+          "AK_Bayonet",
+          "CombatKnife",
+          "FangeKnife",
+          "HuntingKnife",
+          "M9A1_Bayonet"
+        ]
+      },
+      "compatibleAttachments": [
+        "AK_Bayonet",
+        "CombatKnife",
+        "FangeKnife",
+        "HuntingKnife",
+        "M9A1_Bayonet"
+      ]
+    },
+    "PlateCarrierVest": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestHolster",
+        "VestPouch",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestHolster": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxyplate_carrier_holster_g"
+        ],
+        "VestPouch": [
+          "Proxyplate_carrier_pouches_g"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxyplate_carrier_holster_g",
+        "Proxyplate_carrier_pouches_g",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PlateCarrierVest_Black": {
+      "parent": "PlateCarrierVest",
+      "attachmentSlots": [
+        "VestHolster",
+        "VestPouch",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestHolster": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxyplate_carrier_holster_g"
+        ],
+        "VestPouch": [
+          "Proxyplate_carrier_pouches_g"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxyplate_carrier_holster_g",
+        "Proxyplate_carrier_pouches_g",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PlateCarrierVest_Green": {
+      "parent": "PlateCarrierVest",
+      "attachmentSlots": [
+        "VestHolster",
+        "VestPouch",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestHolster": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxyplate_carrier_holster_g"
+        ],
+        "VestPouch": [
+          "Proxyplate_carrier_pouches_g"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxyplate_carrier_holster_g",
+        "Proxyplate_carrier_pouches_g",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PlateCarrierVest_Camo": {
+      "parent": "PlateCarrierVest",
+      "attachmentSlots": [
+        "VestHolster",
+        "VestPouch",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestHolster": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxyplate_carrier_holster_g"
+        ],
+        "VestPouch": [
+          "Proxyplate_carrier_pouches_g"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxyplate_carrier_holster_g",
+        "Proxyplate_carrier_pouches_g",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PlateCarrierVest_Winter": {
+      "parent": "PlateCarrierVest",
+      "attachmentSlots": [
+        "VestHolster",
+        "VestPouch",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestHolster": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxyplate_carrier_holster_g"
+        ],
+        "VestPouch": [
+          "Proxyplate_carrier_pouches_g"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxyplate_carrier_holster_g",
+        "Proxyplate_carrier_pouches_g",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PlateCarrierVest_Desert": {
+      "parent": "PlateCarrierVest",
+      "attachmentSlots": [
+        "VestHolster",
+        "VestPouch",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestHolster": [
+          "PlateCarrierHolster",
+          "PlateCarrierHolster_Black",
+          "PlateCarrierHolster_Camo",
+          "PlateCarrierHolster_Desert",
+          "PlateCarrierHolster_Green",
+          "PlateCarrierHolster_Winter",
+          "Proxyplate_carrier_holster_g"
+        ],
+        "VestPouch": [
+          "Proxyplate_carrier_pouches_g"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "PlateCarrierHolster",
+        "PlateCarrierHolster_Black",
+        "PlateCarrierHolster_Camo",
+        "PlateCarrierHolster_Desert",
+        "PlateCarrierHolster_Green",
+        "PlateCarrierHolster_Winter",
+        "Proxyplate_carrier_holster_g",
+        "Proxyplate_carrier_pouches_g",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "SmershVest": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestBackpack",
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestBackpack": [
+          "Proxysmersh_buttpack",
+          "SmershBag"
+        ],
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d",
+        "Proxysmersh_buttpack",
+        "SmershBag"
+      ]
+    },
+    "PressVest_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PressVest_Blue": {
+      "parent": "PressVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PressVest_LightBlue": {
+      "parent": "PressVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "UKAssVest_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "UKAssVest_Black": {
+      "parent": "UKAssVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "UKAssVest_Camo": {
+      "parent": "UKAssVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "UKAssVest_Khaki": {
+      "parent": "UKAssVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "UKAssVest_Olive": {
+      "parent": "UKAssVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "UKAssVest_Winter": {
+      "parent": "UKAssVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PoliceVest": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "PlateCarrierHolster": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "PlateCarrierHolster_Black": {
+      "parent": "PlateCarrierHolster",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "PlateCarrierHolster_Green": {
+      "parent": "PlateCarrierHolster",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "PlateCarrierHolster_Camo": {
+      "parent": "PlateCarrierHolster",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "PlateCarrierHolster_Winter": {
+      "parent": "PlateCarrierHolster",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "PlateCarrierHolster_Desert": {
+      "parent": "PlateCarrierHolster",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "ChestHolster": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Pistol"
+      ],
+      "attachmentsBySlot": {
+        "Pistol": [
+          "DartGun",
+          "Proxyberetta",
+          "Shockpistol",
+          "Shockpistol_Black"
+        ]
+      },
+      "compatibleAttachments": [
+        "DartGun",
+        "Proxyberetta",
+        "Shockpistol",
+        "Shockpistol_Black"
+      ]
+    },
+    "HighCapacityVest_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "HighCapacityVest_Black": {
+      "parent": "HighCapacityVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "HighCapacityVest_Olive": {
+      "parent": "HighCapacityVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeB",
+        "VestGrenadeC",
+        "VestGrenadeD"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeB": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_b"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ],
+        "VestGrenadeD": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_d"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_b",
+        "Proxyproxy_grenade_c",
+        "Proxyproxy_grenade_d"
+      ]
+    },
+    "LeatherStorageVest_ColorBase": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeC"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_c"
+      ]
+    },
+    "LeatherStorageVest_Natural": {
+      "parent": "LeatherStorageVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeC"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_c"
+      ]
+    },
+    "LeatherStorageVest_Beige": {
+      "parent": "LeatherStorageVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeC"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_c"
+      ]
+    },
+    "LeatherStorageVest_Brown": {
+      "parent": "LeatherStorageVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeC"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_c"
+      ]
+    },
+    "LeatherStorageVest_Black": {
+      "parent": "LeatherStorageVest_ColorBase",
+      "attachmentSlots": [
+        "VestGrenadeA",
+        "VestGrenadeC"
+      ],
+      "attachmentsBySlot": {
+        "VestGrenadeA": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_a"
+        ],
+        "VestGrenadeC": [
+          "Ammo_40mm_ChemGas",
+          "Ammo_40mm_Explosive",
+          "Ammo_40mm_Smoke_Black",
+          "Ammo_40mm_Smoke_Green",
+          "Ammo_40mm_Smoke_Red",
+          "Ammo_40mm_Smoke_White",
+          "Proxyproxy_grenade_c"
+        ]
+      },
+      "compatibleAttachments": [
+        "Ammo_40mm_ChemGas",
+        "Ammo_40mm_Explosive",
+        "Ammo_40mm_Smoke_Black",
+        "Ammo_40mm_Smoke_Green",
+        "Ammo_40mm_Smoke_Red",
+        "Ammo_40mm_Smoke_White",
+        "Proxyproxy_grenade_a",
+        "Proxyproxy_grenade_c"
+      ]
+    },
+    "HuntingVest": {
+      "parent": "Clothing",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
+    },
+    "HuntingVest_Winter": {
+      "parent": "HuntingVest",
+      "attachmentSlots": [
+        "Hook"
+      ],
+      "attachmentsBySlot": {
+        "Hook": []
+      },
+      "compatibleAttachments": []
     }
   }
 };
