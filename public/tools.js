@@ -4560,9 +4560,21 @@ function renderSpawnableModalGroup(
 
         <div class="spawnable-group-summary-info">
 
-          <strong>
-            Groupe ${index + 1}
-          </strong>
+<strong>
+  ${
+    group.items.length
+      ? group.items
+          .map(entry => spawnableEscapeHtml(entry.name))
+          .filter(Boolean)
+          .join(" / ")
+      : group.presets.length
+        ? group.presets
+            .map(entry => spawnableEscapeHtml(entry.name))
+            .filter(Boolean)
+            .join(" / ")
+        : `Groupe ${groupIndex + 1}`
+  }
+</strong>
 
           <span class="spawnable-group-badge">
             Chance ${group.chance}
