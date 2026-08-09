@@ -3645,19 +3645,106 @@ const spawnableTypesList =
 
 
 /* ======================================================
-   PARSE
+   HELPERS
+====================================================== */
+
+function spawnableClamp01(value) {
+  const number = Number(value);
+
+  if (Number.isNaN(number)) {
+    return 0;
+  }
+
+  return Math.min(
+    1,
+    Math.max(0, number)
+  );
+}
+
+function spawnableEscapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function spawnableNewId() {
+  return (
+    Date.now() +
+    Math.random()
+  );
+}
+
+function spawnableGetItem(id) {
+  return spawnableTypesItems.find(
+    item => item.id === id
+  );
+}
+
+
+/* ======================================================
+   PARSE GROUP
+====================================================== */
+
+function parseSpawnableGroup(groupElement) {
+
+  return {
+    id: spawnableNewId(),
+
+    chance:
+      groupElement.getAttribute("chance") || "1",
+
+    items:
+      [...groupElement.children]
+        .filter(child =>
+          child.tagName.toLowerCase() === "item"
+        )
+        .map(child => ({
+          id: spawnableNewId(),
+
+          name:
+            child.getAttribute("name") || "",
+
+          chance:
+            child.getAttribute("chance") || "1"
+        })),
+
+    presets:
+      [...groupElement.children]
+        .filter(child =>
+          child.tagName.toLowerCase() === "preset"
+        )
+        .map(child => ({
+          id: spawnableNewId(),
+
+          name:
+            child.getAttribute("name") || "",
+
+          chance:
+            child.getAttribute("chance") || "1"
+        }))
+  };
+}
+
+
+/* ======================================================
+   PARSE XML
 ====================================================== */
 
 function parseSpawnableTypesEditorXml(xml) {
 
   spawnableTypesItems = [];
 
-  const parser = new DOMParser();
+  const parser =
+    new DOMParser();
 
-  const xmlDoc = parser.parseFromString(
-    xml,
-    "application/xml"
-  );
+  const xmlDoc =
+    parser.parseFromString(
+      xml,
+      "application/xml"
+    );
 
   const parserError =
     xmlDoc.querySelector("parsererror");
@@ -3671,7 +3758,7 @@ function parseSpawnableTypesEditorXml(xml) {
   const typeElements =
     [...xmlDoc.querySelectorAll("type")];
 
-  typeElements.forEach((typeElement, index) => {
+  typeElements.forEach(typeElement => {
 
     const name =
       typeElement.getAttribute("name") || "";
@@ -3679,9 +3766,7 @@ function parseSpawnableTypesEditorXml(xml) {
     if (!name) return;
 
 
-    /* -------------------------
-       DAMAGE
-    ------------------------- */
+    /* DAMAGE */
 
     const damageElement =
       [...typeElement.children]
@@ -3689,85 +3774,733 @@ function parseSpawnableTypesEditorXml(xml) {
           child.tagName.toLowerCase() === "damage"
         );
 
-    const damage = damageElement
-      ? {
-          min:
-            damageElement.getAttribute("min") || "",
-          max:
-            damageElement.getAttribute("max") || ""
-        }
-      : null;
+    const damage =
+      damageElement
+        ? {
+            min:
+              damageElement.getAttribute("min") || "0",
+
+            max:
+              damageElement.getAttribute("max") || "0"
+          }
+        : null;
 
 
-    /* -------------------------
-       ATTACHMENTS
-    ------------------------- */
+    /* ATTACHMENTS */
 
-function parseSpawnGroup(groupElement) {
-  return {
-    chance: groupElement.getAttribute("chance") || "",
-
-    items: [...groupElement.children]
-      .filter(child =>
-        child.tagName.toLowerCase() === "item"
-      )
-      .map(child => ({
-        name: child.getAttribute("name") || "",
-        chance: child.getAttribute("chance") || ""
-      })),
-
-    presets: [...groupElement.children]
-      .filter(child =>
-        child.tagName.toLowerCase() === "preset"
-      )
-      .map(child => ({
-        name: child.getAttribute("name") || "",
-        chance: child.getAttribute("chance") || ""
-      }))
-  };
-}
-
-const attachmentGroups =
-  [...typeElement.children]
-    .filter(child =>
-      child.tagName.toLowerCase() === "attachments"
-    )
-    .map(parseSpawnGroup);
-
-const cargoGroups =
-  [...typeElement.children]
-    .filter(child =>
-      child.tagName.toLowerCase() === "cargo"
-    )
-    .map(parseSpawnGroup);
+    const attachmentGroups =
+      [...typeElement.children]
+        .filter(child =>
+          child.tagName.toLowerCase() === "attachments"
+        )
+        .map(parseSpawnableGroup);
 
 
-    /* -------------------------
-       HOARDER
-    ------------------------- */
+    /* CARGO */
 
-    const hoarder =
-      typeElement.getAttribute("hoarder");
+    const cargoGroups =
+      [...typeElement.children]
+        .filter(child =>
+          child.tagName.toLowerCase() === "cargo"
+        )
+        .map(parseSpawnableGroup);
 
+
+    /* TYPE */
 
     spawnableTypesItems.push({
-      id: index,
+
+      id:
+        spawnableNewId(),
 
       name,
 
       hoarder:
-        hoarder !== null
-          ? hoarder
-          : "",
+        typeElement.getAttribute("hoarder") || "",
 
       damage,
-      attachmentGroups,
-      cargoGroups,
 
-      originalElement:
-        typeElement.cloneNode(true)
+      attachmentGroups,
+
+      cargoGroups
+
     });
   });
+}
+
+
+/* ======================================================
+   UPDATE TYPE VALUES
+====================================================== */
+
+window.updateSpawnableTypeValue =
+function(id, field, value) {
+
+  const item =
+    spawnableGetItem(id);
+
+  if (!item) return;
+
+  if (field === "damageMin") {
+
+    if (!item.damage) {
+      item.damage = {
+        min: "0",
+        max: "0"
+      };
+    }
+
+    item.damage.min =
+      String(
+        spawnableClamp01(value)
+      );
+
+    return;
+  }
+
+  if (field === "damageMax") {
+
+    if (!item.damage) {
+      item.damage = {
+        min: "0",
+        max: "0"
+      };
+    }
+
+    item.damage.max =
+      String(
+        spawnableClamp01(value)
+      );
+
+    return;
+  }
+
+  if (field === "hoarder") {
+    item.hoarder = value;
+  }
+};
+
+
+/* ======================================================
+   GROUP HELPERS
+====================================================== */
+
+function spawnableGetGroup(
+  typeId,
+  section,
+  groupId
+) {
+
+  const item =
+    spawnableGetItem(typeId);
+
+  if (!item) return null;
+
+  const groups =
+    section === "attachments"
+      ? item.attachmentGroups
+      : item.cargoGroups;
+
+  return groups.find(
+    group => group.id === groupId
+  );
+}
+
+
+/* ======================================================
+   UPDATE GROUP CHANCE
+====================================================== */
+
+window.updateSpawnableGroupChance =
+function(
+  typeId,
+  section,
+  groupId,
+  value
+) {
+
+  const group =
+    spawnableGetGroup(
+      typeId,
+      section,
+      groupId
+    );
+
+  if (!group) return;
+
+  group.chance =
+    String(
+      spawnableClamp01(value)
+    );
+};
+
+
+/* ======================================================
+   UPDATE ENTRY
+====================================================== */
+
+window.updateSpawnableEntry =
+function(
+  typeId,
+  section,
+  groupId,
+  entryType,
+  entryId,
+  field,
+  value
+) {
+
+  const group =
+    spawnableGetGroup(
+      typeId,
+      section,
+      groupId
+    );
+
+  if (!group) return;
+
+  const entries =
+    entryType === "item"
+      ? group.items
+      : group.presets;
+
+  const entry =
+    entries.find(
+      item => item.id === entryId
+    );
+
+  if (!entry) return;
+
+  if (field === "chance") {
+
+    entry.chance =
+      String(
+        spawnableClamp01(value)
+      );
+
+    return;
+  }
+
+  if (field === "name") {
+    entry.name = value.trim();
+  }
+};
+
+
+/* ======================================================
+   ADD GROUP
+====================================================== */
+
+window.addSpawnableGroup =
+function(typeId, section) {
+
+  const item =
+    spawnableGetItem(typeId);
+
+  if (!item) return;
+
+  const group = {
+    id: spawnableNewId(),
+    chance: "1",
+    items: [],
+    presets: []
+  };
+
+  if (section === "attachments") {
+    item.attachmentGroups.push(group);
+  } else {
+    item.cargoGroups.push(group);
+  }
+
+  renderSpawnableTypesEditor();
+
+  requestAnimationFrame(() => {
+
+    const details =
+      document.getElementById(
+        `spawnable-type-details-${typeId}`
+      );
+
+    details?.classList.remove("hidden");
+  });
+};
+
+
+/* ======================================================
+   REMOVE GROUP
+====================================================== */
+
+window.removeSpawnableGroup =
+function(
+  typeId,
+  section,
+  groupId
+) {
+
+  if (
+    !confirm(
+      "Supprimer ce groupe ?"
+    )
+  ) {
+    return;
+  }
+
+  const item =
+    spawnableGetItem(typeId);
+
+  if (!item) return;
+
+  if (section === "attachments") {
+
+    item.attachmentGroups =
+      item.attachmentGroups.filter(
+        group => group.id !== groupId
+      );
+
+  } else {
+
+    item.cargoGroups =
+      item.cargoGroups.filter(
+        group => group.id !== groupId
+      );
+  }
+
+  renderSpawnableTypesEditor();
+
+  requestAnimationFrame(() => {
+
+    const details =
+      document.getElementById(
+        `spawnable-type-details-${typeId}`
+      );
+
+    details?.classList.remove("hidden");
+  });
+};
+
+
+/* ======================================================
+   ADD ENTRY
+====================================================== */
+
+window.addSpawnableEntry =
+function(
+  typeId,
+  section,
+  groupId,
+  entryType
+) {
+
+  const group =
+    spawnableGetGroup(
+      typeId,
+      section,
+      groupId
+    );
+
+  if (!group) return;
+
+  const entry = {
+    id: spawnableNewId(),
+    name: "",
+    chance: "1"
+  };
+
+  if (entryType === "item") {
+    group.items.push(entry);
+  } else {
+    group.presets.push(entry);
+  }
+
+  renderSpawnableTypesEditor();
+
+  requestAnimationFrame(() => {
+
+    const details =
+      document.getElementById(
+        `spawnable-type-details-${typeId}`
+      );
+
+    details?.classList.remove("hidden");
+  });
+};
+
+
+/* ======================================================
+   REMOVE ENTRY
+====================================================== */
+
+window.removeSpawnableEntry =
+function(
+  typeId,
+  section,
+  groupId,
+  entryType,
+  entryId
+) {
+
+  const group =
+    spawnableGetGroup(
+      typeId,
+      section,
+      groupId
+    );
+
+  if (!group) return;
+
+  if (entryType === "item") {
+
+    group.items =
+      group.items.filter(
+        item => item.id !== entryId
+      );
+
+  } else {
+
+    group.presets =
+      group.presets.filter(
+        item => item.id !== entryId
+      );
+  }
+
+  renderSpawnableTypesEditor();
+
+  requestAnimationFrame(() => {
+
+    const details =
+      document.getElementById(
+        `spawnable-type-details-${typeId}`
+      );
+
+    details?.classList.remove("hidden");
+  });
+};
+
+
+/* ======================================================
+   REMOVE TYPE
+====================================================== */
+
+window.removeSpawnableType =
+function(id) {
+
+  const item =
+    spawnableGetItem(id);
+
+  if (!item) return;
+
+  if (
+    !confirm(
+      `Supprimer le type ${item.name} ?`
+    )
+  ) {
+    return;
+  }
+
+  spawnableTypesItems =
+    spawnableTypesItems.filter(
+      item => item.id !== id
+    );
+
+  renderSpawnableTypesEditor();
+
+  spawnableTypesStatus.textContent =
+    `${item.name} supprimé.`;
+};
+
+
+/* ======================================================
+   CREATE TYPE
+====================================================== */
+
+window.createSpawnableType =
+function() {
+
+  const classname =
+    prompt(
+      "Classname du nouvel objet :"
+    );
+
+  if (!classname) return;
+
+  const cleanName =
+    classname.trim();
+
+  if (!cleanName) return;
+
+  const exists =
+    spawnableTypesItems.some(
+      item =>
+        item.name.toLowerCase() ===
+        cleanName.toLowerCase()
+    );
+
+  if (exists) {
+
+    spawnableTypesStatus.textContent =
+      "Ce classname existe déjà.";
+
+    return;
+  }
+
+  spawnableTypesItems.push({
+
+    id:
+      spawnableNewId(),
+
+    name:
+      cleanName,
+
+    hoarder:
+      "",
+
+    damage: {
+      min: "0",
+      max: "0"
+    },
+
+    attachmentGroups: [],
+
+    cargoGroups: []
+
+  });
+
+  if (spawnableTypesSearch) {
+    spawnableTypesSearch.value =
+      cleanName;
+  }
+
+  renderSpawnableTypesEditor();
+
+  spawnableTypesStatus.textContent =
+    `${cleanName} créé.`;
+};
+
+
+/* ======================================================
+   ENTRY RENDER
+====================================================== */
+
+function renderSpawnableEntry(
+  typeId,
+  section,
+  groupId,
+  entryType,
+  entry
+) {
+
+  const label =
+    entryType === "item"
+      ? "Item"
+      : "Preset";
+
+  return `
+    <div class="event-position-row">
+
+      <label>
+        ${label}
+
+        <input
+          type="text"
+          value="${spawnableEscapeHtml(entry.name)}"
+          placeholder="Classname..."
+          oninput="
+            updateSpawnableEntry(
+              ${typeId},
+              '${section}',
+              ${groupId},
+              '${entryType}',
+              ${entry.id},
+              'name',
+              this.value
+            )
+          "
+        >
+      </label>
+
+      <label>
+        Chance
+
+        <input
+          type="number"
+          min="0"
+          max="1"
+          step="0.01"
+          value="${spawnableEscapeHtml(entry.chance)}"
+          oninput="
+            updateSpawnableEntry(
+              ${typeId},
+              '${section}',
+              ${groupId},
+              '${entryType}',
+              ${entry.id},
+              'chance',
+              this.value
+            )
+          "
+        >
+      </label>
+
+      <button
+        type="button"
+        class="mini-btn danger"
+        onclick="
+          removeSpawnableEntry(
+            ${typeId},
+            '${section}',
+            ${groupId},
+            '${entryType}',
+            ${entry.id}
+          )
+        "
+      >
+        Supprimer
+      </button>
+
+    </div>
+  `;
+}
+
+
+/* ======================================================
+   GROUP RENDER
+====================================================== */
+
+function renderSpawnableGroup(
+  item,
+  section,
+  group,
+  groupIndex
+) {
+
+  return `
+    <div class="loot-card">
+
+      <div class="event-spawn-header">
+
+        <strong>
+          Groupe ${groupIndex + 1}
+        </strong>
+
+        <button
+          type="button"
+          class="mini-btn danger"
+          onclick="
+            removeSpawnableGroup(
+              ${item.id},
+              '${section}',
+              ${group.id}
+            )
+          "
+        >
+          Supprimer groupe
+        </button>
+
+      </div>
+
+      <div class="loot-card-main">
+
+        <label>
+          Chance du groupe
+
+          <input
+            type="number"
+            min="0"
+            max="1"
+            step="0.01"
+            value="${spawnableEscapeHtml(group.chance)}"
+            oninput="
+              updateSpawnableGroupChance(
+                ${item.id},
+                '${section}',
+                ${group.id},
+                this.value
+              )
+            "
+          >
+        </label>
+
+      </div>
+
+
+      ${
+        group.items.length
+          ? `
+            <h4>Items</h4>
+
+            ${group.items
+              .map(entry =>
+                renderSpawnableEntry(
+                  item.id,
+                  section,
+                  group.id,
+                  "item",
+                  entry
+                )
+              )
+              .join("")}
+          `
+          : ""
+      }
+
+
+      ${
+        group.presets.length
+          ? `
+            <h4>Presets</h4>
+
+            ${group.presets
+              .map(entry =>
+                renderSpawnableEntry(
+                  item.id,
+                  section,
+                  group.id,
+                  "preset",
+                  entry
+                )
+              )
+              .join("")}
+          `
+          : ""
+      }
+
+
+      <div class="tool-actions">
+
+        <button
+          type="button"
+          class="mini-btn"
+          onclick="
+            addSpawnableEntry(
+              ${item.id},
+              '${section}',
+              ${group.id},
+              'item'
+            )
+          "
+        >
+          + Ajouter item
+        </button>
+
+        <button
+          type="button"
+          class="mini-btn"
+          onclick="
+            addSpawnableEntry(
+              ${item.id},
+              '${section}',
+              ${group.id},
+              'preset'
+            )
+          "
+        >
+          + Ajouter preset
+        </button>
+
+      </div>
+
+    </div>
+  `;
 }
 
 
@@ -3787,39 +4520,91 @@ function renderSpawnableTypesEditor() {
       .toLowerCase();
 
   const filtered =
-    spawnableTypesItems.filter(item =>
-      item.name
-        .toLowerCase()
-        .includes(search)
+    spawnableTypesItems.filter(
+      item =>
+        item.name
+          .toLowerCase()
+          .includes(search)
     );
 
-  spawnableTypesList.innerHTML =
-    filtered.map(item => {
+
+  spawnableTypesList.innerHTML = `
+
+    <div class="tool-actions">
+
+      <button
+        type="button"
+        class="btn"
+        onclick="createSpawnableType()"
+      >
+        + Créer un nouveau type
+      </button>
+
+    </div>
+
+    ${filtered.map(item => {
 
       const damageText =
         item.damage
-          ? `${item.damage.min || "-"} → ${item.damage.max || "-"}`
+          ? `${item.damage.min} → ${item.damage.max}`
           : "Aucun";
 
       return `
+
         <article class="loot-card">
 
           <div class="event-spawn-header">
 
             <div>
-              <h3>${item.name}</h3>
+
+              <h3>
+                ${spawnableEscapeHtml(item.name)}
+              </h3>
 
               <span class="loot-category-label">
-                ${item.attachmentGroups.length} groupe(s) attachment
+                ${item.attachmentGroups.length}
+                groupe(s) attachment
               </span>
+
+            </div>
+
+
+            <div class="event-header-actions">
+
+              <button
+                type="button"
+                class="mini-btn"
+                onclick="
+                  toggleSpawnableTypeDetails(
+                    ${item.id}
+                  )
+                "
+              >
+                Détails
+              </button>
+
+              <button
+                type="button"
+                class="mini-btn danger"
+                onclick="
+                  removeSpawnableType(
+                    ${item.id}
+                  )
+                "
+              >
+                Supprimer
+              </button>
+
             </div>
 
           </div>
+
 
           <div class="loot-card-main">
 
             <label>
               Damage
+
               <input
                 type="text"
                 value="${damageText}"
@@ -3829,6 +4614,7 @@ function renderSpawnableTypesEditor() {
 
             <label>
               Attachments
+
               <input
                 type="text"
                 value="${item.attachmentGroups.length}"
@@ -3838,6 +4624,7 @@ function renderSpawnableTypesEditor() {
 
             <label>
               Cargo
+
               <input
                 type="text"
                 value="${item.cargoGroups.length}"
@@ -3847,148 +4634,172 @@ function renderSpawnableTypesEditor() {
 
             <label>
               Hoarder
+
               <input
                 type="text"
-                value="${item.hoarder || "-"}"
+                value="${spawnableEscapeHtml(item.hoarder || "-")}"
                 disabled
               >
             </label>
 
-            <button
-              type="button"
-              class="mini-btn"
-              onclick="toggleSpawnableTypeDetails(${item.id})"
-            >
-              Détails
-            </button>
-
           </div>
 
-<div
-  id="spawnable-type-details-${item.id}"
-  class="hidden"
->
 
-  <div class="loot-details-grid">
+          <div
+            id="spawnable-type-details-${item.id}"
+            class="hidden"
+          >
 
-    <div>
-      <strong>Classname</strong>
-      <code>${item.name}</code>
-    </div>
+            <div class="loot-details-grid">
 
-    <div>
-      <strong>Damage min</strong>
-      <code>${item.damage?.min || "-"}</code>
-    </div>
+              <label>
+                Damage minimum
 
-    <div>
-      <strong>Damage max</strong>
-      <code>${item.damage?.max || "-"}</code>
-    </div>
+                <input
+                  type="number"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="${spawnableEscapeHtml(item.damage?.min ?? 0)}"
+                  oninput="
+                    updateSpawnableTypeValue(
+                      ${item.id},
+                      'damageMin',
+                      this.value
+                    )
+                  "
+                >
+              </label>
 
-  </div>
+              <label>
+                Damage maximum
 
-  <h4>Attachments</h4>
+                <input
+                  type="number"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="${spawnableEscapeHtml(item.damage?.max ?? 0)}"
+                  oninput="
+                    updateSpawnableTypeValue(
+                      ${item.id},
+                      'damageMax',
+                      this.value
+                    )
+                  "
+                >
+              </label>
 
-  ${
-    item.attachmentGroups.length
-      ? item.attachmentGroups.map((group, groupIndex) => `
-          <div class="loot-card">
+              <label>
+                Hoarder
 
-            <strong>
-              Groupe ${groupIndex + 1}
-              — chance ${group.chance || "-"}
-            </strong>
+                <input
+                  type="number"
+                  value="${spawnableEscapeHtml(item.hoarder)}"
+                  placeholder="Optionnel"
+                  oninput="
+                    updateSpawnableTypeValue(
+                      ${item.id},
+                      'hoarder',
+                      this.value
+                    )
+                  "
+                >
+              </label>
+
+            </div>
+
+
+            <div class="event-spawn-header">
+
+              <h4>Attachments</h4>
+
+              <button
+                type="button"
+                class="mini-btn"
+                onclick="
+                  addSpawnableGroup(
+                    ${item.id},
+                    'attachments'
+                  )
+                "
+              >
+                + Ajouter groupe
+              </button>
+
+            </div>
 
             ${
-              group.items.length
-                ? `
-                  <p>Items :</p>
-                  <code>
-                    ${group.items
-                      .map(entry =>
-                        `${entry.name} (${entry.chance || "-"})`
-                      )
-                      .join(", ")}
-                  </code>
+              item.attachmentGroups.length
+                ? item.attachmentGroups
+                    .map(
+                      (group, index) =>
+                        renderSpawnableGroup(
+                          item,
+                          "attachments",
+                          group,
+                          index
+                        )
+                    )
+                    .join("")
+                : `
+                  <p class="muted">
+                    Aucun groupe attachment.
+                  </p>
                 `
-                : ""
             }
 
+
+            <div class="event-spawn-header">
+
+              <h4>Cargo</h4>
+
+              <button
+                type="button"
+                class="mini-btn"
+                onclick="
+                  addSpawnableGroup(
+                    ${item.id},
+                    'cargo'
+                  )
+                "
+              >
+                + Ajouter groupe
+              </button>
+
+            </div>
+
             ${
-              group.presets.length
-                ? `
-                  <p>Presets :</p>
-                  <code>
-                    ${group.presets
-                      .map(entry =>
-                        `${entry.name} (${entry.chance || "-"})`
-                      )
-                      .join(", ")}
-                  </code>
+              item.cargoGroups.length
+                ? item.cargoGroups
+                    .map(
+                      (group, index) =>
+                        renderSpawnableGroup(
+                          item,
+                          "cargo",
+                          group,
+                          index
+                        )
+                    )
+                    .join("")
+                : `
+                  <p class="muted">
+                    Aucun groupe cargo.
+                  </p>
                 `
-                : ""
             }
 
           </div>
-        `).join("")
-      : `<p class="muted">Aucun attachment.</p>`
-  }
-
-  <h4>Cargo</h4>
-
-  ${
-    item.cargoGroups.length
-      ? item.cargoGroups.map((group, groupIndex) => `
-          <div class="loot-card">
-
-            <strong>
-              Groupe ${groupIndex + 1}
-              — chance ${group.chance || "-"}
-            </strong>
-
-            ${
-              group.items.length
-                ? `
-                  <p>Items :</p>
-                  <code>
-                    ${group.items
-                      .map(entry =>
-                        `${entry.name} (${entry.chance || "-"})`
-                      )
-                      .join(", ")}
-                  </code>
-                `
-                : ""
-            }
-
-            ${
-              group.presets.length
-                ? `
-                  <p>Presets :</p>
-                  <code>
-                    ${group.presets
-                      .map(entry =>
-                        `${entry.name} (${entry.chance || "-"})`
-                      )
-                      .join(", ")}
-                  </code>
-                `
-                : ""
-            }
-
-          </div>
-        `).join("")
-      : `<p class="muted">Aucun cargo.</p>`
-  }
-
-</div>
 
         </article>
       `;
-    }).join("");
+
+    }).join("")}
+  `;
+
 
   if (spawnableTypesStatus) {
+
     spawnableTypesStatus.textContent =
       `${spawnableTypesItems.length} types chargés — ${filtered.length} affichés.`;
   }
@@ -3999,7 +4810,8 @@ function renderSpawnableTypesEditor() {
    DETAILS
 ====================================================== */
 
-window.toggleSpawnableTypeDetails = function(id) {
+window.toggleSpawnableTypeDetails =
+function(id) {
 
   const block =
     document.getElementById(
@@ -4010,6 +4822,217 @@ window.toggleSpawnableTypeDetails = function(id) {
 
   block.classList.toggle("hidden");
 };
+
+
+/* ======================================================
+   XML BUILD HELPERS
+====================================================== */
+
+function spawnableBuildEntryXml(
+  entryType,
+  entry,
+  indent
+) {
+
+  if (!entry.name.trim()) {
+    return "";
+  }
+
+  return (
+    `${indent}<${entryType}` +
+    ` name="${entry.name.trim()}"` +
+    ` chance="${spawnableClamp01(entry.chance)}" />`
+  );
+}
+
+
+function spawnableBuildGroupXml(
+  tagName,
+  group,
+  indent
+) {
+
+  const childIndent =
+    indent + "    ";
+
+  const entries = [
+
+    ...group.items
+      .map(entry =>
+        spawnableBuildEntryXml(
+          "item",
+          entry,
+          childIndent
+        )
+      ),
+
+    ...group.presets
+      .map(entry =>
+        spawnableBuildEntryXml(
+          "preset",
+          entry,
+          childIndent
+        )
+      )
+
+  ].filter(Boolean);
+
+
+  const opening =
+    `${indent}<${tagName} chance="${spawnableClamp01(group.chance)}">`;
+
+  const closing =
+    `${indent}</${tagName}>`;
+
+
+  if (!entries.length) {
+
+    return (
+      opening +
+      "\n" +
+      closing
+    );
+  }
+
+
+  return [
+    opening,
+    ...entries,
+    closing
+  ].join("\n");
+}
+
+
+/* ======================================================
+   BUILD TYPE XML
+====================================================== */
+
+function spawnableBuildTypeXml(item) {
+
+  const lines = [];
+
+  const hoarderAttribute =
+    item.hoarder !== ""
+      ? ` hoarder="${item.hoarder}"`
+      : "";
+
+
+  lines.push(
+    `    <type name="${item.name}"${hoarderAttribute}>`
+  );
+
+
+  if (item.damage) {
+
+    const damageMin =
+      spawnableClamp01(
+        item.damage.min
+      );
+
+    const damageMax =
+      spawnableClamp01(
+        item.damage.max
+      );
+
+    lines.push(
+      `        <damage min="${damageMin}" max="${damageMax}" />`
+    );
+  }
+
+
+  item.attachmentGroups.forEach(
+    group => {
+
+      lines.push(
+        spawnableBuildGroupXml(
+          "attachments",
+          group,
+          "        "
+        )
+      );
+
+    }
+  );
+
+
+  item.cargoGroups.forEach(
+    group => {
+
+      lines.push(
+        spawnableBuildGroupXml(
+          "cargo",
+          group,
+          "        "
+        )
+      );
+
+    }
+  );
+
+
+  lines.push(
+    "    </type>"
+  );
+
+
+  return lines.join("\n");
+}
+
+
+/* ======================================================
+   REBUILD XML
+====================================================== */
+
+function rebuildSpawnableTypesXml() {
+
+  let header =
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+
+  let rootOpen =
+    "<spawnabletypes>";
+
+  let rootClose =
+    "</spawnabletypes>";
+
+
+  if (currentSpawnableTypesXml) {
+
+    const declaration =
+      currentSpawnableTypesXml.match(
+        /<\?xml[\s\S]*?\?>/i
+      );
+
+    if (declaration) {
+      header =
+        declaration[0];
+    }
+
+
+    const root =
+      currentSpawnableTypesXml.match(
+        /<spawnabletypes\b[^>]*>/i
+      );
+
+    if (root) {
+      rootOpen =
+        root[0];
+    }
+  }
+
+
+  const body =
+    spawnableTypesItems
+      .map(spawnableBuildTypeXml)
+      .join("\n\n");
+
+
+  return [
+    header,
+    rootOpen,
+    body,
+    rootClose
+  ].join("\n");
+}
 
 
 /* ======================================================
@@ -4025,13 +5048,16 @@ spawnableTypesFile?.addEventListener(
 
     if (!file) return;
 
+
     currentSpawnableTypesFileName =
       file.name;
+
 
     if (spawnableTypesStatus) {
       spawnableTypesStatus.className =
         "status";
     }
+
 
     const fileName =
       document.getElementById(
@@ -4043,19 +5069,30 @@ spawnableTypesFile?.addEventListener(
         file.name;
     }
 
+
     const reader =
       new FileReader();
+
 
     reader.onload = () => {
 
       try {
 
         currentSpawnableTypesXml =
-          String(reader.result || "");
+          String(
+            reader.result || ""
+          );
+
 
         parseSpawnableTypesEditorXml(
           currentSpawnableTypesXml
         );
+
+
+        if (spawnableTypesSearch) {
+          spawnableTypesSearch.value = "";
+        }
+
 
         renderSpawnableTypesEditor();
 
@@ -4066,13 +5103,17 @@ spawnableTypesFile?.addEventListener(
           error
         );
 
+
         spawnableTypesItems = [];
+
 
         if (spawnableTypesList) {
           spawnableTypesList.innerHTML = "";
         }
 
+
         if (spawnableTypesStatus) {
+
           spawnableTypesStatus.className =
             "status error";
 
@@ -4081,12 +5122,15 @@ spawnableTypesFile?.addEventListener(
         }
       }
 
+
       /*
         Permet de réimporter
-        le même fichier ensuite.
+        le même fichier.
       */
+
       spawnableTypesFile.value = "";
     };
+
 
     reader.readAsText(file);
   }
@@ -4108,25 +5152,40 @@ spawnableTypesSearch?.addEventListener(
 ====================================================== */
 
 document
-  .getElementById("downloadSpawnableTypesBtn")
-  ?.addEventListener("click", () => {
+  .getElementById(
+    "downloadSpawnableTypesBtn"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
 
-    if (!currentSpawnableTypesXml.trim()) {
+      if (!spawnableTypesItems.length) {
 
-      if (spawnableTypesStatus) {
-        spawnableTypesStatus.textContent =
-          "Importez d’abord un fichier cfgspawnabletypes.xml.";
+        if (spawnableTypesStatus) {
+
+          spawnableTypesStatus.textContent =
+            "Importez ou créez d’abord un cfgspawnabletypes.xml.";
+        }
+
+        return;
       }
 
-      return;
-    }
 
-    downloadFile(
-      currentSpawnableTypesFileName,
-      currentSpawnableTypesXml,
-      "application/xml"
-    );
-  });
+      const finalXml =
+        rebuildSpawnableTypesXml();
+
+
+      downloadFile(
+        currentSpawnableTypesFileName,
+        finalXml,
+        "application/xml"
+      );
+
+
+      spawnableTypesStatus.textContent =
+        "✅ cfgspawnabletypes.xml généré.";
+    }
+  );
 
 
 /* ======================================================
@@ -4134,38 +5193,51 @@ document
 ====================================================== */
 
 document
-  .getElementById("clearSpawnableTypesBtn")
-  ?.addEventListener("click", () => {
+  .getElementById(
+    "clearSpawnableTypesBtn"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
 
-    currentSpawnableTypesFileName =
-      "cfgspawnabletypes.xml";
+      currentSpawnableTypesFileName =
+        "cfgspawnabletypes.xml";
 
-    currentSpawnableTypesXml = "";
-    spawnableTypesItems = [];
+      currentSpawnableTypesXml = "";
 
-    if (spawnableTypesFile) {
-      spawnableTypesFile.value = "";
+      spawnableTypesItems = [];
+
+
+      if (spawnableTypesFile) {
+        spawnableTypesFile.value = "";
+      }
+
+
+      if (spawnableTypesSearch) {
+        spawnableTypesSearch.value = "";
+      }
+
+
+      if (spawnableTypesList) {
+        spawnableTypesList.innerHTML = "";
+      }
+
+
+      if (spawnableTypesStatus) {
+        spawnableTypesStatus.textContent = "";
+      }
+
+
+      const fileName =
+        document.getElementById(
+          "spawnableTypesFileName"
+        );
+
+
+      if (fileName) {
+
+        fileName.textContent =
+          "Aucun fichier sélectionné";
+      }
     }
-
-    if (spawnableTypesSearch) {
-      spawnableTypesSearch.value = "";
-    }
-
-    if (spawnableTypesList) {
-      spawnableTypesList.innerHTML = "";
-    }
-
-    if (spawnableTypesStatus) {
-      spawnableTypesStatus.textContent = "";
-    }
-
-    const fileName =
-      document.getElementById(
-        "spawnableTypesFileName"
-      );
-
-    if (fileName) {
-      fileName.textContent =
-        "Aucun fichier sélectionné";
-    }
-  });
+  );
