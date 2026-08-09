@@ -1271,6 +1271,214 @@
     class="loot-card-list"
   ></div>
 
+<!-- =====================================================
+     SPAWNABLE TYPES EDITOR MODAL
+===================================================== -->
+
+<div
+  id="spawnableTypeModal"
+  class="spawnable-modal hidden"
+>
+
+  <div class="spawnable-modal-backdrop"></div>
+
+  <div class="spawnable-modal-content">
+
+    <!-- HEADER -->
+
+    <div class="spawnable-modal-header">
+
+      <div>
+        <span class="loot-category-label">
+          CFG SPAWNABLE TYPES
+        </span>
+
+        <h2 id="spawnableModalTitle">
+          Modifier un type
+        </h2>
+      </div>
+
+      <button
+        type="button"
+        id="closeSpawnableModalBtn"
+        class="spawnable-modal-close"
+        aria-label="Fermer"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <!-- BODY -->
+
+    <div class="spawnable-modal-body">
+
+      <!-- GENERAL -->
+
+      <section class="spawnable-editor-section">
+
+        <h3>Informations générales</h3>
+
+        <div class="spawnable-editor-grid">
+
+          <label>
+            Classname
+
+            <input
+              type="text"
+              id="spawnableModalClassname"
+              placeholder="Ex : M4A1"
+            >
+          </label>
+
+
+          <label>
+            Damage minimum
+
+            <input
+              type="number"
+              id="spawnableModalDamageMin"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+            >
+          </label>
+
+
+          <label>
+            Damage maximum
+
+            <input
+              type="number"
+              id="spawnableModalDamageMax"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+            >
+          </label>
+
+
+          <label>
+            Hoarder
+
+            <input
+              type="number"
+              id="spawnableModalHoarder"
+              placeholder="Optionnel"
+            >
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- ATTACHMENTS -->
+
+      <section class="spawnable-editor-section">
+
+        <div class="spawnable-section-header">
+
+          <div>
+            <h3>Attachments</h3>
+
+            <p class="muted">
+              Groupes d'accessoires pouvant apparaître sur cet objet.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="spawnableAddAttachmentGroupBtn"
+            class="mini-btn"
+          >
+            + Ajouter un groupe
+          </button>
+
+        </div>
+
+
+        <div
+          id="spawnableModalAttachments"
+          class="spawnable-group-list"
+        ></div>
+
+      </section>
+
+
+      <!-- CARGO -->
+
+      <section class="spawnable-editor-section">
+
+        <div class="spawnable-section-header">
+
+          <div>
+            <h3>Cargo</h3>
+
+            <p class="muted">
+              Objets pouvant apparaître dans l'inventaire.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="spawnableAddCargoGroupBtn"
+            class="mini-btn"
+          >
+            + Ajouter un groupe
+          </button>
+
+        </div>
+
+
+        <div
+          id="spawnableModalCargo"
+          class="spawnable-group-list"
+        ></div>
+
+      </section>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="spawnable-modal-footer">
+
+      <span
+        id="spawnableModalStatus"
+        class="status"
+      ></span>
+
+      <div class="spawnable-modal-actions">
+
+        <button
+          type="button"
+          id="cancelSpawnableModalBtn"
+          class="btn secondary"
+        >
+          Annuler
+        </button>
+
+        <button
+          type="button"
+          id="saveSpawnableModalBtn"
+          class="btn"
+        >
+          Enregistrer
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 </section>
 
 </main>

@@ -3830,76 +3830,292 @@ function parseSpawnableTypesEditorXml(xml) {
 
 
 /* ======================================================
-   UPDATE TYPE VALUES
+   MODAL STATE
 ====================================================== */
 
-window.updateSpawnableTypeValue =
-function(id, field, value) {
+let spawnableModalEditingId = null;
+let spawnableModalDraft = null;
+
+
+/* ======================================================
+   MODAL ELEMENTS
+====================================================== */
+
+const spawnableTypeModal =
+  document.getElementById("spawnableTypeModal");
+
+const spawnableModalTitle =
+  document.getElementById("spawnableModalTitle");
+
+const spawnableModalClassname =
+  document.getElementById("spawnableModalClassname");
+
+const spawnableModalDamageMin =
+  document.getElementById("spawnableModalDamageMin");
+
+const spawnableModalDamageMax =
+  document.getElementById("spawnableModalDamageMax");
+
+const spawnableModalHoarder =
+  document.getElementById("spawnableModalHoarder");
+
+const spawnableModalAttachments =
+  document.getElementById("spawnableModalAttachments");
+
+const spawnableModalCargo =
+  document.getElementById("spawnableModalCargo");
+
+const spawnableModalStatus =
+  document.getElementById("spawnableModalStatus");
+
+
+/* ======================================================
+   CLONE
+====================================================== */
+
+function cloneSpawnableData(data) {
+  return JSON.parse(
+    JSON.stringify(data)
+  );
+}
+
+
+/* ======================================================
+   EMPTY TYPE
+====================================================== */
+
+function createEmptySpawnableType() {
+
+  return {
+    id: spawnableNewId(),
+
+    name: "",
+
+    hoarder: "",
+
+    damage: {
+      min: "0",
+      max: "0"
+    },
+
+    attachmentGroups: [],
+
+    cargoGroups: []
+  };
+}
+
+
+/* ======================================================
+   OPEN CREATE MODAL
+====================================================== */
+
+window.createSpawnableType =
+function() {
+
+  spawnableModalEditingId = null;
+
+  spawnableModalDraft =
+    createEmptySpawnableType();
+
+  spawnableModalTitle.textContent =
+    "Créer un type";
+
+  spawnableModalClassname.disabled =
+    false;
+
+  populateSpawnableModal();
+
+  openSpawnableModal();
+};
+
+
+/* ======================================================
+   OPEN EDIT MODAL
+====================================================== */
+
+window.editSpawnableType =
+function(id) {
 
   const item =
     spawnableGetItem(id);
 
   if (!item) return;
 
-  if (field === "damageMin") {
+  spawnableModalEditingId =
+    id;
 
-    if (!item.damage) {
-      item.damage = {
-        min: "0",
-        max: "0"
-      };
-    }
+  spawnableModalDraft =
+    cloneSpawnableData(item);
 
-    item.damage.min =
-      String(
-        spawnableClamp01(value)
-      );
+  spawnableModalTitle.textContent =
+    `Modifier ${item.name}`;
 
-    return;
-  }
+  /*
+    On autorise aussi le changement
+    de classname.
+  */
+  spawnableModalClassname.disabled =
+    false;
 
-  if (field === "damageMax") {
+  populateSpawnableModal();
 
-    if (!item.damage) {
-      item.damage = {
-        min: "0",
-        max: "0"
-      };
-    }
-
-    item.damage.max =
-      String(
-        spawnableClamp01(value)
-      );
-
-    return;
-  }
-
-  if (field === "hoarder") {
-    item.hoarder = value;
-  }
+  openSpawnableModal();
 };
 
 
 /* ======================================================
-   GROUP HELPERS
+   OPEN / CLOSE
 ====================================================== */
 
-function spawnableGetGroup(
-  typeId,
+function openSpawnableModal() {
+
+  if (!spawnableTypeModal) return;
+
+  spawnableTypeModal.classList.remove(
+    "hidden"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+}
+
+
+function closeSpawnableModal() {
+
+  if (!spawnableTypeModal) return;
+
+  spawnableTypeModal.classList.add(
+    "hidden"
+  );
+
+  document.body.style.overflow = "";
+
+  spawnableModalEditingId = null;
+  spawnableModalDraft = null;
+
+  if (spawnableModalStatus) {
+    spawnableModalStatus.textContent = "";
+  }
+}
+
+
+/* ======================================================
+   POPULATE MODAL
+====================================================== */
+
+function populateSpawnableModal() {
+
+  if (!spawnableModalDraft) return;
+
+  spawnableModalClassname.value =
+    spawnableModalDraft.name || "";
+
+  spawnableModalDamageMin.value =
+    spawnableModalDraft.damage?.min ?? "0";
+
+  spawnableModalDamageMax.value =
+    spawnableModalDraft.damage?.max ?? "0";
+
+  spawnableModalHoarder.value =
+    spawnableModalDraft.hoarder || "";
+
+  renderSpawnableModalGroups();
+}
+
+
+/* ======================================================
+   MODAL GENERAL VALUES
+====================================================== */
+
+spawnableModalClassname
+  ?.addEventListener(
+    "input",
+    () => {
+
+      if (!spawnableModalDraft) return;
+
+      spawnableModalDraft.name =
+        spawnableModalClassname.value.trim();
+    }
+  );
+
+
+spawnableModalDamageMin
+  ?.addEventListener(
+    "input",
+    () => {
+
+      if (!spawnableModalDraft) return;
+
+      spawnableModalDraft.damage =
+        spawnableModalDraft.damage || {
+          min: "0",
+          max: "0"
+        };
+
+      spawnableModalDraft.damage.min =
+        String(
+          spawnableClamp01(
+            spawnableModalDamageMin.value
+          )
+        );
+    }
+  );
+
+
+spawnableModalDamageMax
+  ?.addEventListener(
+    "input",
+    () => {
+
+      if (!spawnableModalDraft) return;
+
+      spawnableModalDraft.damage =
+        spawnableModalDraft.damage || {
+          min: "0",
+          max: "0"
+        };
+
+      spawnableModalDraft.damage.max =
+        String(
+          spawnableClamp01(
+            spawnableModalDamageMax.value
+          )
+        );
+    }
+  );
+
+
+spawnableModalHoarder
+  ?.addEventListener(
+    "input",
+    () => {
+
+      if (!spawnableModalDraft) return;
+
+      spawnableModalDraft.hoarder =
+        spawnableModalHoarder.value;
+    }
+  );
+
+
+/* ======================================================
+   GET DRAFT GROUP
+====================================================== */
+
+function getSpawnableDraftGroup(
   section,
   groupId
 ) {
 
-  const item =
-    spawnableGetItem(typeId);
-
-  if (!item) return null;
+  if (!spawnableModalDraft) {
+    return null;
+  }
 
   const groups =
     section === "attachments"
-      ? item.attachmentGroups
-      : item.cargoGroups;
+      ? spawnableModalDraft.attachmentGroups
+      : spawnableModalDraft.cargoGroups;
 
   return groups.find(
     group => group.id === groupId
@@ -3908,20 +4124,36 @@ function spawnableGetGroup(
 
 
 /* ======================================================
+   TOGGLE GROUP EDITOR
+====================================================== */
+
+window.toggleSpawnableModalGroup =
+function(section, groupId) {
+
+  const block =
+    document.getElementById(
+      `spawnable-modal-${section}-${groupId}`
+    );
+
+  if (!block) return;
+
+  block.classList.toggle("hidden");
+};
+
+
+/* ======================================================
    UPDATE GROUP CHANCE
 ====================================================== */
 
-window.updateSpawnableGroupChance =
+window.updateSpawnableModalGroupChance =
 function(
-  typeId,
   section,
   groupId,
   value
 ) {
 
   const group =
-    spawnableGetGroup(
-      typeId,
+    getSpawnableDraftGroup(
       section,
       groupId
     );
@@ -3936,12 +4168,241 @@ function(
 
 
 /* ======================================================
+   ADD GROUP
+====================================================== */
+
+function addSpawnableModalGroup(section) {
+
+  if (!spawnableModalDraft) return;
+
+  const group = {
+
+    id:
+      spawnableNewId(),
+
+    chance:
+      "1",
+
+    items:
+      [],
+
+    presets:
+      []
+  };
+
+  if (section === "attachments") {
+
+    spawnableModalDraft
+      .attachmentGroups
+      .push(group);
+
+  } else {
+
+    spawnableModalDraft
+      .cargoGroups
+      .push(group);
+  }
+
+  renderSpawnableModalGroups();
+
+  requestAnimationFrame(() => {
+
+    const editor =
+      document.getElementById(
+        `spawnable-modal-${section}-${group.id}`
+      );
+
+    editor?.classList.remove("hidden");
+  });
+}
+
+
+document
+  .getElementById(
+    "spawnableAddAttachmentGroupBtn"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+      addSpawnableModalGroup(
+        "attachments"
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "spawnableAddCargoGroupBtn"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+      addSpawnableModalGroup(
+        "cargo"
+      );
+    }
+  );
+
+
+/* ======================================================
+   REMOVE GROUP
+====================================================== */
+
+window.removeSpawnableModalGroup =
+function(
+  section,
+  groupId
+) {
+
+  if (!spawnableModalDraft) return;
+
+  if (
+    !confirm(
+      "Supprimer ce groupe ?"
+    )
+  ) {
+    return;
+  }
+
+  if (section === "attachments") {
+
+    spawnableModalDraft
+      .attachmentGroups =
+      spawnableModalDraft
+        .attachmentGroups
+        .filter(
+          group =>
+            group.id !== groupId
+        );
+
+  } else {
+
+    spawnableModalDraft
+      .cargoGroups =
+      spawnableModalDraft
+        .cargoGroups
+        .filter(
+          group =>
+            group.id !== groupId
+        );
+  }
+
+  renderSpawnableModalGroups();
+};
+
+
+/* ======================================================
+   ADD ENTRY
+====================================================== */
+
+window.addSpawnableModalEntry =
+function(
+  section,
+  groupId,
+  entryType
+) {
+
+  const group =
+    getSpawnableDraftGroup(
+      section,
+      groupId
+    );
+
+  if (!group) return;
+
+  const entry = {
+
+    id:
+      spawnableNewId(),
+
+    name:
+      "",
+
+    chance:
+      "1"
+  };
+
+  if (entryType === "item") {
+
+    group.items.push(entry);
+
+  } else {
+
+    group.presets.push(entry);
+  }
+
+  renderSpawnableModalGroups();
+
+  requestAnimationFrame(() => {
+
+    const editor =
+      document.getElementById(
+        `spawnable-modal-${section}-${groupId}`
+      );
+
+    editor?.classList.remove("hidden");
+  });
+};
+
+
+/* ======================================================
+   REMOVE ENTRY
+====================================================== */
+
+window.removeSpawnableModalEntry =
+function(
+  section,
+  groupId,
+  entryType,
+  entryId
+) {
+
+  const group =
+    getSpawnableDraftGroup(
+      section,
+      groupId
+    );
+
+  if (!group) return;
+
+  if (entryType === "item") {
+
+    group.items =
+      group.items.filter(
+        entry =>
+          entry.id !== entryId
+      );
+
+  } else {
+
+    group.presets =
+      group.presets.filter(
+        entry =>
+          entry.id !== entryId
+      );
+  }
+
+  renderSpawnableModalGroups();
+
+  requestAnimationFrame(() => {
+
+    const editor =
+      document.getElementById(
+        `spawnable-modal-${section}-${groupId}`
+      );
+
+    editor?.classList.remove("hidden");
+  });
+};
+
+
+/* ======================================================
    UPDATE ENTRY
 ====================================================== */
 
-window.updateSpawnableEntry =
+window.updateSpawnableModalEntry =
 function(
-  typeId,
   section,
   groupId,
   entryType,
@@ -3951,8 +4412,7 @@ function(
 ) {
 
   const group =
-    spawnableGetGroup(
-      typeId,
+    getSpawnableDraftGroup(
       section,
       groupId
     );
@@ -3966,10 +4426,19 @@ function(
 
   const entry =
     entries.find(
-      item => item.id === entryId
+      entry =>
+        entry.id === entryId
     );
 
   if (!entry) return;
+
+  if (field === "name") {
+
+    entry.name =
+      value.trim();
+
+    return;
+  }
 
   if (field === "chance") {
 
@@ -3977,204 +4446,560 @@ function(
       String(
         spawnableClamp01(value)
       );
-
-    return;
-  }
-
-  if (field === "name") {
-    entry.name = value.trim();
   }
 };
 
 
 /* ======================================================
-   ADD GROUP
+   RENDER MODAL ENTRY
 ====================================================== */
 
-window.addSpawnableGroup =
-function(typeId, section) {
-
-  const item =
-    spawnableGetItem(typeId);
-
-  if (!item) return;
-
-  const group = {
-    id: spawnableNewId(),
-    chance: "1",
-    items: [],
-    presets: []
-  };
-
-  if (section === "attachments") {
-    item.attachmentGroups.push(group);
-  } else {
-    item.cargoGroups.push(group);
-  }
-
-  renderSpawnableTypesEditor();
-
-  requestAnimationFrame(() => {
-
-    const details =
-      document.getElementById(
-        `spawnable-type-details-${typeId}`
-      );
-
-    details?.classList.remove("hidden");
-  });
-};
-
-
-/* ======================================================
-   REMOVE GROUP
-====================================================== */
-
-window.removeSpawnableGroup =
-function(
-  typeId,
+function renderSpawnableModalEntry(
   section,
-  groupId
-) {
-
-  if (
-    !confirm(
-      "Supprimer ce groupe ?"
-    )
-  ) {
-    return;
-  }
-
-  const item =
-    spawnableGetItem(typeId);
-
-  if (!item) return;
-
-  if (section === "attachments") {
-
-    item.attachmentGroups =
-      item.attachmentGroups.filter(
-        group => group.id !== groupId
-      );
-
-  } else {
-
-    item.cargoGroups =
-      item.cargoGroups.filter(
-        group => group.id !== groupId
-      );
-  }
-
-  renderSpawnableTypesEditor();
-
-  requestAnimationFrame(() => {
-
-    const details =
-      document.getElementById(
-        `spawnable-type-details-${typeId}`
-      );
-
-    details?.classList.remove("hidden");
-  });
-};
-
-
-/* ======================================================
-   ADD ENTRY
-====================================================== */
-
-window.addSpawnableEntry =
-function(
-  typeId,
-  section,
-  groupId,
-  entryType
-) {
-
-  const group =
-    spawnableGetGroup(
-      typeId,
-      section,
-      groupId
-    );
-
-  if (!group) return;
-
-  const entry = {
-    id: spawnableNewId(),
-    name: "",
-    chance: "1"
-  };
-
-  if (entryType === "item") {
-    group.items.push(entry);
-  } else {
-    group.presets.push(entry);
-  }
-
-  renderSpawnableTypesEditor();
-
-  requestAnimationFrame(() => {
-
-    const details =
-      document.getElementById(
-        `spawnable-type-details-${typeId}`
-      );
-
-    details?.classList.remove("hidden");
-  });
-};
-
-
-/* ======================================================
-   REMOVE ENTRY
-====================================================== */
-
-window.removeSpawnableEntry =
-function(
-  typeId,
-  section,
-  groupId,
+  group,
   entryType,
-  entryId
+  entry
 ) {
 
-  const group =
-    spawnableGetGroup(
-      typeId,
-      section,
-      groupId
-    );
+  const label =
+    entryType === "item"
+      ? "Item"
+      : "Preset";
 
-  if (!group) return;
+  return `
 
-  if (entryType === "item") {
+    <div class="spawnable-entry-row">
 
-    group.items =
-      group.items.filter(
-        item => item.id !== entryId
-      );
+      <label>
 
-  } else {
+        ${label}
 
-    group.presets =
-      group.presets.filter(
-        item => item.id !== entryId
-      );
+        <input
+          type="text"
+          value="${spawnableEscapeHtml(entry.name)}"
+          placeholder="Classname..."
+          oninput="
+            updateSpawnableModalEntry(
+              '${section}',
+              ${group.id},
+              '${entryType}',
+              ${entry.id},
+              'name',
+              this.value
+            )
+          "
+        >
+
+      </label>
+
+
+      <label>
+
+        Chance
+
+        <input
+          type="number"
+          min="0"
+          max="1"
+          step="0.01"
+          value="${spawnableEscapeHtml(entry.chance)}"
+          oninput="
+            updateSpawnableModalEntry(
+              '${section}',
+              ${group.id},
+              '${entryType}',
+              ${entry.id},
+              'chance',
+              this.value
+            )
+          "
+        >
+
+      </label>
+
+
+      <button
+        type="button"
+        class="mini-btn danger"
+        onclick="
+          removeSpawnableModalEntry(
+            '${section}',
+            ${group.id},
+            '${entryType}',
+            ${entry.id}
+          )
+        "
+      >
+        Supprimer
+      </button>
+
+    </div>
+  `;
+}
+
+
+/* ======================================================
+   RENDER MODAL GROUP
+====================================================== */
+
+function renderSpawnableModalGroup(
+  section,
+  group,
+  index
+) {
+
+  const totalEntries =
+    group.items.length +
+    group.presets.length;
+
+  return `
+
+    <div class="spawnable-group-summary">
+
+      <div class="spawnable-group-summary-header">
+
+        <div class="spawnable-group-summary-info">
+
+          <strong>
+            Groupe ${index + 1}
+          </strong>
+
+          <span class="spawnable-group-badge">
+            Chance ${group.chance}
+          </span>
+
+          <span class="spawnable-group-badge">
+            ${group.items.length} item(s)
+          </span>
+
+          <span class="spawnable-group-badge">
+            ${group.presets.length} preset(s)
+          </span>
+
+        </div>
+
+
+        <div class="event-header-actions">
+
+          <button
+            type="button"
+            class="mini-btn"
+            onclick="
+              toggleSpawnableModalGroup(
+                '${section}',
+                ${group.id}
+              )
+            "
+          >
+            Modifier
+          </button>
+
+
+          <button
+            type="button"
+            class="mini-btn danger"
+            onclick="
+              removeSpawnableModalGroup(
+                '${section}',
+                ${group.id}
+              )
+            "
+          >
+            Supprimer
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="spawnable-modal-${section}-${group.id}"
+        class="spawnable-group-editor hidden"
+      >
+
+        <label>
+
+          Chance du groupe
+
+          <input
+            type="number"
+            min="0"
+            max="1"
+            step="0.01"
+            value="${spawnableEscapeHtml(group.chance)}"
+            oninput="
+              updateSpawnableModalGroupChance(
+                '${section}',
+                ${group.id},
+                this.value
+              )
+            "
+          >
+
+        </label>
+
+
+        ${
+          group.items.length
+            ? `
+              <h4>Items</h4>
+
+              ${
+                group.items
+                  .map(entry =>
+                    renderSpawnableModalEntry(
+                      section,
+                      group,
+                      "item",
+                      entry
+                    )
+                  )
+                  .join("")
+              }
+            `
+            : ""
+        }
+
+
+        ${
+          group.presets.length
+            ? `
+              <h4>Presets</h4>
+
+              ${
+                group.presets
+                  .map(entry =>
+                    renderSpawnableModalEntry(
+                      section,
+                      group,
+                      "preset",
+                      entry
+                    )
+                  )
+                  .join("")
+              }
+            `
+            : ""
+        }
+
+
+        ${
+          !totalEntries
+            ? `
+              <p class="muted">
+                Ce groupe est vide.
+              </p>
+            `
+            : ""
+        }
+
+
+        <div class="spawnable-entry-actions">
+
+          <button
+            type="button"
+            class="mini-btn"
+            onclick="
+              addSpawnableModalEntry(
+                '${section}',
+                ${group.id},
+                'item'
+              )
+            "
+          >
+            + Ajouter item
+          </button>
+
+
+          <button
+            type="button"
+            class="mini-btn"
+            onclick="
+              addSpawnableModalEntry(
+                '${section}',
+                ${group.id},
+                'preset'
+              )
+            "
+          >
+            + Ajouter preset
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* ======================================================
+   RENDER MODAL GROUPS
+====================================================== */
+
+function renderSpawnableModalGroups() {
+
+  if (!spawnableModalDraft) return;
+
+
+  if (spawnableModalAttachments) {
+
+    spawnableModalAttachments.innerHTML =
+
+      spawnableModalDraft
+        .attachmentGroups
+        .length
+
+        ? spawnableModalDraft
+            .attachmentGroups
+            .map(
+              (group, index) =>
+                renderSpawnableModalGroup(
+                  "attachments",
+                  group,
+                  index
+                )
+            )
+            .join("")
+
+        : `
+          <p class="muted">
+            Aucun groupe attachment.
+          </p>
+        `;
   }
 
-  renderSpawnableTypesEditor();
 
-  requestAnimationFrame(() => {
+  if (spawnableModalCargo) {
 
-    const details =
-      document.getElementById(
-        `spawnable-type-details-${typeId}`
-      );
+    spawnableModalCargo.innerHTML =
 
-    details?.classList.remove("hidden");
-  });
-};
+      spawnableModalDraft
+        .cargoGroups
+        .length
+
+        ? spawnableModalDraft
+            .cargoGroups
+            .map(
+              (group, index) =>
+                renderSpawnableModalGroup(
+                  "cargo",
+                  group,
+                  index
+                )
+            )
+            .join("")
+
+        : `
+          <p class="muted">
+            Aucun groupe cargo.
+          </p>
+        `;
+  }
+}
+
+
+/* ======================================================
+   SAVE MODAL
+====================================================== */
+
+document
+  .getElementById(
+    "saveSpawnableModalBtn"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (!spawnableModalDraft) {
+        return;
+      }
+
+
+      /* CLASSNAME */
+
+      const classname =
+        spawnableModalClassname
+          .value
+          .trim();
+
+      if (!classname) {
+
+        spawnableModalStatus.textContent =
+          "Le classname est obligatoire.";
+
+        return;
+      }
+
+
+      /* DUPLICATE */
+
+      const duplicate =
+        spawnableTypesItems.some(
+          item =>
+            item.name.toLowerCase() ===
+              classname.toLowerCase() &&
+            item.id !==
+              spawnableModalEditingId
+        );
+
+      if (duplicate) {
+
+        spawnableModalStatus.textContent =
+          "Ce classname existe déjà.";
+
+        return;
+      }
+
+
+      /* DAMAGE */
+
+      const damageMin =
+        spawnableClamp01(
+          spawnableModalDamageMin.value
+        );
+
+      const damageMax =
+        spawnableClamp01(
+          spawnableModalDamageMax.value
+        );
+
+
+      if (damageMin > damageMax) {
+
+        spawnableModalStatus.textContent =
+          "Damage minimum ne peut pas être supérieur au maximum.";
+
+        return;
+      }
+
+
+      spawnableModalDraft.name =
+        classname;
+
+      spawnableModalDraft.damage = {
+        min:
+          String(damageMin),
+
+        max:
+          String(damageMax)
+      };
+
+      spawnableModalDraft.hoarder =
+        spawnableModalHoarder
+          .value
+          .trim();
+
+
+      /* EDIT */
+
+      if (
+        spawnableModalEditingId !== null
+      ) {
+
+        const index =
+          spawnableTypesItems
+            .findIndex(
+              item =>
+                item.id ===
+                spawnableModalEditingId
+            );
+
+        if (index !== -1) {
+
+          /*
+            On conserve l'id original.
+          */
+
+          spawnableModalDraft.id =
+            spawnableModalEditingId;
+
+          spawnableTypesItems[index] =
+            cloneSpawnableData(
+              spawnableModalDraft
+            );
+        }
+
+      }
+
+      /* CREATE */
+
+      else {
+
+        spawnableTypesItems.push(
+          cloneSpawnableData(
+            spawnableModalDraft
+          )
+        );
+      }
+
+
+      closeSpawnableModal();
+
+      renderSpawnableTypesEditor();
+
+      if (spawnableTypesStatus) {
+
+        spawnableTypesStatus.textContent =
+          `${classname} enregistré.`;
+      }
+    }
+  );
+
+
+/* ======================================================
+   CANCEL / CLOSE
+====================================================== */
+
+document
+  .getElementById(
+    "cancelSpawnableModalBtn"
+  )
+  ?.addEventListener(
+    "click",
+    closeSpawnableModal
+  );
+
+
+document
+  .getElementById(
+    "closeSpawnableModalBtn"
+  )
+  ?.addEventListener(
+    "click",
+    closeSpawnableModal
+  );
+
+
+document
+  .querySelector(
+    "#spawnableTypeModal .spawnable-modal-backdrop"
+  )
+  ?.addEventListener(
+    "click",
+    closeSpawnableModal
+  );
+
+
+/* ESC */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape" &&
+      !spawnableTypeModal
+        ?.classList
+        .contains("hidden")
+    ) {
+
+      closeSpawnableModal();
+    }
+  }
+);
 
 
 /* ======================================================
@@ -4191,7 +5016,7 @@ function(id) {
 
   if (
     !confirm(
-      `Supprimer le type ${item.name} ?`
+      `Supprimer ${item.name} ?`
     )
   ) {
     return;
@@ -4199,313 +5024,22 @@ function(id) {
 
   spawnableTypesItems =
     spawnableTypesItems.filter(
-      item => item.id !== id
+      current =>
+        current.id !== id
     );
 
   renderSpawnableTypesEditor();
 
-  spawnableTypesStatus.textContent =
-    `${item.name} supprimé.`;
-};
-
-
-/* ======================================================
-   CREATE TYPE
-====================================================== */
-
-window.createSpawnableType =
-function() {
-
-  const classname =
-    prompt(
-      "Classname du nouvel objet :"
-    );
-
-  if (!classname) return;
-
-  const cleanName =
-    classname.trim();
-
-  if (!cleanName) return;
-
-  const exists =
-    spawnableTypesItems.some(
-      item =>
-        item.name.toLowerCase() ===
-        cleanName.toLowerCase()
-    );
-
-  if (exists) {
+  if (spawnableTypesStatus) {
 
     spawnableTypesStatus.textContent =
-      "Ce classname existe déjà.";
-
-    return;
+      `${item.name} supprimé.`;
   }
-
-  spawnableTypesItems.push({
-
-    id:
-      spawnableNewId(),
-
-    name:
-      cleanName,
-
-    hoarder:
-      "",
-
-    damage: {
-      min: "0",
-      max: "0"
-    },
-
-    attachmentGroups: [],
-
-    cargoGroups: []
-
-  });
-
-  if (spawnableTypesSearch) {
-    spawnableTypesSearch.value =
-      cleanName;
-  }
-
-  renderSpawnableTypesEditor();
-
-  spawnableTypesStatus.textContent =
-    `${cleanName} créé.`;
 };
 
 
 /* ======================================================
-   ENTRY RENDER
-====================================================== */
-
-function renderSpawnableEntry(
-  typeId,
-  section,
-  groupId,
-  entryType,
-  entry
-) {
-
-  const label =
-    entryType === "item"
-      ? "Item"
-      : "Preset";
-
-  return `
-    <div class="event-position-row">
-
-      <label>
-        ${label}
-
-        <input
-          type="text"
-          value="${spawnableEscapeHtml(entry.name)}"
-          placeholder="Classname..."
-          oninput="
-            updateSpawnableEntry(
-              ${typeId},
-              '${section}',
-              ${groupId},
-              '${entryType}',
-              ${entry.id},
-              'name',
-              this.value
-            )
-          "
-        >
-      </label>
-
-      <label>
-        Chance
-
-        <input
-          type="number"
-          min="0"
-          max="1"
-          step="0.01"
-          value="${spawnableEscapeHtml(entry.chance)}"
-          oninput="
-            updateSpawnableEntry(
-              ${typeId},
-              '${section}',
-              ${groupId},
-              '${entryType}',
-              ${entry.id},
-              'chance',
-              this.value
-            )
-          "
-        >
-      </label>
-
-      <button
-        type="button"
-        class="mini-btn danger"
-        onclick="
-          removeSpawnableEntry(
-            ${typeId},
-            '${section}',
-            ${groupId},
-            '${entryType}',
-            ${entry.id}
-          )
-        "
-      >
-        Supprimer
-      </button>
-
-    </div>
-  `;
-}
-
-
-/* ======================================================
-   GROUP RENDER
-====================================================== */
-
-function renderSpawnableGroup(
-  item,
-  section,
-  group,
-  groupIndex
-) {
-
-  return `
-    <div class="loot-card">
-
-      <div class="event-spawn-header">
-
-        <strong>
-          Groupe ${groupIndex + 1}
-        </strong>
-
-        <button
-          type="button"
-          class="mini-btn danger"
-          onclick="
-            removeSpawnableGroup(
-              ${item.id},
-              '${section}',
-              ${group.id}
-            )
-          "
-        >
-          Supprimer groupe
-        </button>
-
-      </div>
-
-      <div class="loot-card-main">
-
-        <label>
-          Chance du groupe
-
-          <input
-            type="number"
-            min="0"
-            max="1"
-            step="0.01"
-            value="${spawnableEscapeHtml(group.chance)}"
-            oninput="
-              updateSpawnableGroupChance(
-                ${item.id},
-                '${section}',
-                ${group.id},
-                this.value
-              )
-            "
-          >
-        </label>
-
-      </div>
-
-
-      ${
-        group.items.length
-          ? `
-            <h4>Items</h4>
-
-            ${group.items
-              .map(entry =>
-                renderSpawnableEntry(
-                  item.id,
-                  section,
-                  group.id,
-                  "item",
-                  entry
-                )
-              )
-              .join("")}
-          `
-          : ""
-      }
-
-
-      ${
-        group.presets.length
-          ? `
-            <h4>Presets</h4>
-
-            ${group.presets
-              .map(entry =>
-                renderSpawnableEntry(
-                  item.id,
-                  section,
-                  group.id,
-                  "preset",
-                  entry
-                )
-              )
-              .join("")}
-          `
-          : ""
-      }
-
-
-      <div class="tool-actions">
-
-        <button
-          type="button"
-          class="mini-btn"
-          onclick="
-            addSpawnableEntry(
-              ${item.id},
-              '${section}',
-              ${group.id},
-              'item'
-            )
-          "
-        >
-          + Ajouter item
-        </button>
-
-        <button
-          type="button"
-          class="mini-btn"
-          onclick="
-            addSpawnableEntry(
-              ${item.id},
-              '${section}',
-              ${group.id},
-              'preset'
-            )
-          "
-        >
-          + Ajouter preset
-        </button>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* ======================================================
-   RENDER
+   MAIN LIST RENDER
 ====================================================== */
 
 function renderSpawnableTypesEditor() {
@@ -4518,6 +5052,7 @@ function renderSpawnableTypesEditor() {
     )
       .trim()
       .toLowerCase();
+
 
   const filtered =
     spawnableTypesItems.filter(
@@ -4542,6 +5077,7 @@ function renderSpawnableTypesEditor() {
 
     </div>
 
+
     ${filtered.map(item => {
 
       const damageText =
@@ -4563,7 +5099,10 @@ function renderSpawnableTypesEditor() {
 
               <span class="loot-category-label">
                 ${item.attachmentGroups.length}
-                groupe(s) attachment
+                attachment(s)
+                ·
+                ${item.cargoGroups.length}
+                cargo
               </span>
 
             </div>
@@ -4575,13 +5114,14 @@ function renderSpawnableTypesEditor() {
                 type="button"
                 class="mini-btn"
                 onclick="
-                  toggleSpawnableTypeDetails(
+                  editSpawnableType(
                     ${item.id}
                   )
                 "
               >
-                Détails
+                Modifier
               </button>
+
 
               <button
                 type="button"
@@ -4603,16 +5143,20 @@ function renderSpawnableTypesEditor() {
           <div class="loot-card-main">
 
             <label>
+
               Damage
 
               <input
                 type="text"
-                value="${damageText}"
+                value="${spawnableEscapeHtml(damageText)}"
                 disabled
               >
+
             </label>
 
+
             <label>
+
               Attachments
 
               <input
@@ -4620,9 +5164,12 @@ function renderSpawnableTypesEditor() {
                 value="${item.attachmentGroups.length}"
                 disabled
               >
+
             </label>
 
+
             <label>
+
               Cargo
 
               <input
@@ -4630,9 +5177,12 @@ function renderSpawnableTypesEditor() {
                 value="${item.cargoGroups.length}"
                 disabled
               >
+
             </label>
 
+
             <label>
+
               Hoarder
 
               <input
@@ -4640,154 +5190,8 @@ function renderSpawnableTypesEditor() {
                 value="${spawnableEscapeHtml(item.hoarder || "-")}"
                 disabled
               >
+
             </label>
-
-          </div>
-
-
-          <div
-            id="spawnable-type-details-${item.id}"
-            class="hidden"
-          >
-
-            <div class="loot-details-grid">
-
-              <label>
-                Damage minimum
-
-                <input
-                  type="number"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value="${spawnableEscapeHtml(item.damage?.min ?? 0)}"
-                  oninput="
-                    updateSpawnableTypeValue(
-                      ${item.id},
-                      'damageMin',
-                      this.value
-                    )
-                  "
-                >
-              </label>
-
-              <label>
-                Damage maximum
-
-                <input
-                  type="number"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value="${spawnableEscapeHtml(item.damage?.max ?? 0)}"
-                  oninput="
-                    updateSpawnableTypeValue(
-                      ${item.id},
-                      'damageMax',
-                      this.value
-                    )
-                  "
-                >
-              </label>
-
-              <label>
-                Hoarder
-
-                <input
-                  type="number"
-                  value="${spawnableEscapeHtml(item.hoarder)}"
-                  placeholder="Optionnel"
-                  oninput="
-                    updateSpawnableTypeValue(
-                      ${item.id},
-                      'hoarder',
-                      this.value
-                    )
-                  "
-                >
-              </label>
-
-            </div>
-
-
-            <div class="event-spawn-header">
-
-              <h4>Attachments</h4>
-
-              <button
-                type="button"
-                class="mini-btn"
-                onclick="
-                  addSpawnableGroup(
-                    ${item.id},
-                    'attachments'
-                  )
-                "
-              >
-                + Ajouter groupe
-              </button>
-
-            </div>
-
-            ${
-              item.attachmentGroups.length
-                ? item.attachmentGroups
-                    .map(
-                      (group, index) =>
-                        renderSpawnableGroup(
-                          item,
-                          "attachments",
-                          group,
-                          index
-                        )
-                    )
-                    .join("")
-                : `
-                  <p class="muted">
-                    Aucun groupe attachment.
-                  </p>
-                `
-            }
-
-
-            <div class="event-spawn-header">
-
-              <h4>Cargo</h4>
-
-              <button
-                type="button"
-                class="mini-btn"
-                onclick="
-                  addSpawnableGroup(
-                    ${item.id},
-                    'cargo'
-                  )
-                "
-              >
-                + Ajouter groupe
-              </button>
-
-            </div>
-
-            ${
-              item.cargoGroups.length
-                ? item.cargoGroups
-                    .map(
-                      (group, index) =>
-                        renderSpawnableGroup(
-                          item,
-                          "cargo",
-                          group,
-                          index
-                        )
-                    )
-                    .join("")
-                : `
-                  <p class="muted">
-                    Aucun groupe cargo.
-                  </p>
-                `
-            }
 
           </div>
 
@@ -4804,25 +5208,6 @@ function renderSpawnableTypesEditor() {
       `${spawnableTypesItems.length} types chargés — ${filtered.length} affichés.`;
   }
 }
-
-
-/* ======================================================
-   DETAILS
-====================================================== */
-
-window.toggleSpawnableTypeDetails =
-function(id) {
-
-  const block =
-    document.getElementById(
-      `spawnable-type-details-${id}`
-    );
-
-  if (!block) return;
-
-  block.classList.toggle("hidden");
-};
-
 
 /* ======================================================
    XML BUILD HELPERS
@@ -5241,3 +5626,5 @@ document
       }
     }
   );
+
+  
