@@ -15,6 +15,14 @@ const DAYZ_WEAPONS_ROOT = path.join(
   "weapons"
 );
 
+const DAYZ_VEHICLES_ROOT = path.join(
+  process.env.USERPROFILE || "",
+  "Documents",
+  "DayZ Projects",
+  "DZ",
+  "vehicles"
+);
+
 const CORE_ITEMS_FILE = path.join(
   ROOT,
   "public",
@@ -419,36 +427,69 @@ function normalizeSlot(slot) {
 
 
 /* =========================================================
-   READ CONFIGS
+READ CONFIGS
 ========================================================= */
 
 console.log("");
 console.log("===============================");
-console.log(" DAYZ WEAPON RELATIONS");
+console.log(" DAYZ CORE RELATIONS");
 console.log("===============================");
 console.log("");
 
 console.log(
-  `Source : ${DAYZ_WEAPONS_ROOT}`
+  `Source armes     : ${DAYZ_WEAPONS_ROOT}`
+);
+
+console.log(
+  `Source véhicules : ${DAYZ_VEHICLES_ROOT}`
 );
 
 console.log("");
 
-const configFiles =
+
+const weaponConfigFiles =
   findConfigFiles(
     DAYZ_WEAPONS_ROOT
   );
 
+
+const vehicleConfigFiles =
+  findConfigFiles(
+    DAYZ_VEHICLES_ROOT
+  );
+
+
+const configFiles = [
+  ...weaponConfigFiles,
+  ...vehicleConfigFiles
+];
+
+
 console.log(
-  `config.cpp trouvés : ${configFiles.length}`
+  `config.cpp armes     : ${weaponConfigFiles.length}`
 );
 
-if (!configFiles.length) {
+console.log(
+  `config.cpp véhicules : ${vehicleConfigFiles.length}`
+);
+
+console.log(
+  `config.cpp total     : ${configFiles.length}`
+);
+
+
+if (!weaponConfigFiles.length) {
   throw new Error(
     "Aucun config.cpp trouvé dans DZ/weapons."
   );
 }
 
+
+if (!vehicleConfigFiles.length) {
+  throw new Error(
+    "Aucun config.cpp trouvé dans DZ/vehicles."
+  );
+}
 
 /* =========================================================
    PARSE ALL CLASSES
@@ -479,11 +520,16 @@ const data = {
       parent:
         configClass.parent,
 
-      source:
-        path.relative(
-          DAYZ_WEAPONS_ROOT,
-          filePath
-        ),
+source:
+  path.relative(
+    path.join(
+      process.env.USERPROFILE || "",
+      "Documents",
+      "DayZ Projects",
+      "DZ"
+    ),
+    filePath
+  ),
 
       scope:
         getNumberProperty(
@@ -743,6 +789,55 @@ if (!isUsableDayZClass(classname)) {
 
 
 /* =========================================================
+VEHICLE HELPERS
+========================================================= */
+
+function isVehicleClass(classname) {
+
+  const data =
+    classMap.get(classname);
+
+  if (!data) {
+    return false;
+  }
+
+  const source =
+    String(data.source || "")
+      .replace(/\\/g, "/")
+      .toLowerCase();
+
+  return source.startsWith(
+    "vehicles/"
+  );
+}
+
+
+function isVehicleRootClass(classname) {
+
+  if (!isVehicleClass(classname)) {
+    return false;
+  }
+
+  const resolved =
+    resolveClass(classname);
+
+  if (!resolved) {
+    return false;
+  }
+
+  /*
+    Pour notre database, on considère comme véhicule
+    une classe issue de DZ/vehicles qui possède
+    des slots d'attachments.
+  */
+
+  return (
+    Array.isArray(resolved.attachments) &&
+    resolved.attachments.length > 0
+  );
+}
+
+/* =========================================================
    BUILD WEAPON RELATIONS
 ========================================================= */
 
@@ -868,7 +963,128 @@ compatibleAmmo:
   }
 );
 
+/* =========================================================
+BUILD VEHICLE RELATIONS
+========================================================= */
 
+const vehicleRelations = {};
+
+let vehicleRelationCount = 0;
+
+
+classMap.forEach(
+  (_, classname) => {
+
+    /*
+      On ne traite ici que les classes
+      identifiées comme véhicules.
+    */
+
+    if (!isVehicleRootClass(classname)) {
+      return;
+    }
+
+
+    const resolved =
+      resolveClass(classname);
+
+    if (!resolved) {
+      return;
+    }
+
+
+    /* -------------------------
+       ATTACHMENTS
+    ------------------------- */
+
+    const compatibleAttachments =
+      new Set();
+
+    const attachmentsBySlot = {};
+
+
+    resolved.attachments.forEach(
+      slot => {
+
+        const normalizedSlot =
+          normalizeSlot(slot);
+
+        if (!normalizedSlot) {
+          return;
+        }
+
+
+        const compatible =
+          slotIndex.get(
+            normalizedSlot
+          ) || [];
+
+
+        /*
+          On enlève les classes identifiées
+          elles-mêmes comme véhicules.
+
+          On veut ici récupérer les pièces :
+          portes, roues, batterie, radiateur,
+          bougie, phares, etc.
+        */
+
+        const filtered =
+          compatible.filter(
+            candidate =>
+              !isVehicleRootClass(
+                candidate
+              )
+          );
+
+
+        /*
+          Suppression des doublons.
+        */
+
+        const unique =
+          [...new Set(filtered)]
+            .sort();
+
+
+        attachmentsBySlot[slot] =
+          unique;
+
+
+        unique.forEach(
+          attachmentName => {
+
+            compatibleAttachments.add(
+              attachmentName
+            );
+
+            vehicleRelationCount++;
+          }
+        );
+      }
+    );
+
+
+    /* -------------------------
+       RESULT
+    ------------------------- */
+
+    vehicleRelations[classname] = {
+
+      parent:
+        resolved.parent,
+
+      attachmentSlots:
+        resolved.attachments,
+
+      attachmentsBySlot,
+
+      compatibleAttachments:
+        [...compatibleAttachments]
+          .sort()
+    };
+  }
+);
 
 /* =========================================================
    STATS
@@ -990,12 +1206,15 @@ const output = {
     "Official DayZ extracted config.cpp",
 
   weapons:
-    weaponRelations
+    weaponRelations,
+
+  vehicles:
+    vehicleRelations
 };
 
 const fileContent = `
 // =========================================================
-// DAYZ MAPPING LAB - WEAPON RELATIONS
+// DAYZ MAPPING LAB - CORE RELATIONS
 // =========================================================
 //
 // AUTO-GENERATED FILE
@@ -1092,6 +1311,16 @@ console.log(
 );
 
 console.log("");
+
+console.log("");
+
+console.log(
+  `Véhicules trouvés : ${Object.keys(vehicleRelations).length}`
+);
+
+console.log(
+  `Relations pièces véhicule : ${vehicleRelationCount}`
+);
 
 console.log(
   `Fichier : ${OUTPUT_FILE}`

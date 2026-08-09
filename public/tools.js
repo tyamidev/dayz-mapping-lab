@@ -4449,6 +4449,95 @@ function(
   }
 };
 
+/* ======================================================
+SPAWNABLE COMPATIBLE ITEMS
+====================================================== */
+
+function getSpawnableCompatibleItems() {
+
+  if (!spawnableModalDraft) {
+    return [];
+  }
+
+  const classname =
+    String(
+      spawnableModalDraft.name || ""
+    ).trim();
+
+  if (!classname) {
+    return [];
+  }
+
+
+  const relations =
+    window.DAYZ_CORE_RELATIONS;
+
+  if (!relations) {
+    return [];
+  }
+
+
+  /* -------------------------
+     WEAPON
+  ------------------------- */
+
+  const weapon =
+    relations.weapons?.[classname];
+
+  if (weapon) {
+
+    return [
+      ...(weapon.compatibleAttachments || []),
+      ...(weapon.compatibleMagazines || []),
+      ...(weapon.compatibleAmmo || [])
+    ]
+      .filter(Boolean)
+      .filter(
+        (value, index, array) =>
+          array.indexOf(value) === index
+      )
+      .sort();
+  }
+
+
+  /* -------------------------
+     VEHICLE
+  ------------------------- */
+
+  const vehicle =
+    relations.vehicles?.[classname];
+
+  if (vehicle) {
+
+    return [
+      ...(vehicle.compatibleAttachments || [])
+    ]
+      .filter(Boolean)
+
+      /*
+        On masque les classes techniques
+        dont on ne veut pas dans
+        cfgspawnabletypes.
+      */
+
+      .filter(name =>
+        !name.startsWith("Proxy")
+      )
+
+      .filter(name =>
+        !name.endsWith("_Ruined")
+      )
+
+      .filter(
+        (value, index, array) =>
+          array.indexOf(value) === index
+      )
+      .sort();
+  }
+
+
+  return [];
+}
 
 /* ======================================================
    RENDER MODAL ENTRY
@@ -4466,29 +4555,82 @@ function renderSpawnableModalEntry(
       ? "Item"
       : "Preset";
 
-  return `
+  /*
+    L'autocomplétion concerne uniquement les items.
+    Les presets restent en saisie libre.
+  */
 
+  const autocomplete =
+    entryType === "item"
+      ? `
+        oninput="
+          updateSpawnableModalEntry(
+            '${section}',
+            ${group.id},
+            '${entryType}',
+            ${entry.id},
+            'name',
+            this.value
+          );
+
+          showSpawnableItemSuggestions(
+            this,
+            '${section}',
+            ${group.id},
+            ${entry.id}
+          );
+        "
+
+        onfocus="
+          showSpawnableItemSuggestions(
+            this,
+            '${section}',
+            ${group.id},
+            ${entry.id}
+          );
+        "
+      `
+      : `
+        oninput="
+          updateSpawnableModalEntry(
+            '${section}',
+            ${group.id},
+            '${entryType}',
+            ${entry.id},
+            'name',
+            this.value
+          )
+        "
+      `;
+
+  return `
     <div class="spawnable-entry-row">
 
       <label>
 
         ${label}
 
-        <input
-          type="text"
-          value="${spawnableEscapeHtml(entry.name)}"
-          placeholder="Classname..."
-          oninput="
-            updateSpawnableModalEntry(
-              '${section}',
-              ${group.id},
-              '${entryType}',
-              ${entry.id},
-              'name',
-              this.value
-            )
-          "
-        >
+        <div class="spawnable-autocomplete">
+
+          <input
+            type="text"
+            value="${spawnableEscapeHtml(entry.name)}"
+            placeholder="Classname..."
+            autocomplete="off"
+            ${autocomplete}
+          >
+
+          ${
+            entryType === "item"
+              ? `
+                <div
+                  class="spawnable-suggestions hidden"
+                ></div>
+              `
+              : ""
+          }
+
+        </div>
 
       </label>
 
@@ -4537,6 +4679,134 @@ function renderSpawnableModalEntry(
   `;
 }
 
+/* ======================================================
+SPAWNABLE ITEM AUTOCOMPLETE
+====================================================== */
+
+window.showSpawnableItemSuggestions =
+function(
+  input,
+  section,
+  groupId,
+  entryId
+) {
+
+  const wrapper =
+    input.closest(
+      ".spawnable-autocomplete"
+    );
+
+  if (!wrapper) return;
+
+
+  const suggestionsBox =
+    wrapper.querySelector(
+      ".spawnable-suggestions"
+    );
+
+  if (!suggestionsBox) return;
+
+
+  const allItems =
+    getSpawnableCompatibleItems();
+
+
+  const search =
+    String(input.value || "")
+      .trim()
+      .toLowerCase();
+
+
+  /*
+    Recherche dans les compatibilités
+    du parent actuellement modifié.
+  */
+
+  const matches =
+    allItems
+      .filter(name => {
+
+        if (!search) {
+          return true;
+        }
+
+        return name
+          .toLowerCase()
+          .includes(search);
+      })
+      .slice(0, 50);
+
+
+  if (!matches.length) {
+
+    suggestionsBox.innerHTML = `
+      <div class="spawnable-suggestion-empty">
+        Aucun item compatible trouvé
+      </div>
+    `;
+
+    suggestionsBox.classList.remove(
+      "hidden"
+    );
+
+    return;
+  }
+
+
+  suggestionsBox.innerHTML =
+    matches
+      .map(name => `
+        <button
+          type="button"
+          class="spawnable-suggestion"
+          data-name="${spawnableEscapeHtml(name)}"
+        >
+          ${spawnableEscapeHtml(name)}
+        </button>
+      `)
+      .join("");
+
+
+  suggestionsBox.classList.remove(
+    "hidden"
+  );
+
+
+  suggestionsBox
+    .querySelectorAll(
+      ".spawnable-suggestion"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const name =
+            button.dataset.name || "";
+
+          input.value =
+            name;
+
+
+          updateSpawnableModalEntry(
+            section,
+            groupId,
+            "item",
+            entryId,
+            "name",
+            name
+          );
+
+
+          suggestionsBox
+            .classList.add(
+              "hidden"
+            );
+        }
+      );
+    });
+};
 
 /* ======================================================
    RENDER MODAL GROUP

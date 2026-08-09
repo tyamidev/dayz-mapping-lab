@@ -1,5 +1,5 @@
 // =========================================================
-// DAYZ MAPPING LAB - WEAPON RELATIONS
+// DAYZ MAPPING LAB - CORE RELATIONS
 // =========================================================
 //
 // AUTO-GENERATED FILE
@@ -15,7 +15,7 @@
 // =========================================================
 
 window.DAYZ_CORE_RELATIONS = {
-  "generatedAt": "2026-08-08T14:34:51.969Z",
+  "generatedAt": "2026-08-09T09:58:18.105Z",
   "source": "Official DayZ extracted config.cpp",
   "weapons": {
     "ACOGOptic": {
@@ -4914,6 +4914,3454 @@ window.DAYZ_CORE_RELATIONS = {
       "compatibleAmmo": [
         "Ammo_308Win",
         "Ammo_308WinTracer"
+      ]
+    }
+  },
+  "vehicles": {
+    "CfgVehicles": {
+      "parent": null,
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
+      ]
+    },
+    "TruckBattery": {
+      "parent": "Inventory_Base",
+      "attachmentSlots": [
+        "MetalWire"
+      ],
+      "attachmentsBySlot": {
+        "MetalWire": []
+      },
+      "compatibleAttachments": []
+    },
+    "CarBattery": {
+      "parent": "Inventory_Base",
+      "attachmentSlots": [
+        "MetalWire"
+      ],
+      "attachmentsBySlot": {
+        "MetalWire": []
+      },
+      "compatibleAttachments": []
+    },
+    "Boat_01_ColorBase": {
+      "parent": "BoatScript",
+      "attachmentSlots": [
+        "SparkPlug"
+      ],
+      "attachmentsBySlot": {
+        "SparkPlug": [
+          "SparkPlug"
+        ]
+      },
+      "compatibleAttachments": [
+        "SparkPlug"
+      ]
+    },
+    "Boat_01_Orange": {
+      "parent": "Boat_01_ColorBase",
+      "attachmentSlots": [
+        "SparkPlug"
+      ],
+      "attachmentsBySlot": {
+        "SparkPlug": [
+          "SparkPlug"
+        ]
+      },
+      "compatibleAttachments": [
+        "SparkPlug"
+      ]
+    },
+    "Boat_01_Blue": {
+      "parent": "Boat_01_ColorBase",
+      "attachmentSlots": [
+        "SparkPlug"
+      ],
+      "attachmentsBySlot": {
+        "SparkPlug": [
+          "SparkPlug"
+        ]
+      },
+      "compatibleAttachments": [
+        "SparkPlug"
+      ]
+    },
+    "Boat_01_Black": {
+      "parent": "Boat_01_ColorBase",
+      "attachmentSlots": [
+        "SparkPlug"
+      ],
+      "attachmentsBySlot": {
+        "SparkPlug": [
+          "SparkPlug"
+        ]
+      },
+      "compatibleAttachments": [
+        "SparkPlug"
+      ]
+    },
+    "Boat_01_Camo": {
+      "parent": "Boat_01_ColorBase",
+      "attachmentSlots": [
+        "SparkPlug"
+      ],
+      "attachmentsBySlot": {
+        "SparkPlug": [
+          "SparkPlug"
+        ]
+      },
+      "compatibleAttachments": [
+        "SparkPlug"
+      ]
+    },
+    "CarScript": {
+      "parent": "Car",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
+      ]
+    },
+    "RearDrive": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
+      ]
+    },
+    "FrontDrive": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
+      ]
+    },
+    "AllDrive": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
+      ]
+    },
+    "TruckDrive": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
+      ]
+    },
+    "OffroadHatchback": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "NivaDriverDoors",
+        "NivaCoDriverDoors",
+        "NivaHood",
+        "NivaTrunk",
+        "NivaWheel_1_1",
+        "NivaWheel_1_2",
+        "NivaWheel_2_1",
+        "NivaWheel_2_2",
+        "NivaWheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "NivaDriverDoors": [
+          "HatchbackDoors_Driver",
+          "HatchbackDoors_Driver_Blue",
+          "HatchbackDoors_Driver_BlueRust",
+          "HatchbackDoors_Driver_GreenRust",
+          "HatchbackDoors_Driver_White",
+          "HatchbackDoors_Driver_WhiteRust"
+        ],
+        "NivaCoDriverDoors": [
+          "HatchbackDoors_CoDriver",
+          "HatchbackDoors_CoDriver_Blue",
+          "HatchbackDoors_CoDriver_BlueRust",
+          "HatchbackDoors_CoDriver_GreenRust",
+          "HatchbackDoors_CoDriver_White",
+          "HatchbackDoors_CoDriver_WhiteRust"
+        ],
+        "NivaHood": [
+          "HatchbackHood",
+          "HatchbackHood_Blue",
+          "HatchbackHood_BlueRust",
+          "HatchbackHood_GreenRust",
+          "HatchbackHood_White",
+          "HatchbackHood_WhiteRust"
+        ],
+        "NivaTrunk": [
+          "HatchbackTrunk",
+          "HatchbackTrunk_Blue",
+          "HatchbackTrunk_BlueRust",
+          "HatchbackTrunk_GreenRust",
+          "HatchbackTrunk_White",
+          "HatchbackTrunk_WhiteRust"
+        ],
+        "NivaWheel_1_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_1_2": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_2_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_2_2": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_Spare_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "HatchbackDoors_CoDriver",
+        "HatchbackDoors_CoDriver_Blue",
+        "HatchbackDoors_CoDriver_BlueRust",
+        "HatchbackDoors_CoDriver_GreenRust",
+        "HatchbackDoors_CoDriver_White",
+        "HatchbackDoors_CoDriver_WhiteRust",
+        "HatchbackDoors_Driver",
+        "HatchbackDoors_Driver_Blue",
+        "HatchbackDoors_Driver_BlueRust",
+        "HatchbackDoors_Driver_GreenRust",
+        "HatchbackDoors_Driver_White",
+        "HatchbackDoors_Driver_WhiteRust",
+        "HatchbackHood",
+        "HatchbackHood_Blue",
+        "HatchbackHood_BlueRust",
+        "HatchbackHood_GreenRust",
+        "HatchbackHood_White",
+        "HatchbackHood_WhiteRust",
+        "HatchbackTrunk",
+        "HatchbackTrunk_Blue",
+        "HatchbackTrunk_BlueRust",
+        "HatchbackTrunk_GreenRust",
+        "HatchbackTrunk_White",
+        "HatchbackTrunk_WhiteRust",
+        "HatchbackWheel",
+        "HatchbackWheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "OffroadHatchback_Blue": {
+      "parent": "OffroadHatchback",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "NivaDriverDoors",
+        "NivaCoDriverDoors",
+        "NivaHood",
+        "NivaTrunk",
+        "NivaWheel_1_1",
+        "NivaWheel_1_2",
+        "NivaWheel_2_1",
+        "NivaWheel_2_2",
+        "NivaWheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "NivaDriverDoors": [
+          "HatchbackDoors_Driver",
+          "HatchbackDoors_Driver_Blue",
+          "HatchbackDoors_Driver_BlueRust",
+          "HatchbackDoors_Driver_GreenRust",
+          "HatchbackDoors_Driver_White",
+          "HatchbackDoors_Driver_WhiteRust"
+        ],
+        "NivaCoDriverDoors": [
+          "HatchbackDoors_CoDriver",
+          "HatchbackDoors_CoDriver_Blue",
+          "HatchbackDoors_CoDriver_BlueRust",
+          "HatchbackDoors_CoDriver_GreenRust",
+          "HatchbackDoors_CoDriver_White",
+          "HatchbackDoors_CoDriver_WhiteRust"
+        ],
+        "NivaHood": [
+          "HatchbackHood",
+          "HatchbackHood_Blue",
+          "HatchbackHood_BlueRust",
+          "HatchbackHood_GreenRust",
+          "HatchbackHood_White",
+          "HatchbackHood_WhiteRust"
+        ],
+        "NivaTrunk": [
+          "HatchbackTrunk",
+          "HatchbackTrunk_Blue",
+          "HatchbackTrunk_BlueRust",
+          "HatchbackTrunk_GreenRust",
+          "HatchbackTrunk_White",
+          "HatchbackTrunk_WhiteRust"
+        ],
+        "NivaWheel_1_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_1_2": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_2_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_2_2": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_Spare_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "HatchbackDoors_CoDriver",
+        "HatchbackDoors_CoDriver_Blue",
+        "HatchbackDoors_CoDriver_BlueRust",
+        "HatchbackDoors_CoDriver_GreenRust",
+        "HatchbackDoors_CoDriver_White",
+        "HatchbackDoors_CoDriver_WhiteRust",
+        "HatchbackDoors_Driver",
+        "HatchbackDoors_Driver_Blue",
+        "HatchbackDoors_Driver_BlueRust",
+        "HatchbackDoors_Driver_GreenRust",
+        "HatchbackDoors_Driver_White",
+        "HatchbackDoors_Driver_WhiteRust",
+        "HatchbackHood",
+        "HatchbackHood_Blue",
+        "HatchbackHood_BlueRust",
+        "HatchbackHood_GreenRust",
+        "HatchbackHood_White",
+        "HatchbackHood_WhiteRust",
+        "HatchbackTrunk",
+        "HatchbackTrunk_Blue",
+        "HatchbackTrunk_BlueRust",
+        "HatchbackTrunk_GreenRust",
+        "HatchbackTrunk_White",
+        "HatchbackTrunk_WhiteRust",
+        "HatchbackWheel",
+        "HatchbackWheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "OffroadHatchback_White": {
+      "parent": "OffroadHatchback",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "NivaDriverDoors",
+        "NivaCoDriverDoors",
+        "NivaHood",
+        "NivaTrunk",
+        "NivaWheel_1_1",
+        "NivaWheel_1_2",
+        "NivaWheel_2_1",
+        "NivaWheel_2_2",
+        "NivaWheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "NivaDriverDoors": [
+          "HatchbackDoors_Driver",
+          "HatchbackDoors_Driver_Blue",
+          "HatchbackDoors_Driver_BlueRust",
+          "HatchbackDoors_Driver_GreenRust",
+          "HatchbackDoors_Driver_White",
+          "HatchbackDoors_Driver_WhiteRust"
+        ],
+        "NivaCoDriverDoors": [
+          "HatchbackDoors_CoDriver",
+          "HatchbackDoors_CoDriver_Blue",
+          "HatchbackDoors_CoDriver_BlueRust",
+          "HatchbackDoors_CoDriver_GreenRust",
+          "HatchbackDoors_CoDriver_White",
+          "HatchbackDoors_CoDriver_WhiteRust"
+        ],
+        "NivaHood": [
+          "HatchbackHood",
+          "HatchbackHood_Blue",
+          "HatchbackHood_BlueRust",
+          "HatchbackHood_GreenRust",
+          "HatchbackHood_White",
+          "HatchbackHood_WhiteRust"
+        ],
+        "NivaTrunk": [
+          "HatchbackTrunk",
+          "HatchbackTrunk_Blue",
+          "HatchbackTrunk_BlueRust",
+          "HatchbackTrunk_GreenRust",
+          "HatchbackTrunk_White",
+          "HatchbackTrunk_WhiteRust"
+        ],
+        "NivaWheel_1_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_1_2": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_2_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_2_2": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ],
+        "NivaWheel_Spare_1": [
+          "HatchbackWheel",
+          "HatchbackWheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "HatchbackDoors_CoDriver",
+        "HatchbackDoors_CoDriver_Blue",
+        "HatchbackDoors_CoDriver_BlueRust",
+        "HatchbackDoors_CoDriver_GreenRust",
+        "HatchbackDoors_CoDriver_White",
+        "HatchbackDoors_CoDriver_WhiteRust",
+        "HatchbackDoors_Driver",
+        "HatchbackDoors_Driver_Blue",
+        "HatchbackDoors_Driver_BlueRust",
+        "HatchbackDoors_Driver_GreenRust",
+        "HatchbackDoors_Driver_White",
+        "HatchbackDoors_Driver_WhiteRust",
+        "HatchbackHood",
+        "HatchbackHood_Blue",
+        "HatchbackHood_BlueRust",
+        "HatchbackHood_GreenRust",
+        "HatchbackHood_White",
+        "HatchbackHood_WhiteRust",
+        "HatchbackTrunk",
+        "HatchbackTrunk_Blue",
+        "HatchbackTrunk_BlueRust",
+        "HatchbackTrunk_GreenRust",
+        "HatchbackTrunk_White",
+        "HatchbackTrunk_WhiteRust",
+        "HatchbackWheel",
+        "HatchbackWheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "CivilianSedan": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "CivSedanDriverDoors",
+        "CivSedanCoDriverDoors",
+        "CivSedanCargo1Doors",
+        "CivSedanCargo2Doors",
+        "CivSedanHood",
+        "CivSedanTrunk",
+        "CivSedanWheel_1_1",
+        "CivSedanWheel_1_2",
+        "CivSedanWheel_2_1",
+        "CivSedanWheel_2_2",
+        "CivSedanWheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "CivSedanDriverDoors": [
+          "CivSedanDoors_Driver",
+          "CivSedanDoors_Driver_Black",
+          "CivSedanDoors_Driver_BlackRust",
+          "CivSedanDoors_Driver_WhiteRust",
+          "CivSedanDoors_Driver_Wine",
+          "CivSedanDoors_Driver_WineRust"
+        ],
+        "CivSedanCoDriverDoors": [
+          "CivSedanDoors_CoDriver",
+          "CivSedanDoors_CoDriver_Black",
+          "CivSedanDoors_CoDriver_BlackRust",
+          "CivSedanDoors_CoDriver_WhiteRust",
+          "CivSedanDoors_CoDriver_Wine",
+          "CivSedanDoors_CoDriver_WineRust"
+        ],
+        "CivSedanCargo1Doors": [
+          "CivSedanDoors_BackLeft",
+          "CivSedanDoors_BackLeft_Black",
+          "CivSedanDoors_BackLeft_BlackRust",
+          "CivSedanDoors_BackLeft_WhiteRust",
+          "CivSedanDoors_BackLeft_Wine",
+          "CivSedanDoors_BackLeft_WineRust"
+        ],
+        "CivSedanCargo2Doors": [
+          "CivSedanDoors_BackRight",
+          "CivSedanDoors_BackRight_Black",
+          "CivSedanDoors_BackRight_BlackRust",
+          "CivSedanDoors_BackRight_WhiteRust",
+          "CivSedanDoors_BackRight_Wine",
+          "CivSedanDoors_BackRight_WineRust"
+        ],
+        "CivSedanHood": [
+          "CivSedanHood",
+          "CivSedanHood_Black",
+          "CivSedanHood_BlackRust",
+          "CivSedanHood_WhiteRust",
+          "CivSedanHood_Wine",
+          "CivSedanHood_WineRust"
+        ],
+        "CivSedanTrunk": [
+          "CivSedanTrunk",
+          "CivSedanTrunk_Black",
+          "CivSedanTrunk_BlackRust",
+          "CivSedanTrunk_WhiteRust",
+          "CivSedanTrunk_Wine",
+          "CivSedanTrunk_WineRust"
+        ],
+        "CivSedanWheel_1_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_1_2": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_2_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_2_2": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_Spare_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "CivSedanDoors_BackLeft",
+        "CivSedanDoors_BackLeft_Black",
+        "CivSedanDoors_BackLeft_BlackRust",
+        "CivSedanDoors_BackLeft_WhiteRust",
+        "CivSedanDoors_BackLeft_Wine",
+        "CivSedanDoors_BackLeft_WineRust",
+        "CivSedanDoors_BackRight",
+        "CivSedanDoors_BackRight_Black",
+        "CivSedanDoors_BackRight_BlackRust",
+        "CivSedanDoors_BackRight_WhiteRust",
+        "CivSedanDoors_BackRight_Wine",
+        "CivSedanDoors_BackRight_WineRust",
+        "CivSedanDoors_CoDriver",
+        "CivSedanDoors_CoDriver_Black",
+        "CivSedanDoors_CoDriver_BlackRust",
+        "CivSedanDoors_CoDriver_WhiteRust",
+        "CivSedanDoors_CoDriver_Wine",
+        "CivSedanDoors_CoDriver_WineRust",
+        "CivSedanDoors_Driver",
+        "CivSedanDoors_Driver_Black",
+        "CivSedanDoors_Driver_BlackRust",
+        "CivSedanDoors_Driver_WhiteRust",
+        "CivSedanDoors_Driver_Wine",
+        "CivSedanDoors_Driver_WineRust",
+        "CivSedanHood",
+        "CivSedanHood_Black",
+        "CivSedanHood_BlackRust",
+        "CivSedanHood_WhiteRust",
+        "CivSedanHood_Wine",
+        "CivSedanHood_WineRust",
+        "CivSedanTrunk",
+        "CivSedanTrunk_Black",
+        "CivSedanTrunk_BlackRust",
+        "CivSedanTrunk_WhiteRust",
+        "CivSedanTrunk_Wine",
+        "CivSedanTrunk_WineRust",
+        "CivSedanWheel",
+        "CivSedanWheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "CivilianSedan_Wine": {
+      "parent": "CivilianSedan",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "CivSedanDriverDoors",
+        "CivSedanCoDriverDoors",
+        "CivSedanCargo1Doors",
+        "CivSedanCargo2Doors",
+        "CivSedanHood",
+        "CivSedanTrunk",
+        "CivSedanWheel_1_1",
+        "CivSedanWheel_1_2",
+        "CivSedanWheel_2_1",
+        "CivSedanWheel_2_2",
+        "CivSedanWheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "CivSedanDriverDoors": [
+          "CivSedanDoors_Driver",
+          "CivSedanDoors_Driver_Black",
+          "CivSedanDoors_Driver_BlackRust",
+          "CivSedanDoors_Driver_WhiteRust",
+          "CivSedanDoors_Driver_Wine",
+          "CivSedanDoors_Driver_WineRust"
+        ],
+        "CivSedanCoDriverDoors": [
+          "CivSedanDoors_CoDriver",
+          "CivSedanDoors_CoDriver_Black",
+          "CivSedanDoors_CoDriver_BlackRust",
+          "CivSedanDoors_CoDriver_WhiteRust",
+          "CivSedanDoors_CoDriver_Wine",
+          "CivSedanDoors_CoDriver_WineRust"
+        ],
+        "CivSedanCargo1Doors": [
+          "CivSedanDoors_BackLeft",
+          "CivSedanDoors_BackLeft_Black",
+          "CivSedanDoors_BackLeft_BlackRust",
+          "CivSedanDoors_BackLeft_WhiteRust",
+          "CivSedanDoors_BackLeft_Wine",
+          "CivSedanDoors_BackLeft_WineRust"
+        ],
+        "CivSedanCargo2Doors": [
+          "CivSedanDoors_BackRight",
+          "CivSedanDoors_BackRight_Black",
+          "CivSedanDoors_BackRight_BlackRust",
+          "CivSedanDoors_BackRight_WhiteRust",
+          "CivSedanDoors_BackRight_Wine",
+          "CivSedanDoors_BackRight_WineRust"
+        ],
+        "CivSedanHood": [
+          "CivSedanHood",
+          "CivSedanHood_Black",
+          "CivSedanHood_BlackRust",
+          "CivSedanHood_WhiteRust",
+          "CivSedanHood_Wine",
+          "CivSedanHood_WineRust"
+        ],
+        "CivSedanTrunk": [
+          "CivSedanTrunk",
+          "CivSedanTrunk_Black",
+          "CivSedanTrunk_BlackRust",
+          "CivSedanTrunk_WhiteRust",
+          "CivSedanTrunk_Wine",
+          "CivSedanTrunk_WineRust"
+        ],
+        "CivSedanWheel_1_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_1_2": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_2_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_2_2": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_Spare_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "CivSedanDoors_BackLeft",
+        "CivSedanDoors_BackLeft_Black",
+        "CivSedanDoors_BackLeft_BlackRust",
+        "CivSedanDoors_BackLeft_WhiteRust",
+        "CivSedanDoors_BackLeft_Wine",
+        "CivSedanDoors_BackLeft_WineRust",
+        "CivSedanDoors_BackRight",
+        "CivSedanDoors_BackRight_Black",
+        "CivSedanDoors_BackRight_BlackRust",
+        "CivSedanDoors_BackRight_WhiteRust",
+        "CivSedanDoors_BackRight_Wine",
+        "CivSedanDoors_BackRight_WineRust",
+        "CivSedanDoors_CoDriver",
+        "CivSedanDoors_CoDriver_Black",
+        "CivSedanDoors_CoDriver_BlackRust",
+        "CivSedanDoors_CoDriver_WhiteRust",
+        "CivSedanDoors_CoDriver_Wine",
+        "CivSedanDoors_CoDriver_WineRust",
+        "CivSedanDoors_Driver",
+        "CivSedanDoors_Driver_Black",
+        "CivSedanDoors_Driver_BlackRust",
+        "CivSedanDoors_Driver_WhiteRust",
+        "CivSedanDoors_Driver_Wine",
+        "CivSedanDoors_Driver_WineRust",
+        "CivSedanHood",
+        "CivSedanHood_Black",
+        "CivSedanHood_BlackRust",
+        "CivSedanHood_WhiteRust",
+        "CivSedanHood_Wine",
+        "CivSedanHood_WineRust",
+        "CivSedanTrunk",
+        "CivSedanTrunk_Black",
+        "CivSedanTrunk_BlackRust",
+        "CivSedanTrunk_WhiteRust",
+        "CivSedanTrunk_Wine",
+        "CivSedanTrunk_WineRust",
+        "CivSedanWheel",
+        "CivSedanWheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "CivilianSedan_Black": {
+      "parent": "CivilianSedan",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "CivSedanDriverDoors",
+        "CivSedanCoDriverDoors",
+        "CivSedanCargo1Doors",
+        "CivSedanCargo2Doors",
+        "CivSedanHood",
+        "CivSedanTrunk",
+        "CivSedanWheel_1_1",
+        "CivSedanWheel_1_2",
+        "CivSedanWheel_2_1",
+        "CivSedanWheel_2_2",
+        "CivSedanWheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "CivSedanDriverDoors": [
+          "CivSedanDoors_Driver",
+          "CivSedanDoors_Driver_Black",
+          "CivSedanDoors_Driver_BlackRust",
+          "CivSedanDoors_Driver_WhiteRust",
+          "CivSedanDoors_Driver_Wine",
+          "CivSedanDoors_Driver_WineRust"
+        ],
+        "CivSedanCoDriverDoors": [
+          "CivSedanDoors_CoDriver",
+          "CivSedanDoors_CoDriver_Black",
+          "CivSedanDoors_CoDriver_BlackRust",
+          "CivSedanDoors_CoDriver_WhiteRust",
+          "CivSedanDoors_CoDriver_Wine",
+          "CivSedanDoors_CoDriver_WineRust"
+        ],
+        "CivSedanCargo1Doors": [
+          "CivSedanDoors_BackLeft",
+          "CivSedanDoors_BackLeft_Black",
+          "CivSedanDoors_BackLeft_BlackRust",
+          "CivSedanDoors_BackLeft_WhiteRust",
+          "CivSedanDoors_BackLeft_Wine",
+          "CivSedanDoors_BackLeft_WineRust"
+        ],
+        "CivSedanCargo2Doors": [
+          "CivSedanDoors_BackRight",
+          "CivSedanDoors_BackRight_Black",
+          "CivSedanDoors_BackRight_BlackRust",
+          "CivSedanDoors_BackRight_WhiteRust",
+          "CivSedanDoors_BackRight_Wine",
+          "CivSedanDoors_BackRight_WineRust"
+        ],
+        "CivSedanHood": [
+          "CivSedanHood",
+          "CivSedanHood_Black",
+          "CivSedanHood_BlackRust",
+          "CivSedanHood_WhiteRust",
+          "CivSedanHood_Wine",
+          "CivSedanHood_WineRust"
+        ],
+        "CivSedanTrunk": [
+          "CivSedanTrunk",
+          "CivSedanTrunk_Black",
+          "CivSedanTrunk_BlackRust",
+          "CivSedanTrunk_WhiteRust",
+          "CivSedanTrunk_Wine",
+          "CivSedanTrunk_WineRust"
+        ],
+        "CivSedanWheel_1_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_1_2": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_2_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_2_2": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ],
+        "CivSedanWheel_Spare_1": [
+          "CivSedanWheel",
+          "CivSedanWheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "CivSedanDoors_BackLeft",
+        "CivSedanDoors_BackLeft_Black",
+        "CivSedanDoors_BackLeft_BlackRust",
+        "CivSedanDoors_BackLeft_WhiteRust",
+        "CivSedanDoors_BackLeft_Wine",
+        "CivSedanDoors_BackLeft_WineRust",
+        "CivSedanDoors_BackRight",
+        "CivSedanDoors_BackRight_Black",
+        "CivSedanDoors_BackRight_BlackRust",
+        "CivSedanDoors_BackRight_WhiteRust",
+        "CivSedanDoors_BackRight_Wine",
+        "CivSedanDoors_BackRight_WineRust",
+        "CivSedanDoors_CoDriver",
+        "CivSedanDoors_CoDriver_Black",
+        "CivSedanDoors_CoDriver_BlackRust",
+        "CivSedanDoors_CoDriver_WhiteRust",
+        "CivSedanDoors_CoDriver_Wine",
+        "CivSedanDoors_CoDriver_WineRust",
+        "CivSedanDoors_Driver",
+        "CivSedanDoors_Driver_Black",
+        "CivSedanDoors_Driver_BlackRust",
+        "CivSedanDoors_Driver_WhiteRust",
+        "CivSedanDoors_Driver_Wine",
+        "CivSedanDoors_Driver_WineRust",
+        "CivSedanHood",
+        "CivSedanHood_Black",
+        "CivSedanHood_BlackRust",
+        "CivSedanHood_WhiteRust",
+        "CivSedanHood_Wine",
+        "CivSedanHood_WineRust",
+        "CivSedanTrunk",
+        "CivSedanTrunk_Black",
+        "CivSedanTrunk_BlackRust",
+        "CivSedanTrunk_WhiteRust",
+        "CivSedanTrunk_Wine",
+        "CivSedanTrunk_WineRust",
+        "CivSedanWheel",
+        "CivSedanWheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "Hatchback_02": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "Hatchback_02_Door_1_1",
+        "Hatchback_02_Door_1_2",
+        "Hatchback_02_Door_2_1",
+        "Hatchback_02_Door_2_2",
+        "Hatchback_02_Trunk",
+        "Hatchback_02_Hood",
+        "Hatchback_02_Wheel_1_1",
+        "Hatchback_02_Wheel_1_2",
+        "Hatchback_02_Wheel_2_1",
+        "Hatchback_02_Wheel_2_2",
+        "Hatchback_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "Hatchback_02_Door_1_1": [
+          "Hatchback_02_Door_1_1",
+          "Hatchback_02_Door_1_1_Black",
+          "Hatchback_02_Door_1_1_BlackRust",
+          "Hatchback_02_Door_1_1_Blue",
+          "Hatchback_02_Door_1_1_BlueRust",
+          "Hatchback_02_Door_1_1_RedRust"
+        ],
+        "Hatchback_02_Door_1_2": [
+          "Hatchback_02_Door_1_2",
+          "Hatchback_02_Door_1_2_Black",
+          "Hatchback_02_Door_1_2_BlackRust",
+          "Hatchback_02_Door_1_2_Blue",
+          "Hatchback_02_Door_1_2_BlueRust",
+          "Hatchback_02_Door_1_2_RedRust"
+        ],
+        "Hatchback_02_Door_2_1": [
+          "Hatchback_02_Door_2_1",
+          "Hatchback_02_Door_2_1_Black",
+          "Hatchback_02_Door_2_1_BlackRust",
+          "Hatchback_02_Door_2_1_Blue",
+          "Hatchback_02_Door_2_1_BlueRust",
+          "Hatchback_02_Door_2_1_RedRust"
+        ],
+        "Hatchback_02_Door_2_2": [
+          "Hatchback_02_Door_2_2",
+          "Hatchback_02_Door_2_2_Black",
+          "Hatchback_02_Door_2_2_BlackRust",
+          "Hatchback_02_Door_2_2_Blue",
+          "Hatchback_02_Door_2_2_BlueRust",
+          "Hatchback_02_Door_2_2_RedRust"
+        ],
+        "Hatchback_02_Trunk": [
+          "Hatchback_02_Trunk",
+          "Hatchback_02_Trunk_Black",
+          "Hatchback_02_Trunk_BlackRust",
+          "Hatchback_02_Trunk_Blue",
+          "Hatchback_02_Trunk_BlueRust",
+          "Hatchback_02_Trunk_RedRust"
+        ],
+        "Hatchback_02_Hood": [
+          "Hatchback_02_Hood",
+          "Hatchback_02_Hood_Black",
+          "Hatchback_02_Hood_BlackRust",
+          "Hatchback_02_Hood_Blue",
+          "Hatchback_02_Hood_BlueRust",
+          "Hatchback_02_Hood_RedRust"
+        ],
+        "Hatchback_02_Wheel_1_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_1_2": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_2_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_2_2": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_Spare_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "Hatchback_02_Door_1_1",
+        "Hatchback_02_Door_1_1_Black",
+        "Hatchback_02_Door_1_1_BlackRust",
+        "Hatchback_02_Door_1_1_Blue",
+        "Hatchback_02_Door_1_1_BlueRust",
+        "Hatchback_02_Door_1_1_RedRust",
+        "Hatchback_02_Door_1_2",
+        "Hatchback_02_Door_1_2_Black",
+        "Hatchback_02_Door_1_2_BlackRust",
+        "Hatchback_02_Door_1_2_Blue",
+        "Hatchback_02_Door_1_2_BlueRust",
+        "Hatchback_02_Door_1_2_RedRust",
+        "Hatchback_02_Door_2_1",
+        "Hatchback_02_Door_2_1_Black",
+        "Hatchback_02_Door_2_1_BlackRust",
+        "Hatchback_02_Door_2_1_Blue",
+        "Hatchback_02_Door_2_1_BlueRust",
+        "Hatchback_02_Door_2_1_RedRust",
+        "Hatchback_02_Door_2_2",
+        "Hatchback_02_Door_2_2_Black",
+        "Hatchback_02_Door_2_2_BlackRust",
+        "Hatchback_02_Door_2_2_Blue",
+        "Hatchback_02_Door_2_2_BlueRust",
+        "Hatchback_02_Door_2_2_RedRust",
+        "Hatchback_02_Hood",
+        "Hatchback_02_Hood_Black",
+        "Hatchback_02_Hood_BlackRust",
+        "Hatchback_02_Hood_Blue",
+        "Hatchback_02_Hood_BlueRust",
+        "Hatchback_02_Hood_RedRust",
+        "Hatchback_02_Trunk",
+        "Hatchback_02_Trunk_Black",
+        "Hatchback_02_Trunk_BlackRust",
+        "Hatchback_02_Trunk_Blue",
+        "Hatchback_02_Trunk_BlueRust",
+        "Hatchback_02_Trunk_RedRust",
+        "Hatchback_02_Wheel",
+        "Hatchback_02_Wheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "Hatchback_02_Black": {
+      "parent": "Hatchback_02",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "Hatchback_02_Door_1_1",
+        "Hatchback_02_Door_1_2",
+        "Hatchback_02_Door_2_1",
+        "Hatchback_02_Door_2_2",
+        "Hatchback_02_Trunk",
+        "Hatchback_02_Hood",
+        "Hatchback_02_Wheel_1_1",
+        "Hatchback_02_Wheel_1_2",
+        "Hatchback_02_Wheel_2_1",
+        "Hatchback_02_Wheel_2_2",
+        "Hatchback_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "Hatchback_02_Door_1_1": [
+          "Hatchback_02_Door_1_1",
+          "Hatchback_02_Door_1_1_Black",
+          "Hatchback_02_Door_1_1_BlackRust",
+          "Hatchback_02_Door_1_1_Blue",
+          "Hatchback_02_Door_1_1_BlueRust",
+          "Hatchback_02_Door_1_1_RedRust"
+        ],
+        "Hatchback_02_Door_1_2": [
+          "Hatchback_02_Door_1_2",
+          "Hatchback_02_Door_1_2_Black",
+          "Hatchback_02_Door_1_2_BlackRust",
+          "Hatchback_02_Door_1_2_Blue",
+          "Hatchback_02_Door_1_2_BlueRust",
+          "Hatchback_02_Door_1_2_RedRust"
+        ],
+        "Hatchback_02_Door_2_1": [
+          "Hatchback_02_Door_2_1",
+          "Hatchback_02_Door_2_1_Black",
+          "Hatchback_02_Door_2_1_BlackRust",
+          "Hatchback_02_Door_2_1_Blue",
+          "Hatchback_02_Door_2_1_BlueRust",
+          "Hatchback_02_Door_2_1_RedRust"
+        ],
+        "Hatchback_02_Door_2_2": [
+          "Hatchback_02_Door_2_2",
+          "Hatchback_02_Door_2_2_Black",
+          "Hatchback_02_Door_2_2_BlackRust",
+          "Hatchback_02_Door_2_2_Blue",
+          "Hatchback_02_Door_2_2_BlueRust",
+          "Hatchback_02_Door_2_2_RedRust"
+        ],
+        "Hatchback_02_Trunk": [
+          "Hatchback_02_Trunk",
+          "Hatchback_02_Trunk_Black",
+          "Hatchback_02_Trunk_BlackRust",
+          "Hatchback_02_Trunk_Blue",
+          "Hatchback_02_Trunk_BlueRust",
+          "Hatchback_02_Trunk_RedRust"
+        ],
+        "Hatchback_02_Hood": [
+          "Hatchback_02_Hood",
+          "Hatchback_02_Hood_Black",
+          "Hatchback_02_Hood_BlackRust",
+          "Hatchback_02_Hood_Blue",
+          "Hatchback_02_Hood_BlueRust",
+          "Hatchback_02_Hood_RedRust"
+        ],
+        "Hatchback_02_Wheel_1_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_1_2": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_2_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_2_2": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_Spare_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "Hatchback_02_Door_1_1",
+        "Hatchback_02_Door_1_1_Black",
+        "Hatchback_02_Door_1_1_BlackRust",
+        "Hatchback_02_Door_1_1_Blue",
+        "Hatchback_02_Door_1_1_BlueRust",
+        "Hatchback_02_Door_1_1_RedRust",
+        "Hatchback_02_Door_1_2",
+        "Hatchback_02_Door_1_2_Black",
+        "Hatchback_02_Door_1_2_BlackRust",
+        "Hatchback_02_Door_1_2_Blue",
+        "Hatchback_02_Door_1_2_BlueRust",
+        "Hatchback_02_Door_1_2_RedRust",
+        "Hatchback_02_Door_2_1",
+        "Hatchback_02_Door_2_1_Black",
+        "Hatchback_02_Door_2_1_BlackRust",
+        "Hatchback_02_Door_2_1_Blue",
+        "Hatchback_02_Door_2_1_BlueRust",
+        "Hatchback_02_Door_2_1_RedRust",
+        "Hatchback_02_Door_2_2",
+        "Hatchback_02_Door_2_2_Black",
+        "Hatchback_02_Door_2_2_BlackRust",
+        "Hatchback_02_Door_2_2_Blue",
+        "Hatchback_02_Door_2_2_BlueRust",
+        "Hatchback_02_Door_2_2_RedRust",
+        "Hatchback_02_Hood",
+        "Hatchback_02_Hood_Black",
+        "Hatchback_02_Hood_BlackRust",
+        "Hatchback_02_Hood_Blue",
+        "Hatchback_02_Hood_BlueRust",
+        "Hatchback_02_Hood_RedRust",
+        "Hatchback_02_Trunk",
+        "Hatchback_02_Trunk_Black",
+        "Hatchback_02_Trunk_BlackRust",
+        "Hatchback_02_Trunk_Blue",
+        "Hatchback_02_Trunk_BlueRust",
+        "Hatchback_02_Trunk_RedRust",
+        "Hatchback_02_Wheel",
+        "Hatchback_02_Wheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "Hatchback_02_Blue": {
+      "parent": "Hatchback_02",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "SparkPlug",
+        "Hatchback_02_Door_1_1",
+        "Hatchback_02_Door_1_2",
+        "Hatchback_02_Door_2_1",
+        "Hatchback_02_Door_2_2",
+        "Hatchback_02_Trunk",
+        "Hatchback_02_Hood",
+        "Hatchback_02_Wheel_1_1",
+        "Hatchback_02_Wheel_1_2",
+        "Hatchback_02_Wheel_2_1",
+        "Hatchback_02_Wheel_2_2",
+        "Hatchback_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "Hatchback_02_Door_1_1": [
+          "Hatchback_02_Door_1_1",
+          "Hatchback_02_Door_1_1_Black",
+          "Hatchback_02_Door_1_1_BlackRust",
+          "Hatchback_02_Door_1_1_Blue",
+          "Hatchback_02_Door_1_1_BlueRust",
+          "Hatchback_02_Door_1_1_RedRust"
+        ],
+        "Hatchback_02_Door_1_2": [
+          "Hatchback_02_Door_1_2",
+          "Hatchback_02_Door_1_2_Black",
+          "Hatchback_02_Door_1_2_BlackRust",
+          "Hatchback_02_Door_1_2_Blue",
+          "Hatchback_02_Door_1_2_BlueRust",
+          "Hatchback_02_Door_1_2_RedRust"
+        ],
+        "Hatchback_02_Door_2_1": [
+          "Hatchback_02_Door_2_1",
+          "Hatchback_02_Door_2_1_Black",
+          "Hatchback_02_Door_2_1_BlackRust",
+          "Hatchback_02_Door_2_1_Blue",
+          "Hatchback_02_Door_2_1_BlueRust",
+          "Hatchback_02_Door_2_1_RedRust"
+        ],
+        "Hatchback_02_Door_2_2": [
+          "Hatchback_02_Door_2_2",
+          "Hatchback_02_Door_2_2_Black",
+          "Hatchback_02_Door_2_2_BlackRust",
+          "Hatchback_02_Door_2_2_Blue",
+          "Hatchback_02_Door_2_2_BlueRust",
+          "Hatchback_02_Door_2_2_RedRust"
+        ],
+        "Hatchback_02_Trunk": [
+          "Hatchback_02_Trunk",
+          "Hatchback_02_Trunk_Black",
+          "Hatchback_02_Trunk_BlackRust",
+          "Hatchback_02_Trunk_Blue",
+          "Hatchback_02_Trunk_BlueRust",
+          "Hatchback_02_Trunk_RedRust"
+        ],
+        "Hatchback_02_Hood": [
+          "Hatchback_02_Hood",
+          "Hatchback_02_Hood_Black",
+          "Hatchback_02_Hood_BlackRust",
+          "Hatchback_02_Hood_Blue",
+          "Hatchback_02_Hood_BlueRust",
+          "Hatchback_02_Hood_RedRust"
+        ],
+        "Hatchback_02_Wheel_1_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_1_2": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_2_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_2_2": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ],
+        "Hatchback_02_Wheel_Spare_1": [
+          "Hatchback_02_Wheel",
+          "Hatchback_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "Hatchback_02_Door_1_1",
+        "Hatchback_02_Door_1_1_Black",
+        "Hatchback_02_Door_1_1_BlackRust",
+        "Hatchback_02_Door_1_1_Blue",
+        "Hatchback_02_Door_1_1_BlueRust",
+        "Hatchback_02_Door_1_1_RedRust",
+        "Hatchback_02_Door_1_2",
+        "Hatchback_02_Door_1_2_Black",
+        "Hatchback_02_Door_1_2_BlackRust",
+        "Hatchback_02_Door_1_2_Blue",
+        "Hatchback_02_Door_1_2_BlueRust",
+        "Hatchback_02_Door_1_2_RedRust",
+        "Hatchback_02_Door_2_1",
+        "Hatchback_02_Door_2_1_Black",
+        "Hatchback_02_Door_2_1_BlackRust",
+        "Hatchback_02_Door_2_1_Blue",
+        "Hatchback_02_Door_2_1_BlueRust",
+        "Hatchback_02_Door_2_1_RedRust",
+        "Hatchback_02_Door_2_2",
+        "Hatchback_02_Door_2_2_Black",
+        "Hatchback_02_Door_2_2_BlackRust",
+        "Hatchback_02_Door_2_2_Blue",
+        "Hatchback_02_Door_2_2_BlueRust",
+        "Hatchback_02_Door_2_2_RedRust",
+        "Hatchback_02_Hood",
+        "Hatchback_02_Hood_Black",
+        "Hatchback_02_Hood_BlackRust",
+        "Hatchback_02_Hood_Blue",
+        "Hatchback_02_Hood_BlueRust",
+        "Hatchback_02_Hood_RedRust",
+        "Hatchback_02_Trunk",
+        "Hatchback_02_Trunk_Black",
+        "Hatchback_02_Trunk_BlackRust",
+        "Hatchback_02_Trunk_Blue",
+        "Hatchback_02_Trunk_BlueRust",
+        "Hatchback_02_Trunk_RedRust",
+        "Hatchback_02_Wheel",
+        "Hatchback_02_Wheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "SparkPlug"
+      ]
+    },
+    "Sedan_02": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "EngineBelt",
+        "SparkPlug",
+        "Sedan_02_Hood",
+        "Sedan_02_Trunk",
+        "Sedan_02_Door_1_1",
+        "Sedan_02_Door_2_1",
+        "Sedan_02_Door_1_2",
+        "Sedan_02_Door_2_2",
+        "Sedan_02_Wheel_1_1",
+        "Sedan_02_Wheel_1_2",
+        "Sedan_02_Wheel_2_1",
+        "Sedan_02_Wheel_2_2",
+        "Sedan_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "EngineBelt": [],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "Sedan_02_Hood": [
+          "Sedan_02_Hood",
+          "Sedan_02_Hood_Grey",
+          "Sedan_02_Hood_GreyRust",
+          "Sedan_02_Hood_Red",
+          "Sedan_02_Hood_RedRust",
+          "Sedan_02_Hood_YellowRust"
+        ],
+        "Sedan_02_Trunk": [
+          "Sedan_02_Trunk",
+          "Sedan_02_Trunk_Grey",
+          "Sedan_02_Trunk_GreyRust",
+          "Sedan_02_Trunk_Red",
+          "Sedan_02_Trunk_RedRust",
+          "Sedan_02_Trunk_YellowRust"
+        ],
+        "Sedan_02_Door_1_1": [
+          "Sedan_02_Door_1_1",
+          "Sedan_02_Door_1_1_Grey",
+          "Sedan_02_Door_1_1_GreyRust",
+          "Sedan_02_Door_1_1_Red",
+          "Sedan_02_Door_1_1_RedRust",
+          "Sedan_02_Door_1_1_YellowRust"
+        ],
+        "Sedan_02_Door_2_1": [
+          "Sedan_02_Door_2_1",
+          "Sedan_02_Door_2_1_Grey",
+          "Sedan_02_Door_2_1_GreyRust",
+          "Sedan_02_Door_2_1_Red",
+          "Sedan_02_Door_2_1_RedRust",
+          "Sedan_02_Door_2_1_YellowRust"
+        ],
+        "Sedan_02_Door_1_2": [
+          "Sedan_02_Door_1_2",
+          "Sedan_02_Door_1_2_Grey",
+          "Sedan_02_Door_1_2_GreyRust",
+          "Sedan_02_Door_1_2_Red",
+          "Sedan_02_Door_1_2_RedRust",
+          "Sedan_02_Door_1_2_YellowRust"
+        ],
+        "Sedan_02_Door_2_2": [
+          "Sedan_02_Door_2_2",
+          "Sedan_02_Door_2_2_Grey",
+          "Sedan_02_Door_2_2_GreyRust",
+          "Sedan_02_Door_2_2_Red",
+          "Sedan_02_Door_2_2_RedRust",
+          "Sedan_02_Door_2_2_YellowRust"
+        ],
+        "Sedan_02_Wheel_1_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_1_2": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_2_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_2_2": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_Spare_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "Sedan_02_Door_1_1",
+        "Sedan_02_Door_1_1_Grey",
+        "Sedan_02_Door_1_1_GreyRust",
+        "Sedan_02_Door_1_1_Red",
+        "Sedan_02_Door_1_1_RedRust",
+        "Sedan_02_Door_1_1_YellowRust",
+        "Sedan_02_Door_1_2",
+        "Sedan_02_Door_1_2_Grey",
+        "Sedan_02_Door_1_2_GreyRust",
+        "Sedan_02_Door_1_2_Red",
+        "Sedan_02_Door_1_2_RedRust",
+        "Sedan_02_Door_1_2_YellowRust",
+        "Sedan_02_Door_2_1",
+        "Sedan_02_Door_2_1_Grey",
+        "Sedan_02_Door_2_1_GreyRust",
+        "Sedan_02_Door_2_1_Red",
+        "Sedan_02_Door_2_1_RedRust",
+        "Sedan_02_Door_2_1_YellowRust",
+        "Sedan_02_Door_2_2",
+        "Sedan_02_Door_2_2_Grey",
+        "Sedan_02_Door_2_2_GreyRust",
+        "Sedan_02_Door_2_2_Red",
+        "Sedan_02_Door_2_2_RedRust",
+        "Sedan_02_Door_2_2_YellowRust",
+        "Sedan_02_Hood",
+        "Sedan_02_Hood_Grey",
+        "Sedan_02_Hood_GreyRust",
+        "Sedan_02_Hood_Red",
+        "Sedan_02_Hood_RedRust",
+        "Sedan_02_Hood_YellowRust",
+        "Sedan_02_Trunk",
+        "Sedan_02_Trunk_Grey",
+        "Sedan_02_Trunk_GreyRust",
+        "Sedan_02_Trunk_Red",
+        "Sedan_02_Trunk_RedRust",
+        "Sedan_02_Trunk_YellowRust",
+        "Sedan_02_Wheel",
+        "Sedan_02_Wheel_Ruined",
+        "SparkPlug"
+      ]
+    },
+    "Sedan_02_Red": {
+      "parent": "Sedan_02",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "EngineBelt",
+        "SparkPlug",
+        "Sedan_02_Hood",
+        "Sedan_02_Trunk",
+        "Sedan_02_Door_1_1",
+        "Sedan_02_Door_2_1",
+        "Sedan_02_Door_1_2",
+        "Sedan_02_Door_2_2",
+        "Sedan_02_Wheel_1_1",
+        "Sedan_02_Wheel_1_2",
+        "Sedan_02_Wheel_2_1",
+        "Sedan_02_Wheel_2_2",
+        "Sedan_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "EngineBelt": [],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "Sedan_02_Hood": [
+          "Sedan_02_Hood",
+          "Sedan_02_Hood_Grey",
+          "Sedan_02_Hood_GreyRust",
+          "Sedan_02_Hood_Red",
+          "Sedan_02_Hood_RedRust",
+          "Sedan_02_Hood_YellowRust"
+        ],
+        "Sedan_02_Trunk": [
+          "Sedan_02_Trunk",
+          "Sedan_02_Trunk_Grey",
+          "Sedan_02_Trunk_GreyRust",
+          "Sedan_02_Trunk_Red",
+          "Sedan_02_Trunk_RedRust",
+          "Sedan_02_Trunk_YellowRust"
+        ],
+        "Sedan_02_Door_1_1": [
+          "Sedan_02_Door_1_1",
+          "Sedan_02_Door_1_1_Grey",
+          "Sedan_02_Door_1_1_GreyRust",
+          "Sedan_02_Door_1_1_Red",
+          "Sedan_02_Door_1_1_RedRust",
+          "Sedan_02_Door_1_1_YellowRust"
+        ],
+        "Sedan_02_Door_2_1": [
+          "Sedan_02_Door_2_1",
+          "Sedan_02_Door_2_1_Grey",
+          "Sedan_02_Door_2_1_GreyRust",
+          "Sedan_02_Door_2_1_Red",
+          "Sedan_02_Door_2_1_RedRust",
+          "Sedan_02_Door_2_1_YellowRust"
+        ],
+        "Sedan_02_Door_1_2": [
+          "Sedan_02_Door_1_2",
+          "Sedan_02_Door_1_2_Grey",
+          "Sedan_02_Door_1_2_GreyRust",
+          "Sedan_02_Door_1_2_Red",
+          "Sedan_02_Door_1_2_RedRust",
+          "Sedan_02_Door_1_2_YellowRust"
+        ],
+        "Sedan_02_Door_2_2": [
+          "Sedan_02_Door_2_2",
+          "Sedan_02_Door_2_2_Grey",
+          "Sedan_02_Door_2_2_GreyRust",
+          "Sedan_02_Door_2_2_Red",
+          "Sedan_02_Door_2_2_RedRust",
+          "Sedan_02_Door_2_2_YellowRust"
+        ],
+        "Sedan_02_Wheel_1_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_1_2": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_2_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_2_2": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_Spare_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "Sedan_02_Door_1_1",
+        "Sedan_02_Door_1_1_Grey",
+        "Sedan_02_Door_1_1_GreyRust",
+        "Sedan_02_Door_1_1_Red",
+        "Sedan_02_Door_1_1_RedRust",
+        "Sedan_02_Door_1_1_YellowRust",
+        "Sedan_02_Door_1_2",
+        "Sedan_02_Door_1_2_Grey",
+        "Sedan_02_Door_1_2_GreyRust",
+        "Sedan_02_Door_1_2_Red",
+        "Sedan_02_Door_1_2_RedRust",
+        "Sedan_02_Door_1_2_YellowRust",
+        "Sedan_02_Door_2_1",
+        "Sedan_02_Door_2_1_Grey",
+        "Sedan_02_Door_2_1_GreyRust",
+        "Sedan_02_Door_2_1_Red",
+        "Sedan_02_Door_2_1_RedRust",
+        "Sedan_02_Door_2_1_YellowRust",
+        "Sedan_02_Door_2_2",
+        "Sedan_02_Door_2_2_Grey",
+        "Sedan_02_Door_2_2_GreyRust",
+        "Sedan_02_Door_2_2_Red",
+        "Sedan_02_Door_2_2_RedRust",
+        "Sedan_02_Door_2_2_YellowRust",
+        "Sedan_02_Hood",
+        "Sedan_02_Hood_Grey",
+        "Sedan_02_Hood_GreyRust",
+        "Sedan_02_Hood_Red",
+        "Sedan_02_Hood_RedRust",
+        "Sedan_02_Hood_YellowRust",
+        "Sedan_02_Trunk",
+        "Sedan_02_Trunk_Grey",
+        "Sedan_02_Trunk_GreyRust",
+        "Sedan_02_Trunk_Red",
+        "Sedan_02_Trunk_RedRust",
+        "Sedan_02_Trunk_YellowRust",
+        "Sedan_02_Wheel",
+        "Sedan_02_Wheel_Ruined",
+        "SparkPlug"
+      ]
+    },
+    "Sedan_02_Grey": {
+      "parent": "Sedan_02",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "CarRadiator",
+        "EngineBelt",
+        "SparkPlug",
+        "Sedan_02_Hood",
+        "Sedan_02_Trunk",
+        "Sedan_02_Door_1_1",
+        "Sedan_02_Door_2_1",
+        "Sedan_02_Door_1_2",
+        "Sedan_02_Door_2_2",
+        "Sedan_02_Wheel_1_1",
+        "Sedan_02_Wheel_1_2",
+        "Sedan_02_Wheel_2_1",
+        "Sedan_02_Wheel_2_2",
+        "Sedan_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "CarRadiator": [
+          "CarRadiator"
+        ],
+        "EngineBelt": [],
+        "SparkPlug": [
+          "SparkPlug"
+        ],
+        "Sedan_02_Hood": [
+          "Sedan_02_Hood",
+          "Sedan_02_Hood_Grey",
+          "Sedan_02_Hood_GreyRust",
+          "Sedan_02_Hood_Red",
+          "Sedan_02_Hood_RedRust",
+          "Sedan_02_Hood_YellowRust"
+        ],
+        "Sedan_02_Trunk": [
+          "Sedan_02_Trunk",
+          "Sedan_02_Trunk_Grey",
+          "Sedan_02_Trunk_GreyRust",
+          "Sedan_02_Trunk_Red",
+          "Sedan_02_Trunk_RedRust",
+          "Sedan_02_Trunk_YellowRust"
+        ],
+        "Sedan_02_Door_1_1": [
+          "Sedan_02_Door_1_1",
+          "Sedan_02_Door_1_1_Grey",
+          "Sedan_02_Door_1_1_GreyRust",
+          "Sedan_02_Door_1_1_Red",
+          "Sedan_02_Door_1_1_RedRust",
+          "Sedan_02_Door_1_1_YellowRust"
+        ],
+        "Sedan_02_Door_2_1": [
+          "Sedan_02_Door_2_1",
+          "Sedan_02_Door_2_1_Grey",
+          "Sedan_02_Door_2_1_GreyRust",
+          "Sedan_02_Door_2_1_Red",
+          "Sedan_02_Door_2_1_RedRust",
+          "Sedan_02_Door_2_1_YellowRust"
+        ],
+        "Sedan_02_Door_1_2": [
+          "Sedan_02_Door_1_2",
+          "Sedan_02_Door_1_2_Grey",
+          "Sedan_02_Door_1_2_GreyRust",
+          "Sedan_02_Door_1_2_Red",
+          "Sedan_02_Door_1_2_RedRust",
+          "Sedan_02_Door_1_2_YellowRust"
+        ],
+        "Sedan_02_Door_2_2": [
+          "Sedan_02_Door_2_2",
+          "Sedan_02_Door_2_2_Grey",
+          "Sedan_02_Door_2_2_GreyRust",
+          "Sedan_02_Door_2_2_Red",
+          "Sedan_02_Door_2_2_RedRust",
+          "Sedan_02_Door_2_2_YellowRust"
+        ],
+        "Sedan_02_Wheel_1_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_1_2": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_2_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_2_2": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ],
+        "Sedan_02_Wheel_Spare_1": [
+          "Sedan_02_Wheel",
+          "Sedan_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "CarRadiator",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight",
+        "Sedan_02_Door_1_1",
+        "Sedan_02_Door_1_1_Grey",
+        "Sedan_02_Door_1_1_GreyRust",
+        "Sedan_02_Door_1_1_Red",
+        "Sedan_02_Door_1_1_RedRust",
+        "Sedan_02_Door_1_1_YellowRust",
+        "Sedan_02_Door_1_2",
+        "Sedan_02_Door_1_2_Grey",
+        "Sedan_02_Door_1_2_GreyRust",
+        "Sedan_02_Door_1_2_Red",
+        "Sedan_02_Door_1_2_RedRust",
+        "Sedan_02_Door_1_2_YellowRust",
+        "Sedan_02_Door_2_1",
+        "Sedan_02_Door_2_1_Grey",
+        "Sedan_02_Door_2_1_GreyRust",
+        "Sedan_02_Door_2_1_Red",
+        "Sedan_02_Door_2_1_RedRust",
+        "Sedan_02_Door_2_1_YellowRust",
+        "Sedan_02_Door_2_2",
+        "Sedan_02_Door_2_2_Grey",
+        "Sedan_02_Door_2_2_GreyRust",
+        "Sedan_02_Door_2_2_Red",
+        "Sedan_02_Door_2_2_RedRust",
+        "Sedan_02_Door_2_2_YellowRust",
+        "Sedan_02_Hood",
+        "Sedan_02_Hood_Grey",
+        "Sedan_02_Hood_GreyRust",
+        "Sedan_02_Hood_Red",
+        "Sedan_02_Hood_RedRust",
+        "Sedan_02_Hood_YellowRust",
+        "Sedan_02_Trunk",
+        "Sedan_02_Trunk_Grey",
+        "Sedan_02_Trunk_GreyRust",
+        "Sedan_02_Trunk_Red",
+        "Sedan_02_Trunk_RedRust",
+        "Sedan_02_Trunk_YellowRust",
+        "Sedan_02_Wheel",
+        "Sedan_02_Wheel_Ruined",
+        "SparkPlug"
+      ]
+    },
+    "Truck_01_Base": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Covered": {
+      "parent": "Truck_01_Base",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_2_3",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_WoodenLogs",
+        "Truck_01_WoodenPlanks",
+        "Truck_01_MetalSheets",
+        "Truck_01_Barrel1",
+        "Truck_01_Barrel2",
+        "Truck_01_Barrel3",
+        "Truck_01_Barrel4",
+        "Truck_01_WoodenCrate1",
+        "Truck_01_WoodenCrate2",
+        "Truck_01_WoodenCrate3",
+        "Truck_01_WoodenCrate4"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_WoodenLogs": [],
+        "Truck_01_WoodenPlanks": [],
+        "Truck_01_MetalSheets": [],
+        "Truck_01_Barrel1": [],
+        "Truck_01_Barrel2": [],
+        "Truck_01_Barrel3": [],
+        "Truck_01_Barrel4": [],
+        "Truck_01_WoodenCrate1": [],
+        "Truck_01_WoodenCrate2": [],
+        "Truck_01_WoodenCrate3": [],
+        "Truck_01_WoodenCrate4": []
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Covered_Blue": {
+      "parent": "Truck_01_Covered",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_2_3",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_WoodenLogs",
+        "Truck_01_WoodenPlanks",
+        "Truck_01_MetalSheets",
+        "Truck_01_Barrel1",
+        "Truck_01_Barrel2",
+        "Truck_01_Barrel3",
+        "Truck_01_Barrel4",
+        "Truck_01_WoodenCrate1",
+        "Truck_01_WoodenCrate2",
+        "Truck_01_WoodenCrate3",
+        "Truck_01_WoodenCrate4"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_WoodenLogs": [],
+        "Truck_01_WoodenPlanks": [],
+        "Truck_01_MetalSheets": [],
+        "Truck_01_Barrel1": [],
+        "Truck_01_Barrel2": [],
+        "Truck_01_Barrel3": [],
+        "Truck_01_Barrel4": [],
+        "Truck_01_WoodenCrate1": [],
+        "Truck_01_WoodenCrate2": [],
+        "Truck_01_WoodenCrate3": [],
+        "Truck_01_WoodenCrate4": []
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Covered_Orange": {
+      "parent": "Truck_01_Covered",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_2_3",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_WoodenLogs",
+        "Truck_01_WoodenPlanks",
+        "Truck_01_MetalSheets",
+        "Truck_01_Barrel1",
+        "Truck_01_Barrel2",
+        "Truck_01_Barrel3",
+        "Truck_01_Barrel4",
+        "Truck_01_WoodenCrate1",
+        "Truck_01_WoodenCrate2",
+        "Truck_01_WoodenCrate3",
+        "Truck_01_WoodenCrate4"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_WoodenLogs": [],
+        "Truck_01_WoodenPlanks": [],
+        "Truck_01_MetalSheets": [],
+        "Truck_01_Barrel1": [],
+        "Truck_01_Barrel2": [],
+        "Truck_01_Barrel3": [],
+        "Truck_01_Barrel4": [],
+        "Truck_01_WoodenCrate1": [],
+        "Truck_01_WoodenCrate2": [],
+        "Truck_01_WoodenCrate3": [],
+        "Truck_01_WoodenCrate4": []
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Chassis": {
+      "parent": "Truck_01_Base",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Chassis_Blue": {
+      "parent": "Truck_01_Chassis",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Chassis_Orange": {
+      "parent": "Truck_01_Chassis",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Chassis_Grey": {
+      "parent": "Truck_01_Chassis",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Cargo": {
+      "parent": "Truck_01_Chassis",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Cargo_Blue": {
+      "parent": "Truck_01_Cargo",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Cargo_Orange": {
+      "parent": "Truck_01_Cargo",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Truck_01_Cargo_Grey": {
+      "parent": "Truck_01_Cargo",
+      "attachmentSlots": [
+        "TruckBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_2_1",
+        "Truck_01_Hood",
+        "Truck_01_Wheel_1_1",
+        "Truck_01_Wheel_2_1",
+        "Truck_01_Wheel_Spare_1",
+        "Truck_01_Wheel_Spare_2",
+        "Truck_01_Wheel_1_2",
+        "Truck_01_Wheel_2_2",
+        "Truck_01_Wheel_1_3",
+        "Truck_01_Wheel_2_3"
+      ],
+      "attachmentsBySlot": {
+        "TruckBattery": [
+          "ProxyBattery_truck"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Truck_01_Door_1_1": [
+          "Truck_01_Door_1_1",
+          "Truck_01_Door_1_1_Blue",
+          "Truck_01_Door_1_1_BlueRust",
+          "Truck_01_Door_1_1_GreenRust",
+          "Truck_01_Door_1_1_Orange",
+          "Truck_01_Door_1_1_OrangeRust"
+        ],
+        "Truck_01_Door_2_1": [
+          "Truck_01_Door_2_1",
+          "Truck_01_Door_2_1_Blue",
+          "Truck_01_Door_2_1_BlueRust",
+          "Truck_01_Door_2_1_GreenRust",
+          "Truck_01_Door_2_1_Orange",
+          "Truck_01_Door_2_1_OrangeRust"
+        ],
+        "Truck_01_Hood": [
+          "Truck_01_Hood",
+          "Truck_01_Hood_Blue",
+          "Truck_01_Hood_BlueRust",
+          "Truck_01_Hood_GreenRust",
+          "Truck_01_Hood_Orange",
+          "Truck_01_Hood_OrangeRust"
+        ],
+        "Truck_01_Wheel_1_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_2_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_1": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_Spare_2": [
+          "Truck_01_Wheel",
+          "Truck_01_Wheel_Ruined"
+        ],
+        "Truck_01_Wheel_1_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_2": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_1_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ],
+        "Truck_01_Wheel_2_3": [
+          "Truck_01_WheelDouble",
+          "Truck_01_WheelDouble_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "ProxyBattery_truck",
+        "ProxyReplacement_Headlight",
+        "Truck_01_Door_1_1",
+        "Truck_01_Door_1_1_Blue",
+        "Truck_01_Door_1_1_BlueRust",
+        "Truck_01_Door_1_1_GreenRust",
+        "Truck_01_Door_1_1_Orange",
+        "Truck_01_Door_1_1_OrangeRust",
+        "Truck_01_Door_2_1",
+        "Truck_01_Door_2_1_Blue",
+        "Truck_01_Door_2_1_BlueRust",
+        "Truck_01_Door_2_1_GreenRust",
+        "Truck_01_Door_2_1_Orange",
+        "Truck_01_Door_2_1_OrangeRust",
+        "Truck_01_Hood",
+        "Truck_01_Hood_Blue",
+        "Truck_01_Hood_BlueRust",
+        "Truck_01_Hood_GreenRust",
+        "Truck_01_Hood_Orange",
+        "Truck_01_Hood_OrangeRust",
+        "Truck_01_Wheel",
+        "Truck_01_WheelDouble",
+        "Truck_01_WheelDouble_Ruined",
+        "Truck_01_Wheel_Ruined"
+      ]
+    },
+    "Offroad_02": {
+      "parent": "CarScript",
+      "attachmentSlots": [
+        "CarBattery",
+        "Reflector_1_1",
+        "Reflector_2_1",
+        "GlowPlug",
+        "Offroad_02_Hood",
+        "Offroad_02_Trunk",
+        "Offroad_02_Door_1_1",
+        "Offroad_02_Door_2_1",
+        "Offroad_02_Door_1_2",
+        "Offroad_02_Door_2_2",
+        "Offroad_02_Wheel_1_1",
+        "Offroad_02_Wheel_1_2",
+        "Offroad_02_Wheel_2_1",
+        "Offroad_02_Wheel_2_2",
+        "Offroad_02_Wheel_Spare_1"
+      ],
+      "attachmentsBySlot": {
+        "CarBattery": [
+          "ProxyBattery_Car"
+        ],
+        "Reflector_1_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "Reflector_2_1": [
+          "ProxyReplacement_Headlight"
+        ],
+        "GlowPlug": [],
+        "Offroad_02_Hood": [
+          "Offroad_02_Hood"
+        ],
+        "Offroad_02_Trunk": [
+          "Offroad_02_Trunk",
+          "Offroad_02_Trunk_Rust"
+        ],
+        "Offroad_02_Door_1_1": [
+          "Offroad_02_Door_1_1",
+          "Offroad_02_Door_1_1_Rust"
+        ],
+        "Offroad_02_Door_2_1": [
+          "Offroad_02_Door_2_1",
+          "Offroad_02_Door_2_1_Rust"
+        ],
+        "Offroad_02_Door_1_2": [
+          "Offroad_02_Door_1_2",
+          "Offroad_02_Door_1_2_Rust"
+        ],
+        "Offroad_02_Door_2_2": [
+          "Offroad_02_Door_2_2",
+          "Offroad_02_Door_2_2_Rust"
+        ],
+        "Offroad_02_Wheel_1_1": [
+          "Offroad_02_Wheel",
+          "Offroad_02_Wheel_Ruined"
+        ],
+        "Offroad_02_Wheel_1_2": [
+          "Offroad_02_Wheel",
+          "Offroad_02_Wheel_Ruined"
+        ],
+        "Offroad_02_Wheel_2_1": [
+          "Offroad_02_Wheel",
+          "Offroad_02_Wheel_Ruined"
+        ],
+        "Offroad_02_Wheel_2_2": [
+          "Offroad_02_Wheel",
+          "Offroad_02_Wheel_Ruined"
+        ],
+        "Offroad_02_Wheel_Spare_1": [
+          "Offroad_02_Wheel",
+          "Offroad_02_Wheel_Ruined"
+        ]
+      },
+      "compatibleAttachments": [
+        "Offroad_02_Door_1_1",
+        "Offroad_02_Door_1_1_Rust",
+        "Offroad_02_Door_1_2",
+        "Offroad_02_Door_1_2_Rust",
+        "Offroad_02_Door_2_1",
+        "Offroad_02_Door_2_1_Rust",
+        "Offroad_02_Door_2_2",
+        "Offroad_02_Door_2_2_Rust",
+        "Offroad_02_Hood",
+        "Offroad_02_Trunk",
+        "Offroad_02_Trunk_Rust",
+        "Offroad_02_Wheel",
+        "Offroad_02_Wheel_Ruined",
+        "ProxyBattery_Car",
+        "ProxyReplacement_Headlight"
       ]
     }
   }
