@@ -629,3 +629,45 @@ check();
 document.querySelector('[data-tab="reviewsTab"]')?.addEventListener("click", () => {
   loadReviewsAdmin();
 });
+
+// =====================================================
+// MAPPINGS
+// =====================================================
+
+const mappingModal = document.getElementById("mappingModal");
+const addMappingBtn = document.getElementById("addMappingBtn");
+const closeMappingModal = document.getElementById("closeMappingModal");
+const cancelMappingBtn = document.getElementById("cancelMappingBtn");
+const mappingForm = document.getElementById("mappingForm");
+
+function openMappingModal() {
+  mappingForm.reset();
+
+  document.getElementById("mappingId").value = "";
+  document.getElementById("mappingModalTitle").textContent =
+    "Ajouter un mapping";
+
+  document.getElementById("mappingPublished").checked = true;
+
+  mappingModal.classList.remove("hidden");
+}
+
+function hideMappingModal() {
+  mappingModal.classList.add("hidden");
+}
+
+addMappingBtn?.addEventListener("click", openMappingModal);
+closeMappingModal?.addEventListener("click", hideMappingModal);
+cancelMappingBtn?.addEventListener("click", hideMappingModal);
+
+mappingModal?.addEventListener("click", (event) => {
+  if (event.target === mappingModal) {
+    hideMappingModal();
+  }
+});
+
+mappingForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  console.log("Formulaire mapping OK");
+});
