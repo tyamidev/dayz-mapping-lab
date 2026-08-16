@@ -46,6 +46,11 @@
       <button class="sidebar-btn tab-btn" data-tab="manualQuoteTab">
         ➕ Nouveau devis
       </button>
+
+      <button class="sidebar-btn tab-btn" data-tab="mappingsTab">
+        🗺️ Mappings
+      </button>
+
     </nav>
 
     <button class="btn danger logout-btn" id="logout">
@@ -108,6 +113,29 @@
 
         </div>
       </section>
+
+<section id="mappingsTab" class="admin-panel tab-panel hidden">
+
+  <div class="toolbar">
+    <div>
+      <h2>Mappings</h2>
+      <p class="muted">
+        Gère les mappings disponibles sur DayZ Mapping Lab.
+      </p>
+    </div>
+
+    <button class="btn" id="addMappingBtn">
+      ➕ Ajouter un mapping
+    </button>
+  </div>
+
+  <div id="mappingsAdmin" class="quote-list">
+    <p class="muted">
+      Aucun mapping chargé pour le moment.
+    </p>
+  </div>
+
+</section>
 
       <section id="reviewsTab" class="admin-panel tab-panel hidden">
   <div class="toolbar">
